@@ -10,10 +10,7 @@ model evaluation, counting/movement analysis, statistics, and figures for the **
 single-stage model (DEIMv2-X, "v2.6")**. It is a curated, annotated extract of a larger working
 research repository — every module here has been reviewed and commented for external readers.
 
-> **Reviewing the paper?** Start with **`docs/REVIEW_GUIDE.md`** — a plain-language, figure-by-figure
-> and table-by-table map of every claim in the manuscript to the command and data file that produce
-> it, with what reproduces on your laptop vs. what needs large downloads, plus a short list of places
-> where the paper text and the shipped data need to be reconciled.
+> **Reviewing the paper?** Start with **`docs/REVIEW_GUIDE.md`** 
 
 ## What the model is
 
@@ -91,5 +88,4 @@ here under `configs/`.
 
 ## License & citation
 
-See `LICENSE` (a placeholder pending author/OMNRF sign-off — Apache-2.0 recommended) and
-`CITATION.cff`. Author list and DOIs are placeholders to be completed before publication.
+

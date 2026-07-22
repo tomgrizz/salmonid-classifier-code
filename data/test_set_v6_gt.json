@@ -1,0 +1,2568 @@
+{
+  "name": "test_set_v6",
+  "note": "FROZEN held-out test set. GT species per track; two tiers.",
+  "tracks": [
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/09162024-09232024/24  09  16  16  14/1234.mp4",
+      "track_id": 57920,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/146.mp4",
+      "track_id": 311488,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07232021-07262021/21  07  23  12  49/51.mp4",
+      "track_id": 35577,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09252020-09282020/20  09  25  15  10/170.mp4",
+      "track_id": 272243,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/09222025-09262025/25  09  22  15  26/1871.mp4",
+      "track_id": 170276,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/1513.mp4",
+      "track_id": 418907,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/160.mp4",
+      "track_id": 52512,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/10032023-10062023/23  10  03  09  23/602.mp4",
+      "track_id": 26718,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10142025-10202025/25  10  14  10  40/270.mp4",
+      "track_id": 439474,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Mike/08172020 - 08212020/20  08  17  09  08/123.mp4",
+      "track_id": 254598,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10172025-10312025/25  10  17  08  54/623.mp4",
+      "track_id": 199332,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/05072024-26072024/24  07  05  10  46/18.mp4",
+      "track_id": 353416,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/186.mp4",
+      "track_id": 395384,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/08182025-08252025/25  08  18  13  32/144.mp4",
+      "track_id": 400907,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/1105.mp4",
+      "track_id": 1423,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09212020 - 09232020/20  09  21  10  25/63.mp4",
+      "track_id": 270728,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/05212021-05262021/21  05  21  08  19/23.mp4",
+      "track_id": 34488,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/516.mp4",
+      "track_id": 3328,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/1090.mp4",
+      "track_id": 417301,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1167.mp4",
+      "track_id": 37317,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/10112022-10142022/22  10  11  10  59/425.mp4",
+      "track_id": 25314,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/19.mp4",
+      "track_id": 36583,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/10062023-10102023/23  10  06  11  10/2149.mp4",
+      "track_id": 32950,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07122021-07142021/21  07  12  13  26/10.mp4",
+      "track_id": 35374,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/08292024-09032024/24  08  29  14  32/3779.mp4",
+      "track_id": 31713,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/11052020-11102020/20  11  05  11  56/49.mp4",
+      "track_id": 268086,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/1033.mp4",
+      "track_id": 48211,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09212021-09242021/21  09  21  09  34/602.mp4",
+      "track_id": 54791,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/11102020-11122020/20  11  10  10  26/93.mp4",
+      "track_id": 268447,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1062.mp4",
+      "track_id": 325663,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/107.mp4",
+      "track_id": 35928,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/403.mp4",
+      "track_id": 52917,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/2202.mp4",
+      "track_id": 421107,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/199.mp4",
+      "track_id": 330108,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/85.mp4",
+      "track_id": 36916,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09082022-09122022/22  09  08  11  03/2390.mp4",
+      "track_id": 6950,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3032.mp4",
+      "track_id": 42034,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/03302021-04012021/21  03  30  14  36/194.mp4",
+      "track_id": 12420,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04052021-04062021/21  04  05  12  10/981.mp4",
+      "track_id": 23269,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10032023-10062023/23  10  03  13  13/93.mp4",
+      "track_id": 340108,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1981.mp4",
+      "track_id": 38936,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/293.mp4",
+      "track_id": 311798,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/254.mp4",
+      "track_id": 48620,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/11052020-11102020/20  11  05  11  56/135.mp4",
+      "track_id": 267973,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/208.mp4",
+      "track_id": 48541,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/26.mp4",
+      "track_id": 36700,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/158.mp4",
+      "track_id": 36007,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Dan/10072020-10132020/20  10  07  13  31/549.mp4",
+      "track_id": 244078,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/875.mp4",
+      "track_id": 325080,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/43.mp4",
+      "track_id": 36842,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10032023-10062023/23  10  03  13  13/807.mp4",
+      "track_id": 339471,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09082022-09122022/22  09  08  11  03/926.mp4",
+      "track_id": 9162,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09072020-09092020/20  09  07  21  38/98.mp4",
+      "track_id": 269090,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09252023-09292023/23  09  25  11  07/3750.mp4",
+      "track_id": 39189,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1228.mp4",
+      "track_id": 37414,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/08112020-08212020/20  08  11  11  18/2.mp4",
+      "track_id": 268611,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08272021-09022021/21  08  27  13  43/25.mp4",
+      "track_id": 36381,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09212020 - 09232020/20  09  21  10  25/32.mp4",
+      "track_id": 270667,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2830.mp4",
+      "track_id": 41536,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09142020-09172020/20  09  14  08  37/123.mp4",
+      "track_id": 269701,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09212020 - 09232020/20  09  21  10  25/44.mp4",
+      "track_id": 270687,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/233.mp4",
+      "track_id": 311653,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/273.mp4",
+      "track_id": 395769,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/95.mp4",
+      "track_id": 36930,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/11.mp4",
+      "track_id": 48324,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1478.mp4",
+      "track_id": 327901,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2822.mp4",
+      "track_id": 41525,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09152023-09182023/23  09  15  14  52/1625.mp4",
+      "track_id": 72627,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/07122024-07152024/24  07  12  14  48/46.mp4",
+      "track_id": 20140,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1950.mp4",
+      "track_id": 38868,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/168.mp4",
+      "track_id": 35486,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09082022-09122022/22  09  08  11  03/1780.mp4",
+      "track_id": 5867,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10142025-10202025/25  10  14  10  40/332.mp4",
+      "track_id": 439649,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/10102023-10162023/23  10  10  13  56/1246.mp4",
+      "track_id": 40065,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/244.mp4",
+      "track_id": 395666,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09182023-09252023(2)/23  09  18  10  20/4596.mp4",
+      "track_id": 13652,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/10192020-10222020/20  10  19  11  25/140.mp4",
+      "track_id": 266679,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/10112022-10142022/22  10  11  10  59/599.mp4",
+      "track_id": 25890,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09012022-09062022/22  09  01  12  17/684.mp4",
+      "track_id": 910,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/194.mp4",
+      "track_id": 395427,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10032023-10062023/23  10  03  13  13/337.mp4",
+      "track_id": 337153,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10312025-11282025/25  10  31  12  23/237.mp4",
+      "track_id": 200509,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/464.mp4",
+      "track_id": 323748,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/284.mp4",
+      "track_id": 395800,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/1248.mp4",
+      "track_id": 50629,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1042.mp4",
+      "track_id": 325592,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04062021-04072021/21  04  06  14  36/283.mp4",
+      "track_id": 23934,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/261.mp4",
+      "track_id": 311717,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/204.mp4",
+      "track_id": 2838,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/753.mp4",
+      "track_id": 46963,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07092021-07122021/21  07  09  12  22/385.mp4",
+      "track_id": 35360,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1057.mp4",
+      "track_id": 325651,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/317.mp4",
+      "track_id": 36811,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/265.mp4",
+      "track_id": 395735,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/198.mp4",
+      "track_id": 330068,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/779.mp4",
+      "track_id": 51982,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08192021-08242021/21  08  19  14  32/18.mp4",
+      "track_id": 36247,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10102023-10132023/23  10  10  11  12/518.mp4",
+      "track_id": 347488,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/160.mp4",
+      "track_id": 35479,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Ben/09072020-09092020/20  09  07  21  42/313.mp4",
+      "track_id": 203710,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3390.mp4",
+      "track_id": 42617,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10202023-10232023/23  10  20  10  29/198.mp4",
+      "track_id": 352441,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09152022 - 09192022/22  09  15  13  42/384.mp4",
+      "track_id": 11655,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/03302021-04012021/21  03  30  14  36/1854.mp4",
+      "track_id": 12048,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10162023-10202023/23  10  16  14  25/166.mp4",
+      "track_id": 350955,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/08292024-09032024/24  08  29  14  32/659.mp4",
+      "track_id": 32982,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2066.mp4",
+      "track_id": 39153,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2243.mp4",
+      "track_id": 39561,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04222021-04272021/21  04  22  14  51/71.mp4",
+      "track_id": 33506,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/07262024-08012024/24  07  26  15  37/2.mp4",
+      "track_id": 20545,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3591.mp4",
+      "track_id": 42937,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3121.mp4",
+      "track_id": 42236,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/10222020-10272020/20  10  22  10  40/58.mp4",
+      "track_id": 267128,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10032023-10062023/23  10  03  13  13/230.mp4",
+      "track_id": 336753,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10202023-10232023/23  10  20  10  29/218.mp4",
+      "track_id": 352570,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/1854.mp4",
+      "track_id": 322276,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/302.mp4",
+      "track_id": 48709,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09112023-09152023/23  09  11  14  28/3079.mp4",
+      "track_id": 67078,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/08182025-08252025/25  08  18  13  32/86.mp4",
+      "track_id": 401105,
+      "species": "Brown Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/4958.mp4",
+      "track_id": 45995,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/232.mp4",
+      "track_id": 36130,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2020/11052020-11102020/20  11  05  09  15/327.mp4",
+      "track_id": 1814,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10102025-10142025/25  10  10  12  07/212.mp4",
+      "track_id": 434538,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1038.mp4",
+      "track_id": 325582,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/176.mp4",
+      "track_id": 52533,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/598.mp4",
+      "track_id": 51679,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09182023-09252023(2)/23  09  18  10  20/11867.mp4",
+      "track_id": 2990,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09022025-09082025/25  09  02  11  10/1191.mp4",
+      "track_id": 401804,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04132021-04162021/21  04  13  12  48/195.mp4",
+      "track_id": 32886,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/08312020 - 09072020/20  08  31  09  01/20.mp4",
+      "track_id": 268691,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/1067.mp4",
+      "track_id": 50292,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10142025-10202025/25  10  14  10  40/819.mp4",
+      "track_id": 441344,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07092021-07122021/21  07  09  12  22/245.mp4",
+      "track_id": 35188,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/98.mp4",
+      "track_id": 50111,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09022025-09082025/25  09  02  11  10/663.mp4",
+      "track_id": 404714,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/1398.mp4",
+      "track_id": 418513,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1049.mp4",
+      "track_id": 325622,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3632.mp4",
+      "track_id": 43002,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/990.mp4",
+      "track_id": 52410,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1301.mp4",
+      "track_id": 37556,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/274.mp4",
+      "track_id": 311747,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/08182025-08252025/25  08  18  13  32/60.mp4",
+      "track_id": 401058,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/4246.mp4",
+      "track_id": 44268,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/10212024-10252024/24  10  21  15  29/834.mp4",
+      "track_id": 97413,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07232021-07262021/21  07  23  12  49/57.mp4",
+      "track_id": 35586,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09212021-09242021/21  09  21  09  34/578.mp4",
+      "track_id": 54729,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3599.mp4",
+      "track_id": 42950,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/166.mp4",
+      "track_id": 36523,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07122021-07142021/21  07  12  13  26/7.mp4",
+      "track_id": 35390,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09112025-09152025/25  09  11  11  04/306.mp4",
+      "track_id": 407659,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/165.mp4",
+      "track_id": 35483,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3560.mp4",
+      "track_id": 42873,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/1184.mp4",
+      "track_id": 157530,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1037.mp4",
+      "track_id": 325580,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04082021-04122021/21  04  08  09  02/690.mp4",
+      "track_id": 31870,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04222021-04272021/21  04  22  14  51/48.mp4",
+      "track_id": 33471,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09022025-09082025/25  09  02  11  10/1332.mp4",
+      "track_id": 402138,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/10012025-10102025/25  10  01  11  21/56.mp4",
+      "track_id": 431214,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09222023-09252023/23  09  22  12  11/24.mp4",
+      "track_id": 316822,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1049.mp4",
+      "track_id": 325620,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/1595.mp4",
+      "track_id": 321600,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/2349.mp4",
+      "track_id": 331585,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10232023-10272023/23  10  23  13  48/170.mp4",
+      "track_id": 353210,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/62.mp4",
+      "track_id": 36872,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2080.mp4",
+      "track_id": 39181,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1672.mp4",
+      "track_id": 38292,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/09122024-09162024/24  09  12  14  34/1655.mp4",
+      "track_id": 54792,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/10222020-10272020/20  10  22  10  40/55.mp4",
+      "track_id": 267123,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2021/03292021-03312021/21  03  29  13  08/113.mp4",
+      "track_id": 278607,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/305.mp4",
+      "track_id": 35503,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/1483.mp4",
+      "track_id": 321258,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2020/11052020-11102020/20  11  05  09  15/1313.mp4",
+      "track_id": 746,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/521.mp4",
+      "track_id": 423544,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10172025-10312025/25  10  17  08  54/740.mp4",
+      "track_id": 199609,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/682.mp4",
+      "track_id": 3707,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/10212024-10252024/24  10  21  15  29/180.mp4",
+      "track_id": 95807,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/09262025-10022025/25  09  26  12  00/524.mp4",
+      "track_id": 185486,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2021/03292021-03312021/21  03  29  13  08/10.mp4",
+      "track_id": 278585,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09252023-09292023/23  09  25  11  07/1601.mp4",
+      "track_id": 31452,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/121.mp4",
+      "track_id": 52467,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3236.mp4",
+      "track_id": 42419,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10242025-11032025/25  10  24  10  33/86.mp4",
+      "track_id": 443636,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1043.mp4",
+      "track_id": 325596,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/165.mp4",
+      "track_id": 38238,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2022/09272022-09282022/22  09  27  10  01/464.mp4",
+      "track_id": 295179,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2020/10222020-10272020/20  10  22  10  40/10.mp4",
+      "track_id": 267014,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/919.mp4",
+      "track_id": 49995,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/08252025-09022025/25  08  25  15  13/74.mp4",
+      "track_id": 131817,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/05292025-06062025/25  05  29  14  26/40.mp4",
+      "track_id": 125931,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/17.mp4",
+      "track_id": 36528,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/10012020 - 10052020/20  10  01  08  22/507.mp4",
+      "track_id": 277686,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2020/10192020-10222020/20  10  19  11  25/141.mp4",
+      "track_id": 266680,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/719.mp4",
+      "track_id": 49639,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/532.mp4",
+      "track_id": 323991,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/1215.mp4",
+      "track_id": 50581,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04162021-04202021/21  04  16  13  00/96.mp4",
+      "track_id": 33257,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/11102020-11122020/20  11  10  10  26/120.mp4",
+      "track_id": 268260,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09112023-09152023/23  09  11  14  28/2735.mp4",
+      "track_id": 66413,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/156.mp4",
+      "track_id": 36499,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10022025-10092025/25  10  02  09  51/2780.mp4",
+      "track_id": 191511,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/272.mp4",
+      "track_id": 311744,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/09122024-09232024/24  09  12  11  49/591.mp4",
+      "track_id": 356725,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/225.mp4",
+      "track_id": 311610,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/164.mp4",
+      "track_id": 35482,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/10012020 - 10052020/20  10  01  08  22/95.mp4",
+      "track_id": 278557,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09212021-09242021/21  09  21  09  34/399.mp4",
+      "track_id": 54322,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/45.mp4",
+      "track_id": 36844,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09152023-09182023/23  09  15  14  52/1973.mp4",
+      "track_id": 73474,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07092021-07122021/21  07  09  12  22/238.mp4",
+      "track_id": 35177,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/122.mp4",
+      "track_id": 35422,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/840.mp4",
+      "track_id": 49819,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/184.mp4",
+      "track_id": 395372,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07162021-07192021/21  07  16  08  43/161.mp4",
+      "track_id": 35480,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/11052020-11102020/20  11  05  11  56/72.mp4",
+      "track_id": 268132,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/980.mp4",
+      "track_id": 425864,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/09082025-09112025/25  09  08  15  57/231.mp4",
+      "track_id": 150930,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Mike/09042020 - 09072020/20  09  04  12  01/1778.mp4",
+      "track_id": 258683,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/10292020-11022020/20  10  29  11  03/61.mp4",
+      "track_id": 267742,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1186.mp4",
+      "track_id": 37350,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10022025-10092025/25  10  02  09  51/1864.mp4",
+      "track_id": 189099,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/119.mp4",
+      "track_id": 35944,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2020/11052020-11102020/20  11  05  09  15/884.mp4",
+      "track_id": 2878,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07122021-07142021/21  07  12  13  26/12.mp4",
+      "track_id": 35377,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2020/11052020-11102020/20  11  05  09  15/294.mp4",
+      "track_id": 1766,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/09272024-10012024/24  09  27  16  03/1155.mp4",
+      "track_id": 77881,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/235.mp4",
+      "track_id": 36132,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09282021-09302021/21  09  28  08  57/675.mp4",
+      "track_id": 59713,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/03302021-04012021/21  03  30  14  36/1791.mp4",
+      "track_id": 11804,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/1214.mp4",
+      "track_id": 50576,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/07262024-08012024/24  07  26  15  37/3.mp4",
+      "track_id": 20562,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/941.mp4",
+      "track_id": 52310,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2416.mp4",
+      "track_id": 40026,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2020/11052020-11102020/20  11  05  09  15/1616.mp4",
+      "track_id": 1349,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2934.mp4",
+      "track_id": 41760,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10162023-10202023/23  10  16  14  25/303.mp4",
+      "track_id": 351274,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/82.mp4",
+      "track_id": 36910,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/10012020 - 10052020/20  10  01  08  22/679.mp4",
+      "track_id": 278179,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/280.mp4",
+      "track_id": 52691,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/38.mp4",
+      "track_id": 36834,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/09262025-10022025/25  09  26  12  00/443.mp4",
+      "track_id": 185229,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/10052020-10082020/20  10  05  09  28/429.mp4",
+      "track_id": 261630,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2020/10222020-10272020/20  10  22  10  40/53.mp4",
+      "track_id": 267120,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/175.mp4",
+      "track_id": 395330,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/08292024-09032024/24  08  29  14  32/1561.mp4",
+      "track_id": 25799,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/108.mp4",
+      "track_id": 311446,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04082021-04122021/21  04  08  09  02/1075.mp4",
+      "track_id": 30080,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/09302020 - 10012020/20  09  30  10  29/106.mp4",
+      "track_id": 275777,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/11012024-11082024/24  11  01  14  59/562.mp4",
+      "track_id": 100673,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10012025-10102025/25  10  01  11  21/1944.mp4",
+      "track_id": 428647,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10172025-10312025/25  10  17  08  54/1209.mp4",
+      "track_id": 198186,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3182.mp4",
+      "track_id": 42343,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3010.mp4",
+      "track_id": 41976,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Dan/09282020-10012020/20  09  28  13  57/1135.mp4",
+      "track_id": 221149,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10062023-10102023/23  10  06  08  56/1215.mp4",
+      "track_id": 341229,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/09162024-09232024/24  09  16  16  14/2146.mp4",
+      "track_id": 60678,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07092021-07122021/21  07  09  12  22/174.mp4",
+      "track_id": 35086,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/09032024-09092024/24  09  03  09  08/793.mp4",
+      "track_id": 40609,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/804.mp4",
+      "track_id": 49764,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10142025-10202025/25  10  14  10  40/36.mp4",
+      "track_id": 439744,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/806.mp4",
+      "track_id": 52032,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04062021-04072021/21  04  06  14  36/689.mp4",
+      "track_id": 25789,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Dan/09142020-09172020/20  09  14  15  19/868.mp4",
+      "track_id": 209943,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07092021-07122021/21  07  09  12  22/345.mp4",
+      "track_id": 35300,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/751.mp4",
+      "track_id": 49688,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/10222020-10272020/20  10  22  10  40/56.mp4",
+      "track_id": 267124,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2022/10062022 - 10112022/22  10  06  09  04/323.mp4",
+      "track_id": 299629,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04052021-04062021/21  04  05  12  10/340.mp4",
+      "track_id": 20838,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09182023-09252023(2)/23  09  18  10  20/4554.mp4",
+      "track_id": 13447,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1044.mp4",
+      "track_id": 325600,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09152023-09182023/23  09  15  14  52/3521.mp4",
+      "track_id": 78031,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/279.mp4",
+      "track_id": 395789,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/10142025-10202025/25  10  14  10  40/1177.mp4",
+      "track_id": 438028,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/07252023-07282023/23  07  25  13  01/14.mp4",
+      "track_id": 49451,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/3.mp4",
+      "track_id": 395837,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/373.mp4",
+      "track_id": 311994,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04012021-04052021/21  04  01  09  56/384.mp4",
+      "track_id": 15638,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/10012020 - 10052020/20  10  01  08  22/361.mp4",
+      "track_id": 277318,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2022/10112022-10142022/22  10  11  10  57/233.mp4",
+      "track_id": 302477,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3304.mp4",
+      "track_id": 42478,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/233.mp4",
+      "track_id": 36131,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09152025-09192025/25  09  15  14  42/244.mp4",
+      "track_id": 409046,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2020/Mike/10012020 - 10052020/20  10  01  08  22/469.mp4",
+      "track_id": 277617,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/662.mp4",
+      "track_id": 49502,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1129.mp4",
+      "track_id": 325933,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/1115.mp4",
+      "track_id": 1485,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1390.mp4",
+      "track_id": 327427,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/390.mp4",
+      "track_id": 312036,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/04202023-04242023/23  04  20  15  21/29.mp4",
+      "track_id": 46237,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/272.mp4",
+      "track_id": 395765,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09142021-09162021/21  09  14  13  31/795.mp4",
+      "track_id": 49751,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2021/03292021-03312021/21  03  29  13  08/1.mp4",
+      "track_id": 278581,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/08122024-08162024/24  08  12  12  13/22.mp4",
+      "track_id": 353492,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/217.mp4",
+      "track_id": 52588,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/10232023-10272023/23  10  23  13  48/136.mp4",
+      "track_id": 353157,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08052021-08122021/21  08  05  13  05/158.mp4",
+      "track_id": 35774,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/352.mp4",
+      "track_id": 42805,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08272021-09022021/21  08  27  13  43/37.mp4",
+      "track_id": 36393,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/5169.mp4",
+      "track_id": 46390,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08122021-08192021/21  08  12  14  43/120.mp4",
+      "track_id": 35946,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09022025-09082025/25  09  02  11  10/1610.mp4",
+      "track_id": 402945,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04062021-04072021/21  04  06  14  36/160.mp4",
+      "track_id": 23578,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/1200.mp4",
+      "track_id": 1744,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2024/08082024-08122024/24  08  08  14  13/394.mp4",
+      "track_id": 21685,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10012025-10102025/25  10  01  11  21/10.mp4",
+      "track_id": 425922,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04012021-04052021/21  04  01  09  56/66.mp4",
+      "track_id": 16538,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/370.mp4",
+      "track_id": 311982,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/729.mp4",
+      "track_id": 51908,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09082025-09112025/25  09  08  12  40/153.mp4",
+      "track_id": 405913,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/182.mp4",
+      "track_id": 395361,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2020/10222020-10272020/20  10  22  10  40/8.mp4",
+      "track_id": 267160,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10102023-10132023/23  10  10  11  12/736.mp4",
+      "track_id": 348112,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/08182025-08252025/25  08  18  13  32/133.mp4",
+      "track_id": 400879,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2129.mp4",
+      "track_id": 39302,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10092025-10172025/25  10  09  12  33/522.mp4",
+      "track_id": 196618,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1687.mp4",
+      "track_id": 38317,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/10072024-10152024/24  10  07  08  50/661.mp4",
+      "track_id": 388692,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/08192021-08242021/21  08  19  14  32/78.mp4",
+      "track_id": 36350,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/1015.mp4",
+      "track_id": 1060,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/138.mp4",
+      "track_id": 36465,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09252034-09292023/23  09  25  13  21/656.mp4",
+      "track_id": 324399,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/07092021-07122021/21  07  09  12  22/235.mp4",
+      "track_id": 35173,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/205.mp4",
+      "track_id": 395503,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09222023-09252023/23  09  22  12  11/26.mp4",
+      "track_id": 316860,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2022/09192021 - 09272021/22  09  19  10  22/269.mp4",
+      "track_id": 291205,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Dan/09172020-09222020/20  09  17  09  14/595.mp4",
+      "track_id": 210883,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/04032023-04062023/22  11  09  09  48/201.mp4",
+      "track_id": 311572,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10062023-10102023/23  10  06  08  56/581.mp4",
+      "track_id": 344207,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/10232023-10272023/23  10  23  13  48/140.mp4",
+      "track_id": 353168,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/455.mp4",
+      "track_id": 3236,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2135.mp4",
+      "track_id": 39315,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09252025-10012025/25  09  25  14  26/1737.mp4",
+      "track_id": 419662,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3762.mp4",
+      "track_id": 43238,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/5160.mp4",
+      "track_id": 46381,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09022012-09082021/21  09  02  14  29/118.mp4",
+      "track_id": 36436,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2024/11012024-11082024/24  11  01  12  42/278.mp4",
+      "track_id": 395785,
+      "species": "Atlantic",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09172021-09202021/21  09  17  07  53/573.mp4",
+      "track_id": 53241,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/498.mp4",
+      "track_id": 46043,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/09222025-09262025/25  09  22  15  26/1974.mp4",
+      "track_id": 170750,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1043.mp4",
+      "track_id": 325599,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/1171.mp4",
+      "track_id": 37321,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/4256.mp4",
+      "track_id": 44284,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/5131.mp4",
+      "track_id": 46330,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/09222025-09252025/25  09  22  11  56/1054.mp4",
+      "track_id": 410017,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/2825.mp4",
+      "track_id": 41531,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10102025-10142025/25  10  10  12  07/857.mp4",
+      "track_id": 436754,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/791.mp4",
+      "track_id": 52005,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1041.mp4",
+      "track_id": 325589,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2025/10102025-10142025/25  10  10  12  07/38.mp4",
+      "track_id": 435131,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2020/11052020-11102020/20  11  05  09  15/237.mp4",
+      "track_id": 1655,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/04072021-04082021/21  04  07  10  34/811.mp4",
+      "track_id": 29318,
+      "species": "Rainbow Trout",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3228.mp4",
+      "track_id": 42405,
+      "species": "Brown Trout",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2020/Mike/10012020 - 10052020/20  10  01  08  22/400.mp4",
+      "track_id": 277467,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09222023-09252023/23  09  22  12  11/417.mp4",
+      "track_id": 317272,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/1056.mp4",
+      "track_id": 325649,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/449.mp4",
+      "track_id": 51369,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/08112023-08142023/23  08  11  14  09/92.mp4",
+      "track_id": 51802,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2023/09292023-10032023/23  09  29  11  42/314.mp4",
+      "track_id": 332657,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/1377.mp4",
+      "track_id": 2337,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10102025-10142025/25  10  10  12  07/1445.mp4",
+      "track_id": 433101,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2025/10172025-10312025/25  10  17  08  54/851.mp4",
+      "track_id": 199926,
+      "species": "Coho",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2023/09252023-09292023/23  09  25  11  07/4733.mp4",
+      "track_id": 2856,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/ignore/Dan/09172020-09222020/20  09  17  09  14/178.mp4",
+      "track_id": 210167,
+      "species": "Atlantic",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09162021-09172021/21  09  16  10  49/258.mp4",
+      "track_id": 51021,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Credit/2025/10142025-10202025/25  10  14  10  40/840.mp4",
+      "track_id": 441389,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Credit"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2022/09062022-09082022/22  09  06  12  21/1449.mp4",
+      "track_id": 2541,
+      "species": "Coho",
+      "tier": "heldout",
+      "site": "Ganaraska"
+    },
+    {
+      "video_id": "Ganaraska/Ganaraska 2021/09082021-09142021/21  09  08  09  23/3761.mp4",
+      "track_id": 43237,
+      "species": "Chinook",
+      "tier": "pristine",
+      "site": "Ganaraska"
+    }
+  ]
+}

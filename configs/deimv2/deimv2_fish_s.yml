@@ -1,0 +1,29 @@
+__include__: ['./deimv2_dinov3_s_coco.yml']
+
+# DEIMv2-S (DINOv3) fine-tuned on our clean 5-class fish COCO. remap off (0-indexed our cats).
+# Keeps the tested S schedule (epoches/policy); checkpoints every 5 epochs -> op-eval several.
+num_classes: 5
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_s
+checkpoint_freq: 5
+
+# Fine-tuning from COCO converges fast -> short schedule (default 132 is from-scratch + would
+# overfit the tail like RF-DETR Medium did). 50 epochs, LR flat until 24 then cosine decay,
+# brief no-aug finish. DEIMv2 has no early-stopping, so we cap epochs + eval/checkpoint each.
+epoches: 50
+flat_epoch: 24
+no_aug_epoch: 6
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 4
+  dataset:
+    img_folder: G:/Projects/
+    ann_file: G:/Projects/deimv2_fish_5class/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 4
+  dataset:
+    img_folder: G:/Projects/
+    ann_file: G:/Projects/deimv2_fish_5class/val.json

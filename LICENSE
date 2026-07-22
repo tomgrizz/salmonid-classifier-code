@@ -1,0 +1,22 @@
+LICENSE — PLACEHOLDER (requires author / OMNRF sign-off before publication)
+============================================================================
+
+This repository does not yet carry a final open-source license. A license MUST be
+chosen and this file replaced before the code is published with the manuscript.
+
+Recommendation
+--------------
+Use **Apache License 2.0**. Rationale:
+  * The external training dependency (Intellindust-AI-Lab/DEIMv2) is Apache-2.0, so an
+    Apache-2.0 license on this reproduction code is compatible and consistent.
+  * Apache-2.0 is a permissive, publication-friendly license widely accepted by journals
+    and by Zenodo/GitHub archival.
+  * MIT is an acceptable alternative if a shorter permissive license is preferred.
+
+Before replacing this file, confirm with the Ontario Ministry of Natural Resources
+(Lake Ontario Management Unit) that the chosen license is consistent with any Crown
+copyright / government open-data licensing requirements that apply to this work.
+
+Third-party components retain their own licenses:
+  * DEIMv2 (Intellindust-AI-Lab/DEIMv2) — Apache License 2.0
+  * DINOv3 backbone weights — see the upstream model card for terms

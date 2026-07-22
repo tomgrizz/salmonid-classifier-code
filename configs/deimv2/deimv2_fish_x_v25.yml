@@ -1,0 +1,86 @@
+__include__: ['./deimv2_dinov3_x_coco.yml']
+
+# DEIMv2-X v2.5 = the DEPLOY-candidate run (STAGED 2026-07-02, launch at the weekend after Tom's
+# SAM2 cutout review). Fixes the two interpretability problems that muddied v2.4-X and adds the CLEAN
+# SAM2 synth. Changes vs deimv2_fish_x_v24.yml:
+#   1) LR-FIX: main lr 0.0005 -> 0.00025. v2.4-X ran batch 8 with the batch-32-tuned lr 0.0005 =~ 2x
+#      v2.3-L's per-sample lr (DEIMv2 does NOT auto-scale; it has NO grad-accum). Halving matches
+#      v2.3-L's per-sample rate at batch 8. deep-merge overrides ONLY lr, keeps the backbone param-groups.
+#   2) DATA: train on the v2.5 COCO = v2.3 masked base + REVIEWED SAM2 synth (partial + Coho/Chinook
+#      proximity), replacing v2.4's noisy model-labelled mined co-occurrence (which regressed Coho).
+#      Build it at the weekend:
+#        # (after Tom reviews cutouts at :5003 -> review.csv)
+#        python scripts/_sam2_composite.py partial   --n 2000 --sweep --mask-header-px 40 --gallery
+#        python scripts/_sam2_composite.py proximity --n 1200 --pair coho_chinook --mask-header-px 40 --gallery
+#        python scripts/_merge_synth_into_coco.py \
+#            --base  C:/ssl_cache/deimv2_fish_6class_masked_v23/train.json \
+#            --synth G:/Projects/sam2_synth_partial/synth_coco.json \
+#            --synth G:/Projects/sam2_synth_proximity/synth_coco.json \
+#            --out   C:/ssl_cache/deimv2_fish_6class_masked_v25/train.json --max-synth 3300
+#      (--mask-header-px 40 makes synth born header-masked = matches the masked base; no separate mask step.
+#       _sam2_composite applies review.csv by default, so only Tom-kept cutouts reach the synth.)
+# Select the deploy checkpoint by tracked-op F1 on the LEAK-CLEAN op_dev split (NOT lab AP); op peaks
+# EARLY (ep14-24) so checkpoint_freq 2 in that window. Everything else = x_v24 (960 recipe, batch 8, 30ep).
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_x_v25
+checkpoint_freq: 2
+eval_spatial_size: [960, 960]
+print_freq: 100
+
+epoches: 30
+flat_epoch: 15
+no_aug_epoch: 5
+
+optimizer:
+  lr: 0.00025          # LR-FIX (see header); deep-merge keeps the base backbone param-groups + betas/wd
+
+DEIMCriterion:
+  matcher:
+    matcher_change_epoch: 25
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 8
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v25/train.json
+    transforms:
+      ops:
+        - {type: Mosaic, output_size: 480, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 1.0, fill_value: 0, use_cache: True, max_cached_images: 50, random_pop: True}
+        - {type: ColorJitter, brightness: 0.2, contrast: 0.2, saturation: 0.1, hue: 0.0}
+        - {type: RandomZoomOut, fill: 0, side_range: [1.0, 2.0]}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [960, 960], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: [4, 15, 25]
+        ops: ['Mosaic', 'ColorJitter', 'RandomZoomOut', 'RandomIoUCrop']
+      mosaic_prob: 0.5
+  collate_fn:
+    base_size: 960
+    base_size_repeat: null
+    mixup_prob: 0.5
+    mixup_epochs: [4, 15]
+    stop_epoch: 25
+    copyblend_prob: 0.5
+    copyblend_epochs: [4, 25]
+    copyblend_type: paste
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 8
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v23/val.json
+    transforms:
+      ops:
+        - {type: Resize, size: [960, 960], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}

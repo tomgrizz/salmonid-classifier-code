@@ -1,0 +1,27 @@
+__include__: ['./deimv2_dinov3_m_coco.yml']
+
+# DEIMv2-M (DINOv3, bigger ViT-Tiny+ backbone) fine-tuned on our clean 5-class fish COCO.
+# Same recipe as deimv2_fish_s.yml -- the bet is the larger backbone/encoder gives richer SPECIES
+# features (the gap to two-stage), judged by tracked-op (NOT lab mAP; that's how RF-DETR Medium's
+# overfit was caught). remap off (0-indexed cats). 50ep fine-tune (default 132 is from-scratch).
+num_classes: 5
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_m
+checkpoint_freq: 5
+epoches: 50
+flat_epoch: 24
+no_aug_epoch: 6
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 4
+  dataset:
+    img_folder: G:/Projects/
+    ann_file: G:/Projects/deimv2_fish_5class/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 4
+  dataset:
+    img_folder: G:/Projects/
+    ann_file: G:/Projects/deimv2_fish_5class/val.json

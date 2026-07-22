@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "salmonid-classifier"
+version = "2.6.0"
+description = "Reproduction code for the single-stage DEIMv2-X salmonid species classifier (Lake Ontario fishways)"
+readme = "README.md"
+requires-python = ">=3.11"
+# Runtime deps are managed via requirements.txt / requirements-deim.txt (two separate envs;
+# see those files). Kept out of here so `pip install -e .` does not force a single env.
+
+[tool.setuptools.packages.find]
+include = ["salmonid*"]

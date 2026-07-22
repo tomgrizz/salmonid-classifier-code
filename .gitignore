@@ -1,0 +1,38 @@
+# --- generated outputs ---
+# figures/ holds only generated artifacts; keep the dir, ignore its contents
+figures/*
+!figures/.gitkeep
+output/
+*.log
+
+# --- large external artifacts (see docs/DATA_AVAILABILITY.md — never commit) ---
+# model weights, frozen training COCO, corpus detect-stores, raw footage
+*.pth
+*.pt
+*.pkl
+data/coco/
+data/stores/
+data/corpus/
+# the multi-GB SAM2 cutout library (morphology / bbox-grid figures pull from it)
+data/sam2_cutouts/
+
+# ...but the tiny committed Tier-2 demo bundle under data/sample/ IS tracked
+!data/sample/
+!data/sample/**
+
+# --- python ---
+__pycache__/
+*.pyc
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+.venv_deim/
+.env
+
+# --- editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,73 @@
+__include__: ['./deimv2_dinov3_x_coco.yml']
+
+# DEIMv2-X v2.4 fish fine-tune. X = real DINOv3 ViT-S/16-PLUS (~29M) + wider neck (hidden 256) +
+# deeper 6-layer decoder -- the top DEIMv2 rung (L is ViT-S/16 ~21M / hidden 224 / 4-layer). This is
+# the capacity lever after the honest clean-label comparison showed single-stage v2.3 (0.920) trails
+# two-stage v6 (0.936) by ONE chrome Atlantic (Ganaraska__4e676cdf18a2, called Rainbow). Resolution is
+# NOT the lever (fish are ~26 DINOv3 patches wide at 960, MORE than the two-stage's 224 crop); the gap
+# is chrome Atlantic<->Rainbow FEATURE discrimination + the 11:1 Rainbow:Atlantic imbalance (Atlantic
+# is biologically label-capped at ~300 tracks / 1370 boxes -- June added only +2). Same 960 recipe as
+# v2.3 (ColorJitter no-RGB-permute, capped ZoomOut, paste-CopyBlend, rescaled 30ep schedule, matcher_
+# change fires). ONLY changes vs v2.3-L: the X backbone/neck/decoder + batch 8 (X won't fit batch 16 at
+# 960 on 32GB) + the v2.4 data. Fine-tune from ckpts/deimv2_x_coco.pth. Select the deploy checkpoint by
+# tracked-op F1 (confidence-aware Coho vote), NOT lab AP.
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_x_v24
+checkpoint_freq: 5
+eval_spatial_size: [960, 960]
+print_freq: 100
+
+epoches: 30
+flat_epoch: 15
+no_aug_epoch: 5
+
+DEIMCriterion:
+  matcher:
+    matcher_change_epoch: 25
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 8
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v24/train.json
+    transforms:
+      ops:
+        - {type: Mosaic, output_size: 480, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 1.0, fill_value: 0, use_cache: True, max_cached_images: 50, random_pop: True}
+        - {type: ColorJitter, brightness: 0.2, contrast: 0.2, saturation: 0.1, hue: 0.0}
+        - {type: RandomZoomOut, fill: 0, side_range: [1.0, 2.0]}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [960, 960], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: [4, 15, 25]
+        ops: ['Mosaic', 'ColorJitter', 'RandomZoomOut', 'RandomIoUCrop']
+      mosaic_prob: 0.5
+  collate_fn:
+    base_size: 960
+    base_size_repeat: null
+    mixup_prob: 0.5
+    mixup_epochs: [4, 15]
+    stop_epoch: 25
+    copyblend_prob: 0.5
+    copyblend_epochs: [4, 25]
+    copyblend_type: paste
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 8
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v24/val.json
+    transforms:
+      ops:
+        - {type: Resize, size: [960, 960], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}

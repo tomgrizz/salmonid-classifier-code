@@ -1,0 +1,31 @@
+__include__: ['./deimv2_dinov3_s_coco.yml']
+
+# DEIMv2-S (DINOv3) v2 - single-stage detector retrained from the ground up on the enriched,
+# header-masked 6-class COCO: all current LS+CVAT labels + Small Salmonid (class 5) + the 567
+# hardcase tracks (214 hard-pair positives / 203 debris+partial negatives) + capped triple-confirmed
+# (tech+model+seasonal) Rainbow/Brown + the "Not a fish" debris negatives. Goal: beat DEIMv2-S v1
+# (tracked-op 0.837) on detection precision (debris) and hard-pair species. remap off (0-indexed).
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_s_v2
+checkpoint_freq: 5
+
+# Fine-tune from COCO (fast convergence) - keep the tested S schedule. 50 epochs, flat to 24 then
+# cosine, brief no-aug finish. Checkpoint every 5 so several can be op-evaluated (lab AP peaks early).
+epoches: 50
+flat_epoch: 24
+no_aug_epoch: 6
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 4
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 4
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked/val.json

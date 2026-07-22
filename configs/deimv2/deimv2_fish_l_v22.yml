@@ -1,0 +1,82 @@
+__include__: ['./deimv2_dinov3_l_coco.yml']
+
+# DEIMv2-L v2.2 "best-model" run (real DINOv3 ViT-S/16, single-stage 6-class). Same audited v2.1 data
+# (C:/ssl_cache/deimv2_fish_6class_masked_v21) but a recipe overhaul aimed at the CONFIRMED bottleneck:
+# the Coho/Rainbow gap is confident species-MISCLASSIFICATION (detection at ceiling), a fine-grained
+# resolution + color-cue problem. Bundled, deliberately non-isolated changes (Tom approved best-model):
+#   1) RESOLUTION 640 -> 960 (eval_spatial_size + train/val Resize + Mosaic 320->480). ~2.25x tokens on
+#      the fish so DINOv3 can resolve chrome texture (spots/sheen/kype). Multi-scale DISABLED
+#      (base_size_repeat: null) because at base 960 it would push batches to 1200px and OOM the 32GB 5090
+#      AND blow training time; per-image Mosaic/ZoomOut/IoUCrop still give scale variety.
+#   2) NO RGB CHANNEL-PERMUTE: RandomPhotometricDistort (torchvision default permutes RGB on 50% of
+#      images, teaching color-INVARIANCE on a color-DISCRIMINATED task) -> ColorJitter (brightness/
+#      contrast/mild-saturation, hue 0, NO permutation). Preserves the color cue separating chrome morphs.
+#   3) Cap RandomZoomOut side_range [1,2] (was default up to 4x shrink); CopyBlend 'paste' (opaque, was
+#      'blend' = 50% ghost fish corrupting texture).
+#   4) Aug schedule RESCALED to the run length so a true clean no-aug low-LR polish tail exists, and
+#      matcher_change_epoch set BELOW epoches so the IoU-aware refined matcher actually fires (was ==
+#      epoches in v2.0/v2.1 -> never fired -> a free localization lever for the loose-edge-box weakness).
+# Select the deploy checkpoint by tracked-op F1 (peaks early), NOT lab AP. epoches/batch finalized from a
+# VRAM+throughput smoke test.
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_l_v22
+checkpoint_freq: 5
+eval_spatial_size: [960, 960]
+print_freq: 100
+
+# 30 epochs: at 960px batch16 = ~33min/epoch (~16.5h), op-F1 peaks early (~ep19 in v2.0), so 30 covers
+# the peak with margin + a clean no-aug polish tail (ep25-29). Checkpoints at 5/10/15/20/25/29 for the sweep.
+epoches: 30
+flat_epoch: 15
+no_aug_epoch: 5
+
+DEIMCriterion:
+  matcher:
+    matcher_change_epoch: 25
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v21/train.json
+    transforms:
+      ops:
+        - {type: Mosaic, output_size: 480, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 1.0, fill_value: 0, use_cache: True, max_cached_images: 50, random_pop: True}
+        - {type: ColorJitter, brightness: 0.2, contrast: 0.2, saturation: 0.1, hue: 0.0}
+        - {type: RandomZoomOut, fill: 0, side_range: [1.0, 2.0]}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [960, 960], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: [4, 15, 25]
+        ops: ['Mosaic', 'ColorJitter', 'RandomZoomOut', 'RandomIoUCrop']
+      mosaic_prob: 0.5
+  collate_fn:
+    base_size: 960
+    base_size_repeat: null
+    mixup_prob: 0.5
+    mixup_epochs: [4, 15]
+    stop_epoch: 25
+    copyblend_prob: 0.5
+    copyblend_epochs: [4, 25]
+    copyblend_type: paste
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v21/val.json
+    transforms:
+      ops:
+        - {type: Resize, size: [960, 960], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}

@@ -1,0 +1,23 @@
+# Base environment — everything EXCEPT single-stage training/inference of the DEIMv2 model.
+# Covers: BoT-SORT tracking (Pass B), evaluation, counting, results/concordance, figures.
+# Python 3.11. Tracking needs numpy < 2 (boxmot 10.0.52 constraint), so this env is kept
+# SEPARATE from the DEIMv2 training env (numpy 2.x) — see requirements-deim.txt.
+#
+#   python -m venv .venv && .venv/Scripts/activate    # (Windows)
+#   pip install -r requirements.txt
+#   pip install -e .                                   # makes `salmonid` importable anywhere
+
+numpy<2
+pandas>=2.0
+scipy>=1.11
+matplotlib>=3.8
+pyarrow>=14
+opencv-python>=4.9
+Pillow>=10
+tqdm>=4.66
+decord>=0.6            # fast seek-to-frame video decode (Pass B)
+
+# tracking / re-ID (Pass B — BoT-SORT + OSNet). torch here is CPU-or-CUDA; the re-ID net is small.
+boxmot==10.0.52
+torch>=2.2
+torchvision>=0.17

@@ -1,0 +1,34 @@
+__include__: ['./deimv2_dinov3_l_coco.yml']
+
+# DEIMv2-L (REAL Meta DINOv3 ViT-S/16) v2.1 - same recipe as v2, retrained on the v2.0 6-class COCO
+# PLUS Tom's 2026-06 hard-pair / diverse-Coho campaign labels (677 species positives: Chinook 263,
+# Rainbow 200, Coho 126, Brown 49, Small-Sal 39 + 254 not-a-fish debris negatives), sourced from the
+# v6 corpus shards and audited inline by _build_extra_coco's y/x/area/conf sanity filters.
+#
+# WHY v2.1: v2.0 op-F1 = 0.871 (best single-stage, > S 0.837) but < two-stage 0.894; the entire gap is
+# Coho (-0.07) + Rainbow (-0.07) RECALL (it already beats two-stage on Atlantic). This delta targets
+# exactly those two species (Coho 2->126, Rainbow +200 hard-pairs) + debris precision. One clean
+# variable: same backbone/schedule/batch as v2, only the training data grew. Select the deploy
+# checkpoint by tracked-op F1 (peaks early ~ep19 for v2), NOT lab AP.
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_l_v21
+checkpoint_freq: 5
+
+epoches: 50
+flat_epoch: 24
+no_aug_epoch: 6
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v21/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v21/val.json

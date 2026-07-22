@@ -1,0 +1,27 @@
+__include__: ['./deimv2_dinov3_s_coco.yml']
+
+# DEIMv2-S fine-tune from the FISH-SSL backbone (-t ckpts/deimv2_s_ssl.pth = lightly-distilled
+# vitt16 backbone + COCO encoder/decoder). Same recipe as deimv2_fish_s.yml, but on the
+# HEADER-MASKED COCO (matches the masked SSL frames + masked inference). Tests whether fish-domain
+# SSL features beat the from-COCO backbone (S 0.84 / two-stage 0.894). Judge by tracked-op.
+num_classes: 5
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_s_ssl
+checkpoint_freq: 5
+epoches: 50
+flat_epoch: 24
+no_aug_epoch: 6
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 8
+  dataset:
+    img_folder: C:/ssl_cache/
+    ann_file: C:/ssl_cache/deimv2_fish_5class_ssl/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 8
+  dataset:
+    img_folder: C:/ssl_cache/
+    ann_file: C:/ssl_cache/deimv2_fish_5class_ssl/val.json

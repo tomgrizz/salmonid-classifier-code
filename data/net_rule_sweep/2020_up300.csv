@@ -1,0 +1,477 @@
+date,site,species,model,tech
+2020-06-27,Credit,Chinook,-1,0
+2020-06-28,Credit,Atlantic,1,1
+2020-08-06,Credit,Rainbow Trout,1,0
+2020-08-07,Credit,Chinook,7,6
+2020-08-08,Credit,Chinook,1,3
+2020-08-08,Credit,Atlantic,0,1
+2020-08-09,Credit,Chinook,5,6
+2020-08-12,Credit,Rainbow Trout,-1,0
+2020-08-14,Credit,Atlantic,1,1
+2020-08-19,Credit,Chinook,1,1
+2020-08-19,Credit,Rainbow Trout,2,1
+2020-08-20,Credit,Atlantic,0,1
+2020-08-22,Credit,Chinook,3,3
+2020-08-23,Credit,Atlantic,1,1
+2020-08-29,Credit,Chinook,4,4
+2020-08-30,Credit,Chinook,1,1
+2020-08-31,Credit,Chinook,2,2
+2020-09-03,Credit,Chinook,1,3
+2020-09-05,Credit,Chinook,0,1
+2020-09-05,Credit,Atlantic,1,1
+2020-09-05,Credit,Rainbow Trout,2,0
+2020-09-07,Credit,Chinook,4,4
+2020-09-07,Credit,Brown Trout,1,1
+2020-09-08,Credit,Chinook,18,25
+2020-09-08,Credit,Brown Trout,-1,1
+2020-09-09,Credit,Chinook,42,53
+2020-09-09,Credit,Brown Trout,0,1
+2020-09-10,Credit,Chinook,73,93
+2020-09-10,Credit,Coho,1,0
+2020-09-10,Credit,Brown Trout,1,1
+2020-09-11,Credit,Chinook,0,1
+2020-09-12,Credit,Chinook,17,23
+2020-09-12,Credit,Rainbow Trout,1,0
+2020-09-13,Credit,Chinook,30,49
+2020-09-13,Credit,Brown Trout,1,1
+2020-09-14,Credit,Chinook,44,70
+2020-09-14,Credit,Coho,1,2
+2020-09-14,Credit,Rainbow Trout,2,2
+2020-09-15,Credit,Chinook,16,16
+2020-09-15,Credit,Coho,3,4
+2020-09-15,Credit,Atlantic,0,1
+2020-09-15,Credit,Rainbow Trout,2,2
+2020-09-15,Credit,Brown Trout,2,2
+2020-09-16,Credit,Chinook,5,6
+2020-09-16,Credit,Coho,0,2
+2020-09-16,Credit,Atlantic,2,2
+2020-09-16,Credit,Rainbow Trout,1,0
+2020-09-17,Credit,Chinook,32,32
+2020-09-17,Credit,Coho,3,5
+2020-09-17,Credit,Rainbow Trout,1,0
+2020-09-19,Credit,Chinook,1,1
+2020-09-20,Credit,Chinook,97,110
+2020-09-20,Credit,Coho,1,1
+2020-09-20,Credit,Atlantic,1,1
+2020-09-20,Credit,Rainbow Trout,2,1
+2020-09-21,Credit,Chinook,99,130
+2020-09-21,Credit,Rainbow Trout,2,0
+2020-09-22,Credit,Chinook,52,63
+2020-09-22,Credit,Coho,1,1
+2020-09-23,Credit,Chinook,35,53
+2020-09-24,Credit,Chinook,194,241
+2020-09-24,Credit,Coho,3,4
+2020-09-25,Credit,Chinook,117,135
+2020-09-25,Credit,Coho,3,9
+2020-09-26,Credit,Chinook,68,100
+2020-09-26,Credit,Coho,2,2
+2020-09-26,Credit,Rainbow Trout,1,0
+2020-09-27,Credit,Chinook,126,166
+2020-09-27,Credit,Coho,5,8
+2020-09-28,Credit,Chinook,109,145
+2020-09-28,Credit,Coho,2,2
+2020-09-28,Credit,Atlantic,2,2
+2020-09-28,Credit,Rainbow Trout,0,1
+2020-09-29,Credit,Chinook,185,310
+2020-09-29,Credit,Coho,2,4
+2020-09-29,Credit,Rainbow Trout,2,0
+2020-09-30,Credit,Chinook,99,195
+2020-09-30,Credit,Coho,3,5
+2020-09-30,Credit,Rainbow Trout,2,1
+2020-10-01,Credit,Chinook,242,369
+2020-10-01,Credit,Coho,4,3
+2020-10-01,Credit,Rainbow Trout,2,0
+2020-10-02,Credit,Chinook,91,93
+2020-10-02,Credit,Coho,2,3
+2020-10-02,Credit,Rainbow Trout,1,2
+2020-10-03,Credit,Chinook,16,25
+2020-10-03,Credit,Coho,1,1
+2020-10-04,Credit,Chinook,15,18
+2020-10-05,Credit,Chinook,46,69
+2020-10-05,Credit,Coho,3,5
+2020-10-06,Credit,Chinook,92,135
+2020-10-06,Credit,Coho,12,19
+2020-10-06,Credit,Rainbow Trout,2,0
+2020-10-06,Credit,Brown Trout,1,2
+2020-10-07,Credit,Chinook,158,286
+2020-10-07,Credit,Coho,4,5
+2020-10-07,Credit,Rainbow Trout,1,0
+2020-10-07,Credit,Brown Trout,0,1
+2020-10-08,Credit,Chinook,102,155
+2020-10-08,Credit,Coho,7,10
+2020-10-08,Credit,Brown Trout,0,1
+2020-10-09,Credit,Chinook,86,132
+2020-10-09,Credit,Coho,3,5
+2020-10-09,Credit,Atlantic,1,1
+2020-10-09,Credit,Rainbow Trout,1,0
+2020-10-10,Credit,Chinook,63,106
+2020-10-10,Credit,Coho,0,1
+2020-10-11,Credit,Chinook,37,72
+2020-10-11,Credit,Coho,1,2
+2020-10-11,Credit,Atlantic,1,0
+2020-10-12,Credit,Chinook,21,35
+2020-10-12,Credit,Atlantic,1,1
+2020-10-12,Credit,Brown Trout,1,1
+2020-10-13,Credit,Chinook,57,107
+2020-10-13,Credit,Rainbow Trout,1,0
+2020-10-13,Credit,Brown Trout,-2,3
+2020-10-14,Credit,Chinook,65,97
+2020-10-14,Credit,Coho,2,8
+2020-10-14,Credit,Atlantic,0,1
+2020-10-14,Credit,Rainbow Trout,2,0
+2020-10-15,Credit,Chinook,17,34
+2020-10-15,Credit,Coho,0,1
+2020-10-15,Credit,Rainbow Trout,1,1
+2020-10-19,Credit,Chinook,24,38
+2020-10-19,Credit,Coho,0,3
+2020-10-19,Credit,Rainbow Trout,2,2
+2020-10-20,Credit,Chinook,12,16
+2020-10-20,Credit,Coho,0,1
+2020-10-20,Credit,Rainbow Trout,3,2
+2020-10-21,Credit,Chinook,36,42
+2020-10-21,Credit,Coho,0,1
+2020-10-21,Credit,Rainbow Trout,5,6
+2020-10-22,Credit,Chinook,4,6
+2020-10-22,Credit,Coho,0,1
+2020-10-22,Credit,Rainbow Trout,5,8
+2020-10-25,Credit,Chinook,0,1
+2020-10-26,Credit,Chinook,1,2
+2020-10-26,Credit,Coho,0,1
+2020-10-26,Credit,Rainbow Trout,2,2
+2020-10-27,Credit,Chinook,8,7
+2020-10-27,Credit,Coho,1,2
+2020-10-27,Credit,Rainbow Trout,1,1
+2020-10-28,Credit,Chinook,6,7
+2020-10-28,Credit,Coho,0,1
+2020-10-28,Credit,Rainbow Trout,0,1
+2020-10-29,Credit,Chinook,1,2
+2020-10-29,Credit,Coho,0,1
+2020-10-29,Credit,Rainbow Trout,2,0
+2020-11-01,Credit,Chinook,2,2
+2020-11-01,Credit,Rainbow Trout,-5,0
+2020-11-02,Credit,Rainbow Trout,-1,0
+2020-11-03,Credit,Chinook,1,1
+2020-11-04,Credit,Chinook,6,4
+2020-11-04,Credit,Rainbow Trout,1,2
+2020-11-05,Credit,Chinook,10,14
+2020-11-05,Credit,Coho,0,2
+2020-11-05,Credit,Rainbow Trout,8,8
+2020-11-05,Credit,Brown Trout,3,2
+2020-11-08,Credit,Chinook,8,8
+2020-11-08,Credit,Rainbow Trout,7,12
+2020-11-09,Credit,Chinook,3,2
+2020-11-09,Credit,Rainbow Trout,13,21
+2020-11-10,Credit,Chinook,2,2
+2020-11-10,Credit,Rainbow Trout,8,13
+2020-11-11,Credit,Chinook,6,2
+2020-11-11,Credit,Coho,0,3
+2020-11-11,Credit,Rainbow Trout,15,13
+2020-11-12,Credit,Chinook,3,1
+2020-11-12,Credit,Coho,0,2
+2020-11-12,Credit,Rainbow Trout,1,2
+2020-05-12,Ganaraska,Rainbow Trout,0,1
+2020-05-13,Ganaraska,Rainbow Trout,0,3
+2020-05-14,Ganaraska,Rainbow Trout,0,1
+2020-05-15,Ganaraska,Rainbow Trout,0,-2
+2020-05-19,Ganaraska,Rainbow Trout,0,-9
+2020-05-20,Ganaraska,Rainbow Trout,0,-1
+2020-05-21,Ganaraska,Rainbow Trout,0,-5
+2020-05-21,Ganaraska,Brown Trout,0,1
+2020-05-22,Ganaraska,Rainbow Trout,0,-5
+2020-05-22,Ganaraska,Brown Trout,0,3
+2020-05-23,Ganaraska,Rainbow Trout,0,-3
+2020-05-23,Ganaraska,Brown Trout,0,1
+2020-05-24,Ganaraska,Rainbow Trout,0,-6
+2020-05-27,Ganaraska,Rainbow Trout,0,-7
+2020-05-27,Ganaraska,Brown Trout,0,-3
+2020-05-28,Ganaraska,Rainbow Trout,0,1
+2020-05-29,Ganaraska,Rainbow Trout,0,-1
+2020-05-30,Ganaraska,Rainbow Trout,0,-3
+2020-05-31,Ganaraska,Rainbow Trout,0,3
+2020-06-02,Ganaraska,Rainbow Trout,0,1
+2020-06-03,Ganaraska,Rainbow Trout,0,-2
+2020-06-05,Ganaraska,Rainbow Trout,0,-2
+2020-06-06,Ganaraska,Rainbow Trout,0,-2
+2020-06-06,Ganaraska,Brown Trout,0,1
+2020-06-07,Ganaraska,Brown Trout,0,1
+2020-06-10,Ganaraska,Rainbow Trout,0,-2
+2020-06-16,Ganaraska,Rainbow Trout,0,1
+2020-06-19,Ganaraska,Brown Trout,0,2
+2020-06-20,Ganaraska,Rainbow Trout,0,1
+2020-06-21,Ganaraska,Brown Trout,0,1
+2020-06-22,Ganaraska,Brown Trout,0,1
+2020-06-23,Ganaraska,Brown Trout,0,1
+2020-06-24,Ganaraska,Rainbow Trout,0,1
+2020-06-25,Ganaraska,Brown Trout,0,1
+2020-06-27,Ganaraska,Rainbow Trout,0,1
+2020-07-02,Ganaraska,Brown Trout,0,2
+2020-07-13,Ganaraska,Brown Trout,0,1
+2020-07-15,Ganaraska,Brown Trout,0,1
+2020-07-16,Ganaraska,Rainbow Trout,0,1
+2020-07-17,Ganaraska,Brown Trout,0,1
+2020-07-18,Ganaraska,Brown Trout,0,7
+2020-07-19,Ganaraska,Brown Trout,0,1
+2020-07-20,Ganaraska,Brown Trout,0,2
+2020-07-21,Ganaraska,Brown Trout,0,9
+2020-07-22,Ganaraska,Brown Trout,0,2
+2020-07-25,Ganaraska,Brown Trout,0,1
+2020-07-26,Ganaraska,Brown Trout,0,1
+2020-07-31,Ganaraska,Brown Trout,0,1
+2020-08-03,Ganaraska,Chinook,0,7
+2020-08-03,Ganaraska,Brown Trout,0,13
+2020-08-04,Ganaraska,Chinook,0,6
+2020-08-04,Ganaraska,Brown Trout,0,2
+2020-08-05,Ganaraska,Chinook,0,6
+2020-08-05,Ganaraska,Atlantic,0,1
+2020-08-05,Ganaraska,Brown Trout,0,13
+2020-08-06,Ganaraska,Chinook,0,2
+2020-08-06,Ganaraska,Brown Trout,0,7
+2020-08-07,Ganaraska,Atlantic,0,3
+2020-08-07,Ganaraska,Brown Trout,0,6
+2020-08-08,Ganaraska,Chinook,0,1
+2020-08-08,Ganaraska,Atlantic,0,1
+2020-08-09,Ganaraska,Chinook,0,2
+2020-08-09,Ganaraska,Atlantic,0,2
+2020-08-10,Ganaraska,Chinook,0,3
+2020-08-10,Ganaraska,Atlantic,0,2
+2020-08-10,Ganaraska,Brown Trout,0,5
+2020-08-11,Ganaraska,Atlantic,0,1
+2020-08-11,Ganaraska,Brown Trout,0,2
+2020-08-13,Ganaraska,Brown Trout,0,1
+2020-08-14,Ganaraska,Chinook,0,1
+2020-08-14,Ganaraska,Brown Trout,0,1
+2020-08-15,Ganaraska,Brown Trout,0,1
+2020-08-17,Ganaraska,Chinook,0,1
+2020-08-17,Ganaraska,Brown Trout,0,8
+2020-08-18,Ganaraska,Chinook,0,5
+2020-08-18,Ganaraska,Brown Trout,0,10
+2020-08-19,Ganaraska,Chinook,0,11
+2020-08-19,Ganaraska,Atlantic,0,1
+2020-08-19,Ganaraska,Brown Trout,0,8
+2020-08-20,Ganaraska,Chinook,0,4
+2020-08-20,Ganaraska,Brown Trout,0,1
+2020-08-21,Ganaraska,Chinook,0,1
+2020-08-22,Ganaraska,Chinook,0,6
+2020-08-22,Ganaraska,Brown Trout,0,1
+2020-08-23,Ganaraska,Brown Trout,0,1
+2020-08-24,Ganaraska,Chinook,0,1
+2020-08-24,Ganaraska,Atlantic,0,1
+2020-08-25,Ganaraska,Chinook,0,1
+2020-08-26,Ganaraska,Chinook,0,3
+2020-08-26,Ganaraska,Brown Trout,0,1
+2020-08-28,Ganaraska,Chinook,0,60
+2020-08-28,Ganaraska,Brown Trout,0,3
+2020-08-29,Ganaraska,Chinook,0,59
+2020-08-29,Ganaraska,Brown Trout,0,8
+2020-08-30,Ganaraska,Chinook,0,307
+2020-08-30,Ganaraska,Coho,0,19
+2020-08-30,Ganaraska,Brown Trout,0,8
+2020-08-31,Ganaraska,Chinook,0,271
+2020-08-31,Ganaraska,Coho,0,4
+2020-08-31,Ganaraska,Brown Trout,0,14
+2020-09-01,Ganaraska,Chinook,0,88
+2020-09-01,Ganaraska,Coho,0,1
+2020-09-01,Ganaraska,Brown Trout,0,2
+2020-09-02,Ganaraska,Chinook,0,180
+2020-09-02,Ganaraska,Coho,0,9
+2020-09-02,Ganaraska,Brown Trout,0,10
+2020-09-03,Ganaraska,Chinook,0,169
+2020-09-03,Ganaraska,Coho,0,11
+2020-09-03,Ganaraska,Brown Trout,0,7
+2020-09-04,Ganaraska,Chinook,0,583
+2020-09-04,Ganaraska,Coho,0,50
+2020-09-04,Ganaraska,Brown Trout,0,3
+2020-09-05,Ganaraska,Chinook,0,629
+2020-09-05,Ganaraska,Coho,0,101
+2020-09-05,Ganaraska,Brown Trout,0,14
+2020-09-06,Ganaraska,Chinook,0,161
+2020-09-06,Ganaraska,Coho,0,18
+2020-09-06,Ganaraska,Brown Trout,0,2
+2020-09-07,Ganaraska,Chinook,0,82
+2020-09-07,Ganaraska,Coho,0,13
+2020-09-07,Ganaraska,Atlantic,0,1
+2020-09-07,Ganaraska,Brown Trout,0,4
+2020-09-08,Ganaraska,Chinook,0,127
+2020-09-08,Ganaraska,Coho,0,55
+2020-09-08,Ganaraska,Atlantic,0,1
+2020-09-08,Ganaraska,Brown Trout,0,3
+2020-09-09,Ganaraska,Chinook,0,319
+2020-09-09,Ganaraska,Coho,0,37
+2020-09-09,Ganaraska,Brown Trout,0,6
+2020-09-10,Ganaraska,Chinook,0,227
+2020-09-10,Ganaraska,Coho,0,101
+2020-09-10,Ganaraska,Atlantic,0,2
+2020-09-10,Ganaraska,Brown Trout,0,3
+2020-09-11,Ganaraska,Chinook,0,254
+2020-09-11,Ganaraska,Coho,0,240
+2020-09-11,Ganaraska,Atlantic,0,1
+2020-09-11,Ganaraska,Rainbow Trout,0,4
+2020-09-11,Ganaraska,Brown Trout,0,8
+2020-09-12,Ganaraska,Chinook,0,55
+2020-09-12,Ganaraska,Coho,0,175
+2020-09-12,Ganaraska,Brown Trout,0,1
+2020-09-13,Ganaraska,Chinook,0,107
+2020-09-13,Ganaraska,Coho,0,250
+2020-09-13,Ganaraska,Atlantic,0,1
+2020-09-13,Ganaraska,Brown Trout,0,3
+2020-09-14,Ganaraska,Chinook,0,335
+2020-09-14,Ganaraska,Coho,0,145
+2020-09-14,Ganaraska,Rainbow Trout,0,1
+2020-09-14,Ganaraska,Brown Trout,0,12
+2020-09-15,Ganaraska,Chinook,0,26
+2020-09-15,Ganaraska,Coho,0,5
+2020-09-15,Ganaraska,Rainbow Trout,0,2
+2020-09-16,Ganaraska,Chinook,0,37
+2020-09-16,Ganaraska,Coho,0,6
+2020-09-17,Ganaraska,Chinook,0,249
+2020-09-17,Ganaraska,Coho,0,62
+2020-09-17,Ganaraska,Atlantic,0,3
+2020-09-17,Ganaraska,Rainbow Trout,0,3
+2020-09-17,Ganaraska,Brown Trout,0,1
+2020-09-18,Ganaraska,Chinook,0,239
+2020-09-18,Ganaraska,Coho,0,24
+2020-09-18,Ganaraska,Atlantic,0,1
+2020-09-18,Ganaraska,Rainbow Trout,0,2
+2020-09-18,Ganaraska,Brown Trout,0,3
+2020-09-19,Ganaraska,Chinook,0,107
+2020-09-19,Ganaraska,Coho,0,12
+2020-09-19,Ganaraska,Rainbow Trout,0,1
+2020-09-20,Ganaraska,Chinook,0,29
+2020-09-20,Ganaraska,Coho,0,5
+2020-09-21,Ganaraska,Chinook,0,49
+2020-09-21,Ganaraska,Coho,0,9
+2020-09-22,Ganaraska,Chinook,0,49
+2020-09-22,Ganaraska,Coho,0,16
+2020-09-22,Ganaraska,Rainbow Trout,0,1
+2020-09-23,Ganaraska,Chinook,0,135
+2020-09-23,Ganaraska,Coho,0,8
+2020-09-23,Ganaraska,Rainbow Trout,0,1
+2020-09-24,Ganaraska,Chinook,0,410
+2020-09-24,Ganaraska,Coho,0,52
+2020-09-24,Ganaraska,Brown Trout,0,2
+2020-09-25,Ganaraska,Chinook,0,1
+2020-09-26,Ganaraska,Chinook,0,265
+2020-09-26,Ganaraska,Coho,0,25
+2020-09-26,Ganaraska,Atlantic,0,2
+2020-09-26,Ganaraska,Rainbow Trout,0,1
+2020-09-26,Ganaraska,Brown Trout,0,1
+2020-09-27,Ganaraska,Chinook,0,290
+2020-09-27,Ganaraska,Coho,0,36
+2020-09-27,Ganaraska,Atlantic,0,1
+2020-09-27,Ganaraska,Rainbow Trout,0,1
+2020-09-28,Ganaraska,Chinook,0,401
+2020-09-28,Ganaraska,Coho,0,36
+2020-09-28,Ganaraska,Atlantic,0,1
+2020-09-28,Ganaraska,Rainbow Trout,0,1
+2020-09-28,Ganaraska,Brown Trout,0,1
+2020-09-29,Ganaraska,Chinook,0,309
+2020-09-29,Ganaraska,Coho,0,28
+2020-09-29,Ganaraska,Rainbow Trout,0,2
+2020-09-29,Ganaraska,Brown Trout,0,3
+2020-09-30,Ganaraska,Chinook,0,185
+2020-09-30,Ganaraska,Coho,0,11
+2020-09-30,Ganaraska,Brown Trout,0,2
+2020-10-01,Ganaraska,Chinook,0,9
+2020-10-02,Ganaraska,Chinook,0,7
+2020-10-02,Ganaraska,Brown Trout,0,1
+2020-10-03,Ganaraska,Rainbow Trout,0,-2
+2020-10-04,Ganaraska,Coho,0,1
+2020-10-05,Ganaraska,Chinook,0,12
+2020-10-05,Ganaraska,Coho,0,1
+2020-10-05,Ganaraska,Rainbow Trout,0,1
+2020-10-06,Ganaraska,Chinook,0,24
+2020-10-06,Ganaraska,Rainbow Trout,0,1
+2020-10-07,Ganaraska,Chinook,0,207
+2020-10-07,Ganaraska,Coho,0,6
+2020-10-07,Ganaraska,Rainbow Trout,0,11
+2020-10-08,Ganaraska,Chinook,0,-54
+2020-10-08,Ganaraska,Coho,0,5
+2020-10-08,Ganaraska,Rainbow Trout,0,3
+2020-10-09,Ganaraska,Chinook,0,69
+2020-10-09,Ganaraska,Rainbow Trout,0,3
+2020-10-09,Ganaraska,Brown Trout,0,1
+2020-10-10,Ganaraska,Chinook,0,135
+2020-10-10,Ganaraska,Coho,0,2
+2020-10-10,Ganaraska,Rainbow Trout,0,4
+2020-10-10,Ganaraska,Brown Trout,0,1
+2020-10-11,Ganaraska,Chinook,0,261
+2020-10-11,Ganaraska,Coho,0,6
+2020-10-11,Ganaraska,Atlantic,0,1
+2020-10-11,Ganaraska,Rainbow Trout,0,3
+2020-10-11,Ganaraska,Brown Trout,0,1
+2020-10-12,Ganaraska,Chinook,0,107
+2020-10-12,Ganaraska,Coho,0,1
+2020-10-12,Ganaraska,Rainbow Trout,0,8
+2020-10-13,Ganaraska,Chinook,0,200
+2020-10-13,Ganaraska,Coho,0,18
+2020-10-13,Ganaraska,Rainbow Trout,0,31
+2020-10-13,Ganaraska,Brown Trout,0,4
+2020-10-14,Ganaraska,Chinook,0,98
+2020-10-14,Ganaraska,Coho,0,14
+2020-10-14,Ganaraska,Rainbow Trout,0,33
+2020-10-14,Ganaraska,Brown Trout,0,4
+2020-10-15,Ganaraska,Chinook,0,50
+2020-10-15,Ganaraska,Coho,0,6
+2020-10-15,Ganaraska,Rainbow Trout,0,29
+2020-10-15,Ganaraska,Brown Trout,0,5
+2020-10-16,Ganaraska,Chinook,0,65
+2020-10-16,Ganaraska,Coho,0,23
+2020-10-16,Ganaraska,Rainbow Trout,0,86
+2020-10-16,Ganaraska,Brown Trout,0,1
+2020-10-17,Ganaraska,Chinook,0,7
+2020-10-17,Ganaraska,Coho,0,6
+2020-10-17,Ganaraska,Rainbow Trout,0,37
+2020-10-17,Ganaraska,Brown Trout,0,-1
+2020-10-18,Ganaraska,Chinook,0,10
+2020-10-18,Ganaraska,Coho,0,3
+2020-10-18,Ganaraska,Rainbow Trout,0,49
+2020-10-18,Ganaraska,Brown Trout,0,1
+2020-10-19,Ganaraska,Coho,0,4
+2020-10-19,Ganaraska,Rainbow Trout,0,34
+2020-10-20,Ganaraska,Chinook,0,3
+2020-10-20,Ganaraska,Coho,0,4
+2020-10-20,Ganaraska,Rainbow Trout,0,16
+2020-10-20,Ganaraska,Brown Trout,0,1
+2020-10-21,Ganaraska,Chinook,0,8
+2020-10-21,Ganaraska,Coho,0,4
+2020-10-21,Ganaraska,Rainbow Trout,0,11
+2020-10-21,Ganaraska,Brown Trout,0,2
+2020-10-22,Ganaraska,Chinook,0,7
+2020-10-22,Ganaraska,Coho,0,3
+2020-10-22,Ganaraska,Rainbow Trout,0,48
+2020-10-23,Ganaraska,Chinook,0,38
+2020-10-23,Ganaraska,Coho,0,2
+2020-10-23,Ganaraska,Atlantic,0,1
+2020-10-23,Ganaraska,Rainbow Trout,0,142
+2020-10-23,Ganaraska,Brown Trout,0,1
+2020-10-24,Ganaraska,Chinook,0,36
+2020-10-24,Ganaraska,Coho,0,10
+2020-10-24,Ganaraska,Rainbow Trout,0,121
+2020-10-25,Ganaraska,Coho,0,1
+2020-10-25,Ganaraska,Rainbow Trout,0,4
+2020-10-26,Ganaraska,Rainbow Trout,0,3
+2020-10-27,Ganaraska,Rainbow Trout,0,6
+2020-10-28,Ganaraska,Rainbow Trout,0,5
+2020-10-29,Ganaraska,Chinook,0,1
+2020-10-29,Ganaraska,Rainbow Trout,0,1
+2020-10-30,Ganaraska,Rainbow Trout,0,1
+2020-11-01,Ganaraska,Rainbow Trout,0,2
+2020-11-04,Ganaraska,Rainbow Trout,6,4
+2020-11-05,Ganaraska,Coho,1,1
+2020-11-05,Ganaraska,Rainbow Trout,72,47
+2020-11-06,Ganaraska,Chinook,8,7
+2020-11-06,Ganaraska,Coho,11,6
+2020-11-06,Ganaraska,Rainbow Trout,210,210
+2020-11-06,Ganaraska,Brown Trout,3,4
+2020-11-07,Ganaraska,Chinook,2,4
+2020-11-07,Ganaraska,Coho,1,2
+2020-11-07,Ganaraska,Atlantic,2,1
+2020-11-07,Ganaraska,Rainbow Trout,179,131
+2020-11-08,Ganaraska,Chinook,2,4
+2020-11-08,Ganaraska,Coho,3,2
+2020-11-08,Ganaraska,Rainbow Trout,92,69
+2020-11-09,Ganaraska,Chinook,1,3
+2020-11-09,Ganaraska,Coho,7,7
+2020-11-09,Ganaraska,Rainbow Trout,60,34
+2020-11-10,Ganaraska,Rainbow Trout,1,3
+2020-11-11,Ganaraska,Rainbow Trout,-2,0

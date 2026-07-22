@@ -1,0 +1,42 @@
+__include__: ['./deimv2_dinov3_l_coco.yml']
+
+# DEIMv2-L (REAL Meta DINOv3 ViT-S/16 backbone) v2 - single-stage detector retrained from the
+# ground up on the enriched, header-masked 6-class COCO: all current LS+CVAT labels + Small Salmonid
+# (class 5) + the 567 hardcase tracks (hard-pair positives / debris+partial negatives) + capped
+# triple-confirmed (tech+model+seasonal) Rainbow/Brown + the "Not a fish" debris negatives + the new
+# targeted Phase-1 batches (Credit debris-negs, Rainbow<->Chinook, Coho<->Chinook hard-pairs).
+#
+# WHY L (not the proven S 0.837): S/M use DEIMv2's DISTILLED-TINY ViT (192/256-dim); only L/X use the
+# real DINOv3 ViT-S/16 pretrain (dinov3_vits16). The oracle ceiling showed the single-stage gap is
+# SPECIES FEATURES, and "capacity isn't the lever" was only tested within the distilled-tiny family -
+# so the real-DINOv3 backbone is the genuinely-untested lever. Goal: beat DEIMv2-S v1 (tracked-op
+# 0.837), ideally approach two-stage 0.894, on debris precision + hard-pair species. remap off
+# (0-indexed our cats). Select the deploy checkpoint by tracked-op F1, NOT lab AP (peaks early).
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_l_v2
+checkpoint_freq: 5
+
+# Fine-tune from the DEIMv2-L COCO checkpoint (fast convergence) - keep the tested fish schedule.
+# 50 epochs, flat LR to 24 then cosine, brief no-aug finish. Checkpoint every 5 so several can be
+# op-evaluated. (The base l_coco.yml ships epoches:68 from-scratch; we override for fine-tune.)
+epoches: 50
+flat_epoch: 24
+no_aug_epoch: 6
+
+# batch 16 = the tested fish-recipe value (fish_s used 16); L at batch 8 only used 11.7GB of the 5090's
+# 32GB and was GPU-starved at ~11% util (data-loading bound), so batch 16 + 10 workers feeds the GPU
+# far better (~2x throughput) and fits VRAM. PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True in runner.
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked/val.json

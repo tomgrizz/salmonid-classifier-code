@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the accompanying manuscript."
+title: "Single-stage deep-learning enumeration of migratory salmonids at Lake Ontario fishways — reproduction code"
+# NOTE: author list and manuscript DOI are PLACEHOLDERS — complete before publication.
+authors:
+  - family-names: Gristey
+    given-names: Thomas
+    affiliation: "Ontario Ministry of Natural Resources — Lake Ontario Management Unit"
+  # - additional authors per the manuscript CRediT list (Q.F., S.C., M.F., M.Y., D.K.)
+version: "2.6.0"
+license: Apache-2.0        # placeholder — must match LICENSE once finalized
+repository-code: "https://github.com/<org>/salmonid-classifier-code"   # PLACEHOLDER
+preferred-citation:
+  type: article
+  title: "Against the Current: deep learning enumeration of migratory salmonids at Lake Ontario fishways, validated on technician counts"
+  authors:
+    - family-names: Gristey
+      given-names: Thomas
+  journal: "Fisheries Research"
+  year: 2026
+  # doi: <add on acceptance>

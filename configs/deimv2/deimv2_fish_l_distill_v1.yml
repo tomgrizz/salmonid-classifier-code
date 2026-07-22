@@ -1,0 +1,35 @@
+__include__: ['./deimv2_dinov3_l_coco.yml']
+
+# DEIMv2-L DISTILLATION run (v1). Single-stage detector fine-tuned from the DEIMv2-L COCO checkpoint
+# on the TEACHER-DISTILLED 6-class set: 32k human masked COCO + ~70k corpus_v6 pseudo-labels harvested
+# from the two-stage teacher (clean_v2 detector + DINOv3 v6 classifier). Coho-enriched (~7.3k clean
+# teacher tracks), Chinook/Rainbow capped 8k each for diversity, Atlantic HUMAN-ONLY (excluded from
+# pseudo-labels), 40px header-masked. Goal: improve Coho recall (0.77) and overall robustness toward
+# the two-stage 0.894, beating the current single-stage DEIMv2-L 0.849. Select deploy ckpt by tracked-op F1.
+#
+# epoches 30 (not 50): the distill set is ~3x larger, so each epoch is ~3x the gradient steps -> 30 ep
+# on ~100k imgs is ~2x the original's total optimization at ~half the wall-clock. flat/no_aug scaled.
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_l_distill_v1
+# freq 2 (not 5): the current L model's op-peak was ep4/50 on 32k imgs; on this 3x-larger set the
+# op-optimum lands even earlier in epoch terms, so checkpoint densely to catch it.
+checkpoint_freq: 2
+
+epoches: 30
+flat_epoch: 16
+no_aug_epoch: 4
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: G:/Projects/deimv2_distill_v1/train.json
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 10
+  dataset:
+    img_folder: /
+    ann_file: G:/Projects/deimv2_distill_v1/val.json

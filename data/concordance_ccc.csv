@@ -1,13 +1,13 @@
 level,species,river,n,pearson_r,ccc,ci_lo,ci_hi,cb,band
-daily,Chinook,Ganaraska,439,0.967,0.965,0.95,0.978,0.997,substantial
-annual,Chinook,Ganaraska,5,0.999,0.992,0.957,0.995,0.993,almost perfect
-daily,Chinook,Credit,412,0.966,0.958,0.925,0.984,0.991,substantial
-annual,Chinook,Credit,6,0.992,0.972,0.865,0.996,0.98,substantial
-daily,Coho,Ganaraska,316,0.966,0.956,0.923,0.978,0.99,substantial
-annual,Coho,Ganaraska,5,0.966,0.814,0.349,0.983,0.843,weak
-daily,Coho,Credit,188,0.96,0.96,0.804,0.985,1.0,substantial
-annual,Coho,Credit,6,0.988,0.956,0.043,0.969,0.967,substantial
-daily,Rainbow Trout,Ganaraska,797,0.948,0.942,0.904,0.968,0.994,moderate
-annual,Rainbow Trout,Ganaraska,5,0.814,0.71,-0.536,0.884,0.872,weak
-daily,Rainbow Trout,Credit,483,0.955,0.954,0.884,0.975,0.999,substantial
-annual,Rainbow Trout,Credit,6,0.798,0.774,-0.565,0.968,0.97,weak
+daily,Chinook,Ganaraska,446,0.967,0.964,0.951,0.978,0.997,substantial
+annual,Chinook,Ganaraska,5,0.999,0.99,0.95,0.992,0.991,substantial
+daily,Chinook,Credit,411,0.966,0.958,0.923,0.984,0.992,substantial
+annual,Chinook,Credit,6,0.994,0.976,0.897,0.994,0.982,substantial
+daily,Coho,Ganaraska,313,0.954,0.943,0.904,0.972,0.988,moderate
+annual,Coho,Ganaraska,5,0.906,0.742,0.015,0.997,0.82,weak
+daily,Coho,Credit,184,0.968,0.967,0.831,0.988,0.999,substantial
+annual,Coho,Credit,6,0.99,0.973,-0.11,0.986,0.982,substantial
+daily,Rainbow Trout,Ganaraska,811,0.954,0.951,0.919,0.974,0.997,substantial
+annual,Rainbow Trout,Ganaraska,5,0.818,0.701,-0.462,0.885,0.857,weak
+daily,Rainbow Trout,Credit,476,0.959,0.958,0.9,0.977,0.999,substantial
+annual,Rainbow Trout,Credit,6,0.86,0.836,-0.489,0.99,0.972,weak

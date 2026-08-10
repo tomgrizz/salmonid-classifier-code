@@ -1,66 +1,61 @@
 year,river,species,model_net,tech_net,net_pct_err,net_r,model_act,tech_act,act_pct_err,act_r,active_days,recovered
-2019,Credit,Chinook,2678,2291,16.9,0.968,5549,4075,36.2,0.933,66,True
-2019,Credit,Coho,124,190,-34.7,0.879,236,266,-11.3,0.904,31,True
-2019,Credit,Atlantic,41,18,127.8,0.278,66,46,43.5,0.655,13,True
-2019,Credit,Rainbow Trout,3071,2007,53.0,0.996,7085,5065,39.9,0.99,88,True
-2019,Credit,Brown Trout,42,18,133.3,0.141,91,52,75.0,0.657,17,True
-2020,Ganaraska,Chinook,12851,8173,57.2,0.813,21789,8281,163.1,0.635,77,True
-2020,Ganaraska,Coho,1963,1702,15.3,0.984,3016,1702,77.2,0.951,56,True
-2020,Ganaraska,Atlantic,29,29,0.0,0.247,34,29,17.2,0.28,21,True
-2020,Ganaraska,Rainbow Trout,1738,1174,48.0,0.508,4992,1278,290.6,0.401,72,True
-2020,Ganaraska,Brown Trout,467,270,73.0,0.832,899,278,223.4,0.829,79,True
-2020,Credit,Chinook,4138,3941,5.0,0.994,7332,3943,85.9,0.979,66,False
-2020,Credit,Coho,80,130,-38.5,0.905,130,130,0.0,0.786,36,False
-2020,Credit,Atlantic,14,15,-6.7,0.584,17,15,13.3,0.506,13,False
-2020,Credit,Rainbow Trout,150,104,44.2,0.831,314,104,201.9,0.726,22,False
-2020,Credit,Brown Trout,13,17,-23.5,0.0,37,17,117.6,0.764,12,False
-2021,Ganaraska,Chinook,6673,5039,32.4,0.962,10552,5047,109.1,0.945,65,False
-2021,Ganaraska,Coho,1439,1462,-1.6,0.994,2311,1464,57.9,0.981,43,False
-2021,Ganaraska,Atlantic,3,4,-25.0,0.426,3,4,-25.0,0.426,3,False
-2021,Ganaraska,Rainbow Trout,10263,8008,28.2,0.988,20986,8030,161.3,0.984,117,False
-2021,Ganaraska,Brown Trout,471,161,192.5,0.632,1089,173,529.5,0.524,54,False
-2021,Credit,Chinook,787,810,-2.8,0.961,1658,816,103.2,0.897,52,False
-2021,Credit,Coho,21,25,-16.0,0.318,37,25,48.0,0.175,15,False
-2021,Credit,Atlantic,42,49,-14.3,0.68,79,51,54.9,0.771,25,False
-2021,Credit,Rainbow Trout,750,456,64.5,0.966,1369,460,197.6,0.818,65,False
-2021,Credit,Brown Trout,15,2,650.0,0.409,43,2,2050.0,0.521,2,False
-2022,Ganaraska,Chinook,9092,8060,12.8,0.991,12078,8060,49.9,0.982,76,False
-2022,Ganaraska,Coho,1863,1991,-6.4,0.917,3380,1991,69.8,0.922,65,False
-2022,Ganaraska,Atlantic,13,8,62.5,0.394,16,8,100.0,0.27,7,False
-2022,Ganaraska,Rainbow Trout,7926,8894,-10.9,0.982,15752,8902,76.9,0.986,109,False
-2022,Ganaraska,Brown Trout,225,76,196.1,0.854,443,76,482.9,0.722,39,False
-2022,Credit,Chinook,3006,3541,-15.1,0.968,5262,3541,48.6,0.986,61,False
-2022,Credit,Coho,527,431,22.3,0.979,1218,431,182.6,0.957,43,False
-2022,Credit,Atlantic,48,26,84.6,0.741,133,26,411.5,0.09,14,False
-2022,Credit,Rainbow Trout,662,621,6.6,0.99,1148,623,84.3,0.986,62,False
-2022,Credit,Brown Trout,25,15,66.7,0.128,31,15,106.7,-0.101,10,False
-2023,Ganaraska,Chinook,27419,28294,-3.1,0.959,50739,28296,79.3,0.915,101,False
-2023,Ganaraska,Coho,2427,2491,-2.6,0.984,5035,2491,102.1,0.962,58,False
-2023,Ganaraska,Atlantic,30,15,100.0,0.616,41,17,141.2,0.389,13,False
-2023,Ganaraska,Rainbow Trout,4162,5520,-24.6,0.856,9381,5526,69.8,0.944,135,False
-2023,Ganaraska,Brown Trout,314,160,96.2,0.693,773,162,377.2,0.405,71,False
-2023,Credit,Chinook,7589,7938,-4.4,0.993,14482,7938,82.4,0.927,69,False
-2023,Credit,Coho,51,65,-21.5,0.626,125,65,92.3,0.224,30,False
-2023,Credit,Atlantic,54,40,35.0,0.252,86,40,115.0,0.194,26,False
-2023,Credit,Rainbow Trout,526,584,-9.9,0.969,830,584,42.1,0.96,84,False
-2023,Credit,Brown Trout,53,30,76.7,0.472,142,30,373.3,0.426,19,False
-2024,Ganaraska,Chinook,18869,19513,-3.3,0.985,29372,0,,,101,False
-2024,Ganaraska,Coho,2396,3200,-25.1,0.983,4064,0,,,74,False
-2024,Ganaraska,Atlantic,9,4,125.0,-0.779,16,0,,,4,False
-2024,Ganaraska,Rainbow Trout,8851,8634,2.5,0.991,15559,0,,,159,False
-2024,Ganaraska,Brown Trout,491,336,46.1,0.819,1219,0,,,88,False
-2024,Credit,Chinook,6123,6500,-5.8,0.969,10957,13710,-20.1,0.991,89,False
-2024,Credit,Coho,13,60,-78.3,-0.337,17,100,-83.0,-0.351,26,False
-2024,Credit,Atlantic,28,23,21.7,0.287,47,53,-11.3,0.994,19,False
-2024,Credit,Rainbow Trout,334,268,24.6,0.92,573,794,-27.8,0.939,51,False
-2024,Credit,Brown Trout,24,28,-14.3,0.857,49,48,2.1,0.884,22,False
-2025,Ganaraska,Chinook,17461,17638,-1.0,0.975,25349,25418,-0.3,0.982,74,False
-2025,Ganaraska,Coho,3310,4090,-19.1,0.985,4990,6294,-20.7,0.991,60,False
-2025,Ganaraska,Atlantic,4,3,33.3,0.982,13,5,160.0,0.997,3,False
-2025,Ganaraska,Rainbow Trout,7112,7573,-6.1,0.966,11729,13654,-14.1,0.986,118,False
-2025,Ganaraska,Brown Trout,567,399,42.1,0.956,1334,1489,-10.4,0.989,69,False
-2025,Credit,Chinook,8978,10533,-14.8,0.943,13449,14614,-8.0,0.966,68,False
-2025,Credit,Coho,30,32,-6.2,0.67,50,46,8.7,0.286,17,False
-2025,Credit,Atlantic,32,37,-13.5,0.808,44,45,-2.2,0.459,20,False
-2025,Credit,Rainbow Trout,511,611,-16.4,0.949,792,952,-16.8,0.937,96,False
-2025,Credit,Brown Trout,33,38,-13.2,0.748,48,73,-34.2,0.856,22,False
+2020,Ganaraska,Chinook,12962,8173,58.6,0.81,21822,8281,163.5,0.635,77,True
+2020,Ganaraska,Coho,1996,1702,17.3,0.984,3054,1702,79.4,0.951,56,True
+2020,Ganaraska,Atlantic,29,29,0.0,0.243,32,29,10.3,0.226,21,True
+2020,Ganaraska,Rainbow Trout,1700,1174,44.8,0.521,4920,1278,285.0,0.406,72,True
+2020,Ganaraska,Brown Trout,451,270,67.0,0.83,899,278,223.4,0.831,79,True
+2020,Credit,Chinook,4134,3941,4.9,0.993,7316,3943,85.5,0.978,66,False
+2020,Credit,Coho,90,130,-30.8,0.911,141,130,8.5,0.831,36,False
+2020,Credit,Atlantic,14,15,-6.7,0.584,15,15,0.0,0.65,13,False
+2020,Credit,Rainbow Trout,117,104,12.5,0.865,252,104,142.3,0.773,22,False
+2020,Credit,Brown Trout,18,17,5.9,0.012,44,17,158.8,0.739,12,False
+2021,Ganaraska,Chinook,6749,5039,33.9,0.961,10968,5047,117.3,0.943,65,False
+2021,Ganaraska,Coho,1421,1462,-2.8,0.992,2177,1464,48.7,0.982,43,False
+2021,Ganaraska,Atlantic,6,4,50.0,0.429,6,4,50.0,0.429,3,False
+2021,Ganaraska,Rainbow Trout,10441,8008,30.4,0.991,21100,8030,162.8,0.985,117,False
+2021,Ganaraska,Brown Trout,436,161,170.8,0.645,1030,173,495.4,0.542,54,False
+2021,Credit,Chinook,792,810,-2.2,0.951,1710,816,109.6,0.891,52,False
+2021,Credit,Coho,30,25,20.0,0.36,48,25,92.0,0.149,15,False
+2021,Credit,Atlantic,52,49,6.1,0.857,101,51,98.0,0.727,25,False
+2021,Credit,Rainbow Trout,731,456,60.3,0.971,1364,460,196.5,0.815,65,False
+2021,Credit,Brown Trout,20,2,900.0,0.439,52,2,2500.0,0.49,2,False
+2022,Ganaraska,Chinook,8937,8060,10.9,0.989,12266,8060,52.2,0.981,76,False
+2022,Ganaraska,Coho,2008,1991,0.9,0.919,3247,1991,63.1,0.911,65,False
+2022,Ganaraska,Atlantic,11,8,37.5,0.558,14,8,75.0,0.49,7,False
+2022,Ganaraska,Rainbow Trout,8048,8894,-9.5,0.985,15794,8902,77.4,0.987,109,False
+2022,Ganaraska,Brown Trout,236,76,210.5,0.843,461,76,506.6,0.743,39,False
+2022,Credit,Chinook,2950,3541,-16.7,0.966,5241,3541,48.0,0.986,61,False
+2022,Credit,Coho,486,431,12.8,0.983,1181,431,174.0,0.938,43,False
+2022,Credit,Atlantic,45,26,73.1,0.76,121,26,365.4,0.082,14,False
+2022,Credit,Rainbow Trout,671,621,8.1,0.988,1160,623,86.2,0.984,62,False
+2022,Credit,Brown Trout,25,15,66.7,-0.147,32,15,113.3,-0.306,10,False
+2023,Ganaraska,Chinook,26901,28294,-4.9,0.961,50305,28296,77.8,0.916,101,False
+2023,Ganaraska,Coho,2457,2491,-1.4,0.983,4823,2491,93.6,0.964,58,False
+2023,Ganaraska,Atlantic,31,15,106.7,0.601,38,17,123.5,0.45,13,False
+2023,Ganaraska,Rainbow Trout,4181,5520,-24.3,0.855,9458,5526,71.2,0.94,135,False
+2023,Ganaraska,Brown Trout,309,160,93.1,0.686,769,162,374.7,0.399,71,False
+2023,Credit,Chinook,7398,7938,-6.8,0.993,14108,7938,77.7,0.935,69,False
+2023,Credit,Coho,40,65,-38.5,0.695,56,65,-13.8,0.51,30,False
+2023,Credit,Atlantic,55,40,37.5,0.26,86,40,115.0,0.217,26,False
+2023,Credit,Rainbow Trout,517,584,-11.5,0.969,818,584,40.1,0.96,84,False
+2023,Credit,Brown Trout,54,30,80.0,0.481,143,30,376.7,0.358,19,False
+2024,Ganaraska,Chinook,19002,19513,-2.6,0.984,29918,0,,,101,False
+2024,Ganaraska,Coho,2157,3200,-32.6,0.977,3694,0,,,74,False
+2024,Ganaraska,Atlantic,9,4,125.0,-0.712,13,0,,,4,False
+2024,Ganaraska,Rainbow Trout,9130,8634,5.7,0.993,16145,0,,,159,False
+2024,Ganaraska,Brown Trout,474,336,41.1,0.812,1183,0,,,88,False
+2024,Credit,Chinook,6154,6500,-5.3,0.964,11554,13710,-15.7,0.991,89,False
+2024,Credit,Coho,9,60,-85.0,-0.317,13,100,-87.0,-0.479,26,False
+2024,Credit,Atlantic,27,23,17.4,0.339,46,53,-13.2,0.992,19,False
+2024,Credit,Rainbow Trout,294,268,9.7,0.923,485,794,-38.9,0.939,51,False
+2024,Credit,Brown Trout,25,28,-10.7,0.78,52,48,8.3,0.827,22,False
+2025,Ganaraska,Chinook,18267,17638,3.6,0.978,26494,25418,4.2,0.986,74,False
+2025,Ganaraska,Coho,3273,4090,-20.0,0.981,4928,6294,-21.7,0.988,60,False
+2025,Ganaraska,Atlantic,6,3,100.0,0.945,13,5,160.0,0.997,3,False
+2025,Ganaraska,Rainbow Trout,7824,7573,3.3,0.99,13035,13655,-4.5,0.998,118,False
+2025,Ganaraska,Brown Trout,563,399,41.1,0.957,1392,1487,-6.4,0.99,69,False
+2025,Credit,Chinook,9204,10533,-12.6,0.941,13868,14614,-5.1,0.969,68,False
+2025,Credit,Coho,23,32,-28.1,0.85,27,46,-41.3,0.673,17,False
+2025,Credit,Atlantic,30,37,-18.9,0.824,41,45,-8.9,0.399,20,False
+2025,Credit,Rainbow Trout,579,611,-5.2,0.947,946,952,-0.6,0.888,96,False
+2025,Credit,Brown Trout,35,38,-7.9,0.703,50,73,-31.5,0.879,22,False

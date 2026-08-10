@@ -1,26 +1,26 @@
 date,site,species,model,tech
-2021-03-29,Credit,Rainbow Trout,33,24
-2021-03-30,Credit,Rainbow Trout,56,50
-2021-03-31,Credit,Rainbow Trout,79,71
+2021-03-29,Credit,Rainbow Trout,34,24
+2021-03-30,Credit,Rainbow Trout,55,50
+2021-03-31,Credit,Rainbow Trout,81,71
 2021-04-01,Credit,Rainbow Trout,15,13
 2021-04-02,Credit,Rainbow Trout,5,3
 2021-04-03,Credit,Rainbow Trout,2,1
 2021-04-04,Credit,Rainbow Trout,6,6
 2021-04-05,Credit,Rainbow Trout,22,21
-2021-04-06,Credit,Rainbow Trout,26,22
-2021-04-07,Credit,Rainbow Trout,27,21
+2021-04-06,Credit,Rainbow Trout,25,22
+2021-04-07,Credit,Rainbow Trout,26,21
 2021-04-08,Credit,Rainbow Trout,13,15
 2021-04-09,Credit,Rainbow Trout,12,11
-2021-04-10,Credit,Rainbow Trout,19,9
-2021-04-11,Credit,Rainbow Trout,27,19
+2021-04-10,Credit,Rainbow Trout,18,9
+2021-04-11,Credit,Rainbow Trout,29,19
 2021-04-12,Credit,Rainbow Trout,48,39
-2021-04-13,Credit,Rainbow Trout,8,5
+2021-04-13,Credit,Rainbow Trout,7,5
 2021-04-14,Credit,Rainbow Trout,10,6
 2021-04-15,Credit,Rainbow Trout,6,5
 2021-04-16,Credit,Rainbow Trout,2,2
 2021-04-18,Credit,Rainbow Trout,5,5
 2021-04-19,Credit,Rainbow Trout,5,5
-2021-04-20,Credit,Rainbow Trout,4,4
+2021-04-20,Credit,Rainbow Trout,3,4
 2021-04-23,Credit,Rainbow Trout,-1,-1
 2021-04-24,Credit,Rainbow Trout,1,1
 2021-04-26,Credit,Rainbow Trout,2,3
@@ -28,21 +28,20 @@ date,site,species,model,tech
 2021-04-28,Credit,Rainbow Trout,-2,0
 2021-04-29,Credit,Rainbow Trout,4,1
 2021-04-30,Credit,Rainbow Trout,4,4
-2021-05-01,Credit,Rainbow Trout,1,1
+2021-05-01,Credit,Rainbow Trout,0,1
 2021-05-02,Credit,Rainbow Trout,2,5
 2021-05-03,Credit,Rainbow Trout,2,3
 2021-05-04,Credit,Rainbow Trout,3,3
 2021-05-08,Credit,Rainbow Trout,1,1
-2021-05-09,Credit,Rainbow Trout,-1,0
 2021-05-10,Credit,Rainbow Trout,1,1
 2021-05-14,Credit,Rainbow Trout,1,1
 2021-05-15,Credit,Rainbow Trout,3,2
 2021-05-16,Credit,Brown Trout,1,0
 2021-05-17,Credit,Rainbow Trout,1,1
-2021-05-19,Credit,Rainbow Trout,3,1
-2021-05-20,Credit,Rainbow Trout,1,-1
+2021-05-19,Credit,Rainbow Trout,2,1
+2021-05-20,Credit,Rainbow Trout,0,-1
 2021-05-20,Credit,Brown Trout,2,1
-2021-05-22,Credit,Rainbow Trout,2,1
+2021-05-22,Credit,Rainbow Trout,1,1
 2021-05-23,Credit,Rainbow Trout,2,0
 2021-05-24,Credit,Rainbow Trout,1,1
 2021-05-24,Credit,Brown Trout,1,0
@@ -61,106 +60,107 @@ date,site,species,model,tech
 2021-07-31,Credit,Atlantic,1,1
 2021-08-02,Credit,Rainbow Trout,4,0
 2021-08-03,Credit,Brown Trout,1,0
-2021-08-23,Credit,Brown Trout,1,0
+2021-08-18,Credit,Chinook,1,0
+2021-08-23,Credit,Brown Trout,2,0
 2021-08-25,Credit,Brown Trout,1,0
 2021-09-02,Credit,Chinook,0,-1
-2021-09-04,Credit,Chinook,3,3
+2021-09-04,Credit,Chinook,2,3
 2021-09-04,Credit,Brown Trout,1,0
-2021-09-05,Credit,Chinook,7,3
+2021-09-05,Credit,Chinook,6,3
 2021-09-06,Credit,Chinook,0,1
 2021-09-07,Credit,Chinook,0,1
-2021-09-09,Credit,Chinook,1,6
+2021-09-09,Credit,Chinook,2,6
 2021-09-13,Credit,Chinook,0,6
-2021-09-14,Credit,Chinook,12,12
+2021-09-14,Credit,Chinook,14,12
 2021-09-14,Credit,Coho,1,1
 2021-09-14,Credit,Atlantic,2,3
-2021-09-14,Credit,Rainbow Trout,4,2
-2021-09-16,Credit,Chinook,15,33
-2021-09-17,Credit,Chinook,27,33
+2021-09-14,Credit,Rainbow Trout,3,2
+2021-09-16,Credit,Chinook,14,33
+2021-09-17,Credit,Chinook,24,33
 2021-09-17,Credit,Atlantic,0,1
-2021-09-18,Credit,Chinook,15,16
+2021-09-18,Credit,Chinook,17,16
 2021-09-18,Credit,Atlantic,1,1
 2021-09-19,Credit,Chinook,1,1
 2021-09-20,Credit,Chinook,3,3
 2021-09-20,Credit,Coho,0,1
 2021-09-20,Credit,Atlantic,3,2
 2021-09-21,Credit,Chinook,9,6
-2021-09-21,Credit,Coho,0,2
-2021-09-21,Credit,Atlantic,1,0
-2021-09-21,Credit,Rainbow Trout,2,0
-2021-09-25,Credit,Chinook,1,3
-2021-09-26,Credit,Chinook,8,14
+2021-09-21,Credit,Coho,1,2
+2021-09-21,Credit,Rainbow Trout,1,0
+2021-09-25,Credit,Chinook,0,3
+2021-09-26,Credit,Chinook,10,14
 2021-09-26,Credit,Rainbow Trout,2,0
 2021-09-27,Credit,Chinook,8,14
 2021-09-27,Credit,Rainbow Trout,1,0
-2021-09-28,Credit,Chinook,7,-1
-2021-09-28,Credit,Coho,1,0
+2021-09-28,Credit,Chinook,6,-1
 2021-09-28,Credit,Rainbow Trout,2,0
-2021-09-29,Credit,Chinook,37,32
+2021-09-29,Credit,Chinook,36,32
 2021-09-29,Credit,Coho,2,1
 2021-09-29,Credit,Atlantic,1,2
-2021-09-29,Credit,Rainbow Trout,4,1
-2021-09-30,Credit,Chinook,47,62
-2021-09-30,Credit,Coho,4,2
-2021-09-30,Credit,Atlantic,0,1
-2021-09-30,Credit,Rainbow Trout,3,0
+2021-09-29,Credit,Rainbow Trout,7,1
+2021-09-30,Credit,Chinook,46,62
+2021-09-30,Credit,Coho,6,2
+2021-09-30,Credit,Atlantic,1,1
+2021-09-30,Credit,Rainbow Trout,1,0
 2021-09-30,Credit,Brown Trout,1,0
-2021-10-01,Credit,Chinook,44,57
+2021-10-01,Credit,Chinook,43,57
 2021-10-01,Credit,Atlantic,2,1
-2021-10-02,Credit,Chinook,31,31
+2021-10-01,Credit,Rainbow Trout,1,0
+2021-10-02,Credit,Chinook,32,31
 2021-10-02,Credit,Coho,0,2
+2021-10-02,Credit,Atlantic,1,0
 2021-10-02,Credit,Rainbow Trout,3,1
-2021-10-03,Credit,Chinook,45,62
+2021-10-03,Credit,Chinook,42,62
 2021-10-03,Credit,Atlantic,0,1
 2021-10-03,Credit,Rainbow Trout,1,0
 2021-10-04,Credit,Chinook,0,6
-2021-10-05,Credit,Chinook,26,41
-2021-10-05,Credit,Coho,0,2
-2021-10-05,Credit,Rainbow Trout,1,0
+2021-10-05,Credit,Chinook,19,41
+2021-10-05,Credit,Coho,3,2
+2021-10-05,Credit,Rainbow Trout,2,0
 2021-10-05,Credit,Brown Trout,1,1
-2021-10-06,Credit,Chinook,80,110
-2021-10-06,Credit,Coho,6,3
-2021-10-06,Credit,Atlantic,1,5
-2021-10-06,Credit,Rainbow Trout,5,3
-2021-10-07,Credit,Chinook,22,22
+2021-10-06,Credit,Chinook,79,110
+2021-10-06,Credit,Coho,7,3
+2021-10-06,Credit,Atlantic,3,5
+2021-10-06,Credit,Rainbow Trout,6,3
+2021-10-07,Credit,Chinook,20,22
 2021-10-07,Credit,Coho,0,2
 2021-10-07,Credit,Atlantic,5,6
-2021-10-07,Credit,Rainbow Trout,-1,0
-2021-10-07,Credit,Brown Trout,1,0
+2021-10-07,Credit,Rainbow Trout,1,0
+2021-10-07,Credit,Brown Trout,2,0
 2021-10-08,Credit,Chinook,4,4
 2021-10-08,Credit,Atlantic,1,1
 2021-10-08,Credit,Rainbow Trout,2,2
-2021-10-09,Credit,Chinook,5,11
-2021-10-09,Credit,Rainbow Trout,4,1
-2021-10-10,Credit,Chinook,18,36
-2021-10-10,Credit,Rainbow Trout,4,0
-2021-10-11,Credit,Chinook,32,48
+2021-10-09,Credit,Chinook,6,11
+2021-10-09,Credit,Rainbow Trout,3,1
+2021-10-10,Credit,Chinook,19,36
+2021-10-10,Credit,Rainbow Trout,1,0
+2021-10-11,Credit,Chinook,36,48
 2021-10-11,Credit,Atlantic,0,-1
-2021-10-11,Credit,Rainbow Trout,9,5
+2021-10-11,Credit,Rainbow Trout,5,5
 2021-10-12,Credit,Chinook,7,6
 2021-10-12,Credit,Coho,0,1
-2021-10-12,Credit,Atlantic,1,1
-2021-10-12,Credit,Rainbow Trout,4,2
+2021-10-12,Credit,Atlantic,2,1
+2021-10-12,Credit,Rainbow Trout,3,2
 2021-10-13,Credit,Chinook,4,7
-2021-10-13,Credit,Coho,2,1
-2021-10-13,Credit,Atlantic,2,5
+2021-10-13,Credit,Coho,3,1
+2021-10-13,Credit,Atlantic,3,5
 2021-10-13,Credit,Rainbow Trout,2,1
 2021-10-13,Credit,Brown Trout,1,0
 2021-10-14,Credit,Rainbow Trout,1,1
-2021-10-15,Credit,Chinook,9,9
-2021-10-15,Credit,Coho,1,2
-2021-10-15,Credit,Atlantic,3,3
+2021-10-15,Credit,Chinook,8,9
+2021-10-15,Credit,Coho,0,2
+2021-10-15,Credit,Atlantic,5,3
 2021-10-15,Credit,Rainbow Trout,5,4
-2021-10-16,Credit,Chinook,3,14
-2021-10-16,Credit,Rainbow Trout,5,0
-2021-10-17,Credit,Chinook,8,10
+2021-10-16,Credit,Chinook,5,14
+2021-10-16,Credit,Rainbow Trout,2,0
+2021-10-17,Credit,Chinook,9,10
 2021-10-17,Credit,Coho,0,1
 2021-10-17,Credit,Rainbow Trout,5,2
-2021-10-18,Credit,Chinook,2,6
+2021-10-18,Credit,Chinook,4,6
 2021-10-19,Credit,Chinook,0,-1
 2021-10-20,Credit,Chinook,5,5
 2021-10-20,Credit,Rainbow Trout,3,4
-2021-10-21,Credit,Chinook,9,11
+2021-10-21,Credit,Chinook,10,11
 2021-10-21,Credit,Atlantic,1,1
 2021-10-21,Credit,Rainbow Trout,0,1
 2021-10-22,Credit,Chinook,5,5
@@ -170,82 +170,75 @@ date,site,species,model,tech
 2021-10-23,Credit,Rainbow Trout,2,1
 2021-10-24,Credit,Chinook,3,3
 2021-10-24,Credit,Rainbow Trout,2,1
-2021-10-25,Credit,Chinook,2,4
-2021-10-25,Credit,Rainbow Trout,7,1
-2021-10-27,Credit,Chinook,3,13
-2021-10-27,Credit,Rainbow Trout,7,2
-2021-10-28,Credit,Chinook,10,14
-2021-10-28,Credit,Rainbow Trout,8,4
-2021-10-29,Credit,Chinook,6,14
-2021-10-29,Credit,Rainbow Trout,14,9
+2021-10-25,Credit,Chinook,1,4
+2021-10-25,Credit,Rainbow Trout,9,1
+2021-10-27,Credit,Chinook,4,13
+2021-10-27,Credit,Rainbow Trout,6,2
+2021-10-28,Credit,Chinook,11,14
+2021-10-28,Credit,Rainbow Trout,7,4
+2021-10-29,Credit,Chinook,7,14
+2021-10-29,Credit,Rainbow Trout,15,9
 2021-10-30,Credit,Chinook,0,2
-2021-10-30,Credit,Rainbow Trout,1,0
 2021-10-31,Credit,Chinook,0,2
 2021-10-31,Credit,Rainbow Trout,1,0
-2021-11-01,Credit,Chinook,0,6
-2021-11-01,Credit,Rainbow Trout,14,3
-2021-11-02,Credit,Chinook,1,1
+2021-11-01,Credit,Chinook,1,6
+2021-11-01,Credit,Rainbow Trout,13,3
+2021-11-02,Credit,Chinook,2,1
 2021-11-02,Credit,Coho,0,2
-2021-11-02,Credit,Rainbow Trout,12,3
+2021-11-02,Credit,Rainbow Trout,10,3
 2021-11-03,Credit,Chinook,1,2
-2021-11-03,Credit,Rainbow Trout,1,0
-2021-03-24,Ganaraska,Rainbow Trout,432,469
-2021-03-24,Ganaraska,Brown Trout,1,0
-2021-03-25,Ganaraska,Rainbow Trout,383,739
-2021-03-26,Ganaraska,Rainbow Trout,4,1
-2021-03-28,Ganaraska,Rainbow Trout,23,4
-2021-03-29,Ganaraska,Rainbow Trout,20,2
-2021-03-30,Ganaraska,Rainbow Trout,434,483
-2021-03-30,Ganaraska,Brown Trout,3,0
-2021-03-31,Ganaraska,Rainbow Trout,744,840
-2021-03-31,Ganaraska,Brown Trout,3,0
-2021-04-01,Ganaraska,Rainbow Trout,190,198
+2021-03-24,Ganaraska,Rainbow Trout,436,469
+2021-03-25,Ganaraska,Rainbow Trout,408,739
+2021-03-26,Ganaraska,Rainbow Trout,5,1
+2021-03-28,Ganaraska,Rainbow Trout,24,4
+2021-03-29,Ganaraska,Rainbow Trout,30,2
+2021-03-30,Ganaraska,Rainbow Trout,441,483
+2021-03-30,Ganaraska,Brown Trout,1,0
+2021-03-31,Ganaraska,Rainbow Trout,770,840
+2021-03-31,Ganaraska,Brown Trout,1,0
+2021-04-01,Ganaraska,Rainbow Trout,195,198
 2021-04-02,Ganaraska,Rainbow Trout,90,78
 2021-04-03,Ganaraska,Rainbow Trout,13,7
-2021-04-04,Ganaraska,Coho,1,0
-2021-04-04,Ganaraska,Rainbow Trout,424,396
-2021-04-04,Ganaraska,Brown Trout,1,0
-2021-04-05,Ganaraska,Rainbow Trout,973,951
-2021-04-06,Ganaraska,Rainbow Trout,710,762
-2021-04-06,Ganaraska,Brown Trout,3,0
-2021-04-07,Ganaraska,Rainbow Trout,747,799
-2021-04-07,Ganaraska,Brown Trout,2,0
-2021-04-08,Ganaraska,Rainbow Trout,520,560
-2021-04-08,Ganaraska,Brown Trout,2,0
-2021-04-09,Ganaraska,Rainbow Trout,111,109
+2021-04-04,Ganaraska,Rainbow Trout,432,396
+2021-04-04,Ganaraska,Brown Trout,-1,0
+2021-04-05,Ganaraska,Rainbow Trout,987,951
+2021-04-06,Ganaraska,Rainbow Trout,719,762
+2021-04-07,Ganaraska,Rainbow Trout,738,799
+2021-04-08,Ganaraska,Rainbow Trout,529,560
+2021-04-09,Ganaraska,Rainbow Trout,112,109
 2021-04-10,Ganaraska,Rainbow Trout,14,13
-2021-04-11,Ganaraska,Rainbow Trout,72,53
-2021-04-11,Ganaraska,Brown Trout,1,0
+2021-04-11,Ganaraska,Rainbow Trout,76,53
 2021-04-13,Ganaraska,Rainbow Trout,4,2
-2021-04-14,Ganaraska,Rainbow Trout,86,98
+2021-04-14,Ganaraska,Rainbow Trout,85,98
 2021-04-15,Ganaraska,Rainbow Trout,33,26
 2021-04-15,Ganaraska,Brown Trout,1,0
-2021-04-16,Ganaraska,Rainbow Trout,21,13
-2021-04-17,Ganaraska,Rainbow Trout,15,13
+2021-04-16,Ganaraska,Rainbow Trout,20,13
+2021-04-17,Ganaraska,Rainbow Trout,14,13
 2021-04-18,Ganaraska,Rainbow Trout,21,19
 2021-04-19,Ganaraska,Rainbow Trout,16,14
-2021-04-20,Ganaraska,Rainbow Trout,11,14
-2021-04-21,Ganaraska,Rainbow Trout,10,9
+2021-04-20,Ganaraska,Rainbow Trout,10,14
+2021-04-21,Ganaraska,Rainbow Trout,6,9
 2021-04-22,Ganaraska,Rainbow Trout,4,2
 2021-04-23,Ganaraska,Rainbow Trout,12,9
 2021-04-24,Ganaraska,Rainbow Trout,19,15
-2021-04-25,Ganaraska,Rainbow Trout,27,14
+2021-04-25,Ganaraska,Rainbow Trout,26,14
 2021-04-25,Ganaraska,Brown Trout,1,2
-2021-04-26,Ganaraska,Rainbow Trout,13,9
+2021-04-26,Ganaraska,Chinook,1,0
+2021-04-26,Ganaraska,Rainbow Trout,12,9
 2021-04-27,Ganaraska,Chinook,1,1
 2021-04-27,Ganaraska,Rainbow Trout,10,5
-2021-04-28,Ganaraska,Rainbow Trout,15,8
-2021-04-29,Ganaraska,Rainbow Trout,53,9
+2021-04-28,Ganaraska,Rainbow Trout,14,8
+2021-04-29,Ganaraska,Rainbow Trout,52,9
 2021-04-30,Ganaraska,Rainbow Trout,14,9
 2021-05-01,Ganaraska,Rainbow Trout,9,2
-2021-05-02,Ganaraska,Coho,-1,0
+2021-05-02,Ganaraska,Chinook,-1,0
 2021-05-02,Ganaraska,Rainbow Trout,2,0
 2021-05-03,Ganaraska,Chinook,1,1
 2021-05-03,Ganaraska,Rainbow Trout,20,14
 2021-05-04,Ganaraska,Rainbow Trout,11,10
-2021-05-05,Ganaraska,Rainbow Trout,11,9
+2021-05-05,Ganaraska,Rainbow Trout,10,9
 2021-05-06,Ganaraska,Rainbow Trout,3,4
-2021-05-07,Ganaraska,Rainbow Trout,8,2
+2021-05-07,Ganaraska,Rainbow Trout,7,2
 2021-05-07,Ganaraska,Brown Trout,1,1
 2021-05-08,Ganaraska,Rainbow Trout,11,3
 2021-05-09,Ganaraska,Rainbow Trout,6,6
@@ -258,11 +251,12 @@ date,site,species,model,tech
 2021-05-16,Ganaraska,Rainbow Trout,6,5
 2021-05-17,Ganaraska,Rainbow Trout,2,2
 2021-05-18,Ganaraska,Rainbow Trout,4,4
-2021-05-19,Ganaraska,Rainbow Trout,19,14
+2021-05-19,Ganaraska,Rainbow Trout,17,14
 2021-05-20,Ganaraska,Rainbow Trout,6,5
 2021-05-21,Ganaraska,Rainbow Trout,5,3
 2021-05-21,Ganaraska,Brown Trout,1,0
-2021-05-22,Ganaraska,Rainbow Trout,7,3
+2021-05-22,Ganaraska,Chinook,1,0
+2021-05-22,Ganaraska,Rainbow Trout,6,3
 2021-05-23,Ganaraska,Rainbow Trout,3,1
 2021-05-24,Ganaraska,Rainbow Trout,1,1
 2021-05-25,Ganaraska,Rainbow Trout,1,1
@@ -274,28 +268,30 @@ date,site,species,model,tech
 2021-06-02,Ganaraska,Rainbow Trout,5,3
 2021-06-03,Ganaraska,Rainbow Trout,15,7
 2021-06-04,Ganaraska,Rainbow Trout,7,0
+2021-06-06,Ganaraska,Chinook,1,0
 2021-06-06,Ganaraska,Rainbow Trout,6,1
 2021-06-06,Ganaraska,Brown Trout,1,1
-2021-06-07,Ganaraska,Rainbow Trout,5,5
+2021-06-07,Ganaraska,Rainbow Trout,4,5
 2021-06-07,Ganaraska,Brown Trout,1,1
 2021-06-20,Ganaraska,Rainbow Trout,1,2
 2021-06-21,Ganaraska,Rainbow Trout,3,3
 2021-06-24,Ganaraska,Brown Trout,1,1
 2021-06-27,Ganaraska,Brown Trout,1,0
 2021-06-28,Ganaraska,Rainbow Trout,1,0
+2021-06-28,Ganaraska,Brown Trout,-1,0
 2021-06-30,Ganaraska,Brown Trout,1,0
 2021-07-08,Ganaraska,Brown Trout,1,1
-2021-07-09,Ganaraska,Rainbow Trout,5,0
-2021-07-09,Ganaraska,Brown Trout,30,1
+2021-07-09,Ganaraska,Rainbow Trout,4,0
+2021-07-09,Ganaraska,Brown Trout,31,1
 2021-07-10,Ganaraska,Rainbow Trout,5,0
 2021-07-10,Ganaraska,Brown Trout,31,10
 2021-07-11,Ganaraska,Rainbow Trout,2,1
-2021-07-11,Ganaraska,Brown Trout,31,7
-2021-07-12,Ganaraska,Brown Trout,9,4
+2021-07-11,Ganaraska,Brown Trout,34,7
+2021-07-12,Ganaraska,Brown Trout,10,4
 2021-07-13,Ganaraska,Atlantic,1,2
 2021-07-13,Ganaraska,Brown Trout,5,2
 2021-07-14,Ganaraska,Brown Trout,1,0
-2021-07-15,Ganaraska,Brown Trout,2,1
+2021-07-15,Ganaraska,Brown Trout,1,1
 2021-07-16,Ganaraska,Rainbow Trout,-1,0
 2021-07-17,Ganaraska,Brown Trout,4,2
 2021-07-18,Ganaraska,Chinook,2,1
@@ -306,230 +302,231 @@ date,site,species,model,tech
 2021-07-20,Ganaraska,Rainbow Trout,1,0
 2021-07-20,Ganaraska,Brown Trout,2,1
 2021-07-21,Ganaraska,Brown Trout,1,0
+2021-07-23,Ganaraska,Chinook,-1,0
 2021-07-23,Ganaraska,Brown Trout,0,1
-2021-07-24,Ganaraska,Rainbow Trout,1,0
-2021-07-24,Ganaraska,Brown Trout,2,0
+2021-07-24,Ganaraska,Chinook,-1,0
+2021-07-24,Ganaraska,Atlantic,1,0
+2021-07-24,Ganaraska,Brown Trout,1,0
 2021-07-25,Ganaraska,Brown Trout,1,1
 2021-07-26,Ganaraska,Chinook,1,0
-2021-07-26,Ganaraska,Brown Trout,3,1
+2021-07-26,Ganaraska,Brown Trout,5,1
 2021-07-27,Ganaraska,Atlantic,1,0
 2021-07-30,Ganaraska,Chinook,2,2
 2021-07-31,Ganaraska,Brown Trout,3,1
 2021-08-01,Ganaraska,Brown Trout,1,0
-2021-08-02,Ganaraska,Chinook,2,2
+2021-08-02,Ganaraska,Chinook,3,2
 2021-08-03,Ganaraska,Chinook,1,1
 2021-08-04,Ganaraska,Chinook,1,1
 2021-08-04,Ganaraska,Brown Trout,2,0
 2021-08-05,Ganaraska,Chinook,2,2
 2021-08-05,Ganaraska,Rainbow Trout,1,1
 2021-08-09,Ganaraska,Chinook,3,1
-2021-08-10,Ganaraska,Brown Trout,-2,0
 2021-08-11,Ganaraska,Rainbow Trout,1,0
 2021-08-15,Ganaraska,Chinook,1,1
-2021-08-15,Ganaraska,Rainbow Trout,1,0
 2021-08-16,Ganaraska,Chinook,0,1
-2021-08-18,Ganaraska,Chinook,27,27
+2021-08-18,Ganaraska,Chinook,26,27
 2021-08-18,Ganaraska,Brown Trout,11,7
-2021-08-19,Ganaraska,Chinook,28,25
+2021-08-19,Ganaraska,Chinook,26,25
 2021-08-19,Ganaraska,Brown Trout,7,0
 2021-08-20,Ganaraska,Chinook,7,6
 2021-08-20,Ganaraska,Brown Trout,3,2
 2021-08-21,Ganaraska,Chinook,2,2
-2021-08-22,Ganaraska,Atlantic,0,1
+2021-08-22,Ganaraska,Atlantic,2,1
 2021-08-22,Ganaraska,Rainbow Trout,1,0
-2021-08-22,Ganaraska,Brown Trout,2,0
 2021-08-29,Ganaraska,Brown Trout,1,1
 2021-08-30,Ganaraska,Brown Trout,3,1
 2021-08-31,Ganaraska,Chinook,2,2
 2021-09-01,Ganaraska,Chinook,2,2
-2021-09-02,Ganaraska,Chinook,12,10
-2021-09-02,Ganaraska,Brown Trout,13,3
+2021-09-02,Ganaraska,Chinook,10,10
+2021-09-02,Ganaraska,Rainbow Trout,1,0
+2021-09-02,Ganaraska,Brown Trout,14,3
 2021-09-03,Ganaraska,Chinook,16,18
-2021-09-03,Ganaraska,Brown Trout,16,12
+2021-09-03,Ganaraska,Brown Trout,17,12
 2021-09-04,Ganaraska,Brown Trout,2,2
 2021-09-05,Ganaraska,Chinook,8,4
 2021-09-05,Ganaraska,Coho,0,4
 2021-09-05,Ganaraska,Brown Trout,2,2
-2021-09-06,Ganaraska,Chinook,26,23
+2021-09-06,Ganaraska,Chinook,25,23
 2021-09-06,Ganaraska,Coho,0,3
 2021-09-06,Ganaraska,Brown Trout,10,10
 2021-09-07,Ganaraska,Chinook,48,49
 2021-09-07,Ganaraska,Brown Trout,6,6
-2021-09-09,Ganaraska,Chinook,523,150
-2021-09-09,Ganaraska,Coho,27,21
-2021-09-09,Ganaraska,Rainbow Trout,2,0
+2021-09-09,Ganaraska,Chinook,531,150
+2021-09-09,Ganaraska,Coho,29,21
+2021-09-09,Ganaraska,Rainbow Trout,3,0
 2021-09-09,Ganaraska,Brown Trout,5,1
-2021-09-10,Ganaraska,Chinook,953,977
-2021-09-10,Ganaraska,Coho,157,164
-2021-09-10,Ganaraska,Rainbow Trout,9,1
-2021-09-10,Ganaraska,Brown Trout,5,3
-2021-09-11,Ganaraska,Chinook,489,492
-2021-09-11,Ganaraska,Coho,70,72
+2021-09-10,Ganaraska,Chinook,994,977
+2021-09-10,Ganaraska,Coho,156,164
+2021-09-10,Ganaraska,Rainbow Trout,13,1
+2021-09-10,Ganaraska,Brown Trout,4,3
+2021-09-11,Ganaraska,Chinook,487,492
+2021-09-11,Ganaraska,Coho,78,72
 2021-09-11,Ganaraska,Rainbow Trout,1,0
-2021-09-11,Ganaraska,Brown Trout,2,1
+2021-09-11,Ganaraska,Brown Trout,1,1
 2021-09-12,Ganaraska,Chinook,444,437
 2021-09-12,Ganaraska,Coho,27,27
-2021-09-12,Ganaraska,Brown Trout,1,3
+2021-09-12,Ganaraska,Rainbow Trout,1,0
+2021-09-12,Ganaraska,Brown Trout,2,3
 2021-09-13,Ganaraska,Chinook,237,228
-2021-09-13,Ganaraska,Coho,22,23
+2021-09-13,Ganaraska,Coho,24,23
+2021-09-13,Ganaraska,Rainbow Trout,2,0
 2021-09-13,Ganaraska,Brown Trout,3,4
 2021-09-14,Ganaraska,Chinook,82,85
 2021-09-14,Ganaraska,Coho,6,10
 2021-09-14,Ganaraska,Rainbow Trout,0,1
 2021-09-14,Ganaraska,Brown Trout,10,5
-2021-09-15,Ganaraska,Chinook,215,186
-2021-09-15,Ganaraska,Coho,62,76
+2021-09-15,Ganaraska,Chinook,208,186
+2021-09-15,Ganaraska,Coho,58,76
 2021-09-15,Ganaraska,Atlantic,0,1
-2021-09-15,Ganaraska,Rainbow Trout,7,0
-2021-09-15,Ganaraska,Brown Trout,12,12
-2021-09-16,Ganaraska,Chinook,664,663
-2021-09-16,Ganaraska,Coho,380,448
-2021-09-16,Ganaraska,Rainbow Trout,8,2
-2021-09-16,Ganaraska,Brown Trout,12,17
-2021-09-17,Ganaraska,Chinook,112,114
-2021-09-17,Ganaraska,Coho,138,162
-2021-09-17,Ganaraska,Rainbow Trout,2,5
+2021-09-15,Ganaraska,Rainbow Trout,11,0
+2021-09-15,Ganaraska,Brown Trout,11,12
+2021-09-16,Ganaraska,Chinook,675,663
+2021-09-16,Ganaraska,Coho,375,448
+2021-09-16,Ganaraska,Rainbow Trout,7,2
+2021-09-16,Ganaraska,Brown Trout,14,17
+2021-09-17,Ganaraska,Chinook,118,114
+2021-09-17,Ganaraska,Coho,136,162
+2021-09-17,Ganaraska,Rainbow Trout,3,5
 2021-09-17,Ganaraska,Brown Trout,5,5
 2021-09-18,Ganaraska,Chinook,71,60
-2021-09-18,Ganaraska,Coho,57,65
-2021-09-18,Ganaraska,Brown Trout,7,7
-2021-09-19,Ganaraska,Chinook,41,33
+2021-09-18,Ganaraska,Coho,56,65
+2021-09-18,Ganaraska,Brown Trout,8,7
+2021-09-19,Ganaraska,Chinook,40,33
 2021-09-19,Ganaraska,Coho,23,25
-2021-09-19,Ganaraska,Rainbow Trout,1,3
-2021-09-19,Ganaraska,Brown Trout,2,5
-2021-09-20,Ganaraska,Chinook,40,36
-2021-09-20,Ganaraska,Coho,19,22
-2021-09-20,Ganaraska,Rainbow Trout,3,1
-2021-09-21,Ganaraska,Chinook,271,261
+2021-09-19,Ganaraska,Rainbow Trout,2,3
+2021-09-19,Ganaraska,Brown Trout,3,5
+2021-09-20,Ganaraska,Chinook,42,36
+2021-09-20,Ganaraska,Coho,18,22
+2021-09-20,Ganaraska,Rainbow Trout,2,1
+2021-09-21,Ganaraska,Chinook,273,261
 2021-09-21,Ganaraska,Coho,55,56
-2021-09-21,Ganaraska,Rainbow Trout,0,1
-2021-09-21,Ganaraska,Brown Trout,1,-1
-2021-09-22,Ganaraska,Chinook,115,90
-2021-09-22,Ganaraska,Coho,27,32
+2021-09-21,Ganaraska,Rainbow Trout,1,1
+2021-09-21,Ganaraska,Brown Trout,2,-1
+2021-09-22,Ganaraska,Chinook,117,90
+2021-09-22,Ganaraska,Coho,25,32
 2021-09-22,Ganaraska,Rainbow Trout,2,0
 2021-09-22,Ganaraska,Brown Trout,1,2
 2021-09-24,Ganaraska,Chinook,0,1
-2021-09-25,Ganaraska,Chinook,184,159
-2021-09-25,Ganaraska,Coho,3,8
-2021-09-25,Ganaraska,Rainbow Trout,13,0
-2021-09-25,Ganaraska,Brown Trout,1,1
-2021-09-26,Ganaraska,Chinook,185,157
-2021-09-26,Ganaraska,Coho,10,22
-2021-09-26,Ganaraska,Rainbow Trout,7,1
-2021-09-26,Ganaraska,Brown Trout,1,0
-2021-09-27,Ganaraska,Chinook,108,94
-2021-09-27,Ganaraska,Coho,10,30
-2021-09-27,Ganaraska,Rainbow Trout,7,2
-2021-09-28,Ganaraska,Chinook,239,223
-2021-09-28,Ganaraska,Coho,47,90
+2021-09-25,Ganaraska,Chinook,189,159
+2021-09-25,Ganaraska,Coho,2,8
+2021-09-25,Ganaraska,Rainbow Trout,7,0
+2021-09-25,Ganaraska,Brown Trout,2,1
+2021-09-26,Ganaraska,Chinook,187,157
+2021-09-26,Ganaraska,Coho,7,22
+2021-09-26,Ganaraska,Rainbow Trout,9,1
+2021-09-27,Ganaraska,Chinook,105,94
+2021-09-27,Ganaraska,Coho,9,30
+2021-09-27,Ganaraska,Rainbow Trout,4,2
+2021-09-28,Ganaraska,Chinook,237,223
+2021-09-28,Ganaraska,Coho,40,90
 2021-09-28,Ganaraska,Rainbow Trout,14,6
-2021-09-28,Ganaraska,Brown Trout,5,3
-2021-09-29,Ganaraska,Chinook,80,74
-2021-09-29,Ganaraska,Coho,13,11
+2021-09-28,Ganaraska,Brown Trout,4,3
+2021-09-29,Ganaraska,Chinook,82,74
+2021-09-29,Ganaraska,Coho,11,11
 2021-09-29,Ganaraska,Rainbow Trout,3,1
 2021-09-29,Ganaraska,Brown Trout,2,0
-2021-09-30,Ganaraska,Chinook,15,10
+2021-09-30,Ganaraska,Chinook,13,10
 2021-09-30,Ganaraska,Brown Trout,0,4
-2021-10-01,Ganaraska,Chinook,29,9
+2021-10-01,Ganaraska,Chinook,27,9
 2021-10-01,Ganaraska,Coho,2,1
 2021-10-01,Ganaraska,Rainbow Trout,1,0
 2021-10-01,Ganaraska,Brown Trout,1,1
-2021-10-02,Ganaraska,Chinook,30,16
+2021-10-02,Ganaraska,Chinook,31,16
 2021-10-02,Ganaraska,Coho,4,6
-2021-10-02,Ganaraska,Rainbow Trout,1,3
+2021-10-02,Ganaraska,Rainbow Trout,2,3
 2021-10-02,Ganaraska,Brown Trout,1,0
-2021-10-03,Ganaraska,Chinook,32,-1
-2021-10-03,Ganaraska,Coho,3,2
-2021-10-03,Ganaraska,Rainbow Trout,5,2
-2021-10-03,Ganaraska,Brown Trout,7,4
-2021-10-04,Ganaraska,Chinook,43,34
-2021-10-04,Ganaraska,Coho,1,1
-2021-10-04,Ganaraska,Rainbow Trout,11,6
+2021-10-03,Ganaraska,Chinook,29,-1
+2021-10-03,Ganaraska,Coho,2,2
+2021-10-03,Ganaraska,Rainbow Trout,6,2
+2021-10-03,Ganaraska,Brown Trout,6,4
+2021-10-04,Ganaraska,Chinook,44,34
+2021-10-04,Ganaraska,Coho,2,1
+2021-10-04,Ganaraska,Rainbow Trout,12,6
 2021-10-04,Ganaraska,Brown Trout,1,0
-2021-10-06,Ganaraska,Chinook,5,8
-2021-10-06,Ganaraska,Coho,2,-1
-2021-10-06,Ganaraska,Rainbow Trout,1,2
-2021-10-06,Ganaraska,Brown Trout,5,0
-2021-10-07,Ganaraska,Chinook,11,14
-2021-10-07,Ganaraska,Coho,2,4
-2021-10-07,Ganaraska,Rainbow Trout,3,5
-2021-10-07,Ganaraska,Brown Trout,2,0
-2021-10-08,Ganaraska,Chinook,108,102
-2021-10-08,Ganaraska,Coho,8,17
-2021-10-08,Ganaraska,Rainbow Trout,30,23
+2021-10-06,Ganaraska,Chinook,6,8
+2021-10-06,Ganaraska,Coho,1,-1
+2021-10-06,Ganaraska,Rainbow Trout,4,2
+2021-10-06,Ganaraska,Brown Trout,2,0
+2021-10-07,Ganaraska,Chinook,13,14
+2021-10-07,Ganaraska,Coho,1,4
+2021-10-07,Ganaraska,Rainbow Trout,4,5
+2021-10-07,Ganaraska,Brown Trout,1,0
+2021-10-08,Ganaraska,Chinook,103,102
+2021-10-08,Ganaraska,Coho,10,17
+2021-10-08,Ganaraska,Rainbow Trout,31,23
 2021-10-08,Ganaraska,Brown Trout,1,0
-2021-10-09,Ganaraska,Chinook,45,46
-2021-10-09,Ganaraska,Coho,4,9
-2021-10-09,Ganaraska,Rainbow Trout,30,24
-2021-10-09,Ganaraska,Brown Trout,0,1
-2021-10-10,Ganaraska,Chinook,64,60
+2021-10-09,Ganaraska,Chinook,46,46
+2021-10-09,Ganaraska,Coho,5,9
+2021-10-09,Ganaraska,Rainbow Trout,31,24
+2021-10-09,Ganaraska,Brown Trout,2,1
+2021-10-10,Ganaraska,Chinook,63,60
 2021-10-10,Ganaraska,Coho,11,14
-2021-10-10,Ganaraska,Rainbow Trout,14,12
-2021-10-10,Ganaraska,Brown Trout,2,0
-2021-10-11,Ganaraska,Chinook,10,15
-2021-10-11,Ganaraska,Coho,10,7
+2021-10-10,Ganaraska,Rainbow Trout,15,12
+2021-10-10,Ganaraska,Brown Trout,3,0
+2021-10-11,Ganaraska,Chinook,9,15
+2021-10-11,Ganaraska,Coho,11,7
 2021-10-11,Ganaraska,Rainbow Trout,27,21
 2021-10-11,Ganaraska,Brown Trout,0,-2
 2021-10-12,Ganaraska,Chinook,4,2
 2021-10-12,Ganaraska,Coho,2,7
-2021-10-12,Ganaraska,Rainbow Trout,10,9
+2021-10-12,Ganaraska,Rainbow Trout,11,9
 2021-10-12,Ganaraska,Brown Trout,1,0
 2021-10-13,Ganaraska,Chinook,-1,-3
-2021-10-13,Ganaraska,Coho,0,3
+2021-10-13,Ganaraska,Coho,1,3
 2021-10-13,Ganaraska,Rainbow Trout,12,-7
 2021-10-13,Ganaraska,Brown Trout,1,0
-2021-10-14,Ganaraska,Rainbow Trout,7,2
+2021-10-14,Ganaraska,Chinook,1,0
+2021-10-14,Ganaraska,Rainbow Trout,6,2
 2021-10-15,Ganaraska,Chinook,15,6
 2021-10-15,Ganaraska,Coho,2,2
-2021-10-15,Ganaraska,Rainbow Trout,94,76
+2021-10-15,Ganaraska,Rainbow Trout,92,76
 2021-10-15,Ganaraska,Brown Trout,1,0
-2021-10-17,Ganaraska,Chinook,11,2
-2021-10-17,Ganaraska,Coho,4,5
-2021-10-17,Ganaraska,Rainbow Trout,145,129
-2021-10-17,Ganaraska,Brown Trout,1,-1
-2021-10-18,Ganaraska,Chinook,3,3
-2021-10-18,Ganaraska,Coho,0,1
+2021-10-17,Ganaraska,Chinook,12,2
+2021-10-17,Ganaraska,Coho,3,5
+2021-10-17,Ganaraska,Rainbow Trout,143,129
+2021-10-17,Ganaraska,Brown Trout,-1,-1
+2021-10-18,Ganaraska,Chinook,4,3
+2021-10-18,Ganaraska,Coho,-1,1
 2021-10-18,Ganaraska,Rainbow Trout,25,19
-2021-10-18,Ganaraska,Brown Trout,3,1
+2021-10-18,Ganaraska,Brown Trout,4,1
 2021-10-19,Ganaraska,Chinook,1,1
 2021-10-19,Ganaraska,Rainbow Trout,12,10
-2021-10-20,Ganaraska,Chinook,2,2
-2021-10-20,Ganaraska,Coho,3,3
-2021-10-20,Ganaraska,Rainbow Trout,33,27
+2021-10-20,Ganaraska,Chinook,4,2
+2021-10-20,Ganaraska,Coho,2,3
+2021-10-20,Ganaraska,Rainbow Trout,34,27
 2021-10-20,Ganaraska,Brown Trout,1,1
-2021-10-21,Ganaraska,Chinook,4,4
+2021-10-21,Ganaraska,Chinook,3,4
 2021-10-21,Ganaraska,Coho,1,2
 2021-10-21,Ganaraska,Rainbow Trout,58,49
 2021-10-21,Ganaraska,Brown Trout,4,0
-2021-10-22,Ganaraska,Chinook,1,0
-2021-10-22,Ganaraska,Coho,1,3
-2021-10-22,Ganaraska,Rainbow Trout,92,64
-2021-10-22,Ganaraska,Brown Trout,1,0
+2021-10-22,Ganaraska,Coho,2,3
+2021-10-22,Ganaraska,Rainbow Trout,94,64
 2021-10-23,Ganaraska,Rainbow Trout,1,1
-2021-10-24,Ganaraska,Rainbow Trout,6,6
+2021-10-24,Ganaraska,Rainbow Trout,7,6
 2021-10-25,Ganaraska,Chinook,1,0
 2021-10-25,Ganaraska,Rainbow Trout,3,3
 2021-10-26,Ganaraska,Rainbow Trout,15,13
-2021-10-27,Ganaraska,Chinook,4,1
-2021-10-27,Ganaraska,Coho,1,2
-2021-10-27,Ganaraska,Rainbow Trout,133,100
+2021-10-27,Ganaraska,Chinook,3,1
+2021-10-27,Ganaraska,Coho,3,2
+2021-10-27,Ganaraska,Rainbow Trout,132,100
 2021-10-27,Ganaraska,Brown Trout,2,-1
 2021-10-28,Ganaraska,Chinook,1,1
-2021-10-28,Ganaraska,Rainbow Trout,62,54
+2021-10-28,Ganaraska,Rainbow Trout,60,54
 2021-10-29,Ganaraska,Chinook,2,1
 2021-10-29,Ganaraska,Rainbow Trout,73,62
 2021-10-30,Ganaraska,Coho,1,1
-2021-10-30,Ganaraska,Rainbow Trout,189,164
+2021-10-30,Ganaraska,Rainbow Trout,184,164
 2021-10-30,Ganaraska,Brown Trout,2,0
-2021-10-31,Ganaraska,Coho,2,1
-2021-10-31,Ganaraska,Rainbow Trout,109,88
+2021-10-31,Ganaraska,Chinook,1,0
+2021-10-31,Ganaraska,Coho,1,1
+2021-10-31,Ganaraska,Rainbow Trout,112,88
 2021-10-31,Ganaraska,Brown Trout,3,-1
 2021-11-01,Ganaraska,Coho,1,1
-2021-11-01,Ganaraska,Rainbow Trout,87,66
+2021-11-01,Ganaraska,Rainbow Trout,88,66
 2021-11-02,Ganaraska,Rainbow Trout,8,-4
 2021-11-03,Ganaraska,Rainbow Trout,1,1
 2021-11-05,Ganaraska,Rainbow Trout,2,2
 2021-11-06,Ganaraska,Rainbow Trout,3,1
 2021-11-07,Ganaraska,Rainbow Trout,32,12
-2021-11-08,Ganaraska,Rainbow Trout,119,35
+2021-11-08,Ganaraska,Rainbow Trout,128,35
 2021-11-09,Ganaraska,Rainbow Trout,4,6

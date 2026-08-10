@@ -1,5 +1,5 @@
 date,site,species,model,tech
-2020-06-27,Credit,Chinook,-1,0
+2020-06-17,Credit,Brown Trout,1,0
 2020-06-28,Credit,Atlantic,1,1
 2020-08-06,Credit,Rainbow Trout,1,0
 2020-08-07,Credit,Chinook,7,6
@@ -15,19 +15,18 @@ date,site,species,model,tech
 2020-08-23,Credit,Atlantic,1,1
 2020-08-29,Credit,Chinook,4,4
 2020-08-30,Credit,Chinook,1,1
-2020-08-30,Credit,Rainbow Trout,1,0
 2020-08-31,Credit,Chinook,2,2
 2020-09-03,Credit,Chinook,3,3
 2020-09-05,Credit,Chinook,0,1
 2020-09-05,Credit,Atlantic,1,1
-2020-09-05,Credit,Rainbow Trout,2,0
+2020-09-05,Credit,Rainbow Trout,3,0
 2020-09-07,Credit,Chinook,4,4
 2020-09-07,Credit,Brown Trout,2,1
-2020-09-08,Credit,Chinook,19,25
-2020-09-08,Credit,Brown Trout,-1,1
-2020-09-09,Credit,Chinook,46,53
+2020-09-08,Credit,Chinook,20,25
+2020-09-08,Credit,Brown Trout,1,1
+2020-09-09,Credit,Chinook,45,53
 2020-09-09,Credit,Brown Trout,0,1
-2020-09-10,Credit,Chinook,81,93
+2020-09-10,Credit,Chinook,78,93
 2020-09-10,Credit,Coho,1,0
 2020-09-10,Credit,Brown Trout,1,1
 2020-09-11,Credit,Chinook,0,1
@@ -35,13 +34,13 @@ date,site,species,model,tech
 2020-09-12,Credit,Rainbow Trout,1,0
 2020-09-13,Credit,Chinook,36,49
 2020-09-13,Credit,Brown Trout,1,1
-2020-09-14,Credit,Chinook,54,70
+2020-09-14,Credit,Chinook,53,70
 2020-09-14,Credit,Coho,2,2
 2020-09-14,Credit,Rainbow Trout,2,2
-2020-09-15,Credit,Chinook,16,16
+2020-09-15,Credit,Chinook,15,16
 2020-09-15,Credit,Coho,3,4
 2020-09-15,Credit,Atlantic,1,1
-2020-09-15,Credit,Rainbow Trout,2,2
+2020-09-15,Credit,Rainbow Trout,3,2
 2020-09-15,Credit,Brown Trout,3,2
 2020-09-16,Credit,Chinook,5,6
 2020-09-16,Credit,Coho,0,2
@@ -49,9 +48,8 @@ date,site,species,model,tech
 2020-09-16,Credit,Rainbow Trout,1,0
 2020-09-17,Credit,Chinook,33,32
 2020-09-17,Credit,Coho,3,5
-2020-09-17,Credit,Rainbow Trout,1,0
 2020-09-19,Credit,Chinook,1,1
-2020-09-20,Credit,Chinook,102,110
+2020-09-20,Credit,Chinook,104,110
 2020-09-20,Credit,Coho,1,1
 2020-09-20,Credit,Atlantic,1,1
 2020-09-20,Credit,Rainbow Trout,2,1
@@ -60,114 +58,111 @@ date,site,species,model,tech
 2020-09-22,Credit,Chinook,56,63
 2020-09-22,Credit,Coho,1,1
 2020-09-23,Credit,Chinook,39,53
-2020-09-24,Credit,Chinook,225,241
+2020-09-24,Credit,Chinook,222,241
 2020-09-24,Credit,Coho,4,4
-2020-09-25,Credit,Chinook,133,135
+2020-09-25,Credit,Chinook,132,135
 2020-09-25,Credit,Coho,3,9
-2020-09-26,Credit,Chinook,84,100
+2020-09-26,Credit,Chinook,82,100
 2020-09-26,Credit,Coho,2,2
 2020-09-26,Credit,Rainbow Trout,1,0
-2020-09-27,Credit,Chinook,146,166
+2020-09-27,Credit,Chinook,143,166
 2020-09-27,Credit,Coho,5,8
-2020-09-28,Credit,Chinook,124,145
+2020-09-28,Credit,Chinook,123,145
 2020-09-28,Credit,Coho,2,2
 2020-09-28,Credit,Atlantic,2,2
-2020-09-28,Credit,Rainbow Trout,0,1
-2020-09-29,Credit,Chinook,240,310
+2020-09-28,Credit,Rainbow Trout,1,1
+2020-09-29,Credit,Chinook,228,310
 2020-09-29,Credit,Coho,2,4
-2020-09-29,Credit,Rainbow Trout,2,0
-2020-09-30,Credit,Chinook,133,195
+2020-09-29,Credit,Rainbow Trout,1,0
+2020-09-30,Credit,Chinook,138,195
 2020-09-30,Credit,Coho,3,5
-2020-09-30,Credit,Rainbow Trout,3,1
-2020-10-01,Credit,Chinook,314,369
+2020-09-30,Credit,Rainbow Trout,1,1
+2020-10-01,Credit,Chinook,328,369
 2020-10-01,Credit,Coho,4,3
-2020-10-01,Credit,Rainbow Trout,8,0
-2020-10-02,Credit,Chinook,106,93
+2020-10-02,Credit,Chinook,102,93
 2020-10-02,Credit,Coho,2,3
 2020-10-02,Credit,Rainbow Trout,1,2
-2020-10-03,Credit,Chinook,19,25
+2020-10-03,Credit,Chinook,21,25
 2020-10-03,Credit,Coho,1,1
-2020-10-04,Credit,Chinook,20,18
-2020-10-05,Credit,Chinook,63,69
-2020-10-05,Credit,Coho,3,5
+2020-10-04,Credit,Chinook,22,18
+2020-10-05,Credit,Chinook,66,69
+2020-10-05,Credit,Coho,5,5
 2020-10-05,Credit,Rainbow Trout,1,0
-2020-10-06,Credit,Chinook,119,135
-2020-10-06,Credit,Coho,12,19
-2020-10-06,Credit,Rainbow Trout,4,0
+2020-10-06,Credit,Chinook,116,135
+2020-10-06,Credit,Coho,13,19
+2020-10-06,Credit,Rainbow Trout,1,0
 2020-10-06,Credit,Brown Trout,1,2
-2020-10-07,Credit,Chinook,222,286
+2020-10-07,Credit,Chinook,217,286
 2020-10-07,Credit,Coho,4,5
-2020-10-07,Credit,Rainbow Trout,1,0
 2020-10-07,Credit,Brown Trout,0,1
 2020-10-08,Credit,Chinook,125,155
-2020-10-08,Credit,Coho,8,10
+2020-10-08,Credit,Coho,9,10
 2020-10-08,Credit,Brown Trout,1,1
-2020-10-09,Credit,Chinook,104,132
-2020-10-09,Credit,Coho,4,5
+2020-10-09,Credit,Chinook,109,132
+2020-10-09,Credit,Coho,5,5
 2020-10-09,Credit,Atlantic,1,1
-2020-10-09,Credit,Rainbow Trout,2,0
-2020-10-10,Credit,Chinook,97,106
+2020-10-09,Credit,Rainbow Trout,1,0
+2020-10-10,Credit,Chinook,94,106
 2020-10-10,Credit,Coho,0,1
 2020-10-11,Credit,Chinook,49,72
 2020-10-11,Credit,Coho,1,2
 2020-10-11,Credit,Atlantic,1,0
-2020-10-12,Credit,Chinook,32,35
+2020-10-12,Credit,Chinook,36,35
 2020-10-12,Credit,Atlantic,1,1
 2020-10-12,Credit,Brown Trout,1,1
-2020-10-13,Credit,Chinook,74,107
-2020-10-13,Credit,Rainbow Trout,1,0
-2020-10-13,Credit,Brown Trout,-1,3
+2020-10-13,Credit,Chinook,75,107
+2020-10-13,Credit,Coho,-1,0
+2020-10-13,Credit,Brown Trout,-2,3
 2020-10-14,Credit,Chinook,80,97
-2020-10-14,Credit,Coho,2,8
+2020-10-14,Credit,Coho,1,8
 2020-10-14,Credit,Atlantic,0,1
-2020-10-14,Credit,Rainbow Trout,2,0
-2020-10-15,Credit,Chinook,20,34
+2020-10-14,Credit,Rainbow Trout,1,0
+2020-10-15,Credit,Chinook,21,34
 2020-10-15,Credit,Coho,0,1
 2020-10-15,Credit,Rainbow Trout,1,1
-2020-10-19,Credit,Chinook,29,38
-2020-10-19,Credit,Coho,0,3
+2020-10-19,Credit,Chinook,28,38
+2020-10-19,Credit,Coho,2,3
 2020-10-19,Credit,Rainbow Trout,2,2
 2020-10-20,Credit,Chinook,16,16
 2020-10-20,Credit,Coho,0,1
 2020-10-20,Credit,Rainbow Trout,3,2
-2020-10-21,Credit,Chinook,40,42
+2020-10-21,Credit,Chinook,41,42
 2020-10-21,Credit,Coho,0,1
-2020-10-21,Credit,Rainbow Trout,9,6
-2020-10-22,Credit,Chinook,6,6
+2020-10-21,Credit,Rainbow Trout,6,6
+2020-10-22,Credit,Chinook,9,6
 2020-10-22,Credit,Coho,0,1
-2020-10-22,Credit,Rainbow Trout,5,8
+2020-10-22,Credit,Rainbow Trout,4,8
 2020-10-25,Credit,Chinook,1,1
 2020-10-26,Credit,Chinook,2,2
 2020-10-26,Credit,Coho,0,1
 2020-10-26,Credit,Rainbow Trout,3,2
-2020-10-27,Credit,Chinook,8,7
+2020-10-27,Credit,Chinook,10,7
 2020-10-27,Credit,Coho,1,2
-2020-10-27,Credit,Rainbow Trout,1,1
-2020-10-28,Credit,Chinook,7,7
+2020-10-27,Credit,Rainbow Trout,0,1
+2020-10-28,Credit,Chinook,6,7
 2020-10-28,Credit,Coho,0,1
 2020-10-28,Credit,Rainbow Trout,0,1
 2020-10-29,Credit,Chinook,1,2
-2020-10-29,Credit,Coho,0,1
-2020-10-29,Credit,Rainbow Trout,2,0
-2020-11-01,Credit,Chinook,2,2
-2020-11-01,Credit,Rainbow Trout,-4,0
-2020-11-02,Credit,Rainbow Trout,-1,0
+2020-10-29,Credit,Coho,1,1
+2020-11-01,Credit,Chinook,1,2
+2020-11-01,Credit,Rainbow Trout,-3,0
+2020-11-02,Credit,Rainbow Trout,1,0
 2020-11-03,Credit,Chinook,1,1
 2020-11-04,Credit,Chinook,6,4
 2020-11-04,Credit,Rainbow Trout,1,2
-2020-11-05,Credit,Chinook,14,14
+2020-11-05,Credit,Chinook,13,14
 2020-11-05,Credit,Coho,0,2
 2020-11-05,Credit,Rainbow Trout,8,8
 2020-11-05,Credit,Brown Trout,3,2
 2020-11-08,Credit,Chinook,8,8
-2020-11-08,Credit,Rainbow Trout,10,12
-2020-11-09,Credit,Chinook,3,2
-2020-11-09,Credit,Rainbow Trout,15,21
+2020-11-08,Credit,Rainbow Trout,7,12
+2020-11-09,Credit,Chinook,4,2
+2020-11-09,Credit,Rainbow Trout,14,21
 2020-11-10,Credit,Chinook,4,2
-2020-11-10,Credit,Rainbow Trout,9,13
+2020-11-10,Credit,Rainbow Trout,8,13
 2020-11-11,Credit,Chinook,6,2
-2020-11-11,Credit,Coho,0,3
-2020-11-11,Credit,Rainbow Trout,17,13
+2020-11-11,Credit,Coho,1,3
+2020-11-11,Credit,Rainbow Trout,15,13
 2020-11-12,Credit,Chinook,3,1
 2020-11-12,Credit,Coho,0,2
 2020-11-12,Credit,Rainbow Trout,2,2
@@ -460,21 +455,21 @@ date,site,species,model,tech
 2020-11-01,Ganaraska,Rainbow Trout,0,2
 2020-11-04,Ganaraska,Rainbow Trout,10,4
 2020-11-05,Ganaraska,Coho,1,1
-2020-11-05,Ganaraska,Rainbow Trout,84,47
-2020-11-06,Ganaraska,Chinook,12,7
+2020-11-05,Ganaraska,Rainbow Trout,85,47
+2020-11-06,Ganaraska,Chinook,13,7
 2020-11-06,Ganaraska,Coho,11,6
-2020-11-06,Ganaraska,Rainbow Trout,243,210
-2020-11-06,Ganaraska,Brown Trout,3,4
+2020-11-06,Ganaraska,Rainbow Trout,241,210
+2020-11-06,Ganaraska,Brown Trout,2,4
 2020-11-07,Ganaraska,Chinook,3,4
-2020-11-07,Ganaraska,Coho,1,2
+2020-11-07,Ganaraska,Coho,2,2
 2020-11-07,Ganaraska,Atlantic,2,1
-2020-11-07,Ganaraska,Rainbow Trout,212,131
+2020-11-07,Ganaraska,Rainbow Trout,218,131
 2020-11-07,Ganaraska,Brown Trout,1,0
 2020-11-08,Ganaraska,Chinook,4,4
 2020-11-08,Ganaraska,Coho,3,2
-2020-11-08,Ganaraska,Rainbow Trout,124,69
+2020-11-08,Ganaraska,Rainbow Trout,125,69
 2020-11-09,Ganaraska,Chinook,1,3
-2020-11-09,Ganaraska,Coho,8,7
-2020-11-09,Ganaraska,Rainbow Trout,80,34
+2020-11-09,Ganaraska,Coho,7,7
+2020-11-09,Ganaraska,Rainbow Trout,85,34
 2020-11-10,Ganaraska,Rainbow Trout,2,3
-2020-11-11,Ganaraska,Rainbow Trout,1,0
+2020-11-11,Ganaraska,Rainbow Trout,4,0

@@ -1,0 +1,4 @@
+species,scope,river_days,bias,loa_lo,loa_hi,ratio_n,ratio_zero_days_dropped,ratio_bias,ratio_lo,ratio_hi,spread_slope,spread_r,spread_p,spread_k,prop_pct,prop_loa_at10,prop_loa_at100
+Chinook,Ganaraska,446,2.94,-151.4,157.3,398,48,1.128,0.521,2.44,0.1809,0.723,3.451577265619399e-73,0.1771,43.5,"[11.7, 20.4]","[-34.5, 52.5]"
+Chinook,Credit,411,-6.4,-72.1,59.3,382,29,0.959,0.508,1.809,0.1389,0.498,3.7655405009144124e-27,0.14,34.4,"[-1.7, 5.2]","[-43.5, 25.3]"
+Chinook,pooled,857,-1.54,-122.1,119.0,780,77,1.041,0.504,2.151,0.1761,0.7,2.3857411145970494e-127,0.1721,42.3,"[3.2, 11.7]","[-41.6, 43.0]"

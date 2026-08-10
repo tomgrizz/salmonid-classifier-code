@@ -1,13 +1,10 @@
 # salmonid-classifier-code
 
-Reproduction code for the manuscript **"Against the Current: deep-learning enumeration of
-migratory salmonids at Lake Ontario fishways, validated on technician counts"**
-(Ontario Ministry of Natural Resources — Lake Ontario Management Unit; target journal
-*Fisheries Research*).
+Reproduction code for the Lake Ontario CV project
 
 This repository contains the code and the small analysis data needed to reproduce the paper's
 model evaluation, counting/movement analysis, statistics, and figures for the **published
-single-stage model (DEIMv2-X, "v2.6")**. It is a curated, annotated extract of a larger working
+single-stage model (DEIMv2-X, "v2.7")**. It is a curated, annotated extract of a larger working
 research repository — every module here has been reviewed and commented for external readers.
 
 > **Reviewing the paper?** Start with **`docs/REVIEW_GUIDE.md`** 
@@ -19,7 +16,10 @@ backbone) that performs **detection + species classification in a single pass**,
 multi-object tracker for counting. It classifies five salmonid species —
 `0 Chinook · 1 Coho · 2 Atlantic · 3 Rainbow Trout · 4 Brown Trout` (a 6th detection class,
 "Small Salmonid", is detected but excluded from the official report). On the frozen held-out
-test set (`test_set_v6`, 366 tracks) it reaches **macro-F1 0.966**.
+test set (`test_set_v6`, 366 tracks, at least 60 per species) it reaches **macro-F1 0.961**.
+The earlier v2.6 weights scored 0.966 on the same set, but 62 of those 366 fish had been trained
+on, so that figure is not comparable; v2.7 re-applies the holdout at video level and is clean on
+all 366.
 
 ## Reproducibility — two tiers
 
@@ -32,10 +32,29 @@ that does not need raw imagery reproduce on a fresh clone:
 python -m venv .venv && .venv/Scripts/activate      # Windows; use bin/activate on Linux/macOS
 pip install -r requirements.txt && pip install -e .
 
-make score          # -> held-out species macro-F1 0.966 (test_set_v6)
+make score          # -> held-out species macro-F1 0.961 (test_set_v6, 366 tracks)
 make concordance    # -> Lin's CCC table + concordance / Bland-Altman figures
 make figures        # -> manuscript figures regenerated from data/canonical_*.csv
 ```
+
+The agreement statistics that the manuscript reports as *assumption-checked* run from the same
+committed data, also with no GPU and no model:
+
+```bash
+python -m salmonid.results.agreement_stats      # per-river Bland-Altman on the ratio and
+                                                # proportional scales, moving-block bootstrap CIs
+                                                # for Lin's CCC, inter-annual CCC, Spearman rho
+python -m salmonid.results.classification_ci    # Wilson + bootstrap intervals on Table 3
+python -m salmonid.count.net_rule_loyo          # leave-one-year-out validation of the 50/300 px
+                                                # directional rule (out-of-sample, not fitted)
+```
+
+Each exists because daily fish counts violate an assumption the simpler statistic makes: the
+spread of the model-minus-technician difference grows with the size of the day (so constant
+limits of agreement do not hold), consecutive days within a run are correlated (so an i.i.d.
+bootstrap gives intervals that are too narrow), and the directional thresholds were originally
+chosen on the same seasons they were then reported against. Each module's docstring states the
+assumption it repairs and what the repair costs.
 
 (No `make`? Run the underlying `python -m salmonid.…` commands the Makefile prints.)
 
@@ -55,14 +74,16 @@ salmonid/            the annotated code, by pipeline stage
   holdout.py           the leak guard — excludes eval tracks from ALL training
   data/                training-data prep: masked COCO build + SAM2 synthetic composites
   detect/              single-stage inference: DEIMv2 decode, detect-store, BoT-SORT tracking
-  eval/                held-out evaluation (the 0.966 score) + mandatory pre-deploy gates
-  count/               counting & net movement; model-vs-technician daily aggregation
-  results/             canonical results assembly + concordance (Lin's CCC) statistics
+  eval/                held-out evaluation (the 0.961 score) + mandatory pre-deploy gates
+  count/               counting & net movement; model-vs-technician daily aggregation,
+                       leave-one-year-out validation of the directional rule
+  results/             canonical results assembly, concordance (Lin's CCC) statistics,
+                       assumption-checked agreement statistics + classification intervals
   figures/             manuscript figure generators (shared CJFAS style helper)
   provenance/          per-run reproducibility manifest
   util/                shared helpers (parquet schema, notifications)
-configs/             the DEIMv2 fish config chain (snapshotted) incl. the v26 training recipe
-runners/             PowerShell launchers (train v26; multi-year corpus detect + track)
+configs/             the DEIMv2 fish config chain (snapshotted) incl. the v26/v27 training recipes
+runners/             PowerShell launchers (training; multi-year corpus detect + track)
 data/                committed small artifacts (Tier 1) + the data/sample/ demo bundle (Tier 2)
 docs/                REPRODUCE.md · DATA_AVAILABILITY.md · CODE_MAP.md · DEIMV2_PIN.md ·
                      counting_and_movement.md · MANUSCRIPT_RESULTS.md

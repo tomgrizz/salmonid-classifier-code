@@ -145,6 +145,12 @@ SAM2_CUTOUTS: Path = PROJECTS_ROOT / "sam2_cutouts"        # ~3 GB cutout librar
 TESTSET_V6_GT: Path = REPO_DATA / "test_set_v6_gt.json"          # frozen per-track species GT
 TESTSET_V6_HOLDOUT: Path = REPO_DATA / "test_set_v6_holdout.json"  # leak-guard exclusion keys
 PREDS_V26: Path = REPO_DATA / "preds_checkpoint0007.csv"        # v2.6 held-out track predictions
+# v2.7 (checkpoint0017) is the LEAK-CLEAN retrain and the published model. v2.6's COCO excluded the
+# held-out set by (video_id, track_id), which does not identify a fish, so 62 of the 366 test fish
+# were trained on and v2.6 can only be scored honestly on the 304-track remainder. v2.7 re-applies
+# the holdout at video level and trains from the COCO init, so it scores on all 366.
+PREDS_V27: Path = REPO_DATA / "preds_v27_ckpt0017.csv"          # v2.7 held-out track predictions
+PUBLISHED_PREDS: Path = PREDS_V27                               # what the figures and tables use
 CANONICAL_DAILY: Path = REPO_DATA / "canonical_daily.csv"       # per-day model-vs-tech (2019-2025)
 CANONICAL_SUMMARY: Path = REPO_DATA / "canonical_summary.csv"   # per-(year,river,species) totals
 CONCORDANCE_CSV: Path = REPO_DATA / "concordance_ccc.csv"       # Lin's CCC table

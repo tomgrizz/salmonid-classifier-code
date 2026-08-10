@@ -87,13 +87,16 @@ def confusion(gt, preds):
 
 
 def fig_confusion():
-    """Single-stage v2.6 confusion matrix on the held-out test set (for the manuscript).
+    """Single-stage confusion matrix on the held-out test set (for the manuscript).
 
     Diagonal (correct) cells are shaded green by recall; off-diagonal (error) cells are shaded red by
     their within-row share. Every non-empty cell prints the track count and the within-row (recall) %.
+
+    Reads the PUBLISHED model's predictions (v2.7 / checkpoint0017), which are leak-clean and so
+    cover all 366 frozen tracks rather than the 304-track remainder v2.6 had to be scored on.
     """
     gt = load_gt()
-    pf = config.PREDS_V26   # committed v2.6 held-out track predictions (preds_checkpoint0007.csv)
+    pf = config.PUBLISHED_PREDS
     M = confusion(gt, load_preds(pf))
     row = M.sum(1, keepdims=True)
     Mn = M / np.clip(row, 1, None)
@@ -139,7 +142,9 @@ def fig_confusion():
     fig.legend(handles=[Patch(facecolor=(*GREEN, 0.82), label="correct (opacity ∝ recall)"),
                         Patch(facecolor=(*RED, 0.85), label="error (opacity ∝ error size)")],
                loc="outside lower center", ncol=2, frameon=False, fontsize=6.5, handlelength=1.1)
-    save_fig(fig, "fig_confusion_v26", kind="vector")
+    # Named for what it shows, not for an internal model revision: the old "fig_confusion_v26"
+    # filename leaked the model version into the manuscript's figure captions.
+    save_fig(fig, "fig_confusion_heldout", kind="vector")
 
 
 def _load_daily(path, site):

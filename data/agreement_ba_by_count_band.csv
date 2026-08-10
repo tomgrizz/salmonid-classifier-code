@@ -1,0 +1,13 @@
+species,river,count_band,days,mean_diff,sd_diff,median_ratio
+Chinook,Ganaraska,0,24,0.54,0.93,
+Chinook,Ganaraska,1-4,83,0.58,1.65,1.0
+Chinook,Ganaraska,5-19,72,2.35,7.54,1.0
+Chinook,Ganaraska,20-49,38,4.97,12.13,1.113
+Chinook,Ganaraska,50-199,86,16.33,29.84,1.117
+Chinook,Ganaraska,200+,127,-4.09,145.1,0.987
+Chinook,Credit,0,14,-0.43,0.94,
+Chinook,Credit,1-4,101,-0.4,1.61,1.0
+Chinook,Credit,5-19,73,0.59,5.38,1.0
+Chinook,Credit,20-49,53,1.3,10.07,1.0
+Chinook,Credit,50-199,117,-5.45,18.19,0.968
+Chinook,Credit,200+,51,-40.41,82.99,0.949

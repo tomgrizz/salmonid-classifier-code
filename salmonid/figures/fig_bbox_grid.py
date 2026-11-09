@@ -41,12 +41,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from salmonid import config
-from salmonid.figures.manuscript_style import set_style, save_fig, COL2_IN
+from salmonid.figures.manuscript_style import set_style, save_fig, COL2_IN, AFS
 
 set_style()
 BASE = config.SAM2_CUTOUTS      # cutout-library root (holds manifest.csv)
 FRAMES = config.FOOTAGE_ROOT    # raw footage read back for the source frames
-OUT = Path("docs/manuscript_figures"); OUT.mkdir(parents=True, exist_ok=True)
 SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]  # mirrors salmonid.config.SPECIES
 COLORS = {  # per-species box colour, RGB
     "Chinook": (230, 90, 40), "Coho": (224, 161, 59), "Atlantic": (58, 167, 109),
@@ -76,35 +75,28 @@ def read_frame(video_id, frame_no):
 
 
 def annotate_and_crop(frame, r):
-    """Draw the detection box + species/confidence label, then context-crop around the fish.
+    """Draw the detection box, then context-crop around the fish.
 
     Args:
         frame: source RGB frame (HxWx3 uint8).
         r: a manifest row exposing ``box_x1..box_y2``, ``species`` and ``det_conf``.
     Returns:
-        RGB crop centred on the box with a 0.55x-box-size context margin on each side. Box colour
-        and label ("<species>  <conf>%") are baked into the pixels; line/text sizes scale with W.
+        (crop, label): the RGB crop with a 0.55x-box-size context margin on each side, and the
+        "<AFS name> (<detector confidence>%)" label. The label is drawn by matplotlib above the panel at >= 7 pt,
+        not baked into the pixels (the baked cv2 label printed at about 2.5 pt at final size).
     """
     H, W = frame.shape[:2]
     x1, y1, x2, y2 = int(r.box_x1), int(r.box_y1), int(r.box_x2), int(r.box_y2)
     col = COLORS[r.species]
     bgr = tuple(int(c) for c in col[::-1])
     img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-    th = max(2, int(round(W / 480)))
+    th = max(3, int(round(W / 320)))          # >= 0.35 pt at final print size
     cv2.rectangle(img, (x1, y1), (x2, y2), bgr, th)
-    label = f"{r.species}  {r.det_conf * 100:.0f}%"
-    fs = max(0.7, W / 1500)
-    ft = max(1, int(round(W / 640)))
-    (tw, tht), base = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, fs, ft)
-    ly = max(tht + 6, y1)
-    cv2.rectangle(img, (x1, ly - tht - 8), (x1 + tw + 8, ly + base - 2), bgr, -1)
-    cv2.putText(img, label, (x1 + 4, ly - 4), cv2.FONT_HERSHEY_SIMPLEX, fs, (255, 255, 255), ft, cv2.LINE_AA)
     frame = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # crop around the box with context margin
     mx, my = int((x2 - x1) * 0.55), int((y2 - y1) * 0.55)
     cx1, cy1 = max(0, x1 - mx), max(0, y1 - my - 12)
     cx2, cy2 = min(W, x2 + mx), min(H, y2 + my)
-    return frame[cy1:cy2, cx1:cx2]
+    return frame[cy1:cy2, cx1:cx2], f"{AFS[r.species]} ({r.det_conf * 100:.0f}%)"
 
 
 def pick_panels(man):
@@ -113,7 +105,7 @@ def pick_panels(man):
     Args:
         man: the manifest DataFrame (``config.SAM2_CUTOUTS / "manifest.csv"``).
     Returns:
-        ``{species: cropped RGB image}`` for every species with a readable frame. Prefers big,
+        ``{species: (cropped RGB image, label)}`` for every species with a readable frame. Prefers big,
         well-exposed, elongated (aspect >= 2.2), high-confidence (>= 0.90), non-border detections
         so the fish is easiest to identify visually; falls back to a looser filter if none qualify.
     Side effects:
@@ -161,12 +153,14 @@ def main():
               ["x", "D", "D", "E", "E", "x"]]
     # 2-column photo grid; the caption carries the title (kept out of the artwork). "compressed" layout
     # trims the whitespace between the fixed-aspect image panels.
-    fig, axd = plt.subplot_mosaic(layout, figsize=(COL2_IN, COL2_IN * 0.56), empty_sentinel="x",
+    fig, axd = plt.subplot_mosaic(layout, figsize=(COL2_IN, COL2_IN * 0.50), empty_sentinel="x",
                                   layout="compressed")
     for k in slots:
         axd[k].axis("off")
     for k, sp in zip(slots, order):
-        axd[k].imshow(panels[sp]); axd[k].axis("off")
+        img, label = panels[sp]
+        axd[k].imshow(img); axd[k].axis("off")
+        axd[k].set_title(label, fontsize=7.5, loc="left", pad=3)
     save_fig(fig, "bbox_sample_grid", kind="photo")
 
 

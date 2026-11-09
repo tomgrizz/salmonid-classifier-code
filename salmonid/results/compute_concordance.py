@@ -161,67 +161,80 @@ def build_table(daily, summ):
 
 
 def make_figures(daily, fig_dir):
-    """Figures styled to match Godeaux et al. 2026 (FishTracker_workflow.R):
-    ggplot theme_minimal look with a black panel border, red dashed 1:1 line,
-    darkgrey lm trend, and darkgreen dotted +-1.96 SD limits. The two rivers are
-    drawn in distinct colours (Ganaraska blue, Credit amber)."""
+    """Figures styled after Godeaux et al. 2026 (FishTracker_workflow.R): a black panel border, red
+    dashed 1:1 line, grey least-squares trend and green dotted +-1.96 SD limits, drawn on the shared
+    CJFAS production style (true column width, >= 7 pt text, vector PDF plus a 600 dpi PNG).
+
+    The two rivers differ by colour AND marker (Ganaraska filled blue circles, Credit open amber
+    triangles). The two hues are close in luminance, so colour alone merges them in grayscale."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    plt.rcParams.update({"font.family": "sans-serif", "font.size": 11})
+    from salmonid.figures.manuscript_style import (set_style, save_fig, COL15_IN, COL2_IN, AFS,
+                                                   MODEL_LABEL)
+    set_style()
 
     def theme_minimal(ax):
         ax.set_facecolor("white")
-        ax.grid(True, color="0.85", linewidth=0.6)
+        ax.grid(True, color="0.85", linewidth=0.4)
         ax.set_axisbelow(True)
         for sp in ax.spines.values():          # panel.border = black box
-            sp.set_visible(True); sp.set_color("black"); sp.set_linewidth(1.0)
+            sp.set_visible(True); sp.set_color("black"); sp.set_linewidth(0.6)
         ax.tick_params(length=2.5, color="0.5")
 
-    RED, TREND, GREEN = "#E31A1C", "#A9A9A9", "#1B7837"   # 1:1, lm trend, +-1.96 SD
+    def river_scatter(ax, x, y, rv, size):
+        """Ganaraska: filled circles. Credit: open triangles (shape and fill both differ)."""
+        if rv == "Credit":
+            return ax.scatter(x, y, s=size * 1.15, marker=RIVER_MARKER[rv], facecolors="none",
+                              edgecolors="#C98A00", linewidths=0.75, alpha=0.95, label=rv, zorder=2)
+        return ax.scatter(x, y, s=size, marker=RIVER_MARKER[rv], color=RIVER_COLORS[rv],
+                          edgecolor="none", alpha=0.65, label=rv, zorder=2)
+
+    RED, TREND, GREEN = "#E31A1C", "#7F7F7F", "#1B7837"   # 1:1, lm trend, +-1.96 SD
+    TEXT_C = {"Ganaraska": "#2F5A8F", "Credit": "#9A6200"}  # darker text tones, legible in grayscale
 
     # ---- Figure: per-species daily concordance (Lin plots) ----
-    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.9))
-    for ax, sp in zip(axes, MAIN):
+    fig, axes = plt.subplots(1, 3, figsize=(COL2_IN, 2.95), layout="constrained")
+    for k, (ax, sp) in enumerate(zip(axes, MAIN)):
         d = daily[daily.species == sp]
         hi_lim = max(d.tech_net.max(), d.model_net.max()) * 1.05
         lo_lim = min(0, d.tech_net.min(), d.model_net.min())
-        ax.plot([lo_lim, hi_lim], [lo_lim, hi_lim], color=RED, lw=1.1,
+        ax.plot([lo_lim, hi_lim], [lo_lim, hi_lim], color=RED, lw=1.0,
                 ls="--", zorder=3, label="1:1 line")
         for rv in ["Ganaraska", "Credit"]:
             s = d[d.river == rv]
-            ax.scatter(s.tech_net, s.model_net, s=15, alpha=0.7,
-                       color=RIVER_COLORS[rv], edgecolor="none", label=rv, zorder=2)
+            river_scatter(ax, s.tech_net, s.model_net, rv, 7)
         xx = d.tech_net.values.astype(float); yy = d.model_net.values.astype(float)
         b1, b0 = np.polyfit(xx, yy, 1)
         gx = np.array([lo_lim, hi_lim])
-        ax.plot(gx, b0 + b1 * gx, color=TREND, lw=1.2, zorder=1, label="trend (lm)")
+        ax.plot(gx, b0 + b1 * gx, color=TREND, lw=1.0, zorder=1, label="Trend (least squares)")
         ax.set_xlim(lo_lim, hi_lim); ax.set_ylim(lo_lim, hi_lim)
         ax.set_aspect("equal", adjustable="box")
-        ax.set_title(sp, fontsize=12.5, pad=8)
+        ax.set_title(f"({'abc'[k]})  {AFS[sp]}", fontsize=8, loc="left", pad=4, fontweight="bold")
         ax.set_xlabel("Technician daily net count")
         if sp == MAIN[0]:
-            ax.set_ylabel("Automated daily net count")
+            ax.set_ylabel(f"{MODEL_LABEL}, daily net count")
         theme_minimal(ax)
         cg = lin_ccc(d[d.river == "Ganaraska"].model_net,
                      d[d.river == "Ganaraska"].tech_net)["ccc"]
         cc = lin_ccc(d[d.river == "Credit"].model_net,
                      d[d.river == "Credit"].tech_net)["ccc"]
-        ax.text(0.05, 0.955, "Lin's CCC", transform=ax.transAxes, va="top",
-                ha="left", fontsize=10, fontweight="bold")
-        ax.text(0.05, 0.885, f"Ganaraska  {cg:.2f}", transform=ax.transAxes,
-                va="top", ha="left", fontsize=10, color=RIVER_COLORS["Ganaraska"])
-        ax.text(0.05, 0.820, f"Credit  {cc:.2f}", transform=ax.transAxes,
-                va="top", ha="left", fontsize=10, color=RIVER_COLORS["Credit"])
-    axes[0].legend(frameon=True, fontsize=8.5, loc="lower right",
-                   edgecolor="0.7", framealpha=0.95)
-    fig.tight_layout()
+        ax.text(0.05, 0.96, "Lin's CCC", transform=ax.transAxes, va="top",
+                ha="left", fontsize=7, fontweight="bold")
+        ax.text(0.05, 0.875, f"Ganaraska  {cg:.2f}", transform=ax.transAxes,
+                va="top", ha="left", fontsize=7, color=TEXT_C["Ganaraska"], fontweight="bold")
+        ax.text(0.05, 0.790, f"Credit  {cc:.2f}", transform=ax.transAxes,
+                va="top", ha="left", fontsize=7, color=TEXT_C["Credit"], fontweight="bold")
+    # One figure-level legend below the panels; inside panel (a) it covered river-days.
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=4, frameon=False, fontsize=7,
+               handlelength=1.8, markerscale=1.6)
     p1 = Path(fig_dir) / "fig_concordance.png"
-    fig.savefig(p1, dpi=300, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
+    save_fig(fig, "fig_concordance", kind="vector", outdir=fig_dir)
 
-    # ---- Figure: Bland-Altman, daily Chinook net (rivers in distinct colours) ----
-    fig, ax = plt.subplots(figsize=(6.8, 5.0))
+    # ---- Figure: Bland-Altman, daily Chinook net (rivers in distinct colours AND markers) ----
+    # No in-artwork title: CJFAS treats the caption as the title.
+    fig, ax = plt.subplots(figsize=(COL15_IN, 3.3), layout="constrained")
     d = daily[daily.species == "Chinook"]
     mean_c = (d.model_net + d.tech_net) / 2
     diff_c = d.model_net - d.tech_net
@@ -229,26 +242,23 @@ def make_figures(daily, fig_dir):
     hi, lo = bias + 1.96 * sd, bias - 1.96 * sd
     for rv in ["Ganaraska", "Credit"]:
         s = d.river == rv
-        ax.scatter(mean_c[s], diff_c[s], s=15, alpha=0.7,
-                   color=RIVER_COLORS[rv], edgecolor="none", label=rv)
-    ax.axhline(bias, color=RED, lw=1.2, ls="--")
-    ax.axhline(hi, color=GREEN, lw=0.9, ls=":")
-    ax.axhline(lo, color=GREEN, lw=0.9, ls=":")
+        river_scatter(ax, mean_c[s], diff_c[s], rv, 9)
+    ax.axhline(bias, color=RED, lw=1.0, ls="--")
+    ax.axhline(hi, color=GREEN, lw=0.8, ls=":")
+    ax.axhline(lo, color=GREEN, lw=0.8, ls=":")
     xr = mean_c.max()
-    ax.text(xr, bias, f" Mean ({bias:+.0f})", color=RED, fontsize=9,
+    ax.text(xr, bias, f" Mean ({bias:+.1f})".replace("(-", "(−"), color=RED, fontsize=7,
             ha="right", va="bottom")
-    ax.text(xr, hi, " +1.96 SD", color=GREEN, fontsize=9, ha="right", va="bottom")
-    ax.text(xr, lo, " −1.96 SD", color=GREEN, fontsize=9, ha="right", va="top")
-    ax.set_xlabel("Mean of automated & technician daily net count")
-    ax.set_ylabel("Automated − technician (daily net count)")
-    ax.set_title("Chinook Salmon daily net: automated vs technician", fontsize=12.5, pad=8)
+    ax.text(xr, hi, f" +1.96 SD ({hi:+.0f})", color=GREEN, fontsize=7, ha="right", va="bottom")
+    ax.text(xr, lo, f" \u22121.96 SD ({lo:+.0f})".replace("(-", "(\u2212"), color=GREEN, fontsize=7,
+            ha="right", va="top")
+    ax.set_xlabel(f"Mean of {MODEL_LABEL.lower()} and technician daily net count")
+    ax.set_ylabel(f"{MODEL_LABEL} \u2212 technician\n(daily net count)")
     theme_minimal(ax)
-    ax.legend(frameon=True, fontsize=9, loc="upper left", title="River",
-              edgecolor="0.7", framealpha=0.95)
-    fig.tight_layout()
+    ax.legend(frameon=True, fontsize=7, loc="upper left", title="River", title_fontsize=7,
+              edgecolor="0.7", framealpha=0.95, handlelength=1.2, markerscale=1.5)
     p2 = Path(fig_dir) / "fig_bland_altman.png"
-    fig.savefig(p2, dpi=300, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
+    save_fig(fig, "fig_bland_altman", kind="vector", outdir=fig_dir)
     return p1, p2, dict(bias=bias, lo=lo, hi=hi, n=len(d))
 
 

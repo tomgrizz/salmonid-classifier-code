@@ -91,8 +91,29 @@ LS = {   # per-species dash pattern — the grayscale fallback when colour is st
 MK = {   # per-species marker (used where markers read better than dashes)
     "Chinook": "o", "Coho": "s", "Atlantic": "^", "Rainbow Trout": "D", "Brown Trout": "v",
 }
+# Class order (label ids 0-4): the one species order used by every figure and table in the paper.
+SPECIES_ORDER = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]
+
+# ---- species names and series labels -------------------------------------------
+# CJFAS/AFS house style: the full American Fisheries Society common name on the artwork
+# ("Chinook Salmon", not "Chinook"). Internal keys stay short (they are data values in
+# canonical_daily.csv); only the displayed string changes. AFS2 is the two-line form for
+# panels too narrow for the one-line name.
+AFS = {
+    "Chinook": "Chinook Salmon",
+    "Coho": "Coho Salmon",
+    "Atlantic": "Atlantic Salmon",
+    "Rainbow Trout": "Rainbow Trout",
+    "Brown Trout": "Brown Trout",
+}
+AFS2 = {k: v.replace(" ", "\n") for k, v in AFS.items()}   # "Chinook\nSalmon"
+# One label pair for the two series, matching the captions ("model output" vs "technician").
+MODEL_LABEL = "Model output"
+TECH_LABEL = "Technician"
+TECH_LABEL_LONG = "Technician (manual count)"
+
 # Two-method comparison colours (the manuscript captions name these "red line" / "blue bars").
-MODEL_C = "#C0392B"     # automated counter — red
+MODEL_C = "#C0392B"     # model output — red
 TECH_C = "#6F9AC9"      # technician — steel blue (mid tone, >= 10% K, not pale)
 TECH_EDGE = "#3F6390"
 
@@ -134,30 +155,42 @@ def set_style():
     })
 
 
-def save_fig(fig, name, kind="vector", outdir=config.FIGURES_DIR, png_dpi=600):
+CSP_MIN_DPI = 600       # CSP/CJFAS: 600 dpi at print size for combination (photo + text) and line art
+
+
+def save_fig(fig, name, kind="vector", outdir=None, png_dpi=CSP_MIN_DPI):
     """Write ``fig`` at its true physical size, in the repo's manuscript print format.
 
     Args:
         fig: the fully laid-out matplotlib ``Figure`` to render (caller owns the plotting).
         name: filename stem (no extension); the journal spec wants it to start with "fig".
         kind: "vector" -> PNG preview + PDF (line-art plots); "photo" -> PNG preview + flattened
-            300 dpi TIFF (photo montages); "png" -> PNG only.
-        outdir: destination directory; defaults to the repo ``figures/`` directory
-            (``config.FIGURES_DIR``) so figures land alongside the reproduction code.
-        png_dpi: raster resolution for the PNG preview.
+            RGB 600 dpi TIFF (photo montages); "png" -> PNG only.
+        outdir: destination directory, resolved when called; defaults to ``config.FIGURES_DIR``
+            (overridable with the ``SALMONID_FIGURES_DIR`` environment variable).
+        png_dpi: raster resolution at the figure's true print size (600 dpi by default).
 
     Side effects:
         Creates ``outdir`` if needed, writes the PNG (always) and the production PDF/TIFF, closes
-        ``fig`` to free memory, and prints the path written.
+        ``fig`` to free memory, and prints the path written. PDFs carry no CreationDate, so a
+        rebuild from the same data is byte-reproducible.
     """
-    outdir = Path(outdir)
+    outdir = Path(outdir) if outdir is not None else config.FIGURES_DIR
     outdir.mkdir(parents=True, exist_ok=True)
+    dpi = png_dpi
     png = outdir / f"{name}.png"
-    fig.savefig(png, dpi=png_dpi, facecolor="white")
+    fig.savefig(png, dpi=dpi, facecolor="white", metadata={"Software": None})
     if kind == "vector":
-        fig.savefig(outdir / f"{name}.pdf", facecolor="white")
+        fig.savefig(outdir / f"{name}.pdf", facecolor="white",
+                    metadata={"CreationDate": None, "Creator": None, "Producer": None})
     elif kind == "photo":
-        fig.savefig(outdir / f"{name}.tiff", dpi=300, facecolor="white",
-                    pil_kwargs={"compression": "tiff_deflate"})
+        # CJFAS wants a flattened TIFF (no alpha channel): render to PNG in memory, drop alpha.
+        import io
+        from PIL import Image
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", dpi=dpi, facecolor="white")
+        buf.seek(0)
+        Image.open(buf).convert("RGB").save(outdir / f"{name}.tiff", dpi=(dpi, dpi),
+                                            compression="tiff_deflate")
     plt.close(fig)
-    print("wrote", png, "(+ production", kind + ")")
+    print(f"wrote {png} ({dpi:.0f} dpi, {fig.get_size_inches()[0]:.2f} in wide) (+ production {kind})")

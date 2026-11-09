@@ -1,78 +1,59 @@
 """
-In plain terms: this script draws the paper's Figure 6 — a side-by-side picture that lines up
-one clear example of each of the five species so a reader can see how their body shapes and
-depths differ. It takes real fish images that were automatically cut out from the counter-tunnel
-video (background removed, leaving just the fish outline), straightens each one to horizontal,
-sizes them all to the same body length, and stacks them. It only makes this comparison figure —
-it does not calculate any accuracy or count number.
+Manuscript Figure 3: five-species body-shape comparison from verified SAM2 cutouts.
 
-Figure 6 (manuscript) — five-species morphology comparison from clean SAM2 cutouts.
+In plain terms: this script lines up one clear, whole-body example of each of the five species so
+a reader can compare their body shapes and depths. It takes real fish segmented from the
+counter-tunnel video (background removed, leaving the fish silhouette), straightens each one to
+horizontal, scales every fish to the same total length, and lays the five out as a two-column
+plate. It produces no manuscript number; the species median depth:length ratios it prints let the
+caption's body-shape statement be checked.
 
-Pipeline position: **results -> figures** (the final, presentation end of the
-data -> detect -> track -> eval/count -> results -> figures chain). This is a pure
-visualisation script; it consumes no model and produces no manuscript *number* — it
-renders the qualitative claim that the five reported salmonid species are visually
-distinguishable by body shape / relative depth.
+Pipeline position: **results -> figures** (presentation only; no model is loaded).
 
-What it does: for each species it picks one high-quality, fully-exposed, near-lateral SAM2
-cutout from the verified cutout library (``config.SAM2_CUTOUTS``), deskews it to horizontal
-using its min-area-rect angle, orients it head-left, scales every fish to a common body
-length, and stacks the five so their body shape / relative depth can be compared directly.
-The cutouts are real fish segmented as they moved through the counter tunnel (alpha channel =
-silhouette).
+Selection. ``WHOLE_BODY`` names one curated cutout per species. Each was chosen from the cutouts
+whose mask clears every effective frame edge (the dark strip at x < 57 px, the 40 px header mask,
+and the right and bottom edges), so the whole fish, caudal fin included, is in view. The earlier
+picks ended in a straight vertical edge at the frame boundary (only the front half to two-thirds of
+the fish), which inflated depth relative to length when they were scaled to a common width. Every
+pick faces right, so no cutout is mirrored; each is only rotated to horizontal.
 
-Inputs (Tier 2, external image data — not committed to the repo):
-  * ``config.SAM2_CUTOUTS / "manifest.csv"`` — one row per cutout with quality metrics
-    (border_frac, angle_deg, solidity, cc_ratio, sam_score, length_px, depth_px, ...).
-  * ``config.SAM2_CUTOUTS / <png>`` — the RGBA cutout PNGs referenced by the manifest.
+Inputs (Tier 2, external image data, not committed to the repo):
+  * ``config.SAM2_CUTOUTS / "manifest.csv"``: one row per cutout with quality metrics.
+  * ``config.SAM2_CUTOUTS / <png>``: the RGBA cutout PNGs referenced by the manifest.
 
-Outputs (two draft montages, written by ``save_fig`` into the manuscript-figures dir):
-  * fig_species_morphology.png           - best clean/clear cutout per species
-  * fig_species_morphology_fullbody.png  - restricted to elongated WHOLE-BODY cutouts (aspect gate),
-                                           so the full fish is shown rather than a head-dominated view
-
-Selection is visibility-aware (prefers brighter, higher-contrast silhouettes) so faint species such as
-Atlantic Salmon are easy to see.
+Output: ``fig_species_morphology.png`` (preview) + ``.tiff`` (flattened, 600 dpi) via ``save_fig``.
 
   python -m salmonid.figures.fig_species_morphology
 
-Environment: base env (CPU-only — cv2 / numpy / pandas / matplotlib); the DEIMv2 ``.venv_deim``
-is not needed. Reads the cutout PNGs + manifest from ``config.SAM2_CUTOUTS``.
+Environment: base env (CPU-only: cv2 / numpy / pandas / matplotlib).
 """
 import cv2
 import numpy as np
 import pandas as pd
-from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
 from salmonid import config
-from salmonid.figures.manuscript_style import set_style, save_fig, COL1_IN
+from salmonid.figures.manuscript_style import set_style, save_fig, COL2_IN, MAXH_IN, AFS
 
 set_style()
 BASE = config.SAM2_CUTOUTS
-OUT = Path("docs/manuscript_figures"); OUT.mkdir(parents=True, exist_ok=True)
-SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]
-# Curated cutouts for the representative figure: the original set the user approved, with the Chinook
-# kept as the original (good) pick and the Atlantic swapped for a clearer, brighter individual.
-CLEAN_OVERRIDE = {
-    "Chinook": "ls_5d5d94cf_036015_f000024",
-    "Coho": "ls_c3fdc958_002539_f000165",
-    "Atlantic": "ls_4ba787a2_035605_f000234",
-    "Rainbow Trout": "ls_ea0daddf_034078_f000000",
-    "Brown Trout": "ls_b6fbf2e7_035934_f000252",
+SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]   # class order
+# One whole-body, head-right individual per species (chosen 2026-11-06 from a contact sheet of the
+# cutouts that clear every frame edge, with sam_score >= 0.9 and length >= 380 px).
+WHOLE_BODY = {
+    "Chinook": "ls_dae863e6_036707_f000222",
+    "Coho": "ls_f1917b35_073265_f000159",
+    "Atlantic": "ls_c06d3b86_054857_f000141",
+    "Rainbow Trout": "ls_d35eaea8_000629_f000069",
+    "Brown Trout": "ls_5ed56d67_051874_f000144",
 }
-TARGET_LEN = 620          # px: every fish is scaled to this body length
+TARGET_LEN = 620          # px: every fish is scaled to this total length (snout to caudal fin)
 
 
 def load_rgba(rel):
-    """Load a cutout PNG (relative path under BASE) as an RGBA uint8 array.
-
-    Args:
-        rel: manifest ``png`` path, relative to ``config.SAM2_CUTOUTS``.
-    Returns:
-        HxWx4 RGBA array; a fully-opaque alpha channel is synthesised for 3-channel PNGs.
-    """
+    """Read a cutout PNG as RGBA (adds an opaque alpha channel if the file has none)."""
     img = cv2.imread(str(BASE / rel), cv2.IMREAD_UNCHANGED)   # BGRA
     if img.shape[2] == 3:
         img = np.dstack([img, np.full(img.shape[:2], 255, np.uint8)])
@@ -80,14 +61,7 @@ def load_rgba(rel):
 
 
 def crop_to_alpha(rgba, pad=6):
-    """Tight-crop an RGBA image to its non-transparent silhouette (alpha>8), with a small pad.
-
-    Args:
-        rgba: HxWx4 RGBA array.
-        pad: pixels of transparent margin kept around the silhouette bbox.
-    Returns:
-        The cropped RGBA view (or the input unchanged if fully transparent).
-    """
+    """Crop to the silhouette's bounding box plus ``pad`` px."""
     ys, xs = np.where(rgba[:, :, 3] > 8)
     if len(xs) == 0:
         return rgba
@@ -97,11 +71,7 @@ def crop_to_alpha(rgba, pad=6):
 
 
 def _rot(rgba, ang):
-    """Rotate an RGBA cutout by ``ang`` degrees on a transparent, diagonal-sized canvas.
-
-    Padding to the image diagonal before rotating guarantees no corner is clipped; the result
-    is re-cropped to its silhouette. Transparent borders keep the alpha silhouette intact.
-    """
+    """Rotate about the centre on a canvas large enough to hold any rotation, then re-crop."""
     h, w = rgba.shape[:2]
     diag = int(np.hypot(h, w))
     canvas = np.zeros((diag, diag, 4), np.uint8)
@@ -126,152 +96,72 @@ def deskew_horiz(rgba, angle_deg):
 
 
 def on_white(rgba):
-    """Alpha-composite an RGBA cutout over a white background, returning an opaque RGB uint8 array."""
+    """Composite the RGBA cutout over a white background."""
     rgb = rgba[:, :, :3].astype(float)
     a = (rgba[:, :, 3:4].astype(float)) / 255.0
     return (rgb * a + 255.0 * (1 - a)).astype(np.uint8)
 
 
 def prep(row):
-    """Load -> crop -> deskew-to-horizontal -> scale a manifest row's cutout to TARGET_LEN width.
-
-    Args:
-        row: a manifest row (needs ``png`` and ``angle_deg``).
-    Returns:
-        RGBA array whose width is exactly ``TARGET_LEN`` px (height scaled to preserve aspect),
-        so every species is rendered at a common body length.
-    """
+    """Load, deskew and scale one cutout to ``TARGET_LEN`` total length."""
     rgba = deskew_horiz(crop_to_alpha(load_rgba(row["png"])), float(row["angle_deg"]))
     h, w = rgba.shape[:2]
     return cv2.resize(rgba, (TARGET_LEN, max(1, int(round(h * TARGET_LEN / w)))), interpolation=cv2.INTER_AREA)
 
 
-def visibility(rgba):
-    """Clarity of the fish pixels: reward contrast/detail (std) and penalise under- or over-exposure
-    (too dark, or washed-out/blown highlights). Avoids picking faint fish AND over-bright ones."""
-    m = rgba[:, :, 3] > 16
-    if m.sum() < 50:
-        return 0.0
-    px = (0.299 * rgba[:, :, 0] + 0.587 * rgba[:, :, 1] + 0.114 * rgba[:, :, 2])[m]
-    mean, std = px.mean(), px.std()
-    blown = (px > 245).mean()                    # fraction of clipped/blown-out pixels
-    expo = max(0.0, 1.0 - abs(mean - 135.0) / 135.0)   # best near mid-grey, worse toward black/white
-    return float(std * expo * (1.0 - blown))
-
-
-def candidates(man, species, fullbody):
-    """Return quality-filtered candidate cutouts for one species, best-first.
-
-    Applies progressively relaxed quality tiers (centred/on-axis/solid/high-SAM) and stops at the
-    first tier yielding >=3 cutouts; if none qualifies, falls back to the whole species sorted by
-    SAM score. When ``fullbody`` is set, an extra length:depth aspect gate keeps only elongated
-    whole-body cutouts (not head-dominated crops).
-
-    Args:
-        man: the full cutout manifest DataFrame.
-        species: species name to filter on.
-        fullbody: whether to additionally require the aspect (whole-body) gate.
-    Returns:
-        A DataFrame of candidate rows, sorted best-first.
-    """
-    g = man[man["species"] == species].copy()
-    g = g[g["png"].apply(lambda p: (BASE / p).is_file())]
-    g["aspect"] = g["length_px"] / g["depth_px"].clip(lower=1)
-    tiers = [                                        # progressively relaxed if a species is sparse
-        dict(border=0.0, ang=16, sol=0.92, cc=0.98, sam=0.95, length=260, aspect=2.9),
-        dict(border=0.02, ang=22, sol=0.88, cc=0.96, sam=0.93, length=240, aspect=2.6),
-        dict(border=0.05, ang=30, sol=0.82, cc=0.92, sam=0.90, length=200, aspect=2.2),
-    ]
-    for t in tiers:
-        c = g[(g["border_frac"] <= t["border"]) & (g["angle_deg"].abs() <= t["ang"])
-              & (g["solidity"] >= t["sol"]) & (g["cc_ratio"] >= t["cc"])
-              & (g["sam_score"] >= t["sam"]) & (g["length_px"] >= t["length"])]
-        if fullbody:
-            c = c[c["aspect"] >= t["aspect"]]
-        if len(c) >= 3:
-            return c.sort_values(["sam_score", "solidity", "mask_area"], ascending=False)
-    return g.sort_values("sam_score", ascending=False)
-
-
-def pick(man, species, fullbody, k=16):
-    """Choose the most-visible cutout among the top quality candidates."""
-    c = candidates(man, species, fullbody)
-    if not len(c):
-        return None, None
-    best, best_score, best_img = None, -1.0, None
-    for _, r in c.head(k).iterrows():
-        img = prep(r)
-        v = visibility(img)
-        if v > best_score:
-            best, best_score, best_img = r, v, img
-    return best, best_img
-
-
 def median_ratio(manifest, species):
-    """Species-level median depth:length over all reasonably clean cutouts (not one noisy individual)."""
+    """Species-level median depth:length over whole-body cutouts (mask clear of every frame edge)."""
     g = manifest[(manifest["species"] == species) & (manifest["solidity"] >= 0.7)
-                 & (manifest["length_px"] >= 200) & (manifest["angle_deg"].abs() <= 30)]
+                 & (manifest["length_px"] >= 200) & (manifest["angle_deg"].abs() <= 30)
+                 & (manifest["mbox_x1"] > 72) & (manifest["mbox_x2"] < 1255)
+                 & (manifest["mbox_y1"] > 50) & (manifest["mbox_y2"] < 950)]
     if not len(g):
         g = manifest[manifest["species"] == species]
     return float((g["depth_px"] / g["length_px"]).median()), len(g)
 
 
-def build(man, fullbody, outname):
-    """Assemble and save one stacked five-species morphology montage.
-
-    For each species: use the curated ``CLEAN_OVERRIDE`` cutout (clean variant only) if present,
-    else pick the most-visible quality candidate; deskew/scale it to a common body length; then
-    stack all five on a white canvas with species labels and hand off to ``save_fig``.
-
-    Args:
-        man: the cutout manifest DataFrame.
-        fullbody: build the whole-body variant (ignores CLEAN_OVERRIDE, applies the aspect gate).
-        outname: output basename; its stem names the saved figure.
-    Side effects:
-        Prints per-species diagnostics (median depth:length, n, SAM score, aspect) and writes the
-        figure (PNG preview + flattened TIFF) via ``save_fig``.
-    """
+def build(man, outname="fig_species_morphology"):
+    """Two-column plate (18.2 cm wide): fish split between columns by stacked height, each labelled
+    with its AFS common name only (dimensions belong in the caption)."""
     fish, labels = [], []
     for sp in SPECIES:
-        sel = man[man["cutout_id"] == CLEAN_OVERRIDE.get(sp)] if not fullbody else man.iloc[0:0]
-        if len(sel):
-            row = sel.iloc[0]; img = prep(row)
-        else:
-            row, img = pick(man, sp, fullbody)
-        if row is None:
-            print("no cutout for", sp); continue
+        row = man[man["cutout_id"] == WHOLE_BODY[sp]].iloc[0]
+        img = prep(row)
         med, n = median_ratio(man, sp)
         fish.append(img)
-        labels.append(sp)          # species name only — dimensions belong in the caption, not the artwork
-        # median depth:length + n are printed (not drawn) so the caption's ratios stay verifiable
-        print(f"[{'fullbody' if fullbody else 'clean'}] {sp}: {row['cutout_id']}  "
-              f"median depth:length={med:.2f}  n={n}  sam={row['sam_score']:.3f}  "
-              f"aspect={row['length_px'] / max(1, row['depth_px']):.2f}")
+        labels.append(AFS[sp])
+        print(f"{sp}: {row['cutout_id']}  ({row['site']}, frame {row['frame_number']})  "
+              f"median depth:length = {med:.2f}  n = {n}  sam = {row['sam_score']:.3f}")
 
-    # deskewed cutouts already share a consistent facing (head to the right); no extra flip needed
-
-    gap, top_pad = 50, 42
-    heights = [f.shape[0] for f in fish]
-    total_h = top_pad + sum(h + gap for h in heights)
-    canvas = np.full((total_h, TARGET_LEN, 3), 255, np.uint8)
-    bands, y = [], top_pad
-    for f, h in zip(fish, heights):
-        canvas[y:y + h, 0:TARGET_LEN] = on_white(f)
-        bands.append(y)
-        y += h + gap
-    fig = plt.figure(figsize=(COL1_IN, COL1_IN * total_h / TARGET_LEN))
-    ax = fig.add_axes([0, 0, 1, 1])           # axes fill the canvas -> output is exactly 1-column wide
+    gap, top_pad, col_gap = 46, 40, 70
+    heights = [f.shape[0] + gap for f in fish]
+    split = min(range(1, len(fish)), key=lambda s: abs(sum(heights[:s]) - sum(heights[s:])))
+    cols = [list(zip(fish[:split], labels[:split])), list(zip(fish[split:], labels[split:]))]
+    col_w = TARGET_LEN
+    canvas_w = 2 * col_w + col_gap
+    col_h = [sum(f.shape[0] + gap for f, _ in c) for c in cols]
+    canvas_h = top_pad + max(col_h)
+    canvas = np.full((canvas_h, canvas_w, 3), 255, np.uint8)
+    placed = []
+    for ci, c in enumerate(cols):
+        x = ci * (col_w + col_gap)
+        y = top_pad + (max(col_h) - col_h[ci]) // 2          # centre the shorter column
+        for f, lab in c:
+            h = f.shape[0]
+            canvas[y:y + h, x:x + col_w] = on_white(f)
+            placed.append((x, y, lab))
+            y += h + gap
+    fig_h = min(COL2_IN * canvas_h / canvas_w, MAXH_IN)
+    fig = plt.figure(figsize=(COL2_IN, fig_h))
+    ax = fig.add_axes([0, 0, 1, 1])           # axes fill the canvas, so the output is exactly 2-column wide
     ax.imshow(canvas); ax.axis("off")
-    for yb, lab in zip(bands, labels):
-        ax.text(6, yb - 6, lab, fontsize=8.5, fontweight="bold", va="bottom", ha="left")
-    save_fig(fig, Path(outname).stem, kind="photo")   # photo montage -> PNG preview + flattened TIFF
+    for x, yb, lab in placed:
+        ax.text(x + 6, yb - 6, lab, fontsize=8.5, fontweight="bold", va="bottom", ha="left")
+    save_fig(fig, outname, kind="photo")      # photo montage -> PNG preview + flattened TIFF
 
 
 def main():
-    """Read the cutout manifest and render both the clean and the whole-body montages."""
-    man = pd.read_csv(BASE / "manifest.csv")
-    build(man, fullbody=False, outname="fig_species_morphology.png")
-    build(man, fullbody=True, outname="fig_species_morphology_fullbody.png")
+    build(pd.read_csv(BASE / "manifest.csv"))
 
 
 if __name__ == "__main__":

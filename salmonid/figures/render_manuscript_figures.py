@@ -44,15 +44,18 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.patches import Rectangle, Patch
+from matplotlib.lines import Line2D
 
 from salmonid import config
-from salmonid.figures.manuscript_style import set_style, save_fig, COL1_IN, MODEL_C
+from salmonid.figures.manuscript_style import (set_style, save_fig, COL1_IN, MODEL_C, AFS,
+                                               MODEL_LABEL, TECH_LABEL)
 
 set_style()
 SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]  # mirrors salmonid.config.SPECIES
-SHORT = ["Chinook", "Coho", "Atlantic", "Rainbow", "Brown"]
-# fixed panel order for every cumulative-net figure so all four come out identical in size/layout
-PANEL_SPECIES = ["Chinook", "Rainbow Trout", "Coho", "Brown Trout"]
+LAB = [AFS[s] for s in SPECIES]   # full AFS common names on the artwork (CJFAS house style)
+# Fixed panel order for every cumulative-net figure, in class order (matching Figure 2, Figure 4 and
+# Tables 3 and 4). Atlantic Salmon is omitted: it is presence-level, with near-zero counts.
+PANEL_SPECIES = ["Chinook", "Coho", "Rainbow Trout", "Brown Trout"]
 OUT = config.FIGURES_DIR; OUT.mkdir(parents=True, exist_ok=True)
 GT = config.TESTSET_V6_GT   # committed frozen per-track species ground truth (test_set_v6)
 
@@ -89,8 +92,8 @@ def confusion(gt, preds):
 def fig_confusion():
     """Single-stage confusion matrix on the held-out test set (for the manuscript).
 
-    Diagonal (correct) cells are shaded green by recall; off-diagonal (error) cells are shaded red by
-    their within-row share. Every non-empty cell prints the track count and the within-row (recall) %.
+    Cells are shaded on one sequential hue by their within-row share (the diagonal is recall); every
+    non-empty cell prints the track count and the within-row (recall) %.
 
     Reads the PUBLISHED model's predictions (v2.7 / checkpoint0017), which are leak-clean and so
     cover all 366 frozen tracks rather than the 304-track remainder v2.6 had to be scored on.
@@ -100,48 +103,38 @@ def fig_confusion():
     M = confusion(gt, load_preds(pf))
     row = M.sum(1, keepdims=True)
     Mn = M / np.clip(row, 1, None)
-    # one green hue and one red hue; the VALUE is encoded by opacity (transparency), not a different
-    # shade: higher recall -> more solid green, larger error -> more solid red (a minor error is a
-    # faint red of the same colour). The count + recall printed in every cell carries the information,
-    # so the matrix is fully legible in grayscale; cell text auto-contrasts to the blended cell tone.
-    GREEN, RED = (0.16, 0.60, 0.34), (0.85, 0.24, 0.20)
-    err_max = max([Mn[i, j] for i in range(5) for j in range(5) if i != j and M[i, j] > 0] + [1e-6])
-    diag = [Mn[i, i] for i in range(5)]
-    rmin, rrange = min(diag), max(max(diag) - min(diag), 1e-6)   # stretch the narrow 93-100% recall range
+    # SINGLE-HUE sequential ramp: shade = the within-row share, so the diagonal (0.92 to 1.00) is near
+    # solid and the errors (0.02 to 0.08) are faint tints of the same hue. The diagonal is therefore
+    # distinguished by value, not by hue, which prints as a clean grey ramp and is safe for red-green
+    # colour-vision deficiency (the earlier green/red scheme failed both). No legend: every non-empty
+    # cell prints its count and within-row percentage, so the shading only reinforces the numbers.
+    HUE = (0.13, 0.31, 0.53)
+    GAMMA = 0.55                    # lifts small error fractions off zero without rivalling the diagonal
 
     def text_color(rgb, a):
         """Pick black/white cell text by the luminance of ``rgb`` alpha-blended over white."""
         lum = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) * a + (1 - a)  # blended over white
         return "white" if lum < 0.5 else "#1a1a1a"
 
-    fig, ax = plt.subplots(figsize=(COL1_IN, COL1_IN * 1.12), layout="constrained")
+    fig, ax = plt.subplots(figsize=(COL1_IN, 3.45), layout="constrained")
     ax.set_xlim(-0.5, 4.5); ax.set_ylim(4.5, -0.5)  # keep true-species row 0 at the top
     ax.set_aspect("equal")
     for i in range(5):
         for j in range(5):
             frac = Mn[i, j]
-            if i == j:
-                a = 0.45 + 0.50 * (frac - rmin) / rrange         # more opaque green = higher recall
-                rgb = GREEN
-            elif M[i, j] > 0:
-                a = 0.40 + 0.60 * (frac / err_max)               # more opaque red = larger error
-                rgb = RED
-            else:
-                a, rgb = 0.0, (1, 1, 1)
-            ax.add_patch(Rectangle((j - 0.5, i - 0.5), 1, 1, facecolor=(*rgb, a),
+            a = (0.06 + 0.94 * frac ** GAMMA) if M[i, j] > 0 else 0.0
+            ax.add_patch(Rectangle((j - 0.5, i - 0.5), 1, 1, facecolor=(*HUE, a),
                                    edgecolor="#dcdcdc", linewidth=0.5))
             if M[i, j] > 0:
                 ax.text(j, i, f"{M[i, j]}\n{100 * frac:.1f}%", ha="center", va="center",
-                        fontsize=7, linespacing=1.15, color=text_color(rgb, a), fontweight="bold")
-    ax.set_xticks(range(5)); ax.set_xticklabels(SHORT, rotation=35, ha="right")
-    ax.set_yticks(range(5)); ax.set_yticklabels(SHORT)
-    ax.set_xlabel("Predicted species"); ax.set_ylabel("True species")
+                        fontsize=7, linespacing=1.15, color=text_color(HUE, a), fontweight="bold")
+    ax.set_xticks(range(5)); ax.set_xticklabels(LAB, rotation=35, ha="right")
+    ax.set_yticks(range(5)); ax.set_yticklabels(LAB)
+    ax.set_xlabel("Predicted species", fontweight="bold")
+    ax.set_ylabel("True species", fontweight="bold")
     ax.tick_params(length=0)
     for s in ax.spines.values():
         s.set_visible(False)
-    fig.legend(handles=[Patch(facecolor=(*GREEN, 0.82), label="correct (opacity ∝ recall)"),
-                        Patch(facecolor=(*RED, 0.85), label="error (opacity ∝ error size)")],
-               loc="outside lower center", ncol=2, frameon=False, fontsize=6.5, handlelength=1.1)
     # Named for what it shows, not for an internal model revision: the old "fig_confusion_v26"
     # filename leaked the model version into the manuscript's figure captions.
     save_fig(fig, "fig_confusion_heldout", kind="vector")
@@ -201,7 +194,7 @@ def fig_daily(site_tag, site_name, csv_path, title, source="corpus"):
     if not all_dates:
         print("skip (no rows)", csv_path); return
     yr = int(min(all_dates)[:4])
-    fig, axes = plt.subplots(len(PANEL_SPECIES), 1, figsize=(COL1_IN, 5.7), squeeze=False,
+    fig, axes = plt.subplots(len(PANEL_SPECIES), 1, figsize=(COL1_IN, 6.3), squeeze=False,
                              layout="constrained")
     for ax, sp in zip(axes[:, 0], PANEL_SPECIES):
         entry = d.get(sp)
@@ -213,21 +206,29 @@ def fig_daily(site_tag, site_name, csv_path, title, source="corpus"):
             r = _pearson(entry["model"], entry["tech"])
             rtxt = "n/a" if np.isnan(r) else f"{r:.3f}"
             # grayscale-legible: technician solid dark, model dashed red
-            ax.plot(dt, ct, label=f"technician ({int(ct[-1])})", color="#1b3a5c", lw=1.4)
-            ax.plot(dt, cm, label=f"model ({int(cm[-1])})", color=MODEL_C, lw=1.4, ls=(0, (5, 2)))
-            ax.set_title(f"{sp}: daily $r$={rtxt}", loc="left", fontsize=7.5)
-            ax.legend(fontsize=6.3, loc="upper left", handlelength=1.6)
+            ax.plot(dt, ct, color="#1b3a5c", lw=1.4)
+            ax.plot(dt, cm, color=MODEL_C, lw=1.4, ls=(0, (5, 2)))
+            ax.set_ylim(bottom=min(0.0, float(cm.min()), float(ct.min())))   # anchor the y-axis at zero
+            # Season totals go in the panel title and the two series are identified once, below the
+            # panels, so no legend can sit on a curve (the Ganaraska Rainbow Trout run plateaus across
+            # the top of its panel from late April, under the old upper-left legend).
+            ax.set_title(f"{AFS[sp]}: daily $r$ = {rtxt}\n{TECH_LABEL} {int(ct[-1]):,}  ·  "
+                         f"{MODEL_LABEL} {int(cm[-1]):,}", loc="left", fontsize=7.5,
+                         linespacing=1.3)
         else:
-            ax.set_title(f"{sp}: no counts", loc="left", fontsize=7.5, color="#888")
-        ax.grid(alpha=0.25); ax.set_ylabel("Cumulative net", fontsize=7)
+            ax.set_title(f"{AFS[sp]}: no counts", loc="left", fontsize=7.5, color="#888")
+        ax.grid(alpha=0.25); ax.set_ylabel("Cumulative net-total count", fontsize=7)
         ax.set_xlim(datetime(yr, 3, 1), datetime(yr, 12, 1))
         ax.xaxis.set_major_locator(mdates.MonthLocator())
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%b"))
-        ax.tick_params(labelsize=6.5)
+        ax.tick_params(labelsize=7)
     axes[-1, 0].set_xlabel("Month", fontsize=7.5)
     if title:
         fig.suptitle(title, fontweight="bold", fontsize=8.5)
     fig.align_ylabels(axes[:, 0])
+    fig.legend(handles=[Line2D([0], [0], color="#1b3a5c", lw=1.4, label=TECH_LABEL),
+                        Line2D([0], [0], color=MODEL_C, lw=1.4, ls=(0, (5, 2)), label=MODEL_LABEL)],
+               loc="outside lower center", ncol=2, frameon=False, fontsize=7)
     save_fig(fig, f"fig_daily_net_{site_tag}", kind="vector")
 
 

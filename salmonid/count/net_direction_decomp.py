@@ -1,4 +1,13 @@
-"""In plain terms: this script works out WHY the computer's tally of fish moving
+"""STATUS: development record. NOT used for any number in the manuscript.
+This script belongs to the earlier two-stage pipeline (a separate detector and species
+classifier, with per-frame output files that are not part of this deposit). It is kept
+because it documents how the counting rules were arrived at; see
+docs/history/counting_and_movement_development_notes.md. The published counts come from
+salmonid/count/corpus_countr_from_store.py, and the method of record is
+docs/COUNTING_METHOD.md. Statements below about "the paper" describe an earlier draft.
+Tier: 2 (and its inputs are not deposited).
+
+In plain terms: this script works out WHY the computer's tally of fish moving
 upstream doesn't perfectly match the human technicians' tally. For each species and river it
 separates every fish's movement into "went upstream" versus "went downstream" and compares those
 two totals against the technicians'. It shows the mismatch comes mostly from the computer
@@ -6,7 +15,7 @@ over-counting fish that drift back downstream (fish milling about or re-crossing
 camera) rather than from missing fish heading upstream — which is the reason the paper uses a
 lopsided counting rule: count an upstream crossing readily, but only count a downstream crossing
 when the fish travels a long way (the 50/300-pixel "asymmetric net rule"). See
-``docs/counting_and_movement.md``.
+``docs/history/counting_and_movement_development_notes.md``.
 
 Up-vs-down decomposition of the counter's net error (the downstream over-count insight).
 
@@ -18,7 +27,7 @@ across a range of ``|delta_x|`` (net-displacement) thresholds. The finding it su
 net error is dominated by the model over-counting DOWNSTREAM (milling / re-crossing) fish rather
 than missing upstream ones — is the empirical justification for the **asymmetric net rule**
 (count a track upstream at a liberal threshold, downstream only at a strict one). See
-``docs/counting_and_movement.md``.
+``docs/history/counting_and_movement_development_notes.md``.
 
 Inputs
 ------

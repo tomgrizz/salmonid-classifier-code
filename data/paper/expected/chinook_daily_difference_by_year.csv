@@ -1,0 +1,16 @@
+river,year,days,mean_diff
+Credit,2020,66,2.92
+Credit,2021,53,-0.34
+Credit,2022,62,-9.53
+Credit,2023,69,-7.83
+Credit,2024,91,-3.8
+Credit,2025,70,-18.99
+Ganaraska,2021,75,22.8
+Ganaraska,2022,85,10.32
+Ganaraska,2023,104,-13.39
+Ganaraska,2024,106,-4.82
+Ganaraska,2025,76,8.28
+Ganaraska,all included years,446,2.94
+Credit,all included years,411,-6.4
+Ganaraska,2022-2025,371,-1.07
+both,all included years,857,-1.54

@@ -23,7 +23,9 @@ Inputs (Tier 2, external image data, not committed to the repo):
 
 Output: ``fig_species_morphology.png`` (preview) + ``.tiff`` (flattened, 600 dpi) via ``save_fig``.
 
-  python -m salmonid.figures.fig_species_morphology
+Tier   : 2. The figure shows real fish images, so it needs the cutout library (about 3 GB;
+         see docs/DATA_AVAILABILITY.md) and cannot be regenerated from the committed tables.
+Run    : python -m salmonid.figures.fig_species_morphology
 
 Environment: base env (CPU-only: cv2 / numpy / pandas / matplotlib).
 """
@@ -161,6 +163,9 @@ def build(man, outname="fig_species_morphology"):
 
 
 def main():
+    """Build Figure 3 from the cutout library (stops with a clear message if it is not present)."""
+    config.require(BASE / "manifest.csv", "the SAM2 cutout manifest (Figure 3 source images)",
+                   "SALMONID_PROJECTS_ROOT")
     build(pd.read_csv(BASE / "manifest.csv"))
 
 

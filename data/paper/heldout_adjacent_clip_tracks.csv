@@ -1,0 +1,367 @@
+video_hash,track_id,species,tier,site,adjacent_training_images,adjacent_same_species_images,adjacent_same_species
+2fc979c8,57920,Chinook,pristine,Ganaraska,0,0,0
+d2e758a0,311488,Rainbow Trout,pristine,Credit,0,0,0
+4bde8be7,35577,Brown Trout,heldout,Ganaraska,6,6,1
+ed48014f,272243,Coho,heldout,Credit,0,0,0
+4c001e92,170276,Coho,heldout,Ganaraska,1,0,0
+7080a937,418907,Chinook,pristine,Credit,0,0,0
+ce860b28,52512,Coho,heldout,Ganaraska,0,0,0
+f8d0ae6e,26718,Chinook,pristine,Ganaraska,0,0,0
+2e459838,439474,Rainbow Trout,pristine,Credit,0,0,0
+52c93677,254598,Atlantic,heldout,Ganaraska,0,0,0
+28c7b8bc,199332,Coho,pristine,Ganaraska,0,0,0
+e88f838b,353416,Atlantic,heldout,Credit,3,3,1
+022e3dd8,395384,Rainbow Trout,pristine,Credit,0,0,0
+d2ad87db,400907,Atlantic,heldout,Credit,0,0,0
+779460ca,1423,Chinook,pristine,Ganaraska,0,0,0
+ac41e9fd,270728,Chinook,pristine,Credit,0,0,0
+5af55243,34488,Rainbow Trout,pristine,Ganaraska,0,0,0
+2946cd4e,3328,Coho,heldout,Ganaraska,0,0,0
+ed45f550,417301,Atlantic,heldout,Credit,0,0,0
+67359b6a,37317,Chinook,pristine,Ganaraska,0,0,0
+c624f768,25314,Coho,pristine,Ganaraska,0,0,0
+56cc804f,36583,Brown Trout,heldout,Ganaraska,8,8,1
+e4e67f66,32950,Coho,heldout,Ganaraska,0,0,0
+b5ca6b30,35374,Brown Trout,heldout,Ganaraska,8,7,1
+7601c7b1,31713,Chinook,pristine,Ganaraska,0,0,0
+b484da32,268086,Chinook,pristine,Credit,0,0,0
+63c87cc4,48211,Coho,heldout,Ganaraska,0,0,0
+b06481ce,54791,Rainbow Trout,pristine,Ganaraska,0,0,0
+4dab6337,268447,Rainbow Trout,pristine,Credit,0,0,0
+736808bf,325663,Atlantic,heldout,Credit,0,0,0
+80ce9956,35928,Brown Trout,heldout,Ganaraska,0,0,0
+927ed5c5,52917,Coho,heldout,Ganaraska,3,3,1
+24483edd,421107,Atlantic,heldout,Credit,2,2,1
+b3b8905e,330108,Atlantic,heldout,Credit,0,0,0
+955817e2,36916,Brown Trout,heldout,Ganaraska,4,4,1
+9f1e665d,6950,Atlantic,heldout,Ganaraska,0,0,0
+ebd705ec,42034,Coho,pristine,Ganaraska,0,0,0
+4121b8c3,12420,Rainbow Trout,pristine,Ganaraska,0,0,0
+98de56e4,23269,Rainbow Trout,pristine,Ganaraska,0,0,0
+5bdb16ad,340108,Chinook,pristine,Credit,0,0,0
+69e505f7,38936,Chinook,pristine,Ganaraska,6,6,1
+62189d9e,311798,Rainbow Trout,pristine,Credit,0,0,0
+1d60923d,48620,Coho,heldout,Ganaraska,0,0,0
+7bc20345,267973,Rainbow Trout,pristine,Credit,0,0,0
+44977ca5,48541,Chinook,pristine,Ganaraska,6,3,1
+26e42164,36700,Brown Trout,heldout,Ganaraska,9,9,1
+5d267862,36007,Brown Trout,heldout,Ganaraska,0,0,0
+e29e6cb4,244078,Chinook,pristine,Ganaraska,0,0,0
+ff352196,325080,Chinook,pristine,Credit,0,0,0
+94402096,36842,Chinook,pristine,Ganaraska,0,0,0
+8bcbfecc,339471,Chinook,pristine,Credit,0,0,0
+b397d4be,9162,Chinook,pristine,Ganaraska,0,0,0
+aa957d69,269090,Chinook,pristine,Credit,0,0,0
+00a98177,39189,Chinook,pristine,Ganaraska,0,0,0
+38efa1e0,37414,Chinook,pristine,Ganaraska,0,0,0
+b7a192e2,268611,Atlantic,heldout,Credit,0,0,0
+cc894aea,36381,Brown Trout,heldout,Ganaraska,7,7,1
+330202b1,270667,Chinook,pristine,Credit,0,0,0
+da78f73b,41536,Chinook,pristine,Ganaraska,0,0,0
+12cf3af8,269701,Rainbow Trout,pristine,Credit,0,0,0
+19ae853a,270687,Chinook,pristine,Credit,0,0,0
+a2fa8052,311653,Rainbow Trout,pristine,Credit,0,0,0
+9468b4e8,395769,Atlantic,heldout,Credit,1,1,1
+2d1d0dc7,36930,Brown Trout,heldout,Ganaraska,7,7,1
+c767c89f,48324,Brown Trout,heldout,Ganaraska,0,0,0
+bb6fccde,327901,Chinook,pristine,Credit,0,0,0
+5a4d76c5,41525,Chinook,pristine,Ganaraska,2,2,1
+68eea5e3,72627,Coho,heldout,Ganaraska,0,0,0
+f3bf0aea,20140,Atlantic,heldout,Ganaraska,0,0,0
+7c0b103e,38868,Chinook,pristine,Ganaraska,0,0,0
+7caf7a68,35486,Brown Trout,heldout,Ganaraska,5,5,1
+66adcc42,5867,Atlantic,heldout,Ganaraska,0,0,0
+e30f0fe1,439649,Chinook,pristine,Credit,0,0,0
+887fe3af,40065,Chinook,pristine,Ganaraska,0,0,0
+2e93d580,395666,Atlantic,heldout,Credit,0,0,0
+576914f4,13652,Chinook,pristine,Ganaraska,0,0,0
+fae3ee05,266679,Rainbow Trout,pristine,Credit,0,0,0
+b51f87fb,25890,Rainbow Trout,pristine,Ganaraska,0,0,0
+1bc932a7,910,Coho,heldout,Ganaraska,3,3,1
+fabcb85e,395427,Rainbow Trout,pristine,Credit,0,0,0
+71fd48d5,337153,Chinook,pristine,Credit,0,0,0
+f4a1881b,200509,Coho,pristine,Ganaraska,0,0,0
+26734d2d,323748,Chinook,pristine,Credit,0,0,0
+39722ede,395800,Atlantic,heldout,Credit,3,3,1
+47e49871,50629,Coho,pristine,Ganaraska,3,0,0
+5552d0db,325592,Atlantic,pristine,Credit,0,0,0
+e49b332b,23934,Rainbow Trout,pristine,Ganaraska,0,0,0
+3089bb97,311717,Rainbow Trout,pristine,Credit,0,0,0
+14baf48d,2838,Chinook,pristine,Ganaraska,3,0,0
+551ee22d,46963,Brown Trout,heldout,Ganaraska,0,0,0
+879abe04,35360,Brown Trout,heldout,Ganaraska,0,0,0
+398f242b,325651,Atlantic,pristine,Credit,0,0,0
+0f5eb20c,36811,Brown Trout,heldout,Ganaraska,8,8,1
+b6e6f50a,395735,Atlantic,heldout,Credit,6,6,1
+c59ae89d,330068,Atlantic,heldout,Credit,0,0,0
+9c4dec8b,51982,Brown Trout,heldout,Ganaraska,3,0,0
+f53aa553,36247,Brown Trout,heldout,Ganaraska,3,0,0
+e5509eb1,347488,Chinook,pristine,Credit,0,0,0
+b0f249d4,35479,Brown Trout,heldout,Ganaraska,4,4,1
+fd936352,203710,Atlantic,heldout,Ganaraska,0,0,0
+28e51e0f,42617,Chinook,pristine,Ganaraska,0,0,0
+b137b2a2,352441,Chinook,pristine,Credit,0,0,0
+eeaa4e57,11655,Atlantic,heldout,Ganaraska,0,0,0
+836fdd56,12048,Rainbow Trout,pristine,Ganaraska,0,0,0
+ad6dd4e2,350955,Atlantic,pristine,Credit,0,0,0
+150e5af7,32982,Chinook,pristine,Ganaraska,0,0,0
+5519209d,39153,Chinook,pristine,Ganaraska,8,0,0
+69454d46,39561,Chinook,pristine,Ganaraska,3,3,1
+d44143ea,33506,Rainbow Trout,pristine,Ganaraska,0,0,0
+5514c980,20545,Atlantic,heldout,Ganaraska,0,0,0
+5757f5a2,42937,Chinook,pristine,Ganaraska,0,0,0
+519902c7,42236,Chinook,pristine,Ganaraska,0,0,0
+30b39cfe,267128,Rainbow Trout,pristine,Credit,0,0,0
+b79fcff8,336753,Chinook,pristine,Credit,3,3,1
+76a533f4,352570,Chinook,pristine,Credit,0,0,0
+890fce7d,322276,Chinook,pristine,Credit,0,0,0
+e9162f08,48709,Brown Trout,heldout,Ganaraska,0,0,0
+868a83e5,67078,Coho,heldout,Ganaraska,0,0,0
+9bc12fbb,401105,Brown Trout,pristine,Credit,0,0,0
+f7f2cd38,45995,Chinook,pristine,Ganaraska,0,0,0
+300fcdc6,36130,Brown Trout,heldout,Ganaraska,7,7,1
+cc11200a,1814,Rainbow Trout,pristine,Ganaraska,3,3,1
+a335099f,434538,Chinook,pristine,Credit,0,0,0
+d9ad1617,325582,Atlantic,heldout,Credit,3,3,1
+8a75bcaf,52533,Coho,heldout,Ganaraska,9,3,1
+0ec87363,51679,Chinook,pristine,Ganaraska,0,0,0
+9174e8ae,2990,Chinook,pristine,Ganaraska,0,0,0
+2b6ab3f5,401804,Chinook,pristine,Credit,0,0,0
+7aab16ef,32886,Rainbow Trout,pristine,Ganaraska,0,0,0
+e44a62d9,268691,Atlantic,heldout,Credit,0,0,0
+a8782f3a,50292,Coho,heldout,Ganaraska,0,0,0
+ac19ebe3,441344,Rainbow Trout,pristine,Credit,0,0,0
+cf3840f6,35188,Brown Trout,heldout,Ganaraska,0,0,0
+149e28c6,50111,Atlantic,heldout,Ganaraska,3,0,0
+72f7cc87,404714,Chinook,pristine,Credit,0,0,0
+75ae7209,418513,Atlantic,heldout,Credit,0,0,0
+32b5c53c,325622,Atlantic,pristine,Credit,3,3,1
+63ccedd5,43002,Chinook,pristine,Ganaraska,0,0,0
+4dd74e7d,52410,Coho,heldout,Ganaraska,0,0,0
+56856800,37556,Coho,pristine,Ganaraska,3,0,0
+689d0bcc,311747,Rainbow Trout,pristine,Credit,0,0,0
+00859131,401058,Atlantic,heldout,Credit,0,0,0
+57880638,44268,Chinook,pristine,Ganaraska,2,2,1
+c1e74fe3,97413,Chinook,pristine,Ganaraska,0,0,0
+f72dc919,35586,Brown Trout,heldout,Ganaraska,8,8,1
+e4458348,54729,Coho,heldout,Ganaraska,0,0,0
+264e57ca,42950,Coho,heldout,Ganaraska,4,3,1
+1654beb5,36523,Brown Trout,heldout,Ganaraska,3,0,0
+568eb0e3,35390,Brown Trout,heldout,Ganaraska,10,7,1
+9d52b078,407659,Chinook,pristine,Credit,0,0,0
+6234be3c,35483,Brown Trout,heldout,Ganaraska,1,1,1
+77dd3f79,42873,Chinook,pristine,Ganaraska,0,0,0
+ab09b0ec,157530,Chinook,pristine,Ganaraska,3,3,1
+9c407361,325580,Atlantic,heldout,Credit,2,2,1
+65532b03,31870,Rainbow Trout,pristine,Ganaraska,0,0,0
+2a15001d,33471,Rainbow Trout,pristine,Ganaraska,0,0,0
+4283d440,402138,Chinook,pristine,Credit,0,0,0
+7194ec73,431214,Chinook,pristine,Credit,0,0,0
+005dbb1f,316822,Chinook,pristine,Credit,0,0,0
+32b5c53c,325620,Atlantic,heldout,Credit,3,3,1
+3e61d993,321600,Chinook,pristine,Credit,0,0,0
+4b60eabb,331585,Chinook,pristine,Credit,0,0,0
+1b495b85,353210,Rainbow Trout,pristine,Credit,0,0,0
+cf8193c9,36872,Brown Trout,heldout,Ganaraska,3,3,1
+b7dbc923,39181,Coho,heldout,Ganaraska,0,0,0
+0e8e0fa2,38292,Coho,heldout,Ganaraska,0,0,0
+599ab998,54792,Coho,pristine,Ganaraska,7,7,1
+5a76b688,267123,Rainbow Trout,pristine,Credit,0,0,0
+ab9adb70,278607,Rainbow Trout,pristine,Credit,0,0,0
+c66cb8c7,35503,Brown Trout,heldout,Ganaraska,3,3,1
+f8a99ce5,321258,Chinook,pristine,Credit,0,0,0
+2f284c4f,746,Rainbow Trout,pristine,Ganaraska,0,0,0
+fecd200e,423544,Chinook,pristine,Credit,0,0,0
+4991419d,199609,Coho,pristine,Ganaraska,0,0,0
+7ae20384,3707,Coho,heldout,Ganaraska,5,5,1
+1bf57821,95807,Chinook,pristine,Ganaraska,0,0,0
+f394e59d,185486,Atlantic,heldout,Ganaraska,0,0,0
+467ec83e,278585,Rainbow Trout,pristine,Credit,0,0,0
+e37bb489,31452,Chinook,pristine,Ganaraska,0,0,0
+ffbe67bd,52467,Brown Trout,heldout,Ganaraska,0,0,0
+6b0be1d5,42419,Coho,heldout,Ganaraska,2,2,1
+75afc2cd,443636,Coho,pristine,Credit,0,0,0
+28035703,325596,Atlantic,heldout,Credit,0,0,0
+914867e2,38238,Chinook,pristine,Ganaraska,0,0,0
+e489b324,295179,Chinook,pristine,Credit,0,0,0
+bd74c952,267014,Rainbow Trout,pristine,Credit,0,0,0
+de1b9e05,49995,Brown Trout,heldout,Ganaraska,3,0,0
+73a8696e,131817,Coho,heldout,Ganaraska,0,0,0
+a2e7d43b,125931,Atlantic,heldout,Ganaraska,4,0,0
+0fe963ef,36528,Brown Trout,heldout,Ganaraska,13,13,1
+ca787769,277686,Chinook,pristine,Credit,0,0,0
+77f3e425,266680,Rainbow Trout,pristine,Credit,0,0,0
+f1ce3706,49639,Coho,pristine,Ganaraska,3,3,1
+b2817484,323991,Atlantic,heldout,Credit,0,0,0
+55b5464b,50581,Coho,heldout,Ganaraska,0,0,0
+8deaf86c,33257,Rainbow Trout,pristine,Ganaraska,0,0,0
+677a6fd7,268260,Atlantic,heldout,Credit,0,0,0
+fd71b0a5,66413,Coho,heldout,Ganaraska,0,0,0
+2e7a8d60,36499,Brown Trout,heldout,Ganaraska,0,0,0
+dfdeb69d,191511,Coho,pristine,Ganaraska,0,0,0
+449eff7f,311744,Rainbow Trout,pristine,Credit,0,0,0
+7715db8b,356725,Chinook,pristine,Credit,0,0,0
+d9e035ab,311610,Rainbow Trout,pristine,Credit,0,0,0
+d929be64,35482,Brown Trout,heldout,Ganaraska,6,6,1
+a6e013e5,278557,Chinook,pristine,Credit,0,0,0
+b4baf49b,54322,Chinook,pristine,Ganaraska,0,0,0
+0b615806,36844,Brown Trout,heldout,Ganaraska,0,0,0
+e719b386,73474,Coho,heldout,Ganaraska,0,0,0
+88daadd8,35177,Brown Trout,heldout,Ganaraska,0,0,0
+6357a158,35422,Brown Trout,heldout,Ganaraska,13,13,1
+73930e2a,49819,Coho,pristine,Ganaraska,0,0,0
+cc819cf8,395372,Rainbow Trout,pristine,Credit,0,0,0
+26a816cf,35480,Brown Trout,heldout,Ganaraska,0,0,0
+92410d5f,268132,Rainbow Trout,pristine,Credit,0,0,0
+045e4968,425864,Atlantic,heldout,Credit,2,0,0
+7c46d054,150930,Chinook,pristine,Ganaraska,0,0,0
+0d099098,258683,Atlantic,heldout,Ganaraska,0,0,0
+87b9cc34,267742,Rainbow Trout,pristine,Credit,0,0,0
+660863c8,37350,Coho,pristine,Ganaraska,0,0,0
+efe7f1d1,189099,Coho,pristine,Ganaraska,0,0,0
+bd07c41f,35944,Brown Trout,heldout,Ganaraska,0,0,0
+06cf922f,2878,Rainbow Trout,pristine,Ganaraska,3,3,1
+2ec72383,35377,Brown Trout,heldout,Ganaraska,1,0,0
+6b963158,1766,Brown Trout,heldout,Ganaraska,1,1,1
+61ef54dc,77881,Coho,heldout,Ganaraska,0,0,0
+5928e3fe,36132,Brown Trout,heldout,Ganaraska,5,5,1
+869fe9d9,59713,Coho,pristine,Ganaraska,5,5,1
+be44b150,11804,Rainbow Trout,pristine,Ganaraska,1,1,1
+14fcee63,50576,Chinook,pristine,Ganaraska,0,0,0
+eca93312,20562,Atlantic,heldout,Ganaraska,2,0,0
+873d40ef,52310,Chinook,pristine,Ganaraska,0,0,0
+6a3e9899,40026,Brown Trout,heldout,Ganaraska,0,0,0
+f55b120f,1349,Rainbow Trout,pristine,Ganaraska,10,5,1
+0d085f39,41760,Coho,pristine,Ganaraska,3,3,1
+6e122c7e,351274,Atlantic,pristine,Credit,0,0,0
+909ff62d,36910,Brown Trout,heldout,Ganaraska,9,6,1
+c950b9f9,278179,Rainbow Trout,pristine,Credit,0,0,0
+20ff14c7,52691,Coho,heldout,Ganaraska,3,0,0
+959c3f3e,36834,Brown Trout,heldout,Ganaraska,7,7,1
+cd8b6158,185229,Atlantic,heldout,Ganaraska,0,0,0
+cda0d278,261630,Chinook,pristine,Credit,2,2,1
+3708e8a0,267120,Rainbow Trout,pristine,Credit,0,0,0
+8179e97e,395330,Rainbow Trout,pristine,Credit,0,0,0
+dd8e94bb,25799,Chinook,pristine,Ganaraska,0,0,0
+d6ce4f5a,311446,Rainbow Trout,pristine,Credit,0,0,0
+b324f571,30080,Rainbow Trout,pristine,Ganaraska,6,6,1
+2d702b6b,275777,Rainbow Trout,pristine,Credit,0,0,0
+94f034cb,100673,Atlantic,heldout,Ganaraska,0,0,0
+262ca074,428647,Chinook,pristine,Credit,0,0,0
+568c74a9,198186,Chinook,pristine,Ganaraska,0,0,0
+2f7bdeff,42343,Chinook,pristine,Ganaraska,3,3,1
+851fef32,41976,Chinook,pristine,Ganaraska,0,0,0
+f6fdb7c0,221149,Chinook,pristine,Ganaraska,0,0,0
+05c1b9f2,341229,Chinook,pristine,Credit,0,0,0
+3d8e3b97,60678,Chinook,pristine,Ganaraska,0,0,0
+ad615e9b,35086,Brown Trout,heldout,Ganaraska,0,0,0
+bfb7fefa,40609,Chinook,pristine,Ganaraska,0,0,0
+efb60169,49764,Coho,heldout,Ganaraska,2,2,1
+aae33e0a,439744,Chinook,pristine,Credit,0,0,0
+c77f5f39,52032,Brown Trout,heldout,Ganaraska,5,2,1
+531bec8d,25789,Rainbow Trout,pristine,Ganaraska,0,0,0
+f165df9f,209943,Chinook,pristine,Ganaraska,0,0,0
+129687f1,35300,Brown Trout,heldout,Ganaraska,0,0,0
+bbcb836e,49688,Coho,heldout,Ganaraska,3,3,1
+08e8d145,267124,Rainbow Trout,pristine,Credit,0,0,0
+83632228,299629,Chinook,pristine,Credit,0,0,0
+8a295e54,20838,Rainbow Trout,pristine,Ganaraska,0,0,0
+a8fc9e90,13447,Chinook,pristine,Ganaraska,0,0,0
+a418e225,325600,Atlantic,heldout,Credit,7,7,1
+7cd7588f,78031,Chinook,pristine,Ganaraska,0,0,0
+cd9632d8,395789,Atlantic,heldout,Credit,0,0,0
+09f40403,438028,Coho,pristine,Credit,0,0,0
+69347afb,49451,Atlantic,heldout,Ganaraska,3,3,1
+f1d6c2f9,395837,Rainbow Trout,pristine,Credit,0,0,0
+fad52470,311994,Rainbow Trout,pristine,Credit,0,0,0
+005206f9,15638,Rainbow Trout,pristine,Ganaraska,0,0,0
+c46682cb,277318,Chinook,pristine,Credit,0,0,0
+3f1e4cde,302477,Chinook,pristine,Credit,0,0,0
+d0f9e15c,42478,Coho,heldout,Ganaraska,2,0,0
+0c0b548d,36131,Brown Trout,heldout,Ganaraska,0,0,0
+b5d9274a,409046,Chinook,pristine,Credit,0,0,0
+4e2c6013,277617,Chinook,pristine,Credit,0,0,0
+1ecba781,49502,Chinook,pristine,Ganaraska,3,3,1
+c2ae59a6,325933,Chinook,pristine,Credit,0,0,0
+a723a16d,1485,Coho,pristine,Ganaraska,7,7,1
+b2ffe004,327427,Chinook,pristine,Credit,0,0,0
+25f13252,312036,Rainbow Trout,pristine,Credit,0,0,0
+ae307360,46237,Brown Trout,heldout,Ganaraska,0,0,0
+ff811bd6,395765,Atlantic,heldout,Credit,3,3,1
+aa84ff73,49751,Coho,heldout,Ganaraska,3,0,0
+e1d43d48,278581,Rainbow Trout,pristine,Credit,0,0,0
+ee79c043,353492,Atlantic,heldout,Credit,0,0,0
+2402218b,52588,Brown Trout,heldout,Ganaraska,0,0,0
+0ef49824,353157,Atlantic,heldout,Credit,0,0,0
+97a10cca,35774,Brown Trout,heldout,Ganaraska,7,7,1
+77444eb5,42805,Brown Trout,heldout,Ganaraska,7,7,1
+cb913557,36393,Chinook,pristine,Ganaraska,0,0,0
+b09b3a32,46390,Rainbow Trout,pristine,Ganaraska,0,0,0
+bd91e9a3,35946,Brown Trout,heldout,Ganaraska,0,0,0
+62a295fc,402945,Chinook,pristine,Credit,0,0,0
+747c68a4,23578,Rainbow Trout,pristine,Ganaraska,0,0,0
+02158f50,1744,Coho,heldout,Ganaraska,2,2,1
+b485af3f,21685,Atlantic,heldout,Ganaraska,0,0,0
+8d6b8805,425922,Chinook,pristine,Credit,0,0,0
+9aaf07bf,16538,Rainbow Trout,pristine,Ganaraska,5,5,1
+284e06c2,311982,Rainbow Trout,pristine,Credit,0,0,0
+4bda3ed7,51908,Coho,heldout,Ganaraska,6,0,0
+db22e40d,405913,Atlantic,heldout,Credit,0,0,0
+3bc2c3c1,395361,Rainbow Trout,pristine,Credit,0,0,0
+f9d9b655,267160,Rainbow Trout,pristine,Credit,0,0,0
+8358ad08,348112,Chinook,pristine,Credit,0,0,0
+ff3369d4,400879,Atlantic,heldout,Credit,0,0,0
+48263f3e,39302,Chinook,pristine,Ganaraska,0,0,0
+85853f4d,196618,Coho,pristine,Ganaraska,0,0,0
+c27eeafd,38317,Chinook,pristine,Ganaraska,0,0,0
+78ead409,388692,Chinook,pristine,Credit,0,0,0
+d96b14fe,36350,Atlantic,pristine,Ganaraska,6,0,0
+977d34d5,1060,Coho,heldout,Ganaraska,10,7,1
+fab22492,36465,Brown Trout,heldout,Ganaraska,0,0,0
+5e1c5aca,324399,Chinook,pristine,Credit,0,0,0
+a866c1f1,35173,Brown Trout,heldout,Ganaraska,14,14,1
+9ff68f48,395503,Rainbow Trout,pristine,Credit,0,0,0
+d42e15bb,316860,Chinook,pristine,Credit,0,0,0
+fd5a38ba,291205,Chinook,pristine,Credit,0,0,0
+3e789bb4,210883,Atlantic,heldout,Ganaraska,0,0,0
+79d3a748,311572,Rainbow Trout,pristine,Credit,0,0,0
+7532fd42,344207,Chinook,pristine,Credit,0,0,0
+f24323d0,353168,Atlantic,heldout,Credit,31,31,1
+d1238293,3236,Coho,heldout,Ganaraska,0,0,0
+724a6dab,39315,Brown Trout,heldout,Ganaraska,0,0,0
+9c9422f4,419662,Atlantic,heldout,Credit,6,0,0
+13fe1866,43238,Chinook,pristine,Ganaraska,0,0,0
+a1acd014,46381,Brown Trout,heldout,Ganaraska,0,0,0
+ec585470,36436,Brown Trout,heldout,Ganaraska,2,2,1
+f45ebf9c,395785,Atlantic,pristine,Credit,2,2,1
+3335514e,53241,Coho,heldout,Ganaraska,4,0,0
+0d855cbc,46043,Chinook,pristine,Ganaraska,0,0,0
+101a10ec,170750,Chinook,pristine,Ganaraska,0,0,0
+28035703,325599,Atlantic,heldout,Credit,0,0,0
+56c9da49,37321,Coho,heldout,Ganaraska,3,0,0
+faa78fc3,44284,Chinook,pristine,Ganaraska,0,0,0
+dbde51da,46330,Chinook,pristine,Ganaraska,3,0,0
+d78ade16,410017,Chinook,pristine,Credit,0,0,0
+010fd10d,41531,Chinook,pristine,Ganaraska,0,0,0
+de24f6f4,436754,Chinook,pristine,Credit,0,0,0
+8226635b,52005,Brown Trout,heldout,Ganaraska,0,0,0
+62cc4051,325589,Atlantic,heldout,Credit,6,6,1
+1c296354,435131,Chinook,pristine,Credit,0,0,0
+4fec9f47,1655,Brown Trout,heldout,Ganaraska,0,0,0
+c25f74e7,29318,Rainbow Trout,pristine,Ganaraska,0,0,0
+d5fa676d,42405,Brown Trout,heldout,Ganaraska,3,0,0
+16d50efc,277467,Chinook,pristine,Credit,0,0,0
+355d5a53,317272,Chinook,pristine,Credit,0,0,0
+03652f6a,325649,Atlantic,heldout,Credit,0,0,0
+f21328ab,51369,Coho,pristine,Ganaraska,0,0,0
+c9f1b8b3,51802,Atlantic,heldout,Ganaraska,0,0,0
+8fcb5537,332657,Chinook,pristine,Credit,0,0,0
+a3a60d5a,2337,Coho,heldout,Ganaraska,0,0,0
+cb16fcfe,433101,Chinook,pristine,Credit,0,0,0
+126c71cf,199926,Coho,pristine,Ganaraska,0,0,0
+e9a42b26,2856,Coho,heldout,Ganaraska,0,0,0
+ca906820,210167,Atlantic,heldout,Ganaraska,2,2,1
+25281ad9,51021,Chinook,pristine,Ganaraska,0,0,0
+a7e6c7d7,441389,Chinook,pristine,Credit,0,0,0
+12333876,2541,Coho,heldout,Ganaraska,1,1,1
+d60a36f7,43237,Chinook,pristine,Ganaraska,0,0,0

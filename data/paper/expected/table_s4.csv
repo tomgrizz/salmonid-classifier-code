@@ -1,0 +1,7 @@
+block,tracks,n,ResNet-50,DINOv2,DINOv3
+"Misidentified, all species",Both rivers,239,46,22,11
+"Misidentified, all species",Credit River,109,40,16,6
+"Misidentified, all species",Ganaraska River,130,6,6,5
+Other species identified as Atlantic Salmon,Both rivers,232,32,3,1
+Other species identified as Atlantic Salmon,Credit River,103,32,3,1
+Other species identified as Atlantic Salmon,Ganaraska River,129,0,0,0

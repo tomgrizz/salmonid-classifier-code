@@ -1,0 +1,4 @@
+subset,n,macro_f1,accuracy,f1_Chinook,f1_Coho,f1_Atlantic,f1_Rainbow Trout,f1_Brown Trout
+all 366 tracks,366,0.9605,0.9617,0.967,0.949,0.957,0.963,0.966
+excluding flagged tracks,290,0.9501,0.9552,0.964,0.93,0.953,0.967,0.935
+flagged tracks only,76,0.9782,0.9868,1.0,1.0,0.968,0.923,1.0

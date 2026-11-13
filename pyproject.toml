@@ -4,12 +4,37 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "salmonid-classifier"
-version = "2.6.0"
-description = "Reproduction code for the single-stage DEIMv2-X salmonid species classifier (Lake Ontario fishways)"
+version = "2.7.0"
+description = "Code and data to reproduce: deep learning identification and counting of migratory salmon and trout from fishway video (Lake Ontario tributaries)"
 readme = "README.md"
 requires-python = ">=3.11"
-# Runtime deps are managed via requirements.txt / requirements-deim.txt (two separate envs;
-# see those files). Kept out of here so `pip install -e .` does not force a single env.
+# Tier 1 (the statistics and the figures drawn from the committed tables) needs only these.
+# Exact versions that produced the published results: environment/tier1.lock.txt
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.0",
+    "scipy>=1.11",
+    "matplotlib>=3.8",
+]
 
+[project.optional-dependencies]
+# Tier 2, tracking and counting from stored detections (see requirements-track.txt).
+track = [
+    "boxmot==10.0.52",
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "opencv-python>=4.9",
+    "decord>=0.6",
+    "pyarrow>=14",
+    "Pillow>=10",
+    "tqdm>=4.66",
+]
+
+[project.urls]
+Repository = "https://github.com/tomgrizz/salmonid-classifier-code"
+
+# IMPORTANT: install in editable mode (`pip install -e .`) or run from the repository root.
+# The code finds data/ and configs/ relative to the repository, so a plain `pip install .`
+# into site-packages would not find them. `python run_tier1.py` needs no install at all.
 [tool.setuptools.packages.find]
 include = ["salmonid*"]

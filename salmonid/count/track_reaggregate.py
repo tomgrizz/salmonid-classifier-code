@@ -1,4 +1,13 @@
-"""In plain terms: this file tests how many extra fish we can recover by counting
+"""STATUS: development record. NOT used for any number in the manuscript.
+This script belongs to the earlier two-stage pipeline (a separate detector and species
+classifier, with per-frame output files that are not part of this deposit). It is kept
+because it documents how the counting rules were arrived at; see
+docs/history/counting_and_movement_development_notes.md. The published counts come from
+salmonid/count/corpus_countr_from_store.py, and the method of record is
+docs/COUNTING_METHOD.md. Statements below about "the paper" describe an earlier draft.
+Tier: 2 (and its inputs are not deposited).
+
+In plain terms: this file tests how many extra fish we can recover by counting
 shorter camera sightings. When the counter first ran it ignored any fish it saw for
 fewer than 5 video frames; here we re-count the already-saved sightings at looser
 cut-offs (2, 3, or 5 frames) and check how close each choice comes to the technicians'
@@ -15,7 +24,7 @@ recovering the short tracks that the deploy-time ``min_frames=5`` filter dropped
 (``AUTO_FLOOR``), dates each clip by its footage-file mtime, and reports activity %err plus the
 Ganaraska daily correlation-r against the FULL-YEAR technician truth — quantifying how much of the
 Coho / Rainbow under-count is recoverable from the already-saved data alone. This motivates the
-manuscript's ``min_frames=3`` re-derivation choice (see docs/counting_and_movement.md).
+manuscript's ``min_frames=3`` re-derivation choice (see docs/history/counting_and_movement_development_notes.md).
 
 Pipeline position: post-track / eval-count. It consumes the detect -> track outputs (the per-frame
 parquets) and produces a diagnostic count sweep; it feeds no figure directly but underpins the
@@ -25,9 +34,9 @@ Inputs   : per-frame detection parquets under a corpus run's ``detections/`` dir
            raw footage (for file mtimes -> clip dates); the full-year technician CSVs (--tech-dir).
 Outputs  : a stdout table of {min_frames x site x species} model totals, %err and Ganaraska
            daily-r. No files are written.
-Environment: base Python env (CPU only, plus G:/F: filesystem metadata — no GPU / DEIMv2 needed).
+Environment: base Python env (CPU only; reads file dates from the footage folders; no GPU / DEIMv2 needed).
 
-  python scripts/_track_reaggregate.py --year 2025 --min-frames 2,3,5
+  python -m salmonid.count.track_reaggregate --year 2025 --min-frames 2,3,5
 """
 from __future__ import annotations
 import argparse, glob, os, collections, datetime
@@ -60,7 +69,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--year", default="2025")
     # {year} is left as a literal placeholder here and filled by .format(year=...) below; the
-    # dir resolves to the same G:/Projects/model_outputs corpus-run location as before.
+    # dir resolves to <PROJECTS_ROOT>/model_outputs, the earlier pipeline's run folder.
     ap.add_argument("--shard-glob", default=str(config.MODEL_OUTPUTS / "run_corpus_v6_{year}_shard_*"))
     ap.add_argument("--footage-root", default=str(config.FOOTAGE_ROOT_FAST))
     ap.add_argument("--tech-dir", default="docs/Riverwatcher_2025")

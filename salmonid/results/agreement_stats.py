@@ -58,15 +58,25 @@ statistic** (2019 Credit and 2020 Ganaraska, whose archived videos are more fine
 so one fish can span several videos; run timing stays reliable but magnitude is inflated).
 That leaves Ganaraska 2021-2025 and Credit 2020-2025. This is already what
 ``compute_concordance`` does for the daily statistics; applying it to the pooled
-inter-annual rank correlation as well takes that statistic from 39 species-years to 36
-(3 species x 2 rivers x 6 seasons), which is also the number a reader arrives at unaided.
+inter-annual rank correlation as well gives 33 species-years: 3 species x (5 Ganaraska
+seasons + 6 Credit seasons).
 
-Inputs : config.CANONICAL_DAILY, config.CANONICAL_SUMMARY.
-Outputs: agreement_bland_altman.csv, agreement_ccc_block.csv, agreement_interannual.csv
-         (--out-dir, default config.REPO_DATA).
+Inputs : config.CANONICAL_DAILY, config.CANONICAL_SUMMARY (committed in data/).
+Outputs: agreement_bland_altman.csv, agreement_ba_by_count_band.csv, agreement_ccc_block.csv,
+         agreement_interannual.csv, written to --out-dir (default output/tier1/). The committed
+         copies the manuscript quotes are in data/; run_tier1.py compares the two.
+Feeds  : manuscript Section 3.3 (inter-annual r-squared, Spearman rho, CCC; pooled rho = 0.91,
+         n = 33), Section 3.5 (per-river Bland-Altman bias; count-band median ratios; the
+         moving-block intervals), the Spearman rho column of Table 5, and the Figure S3 caption.
+Tier   : 1 (runs from committed data; no model, no GPU; about 20 seconds).
 
-Usage:
-  python -m salmonid.results.agreement_stats [--out-dir <dir>] [--block 10] [--boot 2000]
+Reproducibility: every bootstrap is seeded (SEED). The committed tables were produced with
+4,000 resamples, which is therefore the default (BOOT); with the defaults a re-run reproduces
+data/agreement_*.csv exactly. A different --boot gives slightly different interval limits
+(Monte Carlo error of about +-0.01 on the widest interval) but the same conclusions.
+
+Run:
+  python -m salmonid.results.agreement_stats [--out-dir <dir>] [--block 10] [--boot 4000]
 """
 from __future__ import annotations
 
@@ -82,7 +92,7 @@ from salmonid.results.compute_concordance import lin_ccc, mcbride
 
 MAIN = ["Chinook", "Coho", "Rainbow Trout"]
 RIVERS = ["Ganaraska", "Credit"]
-BOOT = 2000
+BOOT = 4000         # resamples; the value that produced the committed data/agreement_*.csv
 BLOCK = 10          # days; n^(1/3) for a 400-900 day series is ~7.4-9.7, so 10 sits in the
                     # 7-14 range that is standard for a moving-block bootstrap on daily counts
 SEED = 12345
@@ -396,8 +406,8 @@ def pooled_rank_correlation(summ):
 
     Each species x river series is z-scored so all six panels weigh equally regardless of
     abundance, then one Spearman correlation is taken across every species-season. Reported
-    here under the single year-inclusion rule (recovered seasons excluded), which is what
-    takes the count from 39 species-years to 36.
+    here under the single year-inclusion rule (recovered seasons excluded), which gives
+    33 species-years (3 species x 11 river-seasons).
     """
     zm, zt, panels = [], [], []
     for sp in MAIN:
@@ -417,12 +427,13 @@ def pooled_rank_correlation(summ):
 # ---------------------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--out-dir", default=str(config.REPO_DATA))
+    ap.add_argument("--out-dir", default=str(config.OUTPUT_DIR / "tier1"),
+                    help="Where to write the four agreement_*.csv tables (never data/ by default).")
     ap.add_argument("--block", type=int, default=BLOCK, help="Moving-block length in days.")
     ap.add_argument("--boot", type=int, default=BOOT, help="Bootstrap resamples.")
     ap.add_argument("--species", default="Chinook", help="Species for the Bland-Altman table.")
     ap.add_argument("--daily", default=None,
-                    help="Override canonical_daily.csv (e.g. a v2.7 build not yet promoted).")
+                    help="Override canonical_daily.csv (e.g. a rebuilt table in output/).")
     ap.add_argument("--summary", default=None, help="Override canonical_summary.csv.")
     a = ap.parse_args()
     out = Path(a.out_dir); out.mkdir(parents=True, exist_ok=True)
@@ -430,11 +441,11 @@ def main():
     daily, summ = load(daily_path=a.daily, summary_path=a.summary)
 
     print("=" * 78)
-    print(f"1. BLAND-ALTMAN, daily net counts, {a.species} (flag 3.1)")
+    print(f"1. BLAND-ALTMAN, daily net counts, {a.species}")
     print("=" * 78)
     ba = bland_altman_table(daily, a.species)
     print(ba.to_string(index=False))
-    ba.to_csv(out / "agreement_bland_altman.csv", index=False)
+    ba.to_csv(out / "agreement_bland_altman.csv", index=False, lineterminator="\n")
     print("\n  Read: 'ratio_bias 0.97 [0.62, 1.52]' = on a day with fish moving, the model")
     print("  records 0.97x the technician count on average, and between 0.62x and 1.52x on")
     print("  95% of days. 'spread_slope' > 0 with a small spread_p is the heteroscedasticity")
@@ -445,16 +456,16 @@ def main():
     print("      If the constant limits were valid, sd_diff would be flat down each river block.")
     bb = ba_by_count_band(daily, a.species)
     print(bb.to_string(index=False))
-    bb.to_csv(out / "agreement_ba_by_count_band.csv", index=False)
+    bb.to_csv(out / "agreement_ba_by_count_band.csv", index=False, lineterminator="\n")
 
     print()
     print("=" * 78)
-    print(f"2. DAILY CCC, moving-block (len {a.block}) vs i.i.d. bootstrap (flag 3.2)")
-    print("   plus Spearman rho beside Pearson r (flag 3.7)")
+    print(f"2. DAILY CCC, moving-block (len {a.block}) vs i.i.d. bootstrap, B = {a.boot}")
+    print("   plus Spearman rho beside Pearson r")
     print("=" * 78)
     cc = ccc_block_table(daily, a.block, a.boot)
     print(cc.to_string(index=False))
-    cc.to_csv(out / "agreement_ccc_block.csv", index=False)
+    cc.to_csv(out / "agreement_ccc_block.csv", index=False, lineterminator="\n")
     print("\n  iid    = pooled single days (what the manuscript reports)")
     print("  strat  = single days resampled within season (stratification only)")
     print("  block  = moving blocks within season (stratification + autocorrelation)")
@@ -464,15 +475,15 @@ def main():
 
     print()
     print("=" * 78)
-    print("3. INTER-ANNUAL: CCC beside r-squared (flag 3.6)")
+    print("3. INTER-ANNUAL: CCC beside r-squared")
     print("=" * 78)
     ia = interannual_table(summ, a.boot)
     print(ia.to_string(index=False))
-    ia.to_csv(out / "agreement_interannual.csv", index=False)
+    ia.to_csv(out / "agreement_interannual.csv", index=False, lineterminator="\n")
 
     print()
     print("=" * 78)
-    print("4. POOLED RANK CORRELATION under the single year-inclusion rule (flag 3.4/3.5)")
+    print("4. POOLED RANK CORRELATION under the single year-inclusion rule")
     print("=" * 78)
     pr = pooled_rank_correlation(summ)
     print(f"  Spearman rho = {pr['rho']:.2f}, p = {pr['p']:.2e}, "

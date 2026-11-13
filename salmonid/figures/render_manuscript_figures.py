@@ -1,62 +1,54 @@
-"""In plain terms: this file draws the finished charts that appear in the paper. It does not run
-the computer-vision model itself — it just reads the already-computed results tables and turns them
-into publication-ready figures: the species "confusion matrix" (a grid showing how often each
-species was named correctly or mixed up, backing the paper's 0.966 accuracy headline) and the
-day-by-day fish-passage charts comparing the automated counter against the human technicians
-(Figure S2, including the fully held-out 2024 year the model never trained on).
+"""In plain terms: this file draws two of the charts that appear in the paper. It does not run
+the computer-vision model. It reads results tables that are already saved in this repository and
+turns them into print-ready figures: the species "confusion matrix" (a grid showing how often each
+species was named correctly and which species it was mistaken for) and the 2025 running-total
+charts that compare the model's count against the technicians' count through the season.
 
-Render the manuscript's held-out evaluation and daily-net figures.
-
-Pipeline stage: **results -> figures** (the final step). This module performs no detection,
-tracking, or counting itself; it reads already-computed, committed result artifacts and renders
-the publication figures from them.
-
-Environment: **base env** (CPU-only: matplotlib + numpy + pandas). It does NOT require the
-DEIMv2 ``.venv_deim`` — no torch or model weights are loaded here.
+Pipeline stage: **figures** (the final step). No detection, tracking or counting happens here.
 
 Figures produced
 ----------------
-* ``fig_confusion_v26`` — single-stage v2.6 species confusion matrix on the frozen held-out
-  test set. Inputs: ``config.PREDS_V26`` (per-track predictions) + ``config.TESTSET_V6_GT``
-  (per-track ground truth). Backs the manuscript's held-out species-ID claim (macro-F1 0.966).
-* ``fig_daily_net_2025_{credit,ganaraska}`` — Fig S2: cumulative net-upstream passage, model vs
-  technician, one panel per main species. Input: ``config.CANONICAL_DAILY`` (the committed
-  BoT-SORT daily-net table, 2019-2025). Backs the daily-net counting-agreement claim (daily-r).
-* ``fig_daily_net_2024_{credit,ganaraska}`` — the fully held-out 2024 year (the model never
-  trained on 2024). Input: ``config.NET_2024`` (committed 2024 BoT-SORT daily net).
+* ``fig_confusion_heldout`` -> manuscript **Figure 2**. The published model's species confusion
+  matrix on the 366-track held-out test set (352 correct). Inputs: ``config.PUBLISHED_PREDS``
+  (per-track predictions) + ``config.TESTSET_V6_GT`` (per-track reviewer labels).
+* ``fig_daily_net_2025_credit`` and ``fig_daily_net_2025_ganaraska`` -> manuscript **Figure S2**
+  panels (a) and (b). Cumulative net count through 2025, model against technician, one panel per
+  species, with each panel's daily correlation and season totals in its title. Input:
+  ``config.CANONICAL_DAILY``.
 
-Non-manuscript preview figures (``fig_seasonal_timing``, ``fig_multiyear_chinook``) read external
-corpus artifacts under ``config.PROJECTS_ROOT`` and are skipped cleanly when that data is absent,
-so they can never block the committed manuscript figures above.
+Inputs : committed files in data/ only.
+Outputs: PNG (600 dpi) + vector PDF for each figure, in ``config.FIGURES_DIR`` (figures/).
+Tier   : 1 (runs from committed data; no model, no GPU; a few seconds).
+Run    : python -m salmonid.figures.render_manuscript_figures
 
-Outputs: figure files under ``config.FIGURES_DIR`` (via ``manuscript_style.save_fig`` and direct
-``savefig`` for the preview panels).
+Where the other manuscript figures are drawn: Figures 4, 5 and 7 in ``render_hero_regulation``;
+Figures 6 and S3 in ``salmonid.results.compute_concordance``; Figure 3 in
+``fig_species_morphology`` and Figure S1 in ``fig_bbox_grid`` (both Tier 2: they need fish
+images); Figure 1 (the map) in ``salmonid.paper``. docs/PAPER_TO_CODE.md has the full list.
 
-Run:  python -m salmonid.figures.render_manuscript_figures
+Note on the daily correlation printed in Figure S2: it is computed over every day in the
+canonical table for that river and species (days on which either the model or the technician
+recorded a passage). Manuscript Table 2 uses the same day set.
 """
 import csv, json, collections
 from datetime import datetime
-from pathlib import Path
 import numpy as np
-import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib.patches import Rectangle, Patch
+from matplotlib.patches import Rectangle
 from matplotlib.lines import Line2D
 
 from salmonid import config
 from salmonid.figures.manuscript_style import (set_style, save_fig, COL1_IN, MODEL_C, AFS,
                                                MODEL_LABEL, TECH_LABEL)
 
-set_style()
 SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]  # mirrors salmonid.config.SPECIES
 LAB = [AFS[s] for s in SPECIES]   # full AFS common names on the artwork (CJFAS house style)
-# Fixed panel order for every cumulative-net figure, in class order (matching Figure 2, Figure 4 and
-# Tables 3 and 4). Atlantic Salmon is omitted: it is presence-level, with near-zero counts.
+# Fixed panel order for the cumulative-net figure, in class order (matching Figure 2, Figure 4 and
+# Tables 1 and 2). Atlantic Salmon is omitted: it is presence-level, with near-zero counts.
 PANEL_SPECIES = ["Chinook", "Coho", "Rainbow Trout", "Brown Trout"]
-OUT = config.FIGURES_DIR; OUT.mkdir(parents=True, exist_ok=True)
 GT = config.TESTSET_V6_GT   # committed frozen per-track species ground truth (test_set_v6)
 
 
@@ -95,8 +87,7 @@ def fig_confusion():
     Cells are shaded on one sequential hue by their within-row share (the diagonal is recall); every
     non-empty cell prints the track count and the within-row (recall) %.
 
-    Reads the PUBLISHED model's predictions (v2.7 / checkpoint0017), which are leak-clean and so
-    cover all 366 frozen tracks rather than the 304-track remainder v2.6 had to be scored on.
+    Reads the PUBLISHED model's predictions (config.PUBLISHED_PREDS), scored on all 366 tracks.
     """
     gt = load_gt()
     pf = config.PUBLISHED_PREDS
@@ -135,31 +126,14 @@ def fig_confusion():
     ax.tick_params(length=0)
     for s in ax.spines.values():
         s.set_visible(False)
-    # Named for what it shows, not for an internal model revision: the old "fig_confusion_v26"
-    # filename leaked the model version into the manuscript's figure captions.
+    # Named for what it shows, not for an internal model revision.
     save_fig(fig, "fig_confusion_heldout", kind="vector")
 
 
-def _load_daily(path, site):
-    """Load a per-day model/tech net CSV for one ``site`` as {species: {model, tech, date}}.
-
-    Used by the (non-canonical) preview daily figures.
-    """
-    # daily CSVs carry BOTH sites (tech spans both rivers); MUST filter to this figure's site,
-    # else the POOLED tech inflates the comparison (matches the gate's per-site row, not POOLED).
-    d = collections.defaultdict(lambda: {"model": [], "tech": [], "date": []})
-    for r in csv.DictReader(open(path)):
-        if r["site"] != site:
-            continue
-        sp = r["species"]
-        d[sp]["date"].append(r["date"]); d[sp]["model"].append(float(r["model"])); d[sp]["tech"].append(float(r["tech"]))
-    return d
-
-
 def _load_daily_canonical(site, year):
-    """Daily model/tech net from the COMMITTED canonical dataset (``config.CANONICAL_DAILY``)
-    — the same BoT-SORT source as Fig 4 and the main text, so Fig S2 agrees with them. (The old G: corpus
-    file was pre-BoT-SORT and over-counted the dense Ganaraska Chinook run by ~27%, contradicting the text.)"""
+    """Daily model/technician net counts for one river and year from the COMMITTED canonical table
+    (``config.CANONICAL_DAILY``), the same source as Figure 4, Table 2 and the main text, so that
+    Figure S2 agrees with them. Returns {species: {"model": [...], "tech": [...], "date": [...]}}."""
     d = collections.defaultdict(lambda: {"model": [], "tech": [], "date": []})
     for r in csv.DictReader(open(config.CANONICAL_DAILY)):
         if r["river"] != site or int(r["year"]) != year:
@@ -177,22 +151,18 @@ def _pearson(a, b):
     return float(np.corrcoef(a, b)[0, 1])
 
 
-def fig_daily(site_tag, site_name, csv_path, title, source="corpus"):
-    """Cumulative net-upstream passage, model vs technician, one panel per main species.
+def fig_daily(site_tag, site_name, title):
+    """Cumulative net count through one season, model vs technician, one panel per species.
 
-    Every figure renders the same four species in the same order at a fixed canvas size, with a
-    calendar-month x-axis over a common Mar-Dec season window, so all cumulative figures are the same
-    size and directly comparable across rivers and years.
+    ``site_tag`` is "<year>_<river>" (it names the output file); ``site_name`` is the river as
+    written in the canonical table. Both panels of Figure S2 use the same four species in the same
+    order at a fixed canvas size, with a calendar-month x-axis over a common March-December
+    window, so the two rivers are directly comparable.
     """
-    if source == "canonical":
-        d = _load_daily_canonical(site_name, int(site_tag[:4]))
-    elif not Path(csv_path).is_file():
-        print("skip (missing)", csv_path); return
-    else:
-        d = _load_daily(csv_path, site_name)
+    d = _load_daily_canonical(site_name, int(site_tag[:4]))
     all_dates = [dt for s in d for dt in d[s]["date"]]
     if not all_dates:
-        print("skip (no rows)", csv_path); return
+        raise SystemExit(f"No rows for {site_name} {site_tag[:4]} in {config.CANONICAL_DAILY}")
     yr = int(min(all_dates)[:4])
     fig, axes = plt.subplots(len(PANEL_SPECIES), 1, figsize=(COL1_IN, 6.3), squeeze=False,
                              layout="constrained")
@@ -232,103 +202,13 @@ def fig_daily(site_tag, site_name, csv_path, title, source="corpus"):
     save_fig(fig, f"fig_daily_net_{site_tag}", kind="vector")
 
 
-def fig_seasonal_timing(site_name="Ganaraska",
-                        csv_path=str(config.PROJECTS_ROOT / "deimv2_x_v26_corpus2025" / "gan_daily_net.csv"),
-                        species=("Chinook", "Coho", "Rainbow Trout"), title=None):
-    """Seasonal run timing: 7-day rolling average of daily passage, model (line) vs technician (bars)."""
-    if not Path(csv_path).is_file():
-        print("skip (missing)", csv_path); return
-    df = pd.read_csv(csv_path)
-    df = df[df["site"] == site_name].copy()
-    if df.empty:
-        print("skip (no site rows)", csv_path); return
-    df["date"] = pd.to_datetime(df["date"])
-    yr = int(df["date"].dt.year.mode()[0])
-    full = pd.date_range(f"{yr}-03-01", f"{yr}-12-01", freq="D")
-    sp_list = [s for s in species if s in set(df["species"])]
-    colors = {"Chinook": "#c65b2e", "Coho": "#e0a13b", "Rainbow Trout": "#2f6f9f",
-              "Brown Trout": "#7a5230", "Atlantic": "#3aa76d"}
-    fig, axes = plt.subplots(len(sp_list), 1, figsize=(9, 2.6 * len(sp_list)), squeeze=False, sharex=True)
-    for ax, sp in zip(axes[:, 0], sp_list):
-        g = df[df["species"] == sp].set_index("date").reindex(full, fill_value=0)
-        m = g["model"].rolling(7, center=True, min_periods=1).mean()
-        t = g["tech"].rolling(7, center=True, min_periods=1).mean()
-        ax.bar(full, t, width=1.0, color="#b8b8b8", label="technician (7-day avg)")
-        ax.plot(full, m, color=colors.get(sp, "#c65b2e"), lw=2, label="model (7-day avg)")
-        ax.set_title(sp, loc="left", fontsize=11)
-        ax.legend(fontsize=8, loc="upper right"); ax.grid(alpha=0.2)
-        ax.set_ylabel("daily net")
-    axes[-1, 0].xaxis.set_major_locator(mdates.MonthLocator())
-    axes[-1, 0].xaxis.set_major_formatter(mdates.DateFormatter("%b"))
-    axes[-1, 0].set_xlim(full[0], full[-1]); axes[-1, 0].set_xlabel("month")
-    if title is None:
-        title = f"{site_name} {yr}: seasonal run timing (7-day rolling daily passage)"
-    fig.suptitle(title, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.96])
-    p = OUT / "fig_seasonal_timing.png"
-    fig.savefig(p, bbox_inches="tight", facecolor="white"); plt.close(fig)
-    print("wrote", p)
-
-
-def fig_multiyear_chinook():
-    """Two-stage v6 Chinook NET record 2020-2024 (Fig 4), with the single-stage v2.6 held-out 2024
-    result overlaid as a distinct marker. Two-stage values from _corpus_historical_vs_tech.py +
-    _corpus_2024_vs_tech.py (extracted 2026-07-09); single-stage 2024 from corpus2024/2024_count_r_net.json.
-    Ganaraska 2020 excluded (footage-coverage gap: ~1,487 clips, model activity=36)."""
-    years = [2020, 2021, 2022, 2023, 2024]
-    # (%err, daily-r) per river; None = excluded/absent
-    gan = {2020: None, 2021: (24, 0.968), 2022: (12, 0.993), 2023: (-8, 0.969), 2024: (-7, 0.988)}
-    cred = {2020: (-1, 0.992), 2021: (2, 0.966), 2022: (-8, 0.986), 2023: (-4, 0.996), 2024: (-5, 0.976)}
-    # single-stage v2.6 held-out 2024 Chinook (never trained on 2024)
-    ss = {r["scope"]: r for r in json.load(open(config.PROJECTS_ROOT / "deimv2_x_v26_corpus2024" / "2024_count_r_net.json"))
-          if r["species"] == "Chinook"}
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4.2))
-    for ax, idx, lab in [(a1, 1, "daily-r"), (a2, 0, "seasonal net %err")]:
-        for d, name, col, mk in [(gan, "Ganaraska", "#1b3a5c", "o"), (cred, "Credit", "#c65b2e", "s")]:
-            xs = [y for y in years if d[y] is not None]
-            ys = [d[y][idx] for y in xs]
-            ax.plot(xs, ys, marker=mk, color=col, label=f"{name} (two-stage)", lw=2, ms=8)
-        ax.set_xticks(years); ax.set_xlabel("year"); ax.set_title(f"Chinook net: {lab}")
-        ax.grid(alpha=0.25); ax.set_xlim(2019.5, 2024.6)
-    # overlay single-stage held-out 2024 points
-    for name, col in [("Ganaraska", "#1b3a5c"), ("Credit", "#c65b2e")]:
-        rr = ss.get(name)
-        if rr:
-            lbl = "single-stage 2024" if name == "Ganaraska" else None
-            a1.scatter([2024], [rr["pearson_r"]], marker="*", s=240, color=col,
-                       edgecolor="black", linewidth=0.8, zorder=6, label=lbl)
-            a2.scatter([2024], [rr["pct_err"]], marker="*", s=240, color=col,
-                       edgecolor="black", linewidth=0.8, zorder=6)
-    a1.axhline(0.90, ls="--", color="grey", lw=1); a1.set_ylabel("Pearson r"); a1.set_ylim(0.8, 1.01)
-    a1.text(2020, 0.905, "gate r≥0.90", fontsize=8, color="grey")
-    a1.legend(fontsize=8, loc="lower left")
-    a2.axhspan(-15, 15, color="green", alpha=0.08); a2.axhline(0, color="grey", lw=0.8)
-    a2.set_ylim(-17, 27)
-    a2.set_ylabel("% error (model minus tech)"); a2.text(2020, 16, "±15% gate", fontsize=8, color="green")
-    fig.suptitle("Multi-year Chinook net validation: two-stage v6 (2020-2024) with single-stage v2.6 2024",
-                 fontweight="bold")
-    fig.tight_layout()
-    p = OUT / "fig_multiyear_chinook_net.png"
-    fig.savefig(p, bbox_inches="tight", facecolor="white"); plt.close(fig)
-    print("wrote", p)
+def main():
+    """Draw Figure 2 and both panels of Figure S2 into figures/."""
+    set_style()   # the shared CJFAS figure style (fonts, sizes, colours); see manuscript_style.py
+    fig_confusion()                                                         # Figure 2
+    fig_daily("2025_credit", "Credit", "(a) Credit River, 2025")            # Figure S2 (a)
+    fig_daily("2025_ganaraska", "Ganaraska", "(b) Ganaraska River, 2025")   # Figure S2 (b)
 
 
 if __name__ == "__main__":
-    # manuscript figures first, unconditionally: Fig 2 (confusion) + Fig S2 (2025 daily net, panels a/b)
-    fig_confusion()
-    fig_daily("2025_credit", "Credit", "", "(a) Credit River, 2025", source="canonical")
-    fig_daily("2025_ganaraska", "Ganaraska", "", "(b) Ganaraska River, 2025", source="canonical")
-    # non-manuscript preview figures (results-preview doc only); skip cleanly if their data is absent so
-    # they can never block the manuscript figures above.
-    for fn in (fig_multiyear_chinook, fig_seasonal_timing):
-        try:
-            fn()
-        except Exception as e:
-            print(f"skip {fn.__name__}: {e}")
-    # 2024 = fully HELD-OUT year (model never trained on 2024), BoT-SORT-corrected magnitude, both rivers.
-    for tag, site in [("2024_credit", "Credit"), ("2024_ganaraska", "Ganaraska")]:
-        try:
-            fig_daily(tag, site, config.NET_2024,
-                      f"{site} River, 2024 (held-out)")
-        except Exception as e:
-            print(f"skip {tag}: {e}")
+    main()

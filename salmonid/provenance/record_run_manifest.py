@@ -1,55 +1,72 @@
-"""
-In plain terms: this file writes a detailed "receipt" for one training session of
-the fish-identifying model — it records exactly which version of the code, which
-settings, and which set of labelled fish photos were fed in. That receipt lets
-anyone later re-run the training and trace the published model back to its exact
-ingredients, which is what backs up the paper's claim that its results (the
-0.966-accuracy single-stage model) can be reproduced. It does not itself compute any
-number in the paper; it is the record-keeping step that makes the published number
-verifiable.
+"""In plain terms: this script writes a "receipt" for one training run of the fish-identifying
+model. Before training starts it records which version of the code was used, which settings
+file, which exact list of training pictures (by a fingerprint of the file, so a changed file
+cannot pass for the original), the random seed, the software versions and the command. Anyone
+can later compare their own copy of the training pictures against the receipt and know whether
+they hold the same data the published model was trained on. It computes no number in the paper;
+it is the record that lets the published model be traced to its ingredients.
 
-Record a complete, reproducible provenance manifest for a single-stage DEIMv2
-training run. Call this at launch time (from the runner) BEFORE train.py.
+Inputs
+------
+All given on the command line by the launcher (nothing is read from ``salmonid.config``):
+the run output folder, the top settings file (DEIMv2 ``.yml``), the DEIMv2 folder and this
+repository's folder, the training and validation picture lists, the seed, and the command.
+``--train-python`` optionally names the interpreter used for training, so its PyTorch / CUDA /
+GPU versions can be read back.
 
-Pipeline position: this is a *provenance sidecar* to the DETECT / TRAIN stage of
-the pipeline (data -> [detect/train] -> track -> eval/count -> results -> figures).
-It touches no fish data itself; it snapshots the exact code + config + data state
-that a training run consumes, so the resulting weights (and therefore every
-downstream count, score, and figure) are traceable to a fixed input set. It is what
-underwrites the manuscript's central reproducibility claim for the published
-single-stage model (DEIMv2-X v2.6, held-out macro-F1 0.966).
+Outputs
+-------
+Written into ``--output-dir``:
 
-Why: the single-stage experiment definition is split across two repos — this one
-(scripts, runners, COCO builders) and the external DEIMv2 clone (train.py + the
-fish configs), which is untracked and carries a working-tree patch. A published
-number is only reproducible if we pin, per run: both repo SHAs, the DEIMv2
-uncommitted diff, the resolved config set, the train/val COCO content hashes +
-category counts, the seed, the env versions, and the exact command.
+* ``run_manifest.json``: the receipt (git commits of both repositories and whether they had
+  uncommitted changes; sha256, size, picture count, box count and per-species box counts of the
+  training and validation lists; seed; software versions; command).
+* ``config_snapshot/*.yml``: a copy of the settings file and every file it includes.
+* ``deimv2_worktree.patch``: the uncommitted changes in the DEIMv2 folder (empty if none).
 
-Environment: the recorder itself runs under the base Python (only stdlib +
-``git``); it optionally shells out to the *training* interpreter (the isolated
-``.venv_deim``) via ``--train-python`` purely to read back its torch/CUDA/GPU
-versions. No path literals: every location is supplied as a CLI argument by the
-runner, so this module needs nothing from ``salmonid.config``.
+Feeds
+-----
+The reproducibility statement for the published v2.7 model. The receipt of the actual v2.7
+run, written by the research-repository version of this script on 2026-07-24, is committed
+under ``provenance/v2.7/`` and explained in ``provenance/v2.7/README.md``.
 
-Inputs (all CLI args): the run output dir, the top DEIMv2 config yml, the DEIMv2
-and fish-cv repo dirs, the train/val COCO json paths, the seed, and the command.
-Outputs — writes into <output-dir>:
-  run_manifest.json          — the machine-readable pin (everything below)
-  config_snapshot/*.yml      — the full __include__ chain, copied verbatim
-  deimv2_worktree.patch      — `git diff` of the DEIMv2 clone (empty if clean)
+Run
+---
+Normally called by ``python -m salmonid.train.train_v27``. On its own::
 
-Usage (from the runner, base Python is fine):
-  python scripts/_record_run_manifest.py \
-      --output-dir  C:/Users/.../DEIMv2/outputs/deimv2_fish_x_v25 \
-      --config      C:/Users/.../DEIMv2/configs/deimv2/deimv2_fish_x_v25.yml \
-      --deimv2-dir  C:/Users/.../DEIMv2 \
-      --repo-dir    C:/Users/.../lake-ontario-fish-cv \
-      --train-json  C:/ssl_cache/deimv2_fish_6class_masked_v25/train.json \
-      --val-json    C:/ssl_cache/deimv2_fish_6class_masked_v23/val.json \
-      --train-python C:/Users/.../.venv_deim/Scripts/python.exe \
-      --seed 0 \
-      --command "train.py -c configs/deimv2/deimv2_fish_x_v25.yml -t ckpts/deimv2_x_coco.pth -d cuda --use-amp --seed 0"
+    python -m salmonid.provenance.record_run_manifest
+        --output-dir <run output dir> --config <configs/deimv2/deimv2_fish_x_v27.yml>
+        --deimv2-dir <DEIMv2 clone> --repo-dir <this repository>
+        --train-json <COCO_V27>/train.json --val-json <COCO_V27>/val_clean.json
+        --seed 0 --command "<the train.py command line>"
+
+(one command; shown on several lines)
+
+Tier
+----
+2 (it hashes the external training lists). It uses only the Python standard library and ``git``.
+
+Why a receipt is needed
+-----------------------
+The training recipe is split across two repositories: this one (data builders, launcher) and
+the external DEIMv2 detector code, which is used with a small local patch. A published model is
+only traceable if both code states, the settings, the data and the seed are pinned together at
+the moment training starts.
+
+Two corrections relative to the script that wrote the v2.7 receipt
+------------------------------------------------------------------
+Neither changes what a receipt means; both fix how it is written. The committed v2.7 receipt
+shows the old behaviour and is kept as it was written.
+
+* **First character of the first changed-file name.** ``git status --porcelain`` prints two
+  status characters and a space before each file name, and the first status character is often
+  a space. The old code stripped leading whitespace from the whole output and then cut three
+  characters from every line, so the first line lost one character of its file name. That is
+  why the v2.7 receipt lists ``LAUDE.md`` and ``ngine/data/transforms/_transforms.py``; the real
+  names are ``CLAUDE.md`` and ``engine/data/transforms/_transforms.py``.
+* **The saved patch could not be applied.** It was written without its final newline and, on
+  Windows, with CRLF line endings, and ``git apply`` rejects it ("corrupt patch"). It is now
+  written with LF endings and its final newline.
 """
 from __future__ import annotations
 
@@ -74,14 +91,19 @@ def _run(cmd: list[str], cwd: str | None = None) -> str:
         cwd: working directory, or None for the current one.
 
     Returns:
-        The command's stdout (stripped), or an ``<error: ...>`` sentinel string on
-        any failure. Provenance recording must never crash the training launch, so
-        every exception (missing git, timeout, etc.) is swallowed into the return
-        value rather than raised.
+        The command's stdout with TRAILING whitespace removed, or an ``<error: ...>``
+        sentinel string on any failure. Provenance recording must never crash the
+        training launch, so every exception (missing git, timeout, etc.) is turned
+        into the return value rather than raised; the sentinel then appears in the
+        manifest, so the failure is visible in the receipt.
     """
     try:
-        out = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=60)
-        return out.stdout.strip()
+        out = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=60,
+                             encoding="utf-8", errors="replace")
+        # rstrip(), not strip(): leading whitespace is DATA in `git status --porcelain`
+        # (" M file" = modified, not staged). strip() ate the first line's leading space and
+        # `_git` then cut one character too many from that file name (see module docstring).
+        return out.stdout.rstrip()
     except Exception as exc:  # noqa: BLE001 - provenance must never crash the run
         return f"<error: {exc}>"
 
@@ -111,6 +133,7 @@ def _git(repo: str) -> dict:
         "short_sha": short,
         "branch": branch,
         "dirty": bool(status.strip()),
+        # Each porcelain line is "XY <path>": two status characters, one space, the path.
         "dirty_files": [ln[3:] for ln in status.splitlines()][:200],
     }
 
@@ -143,7 +166,7 @@ def _coco_stats(path: str) -> dict:
     """
     if not Path(path).is_file():
         return {"path": path, "present": False}
-    d = json.loads(Path(path).read_text())
+    d = json.loads(Path(path).read_text(encoding="utf-8"))
     cats = {c["id"]: c["name"] for c in d.get("categories", [])}
     per = Counter(a["category_id"] for a in d.get("annotations", []))
     return {
@@ -251,7 +274,10 @@ def main() -> None:
 
     # 2) save the DEIMv2 uncommitted diff (the patch is part of the code state)
     diff = _run(["git", "-C", a.deimv2_dir, "diff", "HEAD"])
-    (out / "deimv2_worktree.patch").write_text(diff or "", encoding="utf-8")
+    # A patch must end with a newline and use LF line endings or `git apply` rejects it.
+    # newline="\n" stops Windows from rewriting the line endings on the way to disk.
+    (out / "deimv2_worktree.patch").write_text((diff + "\n") if diff else "",
+                                               encoding="utf-8", newline="\n")
 
     manifest = {
         "recorded_utc": datetime.now(timezone.utc).isoformat(),
@@ -274,7 +300,7 @@ def main() -> None:
         "env": _env(a.train_python),
     }
 
-    (out / "run_manifest.json").write_text(json.dumps(manifest, indent=2))
+    (out / "run_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     tr = manifest["data"]["train"]
     print(f"[manifest] wrote {out/'run_manifest.json'}")
     print(f"[manifest] fish_cv {manifest['repos']['fish_cv'].get('short_sha')} "

@@ -1,7 +1,7 @@
-"""In plain terms: the paper reports the model's species accuracy to three decimal places on
-as few as 24 example fish. Three decimals on 24 fish claims a precision the sample cannot
-support. This file attaches an honest uncertainty range to each of those numbers, so a
-reader can see that "0.917" on 24 fish really means "somewhere between about 0.73 and 0.98".
+"""In plain terms: the paper reports how often the model names each species correctly, using
+a test set of 60 to 121 fish per species. A score from 60 fish is an estimate, not an exact
+value. This file attaches an honest uncertainty range to each score, so a reader can see that
+"recall 0.933 for Coho Salmon" really means "somewhere between about 0.84 and 0.97".
 
 Confidence intervals for the held-out species-classification metrics.
 
@@ -26,15 +26,22 @@ the number of true tracks of that species (n_true) and precision's is the number
 the model *called* that species (n_pred). These differ, which is why one interval can be
 much wider than the other for the same species.
 
-Inputs : a predictions CSV (video_id, track_id, pred_species) and the frozen GT JSON.
-         Defaults to config.PREDS_V26 + config.TESTSET_V6_GT.
-Outputs: classification_ci.csv (--out-dir, default config.REPO_DATA).
+Inputs : a predictions CSV (video_id, track_id, pred_species) and the frozen ground-truth JSON.
+         Defaults to the PUBLISHED model: config.PUBLISHED_PREDS + config.TESTSET_V6_GT.
+Outputs: classification_ci.csv, written to --out-dir (default output/tier1/). The committed
+         copy the manuscript quotes is data/classification_ci.csv; run_tier1.py compares the two.
+Feeds  : manuscript Table 1 (per-species precision, recall and F1 with 95% intervals; the
+         macro-F1 0.961 [0.939, 0.980]).
+Tier   : 1 (runs from committed data; no model, no GPU).
 
-Usage:
+Reproducibility: the bootstrap is seeded (SEED) and uses BOOT resamples, so a re-run gives
+the same intervals to the last digit. The Wilson intervals have no random component.
+
+Run:
   python -m salmonid.results.classification_ci
-  python -m salmonid.results.classification_ci --preds G:/Projects/deimv2_x_v27_eval/preds_0017.csv \
-      --label v2.7-ckpt0017
-  python -m salmonid.results.classification_ci --binomial 178 188 --label blind-review-overall
+  python -m salmonid.results.classification_ci --binomial 196 208 --label blind-review-overall
+  python -m salmonid.results.classification_ci --preds data/preds_checkpoint0007.csv \
+      --label v2.6-ckpt0007          # the superseded model, for comparison only
 """
 from __future__ import annotations
 
@@ -58,9 +65,9 @@ def wilson(k, n, conf=0.95):
     """Wilson score interval for k successes in n trials.
 
     Chosen over the normal approximation because these denominators are small (n = 6 for the
-    blind-review Atlantic Salmon, n = 24 for held-out Brown Trout under the v2.6 leak-clean
-    set). The normal interval would put the upper bound above 1.0 for the near-perfect
-    species and would give a zero-width interval wherever the score is exactly 1.0.
+    blind-review Atlantic Salmon, n = 60 for most held-out species). The normal interval
+    would put the upper bound above 1.0 for the near-perfect species and would give a
+    zero-width interval wherever the score is exactly 1.0 (held-out Rainbow Trout recall).
     """
     if n == 0:
         return (np.nan, np.nan)
@@ -190,16 +197,19 @@ def print_table(rows, summary, label, missing=0):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--preds", default=str(config.PREDS_V26))
+    ap.add_argument("--preds", default=str(config.PUBLISHED_PREDS),
+                    help="Per-track predictions CSV. Default: the published v2.7 model.")
     ap.add_argument("--gt", default=str(config.TESTSET_V6_GT))
     ap.add_argument("--tier", default=None, choices=[None, "pristine", "heldout"],
                     help="Restrict to one test-set tier.")
-    ap.add_argument("--label", default="v2.6-ckpt0007")
-    ap.add_argument("--out-dir", default=str(config.REPO_DATA))
+    ap.add_argument("--label", default="v2.7-ckpt0017",
+                    help="Model name written into the 'model' column of the output CSV.")
+    ap.add_argument("--out-dir", default=str(config.OUTPUT_DIR / "tier1"),
+                    help="Where to write classification_ci.csv (never data/ by default).")
     ap.add_argument("--boot", type=int, default=BOOT)
     ap.add_argument("--binomial", nargs=2, type=int, metavar=("K", "N"),
                     help="Skip the test set; just print a Wilson interval for K of N. "
-                         "Used for the blind-review per-species agreement in Section 3.2.")
+                         "Used for the blind-review agreement percentages in Section 3.2.")
     a = ap.parse_args()
 
     if a.binomial:
@@ -214,11 +224,14 @@ def main():
 
     out = Path(a.out_dir); out.mkdir(parents=True, exist_ok=True)
     dest = out / "classification_ci.csv"
+    # lineterminator="\n": the csv module otherwise writes Windows line endings on every
+    # platform, which makes git report the file as changed when its content is identical.
     with open(dest, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["model", "species", "n_true", "n_pred", "tp", "fp", "fn",
-                                           "precision", "prec_lo", "prec_hi",
-                                           "recall", "rec_lo", "rec_hi",
-                                           "f1", "f1_lo", "f1_hi"])
+        w = csv.DictWriter(fh, lineterminator="\n",
+                           fieldnames=["model", "species", "n_true", "n_pred", "tp", "fp", "fn",
+                                       "precision", "prec_lo", "prec_hi",
+                                       "recall", "rec_lo", "rec_hi",
+                                       "f1", "f1_lo", "f1_hi"])
         w.writeheader()
         for r in rows:
             w.writerow({"model": a.label, **{k: (round(v, 4) if isinstance(v, float) else v)

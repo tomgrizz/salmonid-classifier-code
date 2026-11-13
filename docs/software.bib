@@ -1,0 +1,884 @@
+% software.bib
+% Verified citations for every library, model, dataset, statistical method and tool that the
+% salmonid-classifier code depends on. Companion to docs/SOFTWARE_CITATIONS.md (same keys).
+%
+% Verification date: 2026-11-10. Sources used: Crossref (DOI records), DataCite and the Zenodo
+% API (software DOIs), the arXiv API, PubMed, CVF Open Access, the NeurIPS proceedings site,
+% OpenReview, PyPI metadata, and each project's own README / CITATION file.
+%
+% Conventions
+%   * Keys that already exist in the manuscript's references.bib are REUSED with identical
+%     metadata. Every departure from the manuscript's entry is marked "CHANGED" or "ADDED".
+%   * Institutional authors are double-braced.
+%   * Long author lists are closed with "and others" (the CSL style prints et al.).
+%   * "No citation requested upstream" means the maintainers publish no preferred citation, so
+%     the entry is a plain software reference built from the package's own metadata.
+
+% =============================================================================================
+% 1. PYTHON LIBRARIES
+% =============================================================================================
+
+% NumPy. Citation requested by the project (CITATION.bib). Verified against Crossref.
+@article{harris2020numpy,
+  author  = {Harris, Charles R. and Millman, K. Jarrod and van der Walt, St{\'e}fan J. and
+             Gommers, Ralf and Virtanen, Pauli and Cournapeau, David and Wieser, Eric and
+             Taylor, Julian and Berg, Sebastian and Smith, Nathaniel J. and Kern, Robert and
+             Picus, Matti and Hoyer, Stephan and van Kerkwijk, Marten H. and Brett, Matthew and
+             Haldane, Allan and Fern{\'a}ndez del R{\'i}o, Jaime and Wiebe, Mark and
+             Peterson, Pearu and G{\'e}rard-Marchant, Pierre and Sheppard, Kevin and
+             Reddy, Tyler and Weckesser, Warren and Abbasi, Hameer and Gohlke, Christoph and
+             Oliphant, Travis E.},
+  title   = {Array programming with {NumPy}},
+  journal = {Nature},
+  year    = {2020},
+  volume  = {585},
+  number  = {7825},
+  pages   = {357--362},
+  doi     = {10.1038/s41586-020-2649-2}
+}
+
+% pandas. The project asks for BOTH the Zenodo software record and the McKinney (2010) paper.
+% Verified against Crossref (paper) and DataCite / Zenodo (software).
+@inproceedings{mckinney2010pandas,
+  author    = {McKinney, Wes},
+  title     = {Data Structures for Statistical Computing in {Python}},
+  booktitle = {Proceedings of the 9th {Python} in Science Conference},
+  editor    = {van der Walt, St{\'e}fan and Millman, Jarrod},
+  year      = {2010},
+  pages     = {56--61},
+  doi       = {10.25080/Majora-92bf1922-00a}
+}
+
+% Version-specific record for pandas 2.3.3 (the version installed). The all-versions (concept)
+% DOI is 10.5281/zenodo.3509134.
+@misc{pandas2025software,
+  author    = {{The pandas development team}},
+  title     = {pandas-dev/pandas: {Pandas}},
+  year      = {2025},
+  version   = {v2.3.3},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.17229934},
+  url       = {https://doi.org/10.5281/zenodo.17229934}
+}
+
+% SciPy. REUSED key. CHANGED: the manuscript's entry carries doi 10.1038/s41592-020-0772-5,
+% which Crossref resolves to the "Author Correction" notice (Nature Methods 17:352), not the
+% article. The article itself (17:261-272) is 10.1038/s41592-019-0686-2. Everything else is
+% identical to the manuscript's entry. Version-specific Zenodo DOIs: SciPy 1.15.3 (base
+% environment) 10.5281/zenodo.15366870; SciPy 1.17.1 (DEIMv2 environment)
+% 10.5281/zenodo.18736568; all versions 10.5281/zenodo.595738.
+@article{virtanen2020scipy,
+  author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and others},
+  title   = {{SciPy} 1.0: fundamental algorithms for scientific computing in {Python}},
+  journal = {Nature Methods},
+  year    = {2020},
+  volume  = {17},
+  pages   = {261--272},
+  doi     = {10.1038/s41592-019-0686-2}
+}
+
+% Matplotlib. Citation requested by the project (CITATION.cff). Verified against Crossref.
+@article{hunter2007matplotlib,
+  author  = {Hunter, John D.},
+  title   = {Matplotlib: A {2D} graphics environment},
+  journal = {Computing in Science \& Engineering},
+  year    = {2007},
+  volume  = {9},
+  number  = {3},
+  pages   = {90--95},
+  doi     = {10.1109/MCSE.2007.55}
+}
+
+% Version-specific record for Matplotlib 3.10.8 (base environment). Matplotlib 3.10.9 (DEIMv2
+% environment) is 10.5281/zenodo.19716234; all versions 10.5281/zenodo.592536.
+@misc{matplotlib2025software,
+  author    = {{The Matplotlib Development Team}},
+  title     = {Matplotlib: Visualization with {Python}},
+  year      = {2025},
+  version   = {v3.10.8},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.17595503},
+  url       = {https://doi.org/10.5281/zenodo.17595503}
+}
+
+% Apache Arrow (the pyarrow package). No citation requested upstream. Version and release date
+% from PyPI (pyarrow 22.0.0, released 2025-10-24).
+@misc{apachearrow2025,
+  author  = {{Apache Software Foundation}},
+  title   = {{Apache Arrow}: {PyArrow}},
+  year    = {2025},
+  version = {22.0.0},
+  url     = {https://arrow.apache.org/}
+}
+
+% OpenCV. This is the citation the OpenCV project asks for (wiki page "CiteOpenCV"). The
+% project's requested entry gives no volume or pages, so none are added here.
+@article{bradski2000opencv,
+  author  = {Bradski, G.},
+  title   = {The {OpenCV} Library},
+  journal = {Dr. Dobb's Journal of Software Tools},
+  year    = {2000}
+}
+
+% Pillow. Version-specific Zenodo record for 12.1.1 (base environment). Pillow 12.2.0 (DEIMv2
+% environment) is 10.5281/zenodo.19371132; all versions 10.5281/zenodo.596518. The Zenodo
+% record lists 27 creators.
+@misc{murray2026pillow,
+  author    = {Murray, Andrew and van Kemenade, Hugo and {wiredfool} and Clark, Jeffrey A. and
+               Karpinsky, Alexander and Baranovi{\v{c}}, Ondrej and others},
+  title     = {python-pillow/{Pillow}: 12.1.1},
+  year      = {2026},
+  version   = {12.1.1},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.18604291},
+  url       = {https://doi.org/10.5281/zenodo.18604291}
+}
+
+% Decord. No citation requested upstream. Version and release date from PyPI (0.6.0,
+% 2021-06-14); repository github.com/dmlc/decord.
+@misc{decord2021,
+  author  = {{Decord contributors}},
+  title   = {Decord},
+  year    = {2021},
+  version = {0.6.0},
+  url     = {https://github.com/dmlc/decord}
+}
+
+% PyTorch. REUSED key, identical to the manuscript's entry. Verified against the NeurIPS
+% proceedings record.
+@inproceedings{paszke2019pytorch,
+  author    = {Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and
+               Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and
+               Gimelshein, Natalia and Antiga, Luca and Desmaison, Alban and K{\"o}pf, Andreas and
+               Yang, Edward and DeVito, Zachary and Raison, Martin and Tejani, Alykhan and
+               Chilamkurthy, Sasank and Steiner, Benoit and Fang, Lu and Bai, Junjie and
+               Chintala, Soumith},
+  title     = {{PyTorch}: An Imperative Style, High-Performance Deep Learning Library},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {32},
+  year      = {2019}
+}
+
+% PyTorch 2. OPTIONAL. This is the citation the PyTorch repository now lists as preferred
+% (CITATION.cff); the 2019 paper above remains the customary one. The paper has 49 authors.
+@inproceedings{ansel2024pytorch2,
+  author    = {Ansel, Jason and Yang, Edward and He, Horace and Gimelshein, Natalia and
+               Jain, Animesh and Voznesensky, Michael and Bao, Bin and Bell, Peter and others},
+  title     = {{PyTorch} 2: Faster Machine Learning Through Dynamic {Python} Bytecode
+               Transformation and Graph Compilation},
+  booktitle = {Proceedings of the 29th {ACM} International Conference on Architectural Support
+               for Programming Languages and Operating Systems, Volume 2 ({ASPLOS} '24)},
+  year      = {2024},
+  pages     = {929--947},
+  publisher = {ACM},
+  doi       = {10.1145/3620665.3640366}
+}
+
+% TorchVision. Citation requested by the project (CITATION.cff, key torchvision2016).
+@misc{torchvision2016,
+  author       = {{TorchVision maintainers and contributors}},
+  title        = {{TorchVision}: {PyTorch}'s Computer Vision library},
+  year         = {2016},
+  howpublished = {GitHub repository},
+  url          = {https://github.com/pytorch/vision}
+}
+
+% BoxMOT (the boxmot package, formerly yolo_tracking): the BoT-SORT implementation used for
+% all tracking, and the ByteTrack implementation used for the tracker comparison.
+% TWO VERSIONS ARE INSTALLED: 10.0.52 in the base environment (the version the code's own
+% documentation names) and 21.0.0 in the DEIMv2 environment (.venv_deim). Which of the two
+% produced the published counts is being confirmed separately. Cite THIS entry if it was
+% 10.0.52 and brostrom2026boxmot (below) if it was 21.0.0; do not cite both.
+% Author, title and licence from the CITATION.cff shipped at tag v10.0.52;
+% version 10.0.52 was released on PyPI on 2024-03-02. Zenodo holds NO record for 10.0.52 (only
+% versions 8, 9 and 10.0.15), so the all-versions DOI is given. Note that the v10.0.52
+% CITATION.cff points at record 7629840 (labelled version 9 on Zenodo) while the v10.0.52
+% README badge points at 10.5281/zenodo.8132989 (version 10.0.15).
+@misc{brostrom2024boxmot,
+  author    = {Brostr{\"o}m, Mikel},
+  title     = {{BoxMOT}: pluggable {SOTA} tracking modules for object detection, segmentation
+               and pose estimation models},
+  year      = {2024},
+  version   = {10.0.52},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.7452873},
+  url       = {https://github.com/mikel-brostrom/boxmot}
+}
+
+% BoxMOT 21.0.0: ALTERNATIVE to the entry above, to be used only if the published counts are
+% confirmed to have come from the copy in the DEIMv2 environment. Released on PyPI 2026-06-03,
+% AGPL-3.0. Title and authors from the CITATION.cff shipped at tag v21.0.0 (which names
+% M. Brostr{\"o}m as author and M. Kozak as maintainer, and whose own version field still reads
+% 20.0.0). Zenodo holds no record for 21.0.0 either, so the all-versions DOI is given.
+@misc{brostrom2026boxmot,
+  author    = {Brostr{\"o}m, Mikel and Kozak, Mikhail},
+  title     = {{BoxMOT}: pluggable state-of-the-art multi-object tracking modules},
+  year      = {2026},
+  version   = {21.0.0},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.7452873},
+  url       = {https://github.com/mikel-brostrom/boxmot}
+}
+
+% Hugging Face Transformers. Citation requested by the project (CITATION.cff). Verified
+% against Crossref. The paper has 22 authors.
+@inproceedings{wolf2020transformers,
+  author    = {Wolf, Thomas and Debut, Lysandre and Sanh, Victor and Chaumond, Julien and
+               Delangue, Clement and Moi, Anthony and Cistac, Pierric and Rault, Tim and others},
+  title     = {Transformers: State-of-the-Art Natural Language Processing},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language
+               Processing: System Demonstrations},
+  year      = {2020},
+  pages     = {38--45},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2020.emnlp-demos.6}
+}
+
+% Supervision (Roboflow): supplies the ByteTrack used by the optional store-only tracker in
+% salmonid/count/corpus_countr_from_store.py (--tracker bytetrack). The tracker comparison
+% reported in the manuscript runs through salmonid/detect/track_from_store.py, which uses
+% BoxMOT's ByteTrack, so cite Supervision only if a result from the store-only tracker is
+% reported. Author and title from the project's CITATION.cff, which gives no version or
+% DOI; version and release date from PyPI (0.27.0.post2, 2026-03-14).
+@misc{roboflow2026supervision,
+  author  = {{Roboflow}},
+  title   = {Supervision},
+  year    = {2026},
+  version = {0.27.0.post2},
+  url     = {https://github.com/roboflow/supervision}
+}
+
+% Faster-COCO-Eval: the COCO evaluator inside the DEIMv2 training engine. Author and title as
+% the maintainer asks (README); the maintainer's own entry is undated beyond "2024", so the
+% year here is that of the installed release (1.7.2, PyPI 2026-02-22).
+@misc{mixaill2026fastercocoeval,
+  author  = {{MiXaiLL76}},
+  title   = {{Faster-COCO-Eval}: Faster and Enhanced {COCO} Evaluation Library},
+  year    = {2026},
+  version = {1.7.2},
+  url     = {https://github.com/MiXaiLL76/faster_coco_eval}
+}
+
+% PyYAML. No citation requested upstream. Version and release date from PyPI (6.0.3,
+% 2025-09-25).
+@misc{simonov2025pyyaml,
+  author  = {Simonov, Kirill and {PyYAML contributors}},
+  title   = {{PyYAML}},
+  year    = {2025},
+  version = {6.0.3},
+  url     = {https://pyyaml.org/}
+}
+
+% TensorBoard. No citation requested upstream. Version and release date from PyPI (2.20.0,
+% 2025-07-17); copyright holder from the repository LICENSE.
+@misc{tensorboard2025,
+  author  = {{The TensorFlow Authors}},
+  title   = {{TensorBoard}},
+  year    = {2025},
+  version = {2.20.0},
+  url     = {https://github.com/tensorflow/tensorboard}
+}
+
+% calflops. Citation requested by the author (README). Version installed: 0.3.2.
+@misc{ye2023calflops,
+  author  = {Ye, Xiaoju},
+  title   = {calflops: a {FLOPs} and Params calculate tool for neural networks in pytorch
+             framework},
+  year    = {2023},
+  version = {0.3.2},
+  url     = {https://github.com/MrYxJ/calculate-flops.pytorch}
+}
+
+% GeoPandas (Fig. 1 map script in the manuscript repository). Citation requested by the
+% project (CITATION.cff). Verified against Crossref. Version-specific Zenodo DOI for
+% GeoPandas 1.1.3: 10.5281/zenodo.18934477; all versions 10.5281/zenodo.2585848.
+@article{fleischmann2026geopandas,
+  author  = {Fleischmann, Martin and Van den Bossche, Joris and Jordahl, Kelsey and
+             Richards, Matthew John and McBride, James and Wasserman, Jacob and
+             Ward, Brendan and Wolf, Levi John},
+  title   = {{GeoPandas}: Fundamental data structures for vector spatial data in {Python}},
+  journal = {Computers, Environment and Urban Systems},
+  year    = {2026},
+  volume  = {130},
+  pages   = {102495},
+  doi     = {10.1016/j.compenvurbsys.2026.102495}
+}
+
+% Shapely (Fig. 1 map script). Citation requested by the project (CITATION.cff). This is the
+% version-specific Zenodo record for 2.1.2; all versions 10.5281/zenodo.5597138.
+@misc{gillies2025shapely,
+  author    = {Gillies, Sean and van der Wel, Casper and Van den Bossche, Joris and
+               Taves, Mike W. and Arnott, Joshua and Ward, Brendan C. and others},
+  title     = {Shapely},
+  year      = {2025},
+  version   = {2.1.2},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.17193310},
+  url       = {https://doi.org/10.5281/zenodo.17193310}
+}
+
+% tqdm. Installed and formerly listed in requirements.txt, but NOT imported by any module of
+% the deposit, so it needs no citation. Entry kept in case it is reinstated. All-versions
+% Zenodo DOI: 10.5281/zenodo.595120.
+@article{dacostaluis2019tqdm,
+  author  = {da Costa-Luis, Casper O.},
+  title   = {tqdm: A Fast, Extensible Progress Meter for {Python} and {CLI}},
+  journal = {Journal of Open Source Software},
+  year    = {2019},
+  volume  = {4},
+  number  = {37},
+  pages   = {1277},
+  doi     = {10.21105/joss.01277}
+}
+
+% =============================================================================================
+% 2. MODELS, PRETRAINED WEIGHTS, DATASETS AND ALGORITHMS
+% =============================================================================================
+
+% DEIMv2: the detector. REUSED key, identical to the manuscript's entry. Verified against the
+% arXiv record (5 authors; v5 dated 2026-10-27; still a preprint, and the project README still
+% asks for the arXiv citation).
+@misc{huang2025deimv2,
+  author        = {Huang, Shihua and Hou, Yongjie and Liu, Longfei and Yu, Xuanlong and Shen, Xi},
+  title         = {Real-Time Object Detection Meets {DINOv3}},
+  year          = {2025},
+  eprint        = {2509.20787},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2509.20787}
+}
+
+% DEIM: the training scheme DEIMv2 extends. Verified against CVF Open Access and Crossref.
+@inproceedings{huang2025deim,
+  author    = {Huang, Shihua and Lu, Zhichao and Cun, Xiaodong and Yu, Yongjun and
+               Zhou, Xiao and Shen, Xi},
+  title     = {{DEIM}: {DETR} with Improved Matching for Fast Convergence},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2025},
+  pages     = {15162--15171},
+  doi       = {10.1109/CVPR52734.2025.01412}
+}
+
+% D-FINE: the decoder and box-refinement design DEIM and DEIMv2 build on. Published at ICLR
+% 2025 (confirmed on the ICLR proceedings site); author list from the arXiv record.
+@inproceedings{peng2025dfine,
+  author        = {Peng, Yansong and Li, Hebei and Wu, Peixi and Zhang, Yueyi and
+                   Sun, Xiaoyan and Wu, Feng},
+  title         = {{D-FINE}: Redefine Regression Task in {DETRs} as Fine-grained Distribution
+                   Refinement},
+  booktitle     = {International Conference on Learning Representations (ICLR)},
+  year          = {2025},
+  eprint        = {2410.13842},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2410.13842}
+}
+
+% RT-DETR. REUSED key, metadata identical to the manuscript's entry. ADDED: the DOI. (The key
+% says "lv2023" but the first author is Zhao and the paper appeared at CVPR 2024; the entry
+% itself is correct.)
+@inproceedings{lv2023rtdetr,
+  author    = {Zhao, Yian and Lv, Wenyu and Xu, Shangliang and Wei, Jinman
+               and Wang, Guanzhong and Dang, Qingqing and Liu, Yi and Chen, Jie},
+  title     = {{DETRs} beat {YOLOs} on real-time object detection},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2024},
+  pages     = {16965--16974},
+  doi       = {10.1109/CVPR52733.2024.01605}
+}
+
+% RT-DETRv2: base architecture of the earlier two-stage detector that
+% salmonid/eval/bbox_regression_gate.py scores (Hugging Face checkpoint PekingU/rtdetr_v2_r50vd).
+% Cite only if that earlier detector is described. Verified against the arXiv record.
+@misc{lv2024rtdetrv2,
+  author        = {Lv, Wenyu and Zhao, Yian and Chang, Qinyao and Huang, Kui and
+                   Wang, Guanzhong and Liu, Yi},
+  title         = {{RT-DETRv2}: Improved Baseline with Bag-of-Freebies for Real-Time Detection
+                   Transformer},
+  year          = {2024},
+  eprint        = {2407.17140},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2407.17140}
+}
+
+% DETR. REUSED key, identical to the manuscript's entry. Verified against Crossref.
+@inproceedings{carion2020detr,
+  author    = {Carion, Nicolas and Massa, Francisco and Synnaeve, Gabriel
+               and Usunier, Nicolas and Kirillov, Alexander and Zagoruyko, Sergey},
+  title     = {End-to-end object detection with transformers},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2020},
+  pages     = {213--229},
+  doi       = {10.1007/978-3-030-58452-8_13}
+}
+
+% DINOv3: the backbone (ViT-S+/16, LVD-1689M pretraining). REUSED key, identical to the
+% manuscript's entry. Verified against the arXiv record (26 authors) and the project README.
+% The DINOv3 License also REQUIRES that publications acknowledge use of the model.
+@misc{simeoni2025dinov3,
+  author       = {Sim{\'e}oni, Oriane and Vo, Huy V. and Seitzer, Maximilian and others},
+  title        = {{DINOv3}},
+  howpublished = {arXiv preprint arXiv:2508.10104},
+  year         = {2025},
+  doi          = {10.48550/arXiv.2508.10104}
+}
+
+% DINOv2 (backbone comparison). REUSED key, identical to the manuscript's entry. Verified
+% against OpenReview: published in TMLR, January 2024, https://openreview.net/forum?id=a68SUt6zFt
+@article{oquab2024dinov2,
+  author  = {Oquab, Maxime and Darcet, Timoth{\'e}e and Moutakanni, Th{\'e}o
+             and Vo, Huy and Szafraniec, Marc and Khalidov, Vasil and others},
+  title   = {{DINOv2}: learning robust visual features without supervision},
+  journal = {Transactions on Machine Learning Research (TMLR)},
+  year    = {2024}
+}
+
+% Vision Transformer. REUSED key, identical to the manuscript's entry. Verified against the
+% arXiv record (12 authors; ICLR camera-ready).
+@inproceedings{dosovitskiy2021vit,
+  author    = {Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander
+               and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas
+               and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg
+               and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
+  title     = {An image is worth 16x16 words: transformers for image recognition at scale},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2021}
+}
+
+% ResNet (backbone comparison). REUSED key, identical to the manuscript's entry. Verified
+% against Crossref.
+@inproceedings{he2016resnet,
+  author    = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  title     = {Deep residual learning for image recognition},
+  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2016},
+  pages     = {770--778},
+  doi       = {10.1109/CVPR.2016.90}
+}
+
+% ImageNet: the labelled images the ResNet-50 comparison classifier was pretrained on
+% (torchvision weights IMAGENET1K_V1). Verified against Crossref.
+@inproceedings{deng2009imagenet,
+  author    = {Deng, Jia and Dong, Wei and Socher, Richard and Li, Li-Jia and Li, Kai and
+               Fei-Fei, Li},
+  title     = {{ImageNet}: A large-scale hierarchical image database},
+  booktitle = {2009 IEEE Conference on Computer Vision and Pattern Recognition},
+  year      = {2009},
+  pages     = {248--255},
+  doi       = {10.1109/CVPR.2009.5206848}
+}
+
+% MS COCO: the dataset the starting DEIMv2-X checkpoint was trained on. REUSED key, identical
+% to the manuscript's entry. Verified against Crossref.
+@inproceedings{lin2014coco,
+  author    = {Lin, Tsung-Yi and Maire, Michael and Belongie, Serge and Hays, James and
+               Perona, Pietro and Ramanan, Deva and Doll{\'a}r, Piotr and Zitnick, C. Lawrence},
+  title     = {Microsoft {COCO}: Common Objects in Context},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  pages     = {740--755},
+  year      = {2014},
+  doi       = {10.1007/978-3-319-10602-1_48}
+}
+
+% BoT-SORT. REUSED key, identical to the manuscript's entry (its "VERIFY" comment can be
+% dropped: confirmed against the arXiv record, 3 authors, v2 2022-07-07, no journal version).
+@article{aharon2022botsort,
+  author  = {Aharon, Nir and Orfaig, Roy and Bobrovsky, Ben-Zion},
+  title   = {{BoT-SORT}: Robust Associations Multi-Pedestrian Tracking},
+  journal = {arXiv preprint arXiv:2206.14651},
+  year    = {2022},
+  doi     = {10.48550/arXiv.2206.14651}
+}
+
+% ByteTrack. REUSED key, identical to the manuscript's entry. Verified against Crossref.
+@inproceedings{zhang2022bytetrack,
+  author    = {Zhang, Yifu and Sun, Peize and Jiang, Yi and Yu, Dongdong and Weng, Fucheng and Yuan, Zehuan and Luo, Ping and Liu, Wenyu and Wang, Xinggang},
+  title     = {{ByteTrack}: Multi-object tracking by associating every detection box},
+  booktitle = {Computer Vision -- ECCV 2022},
+  year      = {2022},
+  pages     = {1--21},
+  doi       = {10.1007/978-3-031-20047-2_1}
+}
+
+% OSNet. REUSED key. CHANGED: pages. The manuscript's entry gives 3702--3712; the publisher
+% (IEEE) record for this DOI gives 3701--3711. The one-page offset is the usual difference
+% between CVF open-access pagination and IEEE Xplore; because the entry cites the IEEE DOI,
+% the IEEE range is used here.
+@inproceedings{zhou2019osnet,
+  author    = {Zhou, Kaiyang and Yang, Yongxin and Cavallaro, Andrea and Xiang, Tao},
+  title     = {Omni-scale feature learning for person re-identification},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2019},
+  pages     = {3701--3711},
+  doi       = {10.1109/ICCV.2019.00380}
+}
+
+% OSNet, journal version. OPTIONAL. Torchreid asks users of its OSNet models to cite this
+% together with zhou2019osnet and zhou2019torchreid. Verified against Crossref (the article
+% carries a 2021 DOI and appeared in the September 2022 issue).
+@article{zhou2022osnet,
+  author  = {Zhou, Kaiyang and Yang, Yongxin and Cavallaro, Andrea and Xiang, Tao},
+  title   = {Learning Generalisable Omni-Scale Representations for Person Re-Identification},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year    = {2022},
+  volume  = {44},
+  number  = {9},
+  pages   = {5056--5069},
+  doi     = {10.1109/TPAMI.2021.3069237}
+}
+
+% Torchreid: the library whose model zoo is the source of the osnet_x0_25_msmt17 re-ID
+% weights that BoxMOT downloads. Verified against the arXiv record.
+@misc{zhou2019torchreid,
+  author        = {Zhou, Kaiyang and Xiang, Tao},
+  title         = {Torchreid: A Library for Deep Learning Person Re-Identification in {Pytorch}},
+  year          = {2019},
+  eprint        = {1910.10093},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.1910.10093}
+}
+
+% MSMT17: the pedestrian dataset the OSNet re-ID weights were trained on. Verified against
+% Crossref.
+@inproceedings{wei2018msmt17,
+  author    = {Wei, Longhui and Zhang, Shiliang and Gao, Wen and Tian, Qi},
+  title     = {Person Transfer {GAN} to Bridge Domain Gap for Person Re-identification},
+  booktitle = {2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year      = {2018},
+  pages     = {79--88},
+  doi       = {10.1109/CVPR.2018.00016}
+}
+
+% SAM 2 (checkpoint used: facebook/sam2.1-hiera-base-plus). REUSED key, identical to the
+% manuscript's entry. Verified against the arXiv record (18 authors). The paper has since
+% been published at ICLR 2025 (oral; https://openreview.net/forum?id=Ha6RTeWMd0). The project
+% README still asks for the arXiv citation, so the entry is left as it is; to cite the
+% proceedings version instead, change the type to @inproceedings, set
+% booktitle = {International Conference on Learning Representations (ICLR)} and year = {2025}.
+@misc{ravi2024sam2,
+  author        = {Ravi, Nikhila and Gabeur, Valentin and Hu, Yuan-Ting and Hu, Ronghang and
+                   Ryali, Chaitanya and Ma, Tengyu and Khedr, Haitham and R{\"a}dle, Roman and
+                   Rolland, Chloe and Gustafson, Laura and Mintun, Eric and Pan, Junting and
+                   Alwala, Kalyan Vasudev and Carion, Nicolas and Wu, Chao-Yuan and
+                   Girshick, Ross and Doll{\'a}r, Piotr and Feichtenhofer, Christoph},
+  title         = {{SAM} 2: Segment Anything in Images and Videos},
+  year          = {2024},
+  eprint        = {2408.00714},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2408.00714}
+}
+
+% Copy-paste augmentation: the method salmonid/data/sam2_composite.py implements. REUSED key,
+% metadata identical to the manuscript's entry. ADDED: the DOI the manuscript's comment
+% flagged as unconfirmed. Note that the IEEE record for this DOI gives pages 2917--2927; the
+% manuscript's 2918--2928 is the CVF open-access pagination (confirmed on the CVF page).
+@inproceedings{ghiasi2021copypaste,
+  author    = {Ghiasi, Golnaz and Cui, Yin and Srinivas, Aravind and Qian, Rui
+               and Lin, Tsung-Yi and Cubuk, Ekin D. and Le, Quoc V. and Zoph, Barret},
+  title     = {Simple copy-paste is a strong data augmentation method for
+               instance segmentation},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2021},
+  pages     = {2918--2928},
+  doi       = {10.1109/CVPR46437.2021.00294}
+}
+
+% =============================================================================================
+% 3. STATISTICAL METHODS IMPLEMENTED IN THE CODE
+% =============================================================================================
+
+% Lin's concordance correlation coefficient. REUSED key, identical to the manuscript's entry.
+% Verified against Crossref and PubMed (Biometrics 45(1):255-268).
+@article{lin1989concordance,
+  author  = {Lin, Lawrence I-Kuei},
+  title   = {A concordance correlation coefficient to evaluate reproducibility},
+  journal = {Biometrics},
+  year    = {1989},
+  volume  = {45},
+  number  = {1},
+  pages   = {255--268},
+  doi     = {10.2307/2532051}
+}
+
+% McBride's strength-of-agreement bands. REUSED key, identical to the manuscript's entry. The
+% report has no DOI; title, report number and year confirmed from independent citing sources.
+@techreport{mcbride2005proposal,
+  author      = {McBride, Graham B.},
+  title       = {A proposal for strength-of-agreement criteria for {Lin's} concordance correlation coefficient},
+  institution = {National Institute of Water and Atmospheric Research (NIWA)},
+  type        = {NIWA Client Report},
+  number      = {HAM2005-062},
+  year        = {2005}
+}
+
+% Bland-Altman limits of agreement. REUSED key, identical to the manuscript's entry. Verified
+% against Crossref and PubMed.
+@article{bland1986statistical,
+  author  = {Bland, J. Martin and Altman, Douglas G.},
+  title   = {Statistical methods for assessing agreement between two methods of clinical measurement},
+  journal = {The Lancet},
+  year    = {1986},
+  volume  = {327},
+  number  = {8476},
+  pages   = {307--310},
+  doi     = {10.1016/S0140-6736(86)90837-8}
+}
+
+% Bland-Altman with non-constant variance: the source for the ratio (log) limits and the
+% limits that widen with the count, in salmonid/results/agreement_stats.py. Verified against
+% Crossref and PubMed.
+@article{bland1999measuring,
+  author  = {Bland, J. Martin and Altman, Douglas G.},
+  title   = {Measuring agreement in method comparison studies},
+  journal = {Statistical Methods in Medical Research},
+  year    = {1999},
+  volume  = {8},
+  number  = {2},
+  pages   = {135--160},
+  doi     = {10.1177/096228029900800204}
+}
+
+% Wilson score interval (salmonid/results/classification_ci.py). Verified against Crossref.
+@article{wilson1927probable,
+  author  = {Wilson, Edwin B.},
+  title   = {Probable inference, the law of succession, and statistical inference},
+  journal = {Journal of the American Statistical Association},
+  year    = {1927},
+  volume  = {22},
+  number  = {158},
+  pages   = {209--212},
+  doi     = {10.1080/01621459.1927.10502953}
+}
+
+% The reference the code's docstring gives for preferring the Wilson interval at small n.
+% Verified against Crossref.
+@article{brown2001interval,
+  author  = {Brown, Lawrence D. and Cai, T. Tony and DasGupta, Anirban},
+  title   = {Interval estimation for a binomial proportion},
+  journal = {Statistical Science},
+  year    = {2001},
+  volume  = {16},
+  number  = {2},
+  pages   = {101--133},
+  doi     = {10.1214/ss/1009213286}
+}
+
+% Bootstrap (percentile intervals for CCC, F1, macro-F1 and kappa). Verified against Crossref.
+@article{efron1979bootstrap,
+  author  = {Efron, B.},
+  title   = {Bootstrap methods: another look at the jackknife},
+  journal = {The Annals of Statistics},
+  year    = {1979},
+  volume  = {7},
+  number  = {1},
+  pages   = {1--26},
+  doi     = {10.1214/aos/1176344552}
+}
+
+% Moving-block bootstrap for autocorrelated daily counts. Verified against Crossref.
+@article{kunsch1989jackknife,
+  author  = {K{\"u}nsch, Hans R.},
+  title   = {The jackknife and the bootstrap for general stationary observations},
+  journal = {The Annals of Statistics},
+  year    = {1989},
+  volume  = {17},
+  number  = {3},
+  pages   = {1217--1241},
+  doi     = {10.1214/aos/1176347265}
+}
+
+% Cohen's kappa. REUSED key, identical to the manuscript's entry. Verified against Crossref.
+@article{cohen1960coefficient,
+  author  = {Cohen, Jacob},
+  title   = {A coefficient of agreement for nominal scales},
+  journal = {Educational and Psychological Measurement},
+  year    = {1960},
+  volume  = {20},
+  number  = {1},
+  pages   = {37--46},
+  doi     = {10.1177/001316446002000104}
+}
+
+% Large-sample standard error of kappa, computed by the manuscript repository's
+% compute_kappa.py. Cite ONLY if the asymptotic interval is reported (the manuscript currently
+% reports bootstrap intervals). Verified against Crossref.
+@article{fleiss1969large,
+  author  = {Fleiss, Joseph L. and Cohen, Jacob and Everitt, B. S.},
+  title   = {Large sample standard errors of kappa and weighted kappa},
+  journal = {Psychological Bulletin},
+  year    = {1969},
+  volume  = {72},
+  number  = {5},
+  pages   = {323--327},
+  doi     = {10.1037/h0028106}
+}
+
+% Verbal bands for kappa, applied by compute_kappa.py. Cite ONLY if those bands are quoted in
+% the text (they are not at present). Verified against Crossref and PubMed.
+@article{landis1977measurement,
+  author  = {Landis, J. Richard and Koch, Gary G.},
+  title   = {The measurement of observer agreement for categorical data},
+  journal = {Biometrics},
+  year    = {1977},
+  volume  = {33},
+  number  = {1},
+  pages   = {159--174},
+  doi     = {10.2307/2529310}
+}
+
+% Fisher's z-transformation, used for the 95% interval on the daily Pearson correlation
+% (manuscript repository, scripts/compute_correlation_stats.py). Verified against Crossref
+% (the Oxford record 10.1093/biomet/10.4.507 confirms pages 507-521).
+@article{fisher1915frequency,
+  author  = {Fisher, R. A.},
+  title   = {Frequency distribution of the values of the correlation coefficient in samples from an indefinitely large population},
+  journal = {Biometrika},
+  year    = {1915},
+  volume  = {10},
+  number  = {4},
+  pages   = {507--521},
+  doi     = {10.2307/2331838}
+}
+
+% Spearman's rank correlation. Verified against Crossref (first page) and the APA PsycNet
+% record (pages 72-101).
+@article{spearman1904proof,
+  author  = {Spearman, C.},
+  title   = {The proof and measurement of association between two things},
+  journal = {The American Journal of Psychology},
+  year    = {1904},
+  volume  = {15},
+  number  = {1},
+  pages   = {72--101},
+  doi     = {10.2307/1412159}
+}
+
+% McNemar's test (the exact form is used for the backbone comparison, Table S4). Verified
+% against Crossref.
+@article{mcnemar1947note,
+  author  = {McNemar, Quinn},
+  title   = {Note on the sampling error of the difference between correlated proportions or percentages},
+  journal = {Psychometrika},
+  year    = {1947},
+  volume  = {12},
+  number  = {2},
+  pages   = {153--157},
+  doi     = {10.1007/BF02295996}
+}
+
+% Okabe-Ito colour palette (salmonid/figures/manuscript_style.py). The palette's source is a
+% web page, dated 20 November 2002 and last modified 24 September 2008 (read 2026-11-10).
+@misc{okabe2008color,
+  author       = {Okabe, Masataka and Ito, Kei},
+  title        = {Color Universal Design ({CUD}): How to make figures and presentations that
+                  are friendly to Colorblind people},
+  year         = {2008},
+  url          = {https://jfly.uni-koeln.de/color/},
+  note         = {First posted 2002; modified 2008}
+}
+
+% The journal article usually cited with the Okabe-Ito palette. Verified against Crossref.
+@article{wong2011points,
+  author  = {Wong, Bang},
+  title   = {Points of view: Color blindness},
+  journal = {Nature Methods},
+  year    = {2011},
+  volume  = {8},
+  number  = {6},
+  pages   = {441},
+  doi     = {10.1038/nmeth.1618}
+}
+
+% =============================================================================================
+% 4. TOOLS AND BASE DATA
+% =============================================================================================
+
+% Python 3.11.9 (both environments). Release date from python.org (2 April 2024).
+@misc{python3119,
+  author  = {{Python Software Foundation}},
+  title   = {Python Language Reference, version 3.11.9},
+  year    = {2024},
+  version = {3.11.9},
+  url     = {https://www.python.org/downloads/release/python-3119/}
+}
+
+% NVIDIA CUDA (both environments run PyTorch built against CUDA 12.8). OPTIONAL: hardware
+% libraries are not usually cited. Verified against Crossref.
+@article{nickolls2008cuda,
+  author  = {Nickolls, John and Buck, Ian and Garland, Michael and Skadron, Kevin},
+  title   = {Scalable parallel programming with {CUDA}},
+  journal = {ACM Queue},
+  year    = {2008},
+  volume  = {6},
+  number  = {2},
+  pages   = {40--53},
+  doi     = {10.1145/1365490.1365500}
+}
+
+% NVIDIA cuDNN (9.19 in the base environment, 9.7 in the DEIMv2 environment). OPTIONAL.
+% Verified against the arXiv record.
+@misc{chetlur2014cudnn,
+  author        = {Chetlur, Sharan and Woolley, Cliff and Vandermersch, Philippe and
+                   Cohen, Jonathan and Tran, John and Catanzaro, Bryan and Shelhamer, Evan},
+  title         = {{cuDNN}: Efficient Primitives for Deep Learning},
+  year          = {2014},
+  eprint        = {1410.0759},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.NE},
+  doi           = {10.48550/arXiv.1410.0759}
+}
+
+% Pandoc (manuscript build only). Authors from the project's CITATION.cff. UNVERIFIED: the
+% version actually used. Pandoc is not on this machine's PATH, so no version is given; add it
+% from `pandoc --version` on the machine that builds the manuscript.
+@misc{macfarlane2026pandoc,
+  author = {MacFarlane, John and Krewinkel, Albert and Rosenthal, Jesse},
+  title  = {Pandoc},
+  year   = {2026},
+  url    = {https://github.com/jgm/pandoc}
+}
+
+% Quarto (manuscript build only; supplies bundled pandoc and Typst). Authors and DOI from the
+% project's CITATION.cff, which lists six authors against the four on the 2022 Zenodo record.
+% UNVERIFIED: the version actually used (Quarto is not on this machine's PATH).
+@misc{allaire2022quarto,
+  author    = {Allaire, J. J. and Teague, Charles and Scheidegger, Carlos and Xie, Yihui and
+               Dervieux, Christophe and Woodhull, Gordon},
+  title     = {Quarto},
+  year      = {2022},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.5960048},
+  url       = {https://github.com/quarto-dev/quarto-cli}
+}
+
+% Typst (manuscript PDF build only). Authors from the project's CITATION.cff. UNVERIFIED: the
+% version actually used (Typst is not on this machine's PATH).
+@misc{madje2026typst,
+  author = {M{\"a}dje, Laurenz and Haug, Martin and {The Typst Project Developers}},
+  title  = {Typst},
+  year   = {2026},
+  url    = {https://typst.app/}
+}
+
+% Natural Earth: inset basemap of Fig. 1 (1:50m countries and lakes). Public domain; the
+% project says credit is not required and suggests the wording "Made with Natural Earth".
+@misc{naturalearth,
+  author = {{Natural Earth}},
+  title  = {Natural Earth: free vector and raster map data, 1:50m cultural and physical vectors},
+  year   = {2026},
+  url    = {https://www.naturalearthdata.com/},
+  note   = {Retrieved from github.com/nvkelso/natural-earth-vector}
+}
+
+% OpenStreetMap: Ganaraska River centrelines in Fig. 1 (Overpass API extract; the file's
+% base timestamp is 2026-06-10). Licence ODbL 1.0, which REQUIRES attribution.
+@misc{openstreetmap2026,
+  author = {{OpenStreetMap contributors}},
+  title  = {{OpenStreetMap}},
+  year   = {2026},
+  url    = {https://www.openstreetmap.org},
+  note   = {Data extract of 10 June 2026, retrieved through the Overpass API. Available under
+            the Open Database License}
+}

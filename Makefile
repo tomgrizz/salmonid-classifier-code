@@ -1,58 +1,55 @@
-# Turnkey reproduction targets. `make help` lists them.
-# Override the interpreter with e.g. `make PY=python3.11 score`.
+# Shortcuts for the reproduction steps. `make help` lists them.
+#
+# make is OPTIONAL. Every target below is one plain python command, printed when it runs,
+# so on a machine without make (most Windows machines) run that command directly. The main
+# one is:   python run_tier1.py
+#
+# Override the interpreter with e.g. `make PY=python3.11 tier1`.
 PY ?= python
 
-.PHONY: help install compile score figures concordance sensitivity all setup-deimv2 clean
+.PHONY: help install tier1 list score stats figures paper compile clean
 
 help:
-	@echo "salmonid-classifier-code — reproduction targets"
+	@echo "Reproduction targets (Tier 1 = from the committed data; no downloads, no GPU)"
 	@echo ""
-	@echo "  make install       pip install base env (requirements.txt) + this package (editable)"
-	@echo "  make compile       byte-compile every module (fast import smoke test)"
+	@echo "  make install   install the four Tier-1 packages at the exact published versions"
+	@echo "  make tier1     run EVERY Tier-1 step in order, then verify against data/   <- start here"
+	@echo "  make list      list the Tier-1 steps and what each one feeds in the manuscript"
 	@echo ""
-	@echo "  Tier 1 (needs only committed data/ — no downloads):"
-	@echo "    make score        held-out species score -> macro-F1 0.966 (test_set_v6)"
-	@echo "    make concordance  Lin's CCC table + concordance/Bland-Altman figures"
-	@echo "    make figures      regenerate manuscript figures from canonical_*.csv"
-	@echo "    make sensitivity  net-rule sensitivity figure from the committed sweeps"
-	@echo "    make all          score + concordance + figures"
+	@echo "  Single steps (all are run by 'make tier1'):"
+	@echo "  make score     held-out species score        -> Table 1, Figure 2 (macro-F1 0.961)"
+	@echo "  make stats     agreement statistics          -> Tables 1 and 5, Sections 3.3 to 3.5"
+	@echo "  make figures   figures drawn from the tables -> Figures 2, 4, 5, 6, 7, S2, S3"
+	@echo "  make paper     the remaining manuscript tables -> see docs/PAPER_TO_CODE.md"
 	@echo ""
-	@echo "  Environment:"
-	@echo "    make setup-deimv2 print the steps to reconstruct the pinned external DEIMv2 repo"
+	@echo "  make compile   byte-compile every module (a fast syntax check)"
+	@echo "  make clean     delete regenerated outputs (output/ and figures/)"
+	@echo ""
+	@echo "Tier 2 (model weights, video, stored detections): see docs/REPRODUCE.md"
 
 install:
-	$(PY) -m pip install -r requirements.txt
-	$(PY) -m pip install -e .
+	$(PY) -m pip install -r environment/tier1.lock.txt
 
-compile:
-	$(PY) -m compileall -q salmonid
+tier1:
+	$(PY) run_tier1.py
 
-# --- Tier 1: reproduce from committed data (config.py defaults resolve into data/) ---
+list:
+	$(PY) run_tier1.py --list
+
 score:
-	$(PY) -m salmonid.eval.score_testset_v6 --preds data/preds_checkpoint0007.csv
+	$(PY) run_tier1.py --only 1 2
 
-concordance:
-	$(PY) -m salmonid.results.compute_concordance --fig-dir figures
+stats:
+	$(PY) run_tier1.py --only 2 3 4 5 6
 
 figures:
-	$(PY) -m salmonid.figures.render_hero_regulation
-	$(PY) -m salmonid.figures.render_manuscript_figures
-	$(PY) -m salmonid.figures.render_sensitivity_figure
+	$(PY) run_tier1.py --only 4 7 8 9
 
-sensitivity:
-	$(PY) -m salmonid.figures.render_sensitivity_figure
+paper:
+	$(PY) run_tier1.py --only 10 11 12 13 14 15 16 17 18
 
-all: score concordance figures
-
-# --- environment reconstruction (external DEIMv2 repo; see docs/DEIMV2_PIN.md) ---
-setup-deimv2:
-	@echo "Reconstruct the pinned DEIMv2 training repo (needed only for training / Pass-A detection):"
-	@echo "  git clone https://github.com/Intellindust-AI-Lab/DEIMv2"
-	@echo "  cd DEIMv2 && git checkout $$(cat docs/DEIMV2_SHA.txt)"
-	@echo "  git apply <this-repo>/docs/deimv2_worktree.patch"
-	@echo "  cp -r <this-repo>/configs/* configs/          # fish config chain incl. v26"
-	@echo "  # place ckpts/deimv2_x_coco.pth + ckpts/dinov3_vits16plus_pretrain_*.pth"
-	@echo "  export SALMONID_DEIM_DIR=\$$(pwd)"
+compile:
+	$(PY) -m compileall -q salmonid run_tier1.py
 
 clean:
-	rm -f figures/*.png figures/*.pdf figures/*.tiff
+	rm -rf output figures/*.png figures/*.pdf figures/*.tiff

@@ -1,22 +1,37 @@
-LICENSE — PLACEHOLDER (requires author / OMNRF sign-off before publication)
-============================================================================
+LICENCE NOT YET FINALIZED
+=========================
 
-This repository does not yet carry a final open-source license. A license MUST be
-chosen and this file replaced before the code is published with the manuscript.
+This repository does not yet carry a licence. Until this file is replaced by the text of
+one, no rights to reuse, modify or redistribute its contents are granted beyond reading and
+running the code for the purpose of peer review.
 
-Recommendation
---------------
-Use **Apache License 2.0**. Rationale:
-  * The external training dependency (Intellindust-AI-Lab/DEIMv2) is Apache-2.0, so an
-    Apache-2.0 license on this reproduction code is compatible and consistent.
-  * Apache-2.0 is a permissive, publication-friendly license widely accepted by journals
-    and by Zenodo/GitHub archival.
-  * MIT is an acceptable alternative if a shorter permissive license is preferred.
+The licence is to be chosen by the authors with the agreement of the Ontario Ministry of
+Natural Resources (Lake Ontario Management Unit), having regard to any Crown copyright or
+government open-data requirements that apply. It must be in place before the repository is
+archived with a DOI, which the Canadian Journal of Fisheries and Aquatic Sciences requires at
+acceptance.
 
-Before replacing this file, confirm with the Ontario Ministry of Natural Resources
-(Lake Ontario Management Unit) that the chosen license is consistent with any Crown
-copyright / government open-data licensing requirements that apply to this work.
+Points the choice has to take into account
+------------------------------------------
+These are set out, with sources, in docs/SOFTWARE_CITATIONS.md ("Licence notes"):
 
-Third-party components retain their own licenses:
-  * DEIMv2 (Intellindust-AI-Lab/DEIMv2) — Apache License 2.0
-  * DINOv3 backbone weights — see the upstream model card for terms
+  * Code and data may need different licences: one for the code under salmonid/, another
+    (for example CC BY 4.0 or the Open Government Licence - Ontario) for the tables under
+    data/ and provenance/.
+
+  * salmonid/detect/track_from_store.py imports BoxMOT, which is licensed AGPL-3.0. BoxMOT is
+    not redistributed here, but the licence chosen for this repository should be checked for
+    compatibility with importing it.
+
+  * configs/ contains configuration files from the DEIMv2 project, and docs/ contains a patch
+    to DEIMv2 source code. DEIMv2 was licensed Apache-2.0 at the commit used
+    (docs/DEIMV2_PIN.md); redistributing these files requires the Apache-2.0 licence text and
+    notices to accompany them.
+
+  * The trained model weights are not in this repository. They are a derivative of the DINOv3
+    backbone and can be distributed only under the DINOv3 License.
+
+  * data/paper/spatial/ contains OpenStreetMap data, (c) OpenStreetMap contributors, licensed
+    under the Open Database License (ODbL) 1.0.
+
+Third-party components keep their own licences in every case.

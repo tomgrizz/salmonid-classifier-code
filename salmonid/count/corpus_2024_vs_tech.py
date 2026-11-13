@@ -1,4 +1,13 @@
-"""
+"""STATUS: only ``load_tech()`` in this file is on the published path.
+``load_tech()`` reads the technician count records for the season(s) named below and is
+imported by salmonid/count/corpus_countr_from_store.py, which produced the published counts.
+Everything else in this file (the command-line entry point, the per-frame file reading, the
+species-confidence floors) is the counting engine of the earlier two-stage pipeline: it is
+kept for provenance, its inputs are not deposited, and none of its numbers are in the
+manuscript. Statements below about "the paper" describe an earlier draft. The method of
+record is docs/COUNTING_METHOD.md.
+Tier: 2 (technician records are external; see docs/DATA_AVAILABILITY.md).
+
 In plain terms: this file is a fair test of the automated fish counter for the year 2024, a year the
 model was never trained on. It re-counts the fish the model found in the 2024 Credit and Ganaraska
 footage and compares those counts — both the total number of each species seen and the net upstream

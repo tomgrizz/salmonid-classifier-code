@@ -1,0 +1,42 @@
+diff --git a/engine/data/transforms/_transforms.py b/engine/data/transforms/_transforms.py
+index 31588df..122779a 100644
+--- a/engine/data/transforms/_transforms.py
++++ b/engine/data/transforms/_transforms.py
+@@ -24,6 +24,10 @@ torchvision.disable_beta_transforms_warning()
+ 
+ 
+ RandomPhotometricDistort = register()(T.RandomPhotometricDistort)
++# ColorJitter: brightness/contrast/saturation/hue jitter WITHOUT the RGB channel-permutation that
++# T.RandomPhotometricDistort applies (which destroys the color cue separating chrome Coho/Rainbow/
++# Chinook). Registered for the fish v2.2 (960px) recipe; use type: ColorJitter in the config.
++ColorJitter = register()(T.ColorJitter)
+ RandomZoomOut = register()(T.RandomZoomOut)
+ RandomHorizontalFlip = register()(T.RandomHorizontalFlip)
+ Resize = register()(T.Resize)
+@@ -66,7 +70,7 @@ class PadToSize(T.Pad):
+         self.size = size
+         super().__init__(0, fill, padding_mode)
+ 
+-    def _transform(self, inpt: Any, params: Dict[str, Any]) -> Any:
++    def transform(self, inpt: Any, params: Dict[str, Any]) -> Any:  # tv>=0.22 renamed _transform->transform
+         fill = self._fill[type(inpt)]
+         padding = params['padding']
+         return F.pad(inpt, padding=padding, fill=fill, padding_mode=self.padding_mode)  # type: ignore[arg-type]
+@@ -101,7 +105,7 @@ class ConvertBoxes(T.Transform):
+         self.fmt = fmt
+         self.normalize = normalize
+ 
+-    def _transform(self, inpt: Any, params: Dict[str, Any]) -> Any:
++    def transform(self, inpt: Any, params: Dict[str, Any]) -> Any:  # tv>=0.22 renamed _transform->transform
+         spatial_size = getattr(inpt, _boxes_keys[1])
+         if self.fmt:
+             in_fmt = inpt.format.value.lower()
+@@ -124,7 +128,7 @@ class ConvertPILImage(T.Transform):
+         self.dtype = dtype
+         self.scale = scale
+ 
+-    def _transform(self, inpt: Any, params: Dict[str, Any]) -> Any:
++    def transform(self, inpt: Any, params: Dict[str, Any]) -> Any:  # tv>=0.22 renamed _transform->transform
+         inpt = F.pil_to_tensor(inpt)
+         if self.dtype == 'float32':
+             inpt = inpt.float()

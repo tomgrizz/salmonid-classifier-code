@@ -1,0 +1,54 @@
+[07/24/2026 14:45:21] === v2.7 leak gate (test_set_v6 + ls_test_v5, TRACK/VIDEO/SYNTH/same-fish-box) ===
+  holdout guard: +366 tracks / +364 videos from test_set_v6_holdout.json
+  holdout guard: +180 tracks / +180 videos from ls_test_set_v5.json
+guard: 546 held-out tracks across 544 held-out videos
+coco: train.json ΓÇö 45249 images, 52444 anns
+synth provenance: 7500 composited images resolved from 6 synth COCO(s)
+
+DEEP: 0 held-out GT tracks trained on with a box on the SAME fish (IoU>=0.5)  tiers={}  species={}
+
+level      images
+TRACK           0
+VIDEO           0   (0 beyond TRACK)
+SYNTH           0
+DEEP            0   (0 distinct GT test tracks)
+TOTAL           0  (0.00% of images)
+
+VERDICT: CLEAN
+  holdout guard: +366 tracks / +364 videos from test_set_v6_holdout.json
+  holdout guard: +180 tracks / +180 videos from ls_test_set_v5.json
+guard: 546 held-out tracks across 544 held-out videos
+coco: val_clean.json ΓÇö 2160 images, 2097 anns
+
+DEEP: 0 held-out GT tracks trained on with a box on the SAME fish (IoU>=0.5)  tiers={}  species={}
+
+level      images
+TRACK           0
+VIDEO           0   (0 beyond TRACK)
+SYNTH           0
+DEEP            0   (0 distinct GT test tracks)
+TOTAL           0  (0.00% of images)
+
+VERDICT: CLEAN
+[07/24/2026 14:45:22] DEIMv2-X v2.7 begin (seed=0, leak-clean COCO, init from COCO weights, 30 epochs)
+[manifest] wrote C:\Users\lomu-\Documents\GitHub\DEIMv2\outputs\deimv2_fish_x_v27\run_manifest.json
+[manifest] fish_cv 51bf64d (dirty=True) | deimv2 0fff8d4 (dirty=True)
+[manifest] train: 45249 imgs / 52444 anns  {'Chinook': 12177, 'Coho': 12954, 'Atlantic': 2067, 'Rainbow Trout': 18341, 'Brown Trout': 6327, 'Small Salmonid': 578}
+[manifest] train sha256 a9a0eed56ab0472bΓÇª  seed=0
+
+[... trainer start-up output omitted ...]
+
+Loading ckpt from ./ckpts/dinov3_vits16plus_pretrain_lvd1689m-4057cbaa.pth...
+Tuning checkpoint from ckpts/deimv2_x_coco.pth
+
+[... 30 epochs of training output omitted ...]
+
+[07/25/2026 18:31:00] DEIMv2-X v2.7 training done -> C:\Users\lomu-\Documents\GitHub\DEIMv2\outputs\deimv2_fish_x_v27
+[07/25/2026 18:31:01] --- eval 0013 ---
+[07/25/2026 19:26:29] --- eval 0015 ---
+[07/25/2026 20:22:27] --- eval 0017 ---
+[07/25/2026 21:18:57] --- eval 0019 ---
+[07/25/2026 22:15:28] --- eval 0021 ---
+[07/25/2026 23:12:04] --- eval 0023 ---
+[07/26/2026 00:08:42] --- eval best_stg2 ---
+[07/26/2026 01:05:09] v2.7 eval done -> G:\Projects\deimv2_x_v27_eval\results.txt

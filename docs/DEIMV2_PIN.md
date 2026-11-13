@@ -1,36 +1,47 @@
-# DEIMv2 external-repo pin
+# The external detector code (DEIMv2) and how to obtain the exact version
 
-The single-stage detector trains with the external **DEIMv2** repo
-(`Intellindust-AI-Lab/DEIMv2`, Apache-2.0), cloned at
-`C:\Users\lomu-\Documents\GitHub\DEIMv2` — OUTSIDE this git repo. To reproduce a run you need the
-exact DEIMv2 state below, plus the fish configs (snapshotted in `single_stage/configs/`).
+The model is a DEIMv2 detector. Training and detection run the DEIMv2 code published by its
+authors (`Intellindust-AI-Lab/DEIMv2` on GitHub), which is **not** copied into this repository.
+To reproduce training or detection you need that code in exactly the state below.
 
-## Pinned state
+## The pinned state
 
-- **Commit:** `0fff8d4` (full SHA in `DEIMV2_SHA.txt`).
-- **Working-tree patch:** `deimv2_worktree.patch` — the DEIMv2 clone is **dirty**, and the patch is
-  REQUIRED (not optional cleanup). It contains two load-bearing edits to
-  `engine/data/transforms/_transforms.py`:
-  1. **Registers `ColorJitter`** as a DEIMv2 transform — the de-chrome augmentation. The v2.2+ fish
-     recipe uses `type: ColorJitter` *instead of* `RandomPhotometricDistort`, whose RGB channel
-     permutation destroys the color cue that separates chrome Coho / Rainbow / Chinook. The v25
-     config references `ColorJitter`, so **without this patch the config fails to build.**
-  2. **torchvision ≥0.22 rename** `_transform` → `transform` on `PadToSize`, `ConvertBoxes`,
-     `ConvertPILImage` (the beta-transforms API changed).
+| | |
+|---|---|
+| Commit | `0fff8d4dcdc272e6cf2d84be31399db471357941` (also in `DEIMV2_SHA.txt`), dated 2026-03-24 |
+| Licence at that commit | Apache-2.0. The upstream project changed its licence on 2026-08-24; the terms of the pinned commit are the ones that apply to it. See `SOFTWARE_CITATIONS.md`. |
+| Required patch | `deimv2_worktree.patch` (in this folder), applied on top of the commit |
+| Configuration files | `../configs/`, copied into the DEIMv2 `configs/` folder |
+| Starting weights | `ckpts/deimv2_x_coco.pth` and `ckpts/dinov3_vits16plus_pretrain_lvd1689m-4057cbaa.pth`; checksums in `../provenance/v2.7/CHECKSUMS.md` |
 
-## Reconstruct
+The patch is required, not optional. It makes two changes to one file
+(`engine/data/transforms/_transforms.py`):
+
+1. It registers a `ColorJitter` transform. The fish configuration uses it in place of
+   DEIMv2's default colour augmentation, which shuffles the colour channels and so destroys
+   the colour cue that helps separate silvery Coho Salmon, Rainbow Trout and Chinook Salmon.
+   Without the patch the configuration fails to load.
+2. It follows a method rename (`_transform` to `transform`) in torchvision 0.22, the version
+   used here.
+
+The patch file here is identical to the one recorded with the published training run
+(`../provenance/v2.7/deimv2_worktree.patch`), apart from line endings.
+
+## Setting it up
 
 ```bash
 git clone https://github.com/Intellindust-AI-Lab/DEIMv2
-cd DEIMv2 && git checkout 0fff8d4
-git apply /path/to/single_stage/deimv2_worktree.patch
-# place ckpts/deimv2_x_coco.pth + ckpts/dinov3_vits16plus_pretrain_lvd1689m-4057cbaa.pth
-# copy single_stage/configs/* back into configs/ (same relative layout) if the clone lacks them
+cd DEIMv2
+git checkout 0fff8d4dcdc272e6cf2d84be31399db471357941
+git apply /path/to/salmonid-classifier-code/docs/deimv2_worktree.patch
+cp -r /path/to/salmonid-classifier-code/configs/* configs/
+# place the two starting-weight files in ckpts/
 ```
 
-## Recommendation
+Then point `SALMONID_DEIM_DIR` at this folder (see `../.env.example`). The training launcher
+(`python -m salmonid.train.train_v27 --dry-run`) checks the commit, the patch and the weight
+files and says which, if any, is not as expected.
 
-Commit this patch inside the DEIMv2 clone (or fork DEIMv2 and push it) so it stops living as an
-uncommitted working-tree change — a `git checkout`/reclone in that directory would silently drop it
-and break every fish config. Until then, `deimv2_worktree.patch` here is the safety copy, and every
-`run_manifest.json` re-captures it per run.
+The configuration files that matter for the published model are
+`configs/deimv2/deimv2_fish_x_v27.yml` and the files it includes; `../configs/README.md`
+describes the rest.

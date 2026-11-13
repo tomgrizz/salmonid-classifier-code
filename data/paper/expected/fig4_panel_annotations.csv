@@ -1,0 +1,11 @@
+river,species,years,pooled_pct_error,interannual_r2
+Ganaraska,Chinook,6,7.0,0.964
+Ganaraska,Coho,6,-10.9,0.793
+Ganaraska,Atlantic,6,46.0,0.755
+Ganaraska,Rainbow Trout,6,3.8,0.841
+Ganaraska,Brown Trout,6,76.1,0.837
+Credit,Chinook,6,-7.9,0.989
+Credit,Coho,6,-8.7,0.98
+Credit,Atlantic,6,17.4,0.629
+Credit,Rainbow Trout,6,10.0,0.739
+Credit,Brown Trout,6,36.2,0.388

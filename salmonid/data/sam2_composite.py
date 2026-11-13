@@ -1,55 +1,91 @@
-"""
-In plain terms: this file builds extra, made-up training pictures for the fish detector by pasting
-real, human-labelled cut-out fish (a fish snipped out of a real video frame with its background
-removed) onto real empty tunnel-camera backgrounds. It deliberately creates two tricky situations —
-a fish only half-visible as it swims past the edge of the frame, and two fish crowded close together —
-so the model learns to handle them. It does not itself produce any number or figure in the paper; it
-only supplies practice images that help train the detection model behind the paper's species results.
+"""In plain terms: this script makes extra practice pictures for the fish detector. It takes
+real fish that a person has already identified, cut out of a video frame with the background
+removed, and pastes them onto real empty frames from the same camera tunnel. It builds two hard
+situations on purpose: a fish only partly in view at the edge of the frame, and two fish
+overlapping. Because every pasted fish was identified by a person, the species label of each
+composite is known, not guessed. Before making anything it throws away every cut-out that came
+from a held-out test clip, so no exam fish can re-enter training inside a composite.
 
-SAM2 compositor (Branch B, Phases 2-3): synthesize the two hard training cases from the cutout library.
+Inputs
+------
+* The cut-out library: ``<--cutouts-dir>/manifest.csv`` plus one transparent PNG per fish
+  (default ``config.SAM2_CUTOUTS``), with ``review.csv`` holding the lead author's
+  reject / relabel decisions for individual cut-outs.
+* Empty tunnel frames: ``<--backgrounds-dir>/index.csv`` (or ``Credit/`` and ``Ganaraska/`` folders).
+* The held-out sets: the canonical ones from ``salmonid.holdout`` plus two older evaluation
+  lists (``--op-testset``, ``--ls-test-queue``).
 
-Role: Composite SAM2 synthetic fish into training COCO (partial + proximity); applies review.csv +
-40px header mask + leak guard.
+Outputs
+-------
+Under ``--output-dir`` (default ``<SALMONID_PROJECTS_ROOT>/sam2_synth_<mode>``):
 
-Pipeline position — this is a **DATA** stage (data -> detect -> track -> eval/count -> results ->
-figures). It manufactures augmentation data that is later folded into the single-stage detector's
-training COCO (salmonid.data.merge_synth_into_coco), so it does not itself produce a manuscript number
-or figure; it feeds the v2.5/v2.6 (DEIMv2-X) training that the reported held-out species score rests on.
+* ``images/*.jpg`` and ``synth_coco.json``: the composites and their boxes (five species, one box
+  per visible fish). Each record lists the real fish it was cut from (``srcs``); that list is
+  what ``salmonid.data.audit_coco_holdout_leak --synth-coco`` checks.
+* ``crops/*.jpg`` and ``crops.csv``: small square crops for a separate classifier (not used by
+  the published single-stage model; skip with ``--no-crops``).
 
-Both modes paste VERIFIED-species RGBA cutouts (the cutout-extraction step of the SAM2 data engine)
-onto REAL empty same-site tunnel backgrounds (the background-harvest step), so the tunnel geometry /
-water / lighting are in-distribution (avoids the whole-frame-warp OOD trap). Species labels are the
-cutouts' TRUE human labels — never a model guess.
+Feeds
+-----
+No manuscript number directly. Its composites, after ``salmonid.data.merge_synth_into_coco``,
+are 7,391 of the 45,249 pictures (11,644 of the 52,444 fish boxes) the published v2.7 model was
+trained on (Methods, training-set composition).
+
+Run
+---
+::
+
+    # single fish partly out of frame, with a preview gallery
+    python -m salmonid.data.sam2_composite partial   --n 2000 --sweep --mask-header-px 40 --gallery
+    # one fish partly hidden behind another
+    python -m salmonid.data.sam2_composite proximity --n 1200 --pair coho_chinook --mask-header-px 40 --gallery
+
+Tier
+----
+2. The cut-out library, the empty backgrounds and ``review.csv`` are external and were not
+produced by code in this deposit (see "What cannot be regenerated").
+
+The two modes
+-------------
+::
 
   partial   — reveal only a swept fraction of a known fish past a frame edge -> teaches "a Chinook tail
-              is still a Chinook" (root-fixes the entering-fish -> Atlantic default) AND, because the
-              species is known, gives an accuracy-vs-exposure DIAGNOSTIC axis (100/75/50/25% visible).
+              is still a Chinook" AND, because the species is known, gives an accuracy-vs-exposure
+              DIAGNOSTIC axis (100/75/50/25% visible).
   proximity — paste two known cutouts adjacent/overlapping (default Coho trailing a Chinook, the observed
-              two-fish confusion) with correct boxes for BOTH -> teaches fish-to-fish separation for the
-              dense-Credit under-count and the two-fish Coho->Chinook mis-ID.
+              two-fish confusion) with correct boxes for BOTH -> teaches fish-to-fish separation for
+              crowded passages and the two-fish Coho->Chinook mis-ID.
 
-Inputs:
-  * cutout library     — <cutouts-dir>/manifest.csv + per-cutout RGBA PNGs (config.SAM2_CUTOUTS),
-                         optionally gated by <cutouts-dir>/review.csv (Tom's reject/relabel decisions).
-  * backgrounds        — <backgrounds-dir>/index.csv (or per-site subdirs) of empty tunnel frames.
-  * eval-holdout keys  — op_testset + ls_test_set_v5 manifests (config.LABEL_BATCHES) plus the frozen
-                         canonical holdout from salmonid.holdout, so eval fish never leak into training.
+Both paste onto REAL empty frames from the SAME site, so the tunnel geometry, water and lighting
+match real footage. Header strip: composites keep the camera's date/river overlay unless
+``--mask-header-px 40`` is passed, which blacks it out the same way the real training frames are.
 
-Emits, for one-variable folding into Branch A:
-  * COCO detector data     — <out>/images/*.jpg + <out>/synth_coco.json  (5-species categories,
-                             one box per VISIBLE fish; file_name = absolute path).
-  * classifier crops       — <out>/crops/*.jpg + <out>/crops.csv (path,class_id,species,source),
-                             224 letterbox to match training/prepare_crops.
-Header discipline: composites keep the real header strip; run them through Branch A's existing 40px
-header mask alongside the real COCO so masking stays uniform (pass --mask-header-px to pre-mask instead).
+How this differs from what built the published data
+---------------------------------------------------
+The guard here is the corrected, video-level one (research repository commit ``d40b869``). The
+composite batches in the published training list were generated earlier, with the pair-keyed
+guard: 23 of them used a cut-out from a held-out clip and were removed afterwards by
+``salmonid.data.audit_coco_holdout_leak --out``. None remain in the v2.7 list.
 
-Environment: runs in the **base** Python 3.11 interpreter (needs cv2 + numpy for compositing); it is a
-data-engine tool and does NOT require the DEIMv2 .venv_deim (that env is only for detector train/infer).
+Known limitations (left as they were)
+-------------------------------------
+* ``--no-holdout-filter`` switches the whole guard off, including the canonical test set. It
+  exists for making demonstration images; output made with it must not be used for training.
+  The script now prints a warning when it is used.
+* Background frames carry no record of which clip they came from, so they are not tested
+  against the holdout. They are empty frames (no fish), chosen by a separate harvest step.
+* In ``_apply_review``, a cut-out relabelled to something other than the five species (for
+  example "Small Salmonid") is kept under its ORIGINAL species instead of being dropped.
 
-  # partial-exposure set + diagnostic sweep, with a preview gallery
-  python -m salmonid.data.sam2_composite partial  --n 400 --sweep --gallery
-  # proximity Coho-behind-Chinook set
-  python -m salmonid.data.sam2_composite proximity --n 300 --pair coho_chinook --gallery
+What cannot be regenerated from this deposit
+--------------------------------------------
+The random choices are seeded (``--seed``, default 42), so the same library and backgrounds give
+the same composites. But the cut-out extraction step, the background harvest step and the
+review tool are not part of this deposit, and the exact commands (counts, species pairs) used
+for the four targeted v2.6 batches were not recorded in any repository. The composites
+themselves are therefore a frozen external artifact.
+
+Environment: base Python 3.11 (``cv2`` + ``numpy``). It does not need the DEIMv2 environment.
 """
 from __future__ import annotations
 
@@ -93,9 +129,12 @@ _NAME2ID = {"Chinook": "0", "Coho": "1", "Atlantic": "2", "Rainbow Trout": "3", 
 
 
 def _apply_review(cuts: list[dict], cut_dir: Path, review_csv: str | None) -> list[dict]:
-    """Gate the library by Tom's review (_sam2_review_app.py). DROP cutout_ids marked 'reject';
-    for 'relabel' keep the cutout under the corrected species (Tom is the species authority).
-    Last write per cutout_id wins, so a later 'keep' undoes an earlier reject."""
+    """Gate the library by the lead author's cut-out review. DROP cutout_ids marked 'reject';
+    for 'relabel' keep the cutout under the corrected species (the reviewer is the species authority).
+    Last write per cutout_id wins, so a later 'keep' undoes an earlier reject.
+
+    Known limitation, unchanged: a 'relabel' to a name outside the five species falls through
+    the `sp in _NAME2ID` test below and the cut-out is kept under its ORIGINAL species."""
     p = Path(review_csv) if review_csv else (cut_dir / "review.csv")
     if not p.is_file():
         return cuts
@@ -128,11 +167,17 @@ def _load_holdout(op_path: str, ls_path: str):
     leak the eval-hygiene work fought. This gate drops them BY DEFAULT.
     """
     op_keys, ls_keys = set(), set()
+    for label, path in (("--op-testset", op_path), ("--ls-test-queue", ls_path)):
+        # The original skipped a missing file without a word. These two lists are secondary to
+        # the canonical guard (fatal when its own files are missing), so a missing one is still
+        # not an error, but it is now said out loud.
+        if path and not Path(path).is_file():
+            print(f"  WARNING: {label} file not found, so it excludes nothing: {path}")
     if op_path and Path(op_path).is_file():
-        for v in json.loads(Path(op_path).read_text()).get("videos", []):
+        for v in json.loads(Path(op_path).read_text(encoding="utf-8")).get("videos", []):
             op_keys.add((v["site"], v["video_rel"].replace("\\", "/")))
     if ls_path and Path(ls_path).is_file():
-        for it in json.loads(Path(ls_path).read_text()).get("items", []):
+        for it in json.loads(Path(ls_path).read_text(encoding="utf-8")).get("items", []):
             ls_keys.add((it["video_id"], int(it["track_id"])))
     return op_keys, ls_keys
 
@@ -260,7 +305,8 @@ def _maybe_flip(cut_rgb, cut_alpha, do):
 def _letterbox_crop(frame_bgr, box, pad_frac=0.20, size=224):
     """Cut a padded, aspect-preserving 224 letterbox crop around ``box`` (xyxy).
 
-    Matches training/prepare_crops so synth classifier crops are pixel-consistent with real ones:
+    Matches the crop geometry of the earlier two-stage classifier's training crops, so synth
+    classifier crops are pixel-consistent with real ones:
     pad the box by ``pad_frac`` per side, resize the longest side to ``size``, and centre it on a
     black square canvas. Returns the HxWx3 crop, or None for a degenerate box / empty crop.
     """
@@ -601,15 +647,21 @@ def main():
     rng = random.Random(a.seed)
     cut_dir = Path(a.cutouts_dir)
     cuts = _load_manifest(cut_dir)
-    # Apply Tom's cutout review (reject/relabel) FIRST so bad/wrong-species cutouts never reach synth.
+    # Apply the cut-out review (reject/relabel) FIRST so bad/wrong-species cutouts never reach synth.
     if not a.no_review_filter:
         cuts = _apply_review(cuts, cut_dir, a.review_csv)
     # Drop EVAL-holdout cutouts before any training synth is made (on by default — see _load_holdout).
+    if a.no_holdout_filter:
+        print("WARNING: --no-holdout-filter given: held-out test fish are NOT excluded. "
+              "Composites from this run must not be used for training.")
     if not a.no_holdout_filter:
         op_keys, ls_keys = _load_holdout(a.op_testset, a.ls_test_queue)
         # Permanent leak guard: always add the canonical frozen eval sets (test_set_v6 + ls_test_v5).
+        # Assign (don't |=) so the VIDEO-aware HoldoutKeys survives: a cutout of the test fish mined
+        # under another run's track id is still the test fish. `ls_keys |= load_holdout_pairs()`
+        # (the earlier form) copied the pairs into a plain set and lost the video test.
         from salmonid.holdout import load_holdout_pairs
-        ls_keys |= load_holdout_pairs(verbose=False)
+        ls_keys = load_holdout_pairs(extra_pairs=ls_keys, verbose=False)
         before = len(cuts)
         dropped = Counter(c["species"] for c in cuts if _is_holdout(c, op_keys, ls_keys))
         cuts = [c for c in cuts if not _is_holdout(c, op_keys, ls_keys)]
@@ -618,9 +670,9 @@ def main():
     print(f"library: {len(cuts)} cutouts ({Counter(c['species'] for c in cuts)}); "
           f"backgrounds: {{{', '.join(f'{k} {len(v)}' for k, v in bgs.items())}}}")
     if not cuts:
-        print("No cutouts — run scripts/_sam2_extract_cutouts.py first."); return
+        print("No cutouts — the cut-out library is empty or missing (see docs/DATA_AVAILABILITY.md)."); return
     if not any(bgs.values()):
-        print("No backgrounds — run scripts/_sam2_harvest_backgrounds.py first."); return
+        print("No backgrounds — the empty-frame library is empty or missing (see docs/DATA_AVAILABILITY.md)."); return
     (run_partial if a.mode == "partial" else run_proximity)(a, cuts, bgs, rng)
     print(f"-> {a.output_dir}  (synth_coco.json + images/"
           + ("" if a.no_crops else " + crops/ + crops.csv") + ")")
@@ -630,7 +682,7 @@ def _parse_args():
     """Define and parse the CLI. Path defaults resolve via salmonid.config (same absolute locations
     as the original workstation, overridable by SALMONID_* env vars). Returns the argparse Namespace,
     with output_dir defaulted to config.PROJECTS_ROOT/sam2_synth_<mode> when not supplied."""
-    p = argparse.ArgumentParser(description="SAM2 partial/proximity compositor (Branch B)")
+    p = argparse.ArgumentParser(description="SAM2 partial/proximity compositor")
     p.add_argument("mode", choices=["partial", "proximity"])
     p.add_argument("--cutouts-dir", default=str(config.SAM2_CUTOUTS))
     p.add_argument("--backgrounds-dir", default=str(config.PROJECTS_ROOT / "sam2_backgrounds"))
@@ -660,12 +712,13 @@ def _parse_args():
     p.add_argument("--mask-header-px", type=int, default=0,
                    help="Pre-zero the top N px. Default 0 = keep header, mask downstream with real COCO.")
     p.add_argument("--no-holdout-filter", action="store_true",
-                   help="Do NOT drop op_testset / ls_test_set_v5 cutouts. Only for non-training use.")
+                   help="Do NOT drop held-out cutouts (switches off the canonical guard too). "
+                        "Only for non-training use, e.g. demonstration images.")
     p.add_argument("--review-csv", default=None,
-                   help="Cutout review decisions (default <cutouts-dir>/review.csv from _sam2_review_app.py); "
+                   help="Cutout review decisions (default <cutouts-dir>/review.csv); "
                         "rejects dropped, relabels applied.")
     p.add_argument("--no-review-filter", action="store_true",
-                   help="Ignore review.csv (use the raw library). Default: apply Tom's reject/relabel.")
+                   help="Ignore review.csv (use the raw library). Default: apply the reject/relabel decisions.")
     p.add_argument("--op-testset", default=str(config.LABEL_BATCHES / "op_testset_v1.json"))
     p.add_argument("--ls-test-queue", default=str(config.LABEL_BATCHES / "ls_test_set_v5.json"))
     p.add_argument("--no-crops", action="store_true", help="Skip the classifier crops emitter.")

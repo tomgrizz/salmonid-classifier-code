@@ -1,0 +1,135 @@
+{
+  "recorded_utc": "2026-07-24T18:45:22.379980+00:00",
+  "note": "DEIMv2-X v2.7 leak-clean publish candidate: v2.5 recipe + v2.6 data with the holdout re-applied at VIDEO level; init from deimv2_x_coco.pth (no v2.x warm start)",
+  "seed": 0,
+  "command": "train.py -c configs/deimv2/deimv2_fish_x_v27.yml -t ckpts/deimv2_x_coco.pth -d cuda --use-amp --seed 0",
+  "determinism": "seed fixed via DEIMv2 --seed; cudnn NON-deterministic (setup_seed deterministic=False) + AMP, so runs are seed-pinned but not bitwise reproducible. Report as seeded, not deterministic.",
+  "repos": {
+    "fish_cv": {
+      "path": "C:\\Users\\lomu-\\Documents\\GitHub\\lake-ontario-fish-cv",
+      "present": true,
+      "sha": "51bf64de3580dc6a611680c3709aeafb229b5b48",
+      "short_sha": "51bf64d",
+      "branch": "main",
+      "dirty": true,
+      "dirty_files": [
+        "LAUDE.md",
+        "scripts/_build_extra_coco.py",
+        "scripts/_merge_synth_into_coco.py",
+        "scripts/_sam2_composite.py",
+        "single_stage/REPRODUCE.md",
+        "training/_holdout.py",
+        "training/prepare_crops.py",
+        "training/prepare_dataset.py",
+        "lamprey/data/",
+        "runners/run_deimv2_fish_x_v27.ps1",
+        "scripts/_audit_coco_holdout_leak.py",
+        "single_stage/configs/deimv2/deimv2_fish_x_v26.yml",
+        "single_stage/configs/deimv2/deimv2_fish_x_v27.yml"
+      ]
+    },
+    "deimv2": {
+      "path": "C:\\Users\\lomu-\\Documents\\GitHub\\DEIMv2",
+      "present": true,
+      "sha": "0fff8d4dcdc272e6cf2d84be31399db471357941",
+      "short_sha": "0fff8d4",
+      "branch": "main",
+      "dirty": true,
+      "dirty_files": [
+        "ngine/data/transforms/_transforms.py",
+        "_debug_tf.py",
+        "_prep_m_coco.py",
+        "_remap_ssl_to_deimv2.py",
+        "_smoke_infer.py",
+        "_smoke_prep.py",
+        "configs/deimv2/_smoke_aug.yml",
+        "configs/deimv2/_smoke_fish.yml",
+        "configs/deimv2/deimv2_fish_l_distill_v1.yml",
+        "configs/deimv2/deimv2_fish_l_v2.yml",
+        "configs/deimv2/deimv2_fish_l_v21.yml",
+        "configs/deimv2/deimv2_fish_l_v22.yml",
+        "configs/deimv2/deimv2_fish_l_v23.yml",
+        "configs/deimv2/deimv2_fish_m.yml",
+        "configs/deimv2/deimv2_fish_s.yml",
+        "configs/deimv2/deimv2_fish_s_ssl.yml",
+        "configs/deimv2/deimv2_fish_s_v2.yml",
+        "configs/deimv2/deimv2_fish_x_v24.yml",
+        "configs/deimv2/deimv2_fish_x_v25.yml",
+        "configs/deimv2/deimv2_fish_x_v26.yml",
+        "configs/deimv2/deimv2_fish_x_v27.yml"
+      ]
+    }
+  },
+  "deimv2_worktree_patch": "deimv2_worktree.patch",
+  "config": {
+    "top": "C:\\Users\\lomu-\\Documents\\GitHub\\DEIMv2\\configs\\deimv2\\deimv2_fish_x_v27.yml",
+    "include_chain": [
+      "deimv2_fish_x_v27.yml",
+      "deimv2_dinov3_x_coco.yml",
+      "coco_detection.yml",
+      "runtime.yml",
+      "dataloader.yml",
+      "optimizer.yml",
+      "deimv2.yml"
+    ],
+    "snapshot_dir": "config_snapshot"
+  },
+  "data": {
+    "train": {
+      "path": "C:/ssl_cache/deimv2_fish_6class_masked_v26_clean/train.json",
+      "present": true,
+      "sha256": "a9a0eed56ab0472bf6a74d7e975e9c53b12ca8892fe470f5649a191f4c794a38",
+      "bytes": 18973783,
+      "images": 45249,
+      "annotations": 52444,
+      "categories": {
+        "0": "Chinook",
+        "1": "Coho",
+        "2": "Atlantic",
+        "3": "Rainbow Trout",
+        "4": "Brown Trout",
+        "5": "Small Salmonid"
+      },
+      "per_category": {
+        "Chinook": 12177,
+        "Coho": 12954,
+        "Atlantic": 2067,
+        "Rainbow Trout": 18341,
+        "Brown Trout": 6327,
+        "Small Salmonid": 578
+      }
+    },
+    "val": {
+      "path": "C:/ssl_cache/deimv2_fish_6class_masked_v26_clean/val_clean.json",
+      "present": true,
+      "sha256": "e33e7db164a47048feca52c5691eac1fb662425569a2499c24431510474ef12c",
+      "bytes": 916513,
+      "images": 2160,
+      "annotations": 2097,
+      "categories": {
+        "0": "Chinook",
+        "1": "Coho",
+        "2": "Atlantic",
+        "3": "Rainbow Trout",
+        "4": "Brown Trout",
+        "5": "Small Salmonid"
+      },
+      "per_category": {
+        "Chinook": 654,
+        "Coho": 551,
+        "Atlantic": 116,
+        "Rainbow Trout": 609,
+        "Brown Trout": 114,
+        "Small Salmonid": 53
+      }
+    }
+  },
+  "env": {
+    "recorder_python": "3.11.9",
+    "train_python": "3.11.9",
+    "torch": "2.7.0+cu128",
+    "torchvision": "0.22.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5090"
+  }
+}

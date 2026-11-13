@@ -1,4 +1,12 @@
-"""
+"""STATUS: development record. NOT used for any number in the manuscript.
+This script belongs to the earlier two-stage pipeline (a separate detector and species
+classifier, with per-frame output files that are not part of this deposit). It is kept
+because it documents how the counting rules were arrived at; see
+docs/history/counting_and_movement_development_notes.md. The published counts come from
+salmonid/count/corpus_countr_from_store.py, and the method of record is
+docs/COUNTING_METHOD.md. Statements below about "the paper" describe an earlier draft.
+Tier: 2 (and its inputs are not deposited).
+
 In plain terms: this file works out how far a fish has to travel across the video (measured in
 pixels of sideways movement) before we count it as heading upstream or downstream, and it tallies
 the resulting net-upstream count for each species and river. It tests a range of distance cut-offs
@@ -41,7 +49,7 @@ Manuscript claim
 Justifies the deployed ASYMMETRIC net rule (count a track UPSTREAM at |dx|>=50px, DOWNSTREAM only
 at |dx|>=300px). This sweep of a single SYMMETRIC |dx| threshold shows no one value matches both
 rivers' net simultaneously, which is the empirical motivation for the asymmetric family optimum
-(docs/counting_and_movement.md).
+(docs/history/counting_and_movement_development_notes.md).
 
   # --shard-dirs is a glob under config.MODEL_OUTPUTS; --footage-root defaults to
   # config.FOOTAGE_ROOT_FAST (set the SALMONID_* env vars to point at your data).

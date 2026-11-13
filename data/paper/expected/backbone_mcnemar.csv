@@ -1,0 +1,6 @@
+tracks,classifier_b,classifier_a,only_b_right,only_a_right,exact_p
+"Benchmark, unseen, all",dinov2_vitb14,resnet50,28,4,1.9301194697618484e-05
+"Benchmark, unseen, all",dinov3_vitb16,resnet50,39,4,3.1081526685738936e-08
+"Benchmark, unseen, all",dinov3_vitb16,dinov2_vitb14,16,5,0.02660369873046875
+"Ganaraska River, all years",dinov3_vitb16,resnet50,3,2,1.0
+Earlier test set,dinov3_vitb16,resnet50,2,0,0.5

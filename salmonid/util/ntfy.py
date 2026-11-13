@@ -7,10 +7,16 @@ Tiny ntfy.sh notification sender used by the pipeline runners.
 
 What it does
 ------------
-Fires a single one-shot push notification to a fixed ntfy.sh topic. The long-running
-GPU jobs in this repo (detection, training, corpus count runs, figure builds) call this
-at the end of a stage so the operator's phone/desktop pings when an unattended overnight
-run finishes or fails.
+Fires a single one-shot push notification to an ntfy.sh topic OF YOUR CHOOSING. The
+long-running GPU jobs in this repo (detection, training, corpus count runs) call this at the
+end of a stage so the operator's phone/desktop pings when an unattended overnight run
+finishes or fails.
+
+Notifications are OFF by default. ntfy.sh topics are public and unauthenticated: anyone who
+knows a topic name can read it and post to it. So no topic is built into this code. To turn
+notifications on, set the environment variable ``SALMONID_NTFY_TOPIC`` (or put it in ``.env``)
+to a hard-to-guess topic name of your own. With it unset, ``send()`` prints the message
+locally and returns without touching the network.
 
 Where it sits in the pipeline
 -----------------------------
@@ -22,9 +28,9 @@ or figure; it is safe to omit entirely (a failed notification never affects resu
 Inputs / outputs
 ----------------
 Inputs: a message body string, plus optional ``--title``/``--priority``/``--tags``.
-Output: an HTTP POST to ``{NTFY_URL}/{TOPIC}``. If every attempt fails (e.g. the machine
-is offline) the message is appended to a local fallback log instead, so a run summary is
-never lost during an internet outage.
+Output: an HTTP POST to ``{NTFY_URL}/{topic}`` when a topic is configured. If every attempt
+fails (e.g. the machine is offline) the message is appended to ``output/logs/ntfy_unsent.log``
+instead, so a run summary is never lost during an internet outage.
 
 Environment
 -----------
@@ -39,12 +45,13 @@ from __future__ import annotations
 import argparse
 import time
 import urllib.request
-from pathlib import Path
 
-TOPIC    = "ontario-fish-update"   # project ntfy.sh topic (subscribe with the ntfy app)
+from salmonid import config
+
+TOPIC    = config.NTFY_TOPIC       # "" unless SALMONID_NTFY_TOPIC is set -> notifications disabled
 NTFY_URL = "https://ntfy.sh"
-# Offline safety net: <package>/logs/ntfy_unsent.log (repo-local, resolved from this file).
-FALLBACK = Path(__file__).resolve().parents[1] / "logs" / "ntfy_unsent.log"
+# Offline safety net, kept with the other regenerated outputs (git-ignored).
+FALLBACK = config.OUTPUT_DIR / "logs" / "ntfy_unsent.log"
 
 
 def send(message: str, title: str | None = None, priority: int = 3,
@@ -65,6 +72,10 @@ def send(message: str, title: str | None = None, priority: int = 3,
         Performs network I/O and prints a status line. On total failure, appends the
         message to ``FALLBACK`` (creating its parent dir) so nothing is lost offline.
     """
+    if not TOPIC:
+        # Opt-in only: with no topic configured nothing leaves this machine.
+        print(f"ntfy (disabled; set SALMONID_NTFY_TOPIC to enable): {title or ''} {message}".strip())
+        return False
     headers = {}
     if title:
         headers["Title"] = title

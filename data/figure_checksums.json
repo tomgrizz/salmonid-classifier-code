@@ -1,0 +1,28 @@
+{
+ "note": "sha256 of each data-driven figure as built for the manuscript. Bytes depend on the plotting library and fonts, so a mismatch on another machine is a NOTE, not a failure; run_tier1.py verifies the numbers behind every figure separately.",
+ "built_with": {
+  "matplotlib": "3.10.8",
+  "numpy": "2.4.4",
+  "python": "3.11.9",
+  "platform": "Windows 11"
+ },
+ "sha256": {
+  "fig_confusion_heldout.png": "75fc93abd163b677d768f90375585928480d4eee6589fc20fd50d5350c7aa5ce",
+  "fig_confusion_heldout.pdf": "95ac24bfae2c8215068baa8570955532d76a2b2bf23c21077f8ff927fa3ab852",
+  "fig_hero_performance.png": "c69d62e825e6257991cea124acf4e41e3342ed63f9f2fc949b6c6a02b4d8b580",
+  "fig_hero_performance.pdf": "989dec49e1345fffc7532e386016093461a3ae904f8acd62005dfd773bbf72b3",
+  "fig_species_phenology.png": "4b923b248e855c2e504d157896fd8ada12a6a3a58aff59113a5bb1734b641c67",
+  "fig_species_phenology.pdf": "08ab703f0b7146d465c0fed30bb7126c19ee929d9dce66a645e877a0cd4f9f61",
+  "fig_concordance.png": "caa513ebd136986aa29a0a91f20703d681d1a4b70f5f27290b1bd8c234c0dc21",
+  "fig_concordance.pdf": "25532661f412085540aed3736a19df2bcb30c6e30b6ee2fd86a444a737ac53a1",
+  "fig_ganaraska_sanctuary.png": "36ee77307ed57e18767c7bf02b353fb584d478345cb94af1eb4bd3d9ab860c08",
+  "fig_ganaraska_sanctuary.pdf": "584dba43f8e66af24dcaafe4c5e569ba9c321c1022b07b608682d68f958bedff",
+  "fig_daily_net_2025_credit.png": "bc8a9023e50592ffd12128dbc25dcfac8c5869e63dcc7fc8b66b23f88ca3b41d",
+  "fig_daily_net_2025_credit.pdf": "e8adba13e9ad69528df96ea9c3cfe7cde7bc19ac7ce2925e6fb17bd93a8e3f4f",
+  "fig_daily_net_2025_ganaraska.png": "b5c46890cd4a57728c595a30579d8d889f2f66142d9f799d3d264f4ac8c90647",
+  "fig_daily_net_2025_ganaraska.pdf": "bb70a3aa94ae5ce2e2a5aa0dde2760400e89864a988843f53d891a72e933f311",
+  "fig_bland_altman.png": "9a6ed9e442e7c74bbc7a464966f9f4c35c7ba640dbb8dfe7fa85f39ffe5fc206",
+  "fig_bland_altman.pdf": "6668213de40f7f9ea4ee9dc470fb69ae776f8bcedaa563d5386a16f781e72bb2",
+  "fig_net_rule_sensitivity.png": "cea76259652551f7ddd49f16fc4d090ea6fdbb57e78f691ba4a0d81b36f928a6"
+ }
+}

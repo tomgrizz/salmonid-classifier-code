@@ -1,52 +1,66 @@
-"""
-In plain terms: this file assembles the collection of training pictures used to teach the fish-detection
-model. It mixes in extra computer-generated ("synthetic") fish images alongside the real ones to give the
-model more practice, while carefully removing any picture that belongs to the separate set of fish the model
-is graded on — so the model can never secretly study its own exam. It does not itself report a number in the
-paper, but it prepares the training data behind the published detection model (v2.6).
-
-Fold synthetic COCO into the masked base, cap synth, and drop holdout images (builds masked_v26/train.json).
-
-Fold SAM2 synth COCO (scripts/_sam2_composite.py) into a DEIMv2 base COCO's TRAIN split — the one-variable
-augmentation fold for Branch A's v2.5/v2.6 experiment (single-stage). Val is NEVER touched; synth goes to
-train only, tagged `synth_source` so it is trivially ablatable, and every synth image is re-checked against
-the eval holdouts before it lands (defense-in-depth on top of the compositor's own filter).
-
-Pipeline position
------------------
-DATA-prep stage (data -> **here** -> detect/train -> track -> eval/count -> results -> figures). This
-produces the training COCO that the DEIMv2 single-stage detector is trained on; it does not itself compute
-a manuscript number, but it is upstream of the published v2.6 model.
+"""In plain terms: this script adds computer-composited ("synthetic") fish pictures to the list
+of real labelled pictures the model learns from. The composites give the model extra practice on
+two hard situations: a fish only partly in view, and two fish overlapping. While merging, it
+removes every real picture that comes from a held-out test clip, and every composite that was
+made from a fish cut out of such a clip, so that no exam fish reaches training by either route.
+It caps how many composites are added so they stay a minority of the training set.
 
 Inputs
 ------
-* ``--base`` train.json — a DEIMv2 6-class COCO; its ``categories`` are the authority for the merge.
-* one or more ``--synth`` synth_coco.json from _sam2_composite.py (synth uses category ids 0-4).
-* the frozen track-level / operational / label-studio holdout files (test_set_v6, ls_test_set_v5,
-  op_testset) — used to *reject* any synth image and *drop* any base image touching held-out tracks.
+* ``--base``: the list of real training pictures (COCO JSON, six classes). Its class list is
+  the authority for the merge.
+* ``--synth`` (repeatable): the record written by ``salmonid.data.sam2_composite`` for one batch
+  of composites. Each composite lists the real fish it was cut from (``srcs``).
+* The held-out sets. The two canonical files are always loaded through ``salmonid.holdout`` and
+  cannot be switched off; ``--holdout-keys`` only ADDS further files. Two older evaluation lists
+  (``--op-testset``, ``--ls-test-queue``) are applied to the composites as well.
 
-Output
-------
-A merged train.json (e.g. ``masked_v26/train.json``) = base + capped synth images/annotations with all
-holdout images removed. Images are referenced by absolute ``file_name``, so nothing is copied.
-
-Environment
------------
-Base Python (pure ``json``/``pathlib``; no torch / DEIMv2). The DEIMv2 train that consumes the output runs
-later in the isolated ``.venv_deim`` environment.
-
-Example
+Outputs
 -------
-  python scripts/_merge_synth_into_coco.py \
-      --base   G:/Projects/deimv2_fish_6class_v25/train.json \
-      --synth  G:/Projects/sam2_synth_partial/synth_coco.json \
-      --synth  G:/Projects/sam2_synth_proximity/synth_coco.json \
-      --out    G:/Projects/deimv2_fish_6class_v25/train_plus_synth.json \
-      --max-synth 3300
+``--out``: the merged list = base pictures (minus held-out ones) + the capped composites.
+Pictures are referenced by absolute file name; no image is copied.
 
-Then run Branch A's header-mask step over the merged COCO (so synth frames get the same 40px mask as real
-ones) and train v2.5/v2.6 with ONLY this variable changed. Categories come from --base (6-class safe: synth
-uses ids 0-4 which align). Images are referenced by absolute file_name, so nothing is copied.
+Feeds
+-----
+No manuscript number directly. The composites it folds in make up 7,391 of the 45,249 pictures
+and 11,644 of the 52,444 fish boxes the published v2.7 model was trained on (Methods,
+training-set composition: "11,644 were synthetic").
+
+Run
+---
+::
+
+    python -m salmonid.data.merge_synth_into_coco --base <base>/train.json
+        --synth <PROJECTS_ROOT>/sam2_synth_partial/synth_coco.json
+        --synth <PROJECTS_ROOT>/sam2_synth_proximity/synth_coco.json
+        --out <merged>/train.json --max-synth 3300
+
+(one command; shown on four lines)
+
+Tier
+----
+2. The base list, the composites and two of the holdout lists are external. The published
+training list is a frozen file whose checksum is in ``provenance/v2.7/``; this script is
+deposited so the merge can be read, not so the list can be regenerated from a clone.
+
+How this differs from what built the published data
+---------------------------------------------------
+The guard here is the corrected, video-level one (research repository commit ``d40b869``). The
+merges that built the v2.5 and v2.6 lists ran the earlier version, which re-listed its own
+holdout files and matched on exact (video, track) pairs. The published v2.7 list is the v2.6
+list cleaned afterwards by ``salmonid.data.audit_coco_holdout_leak --out`` (which removed 311
+real pictures and 23 composites). A fresh merge with this version would not admit them.
+
+Known limitations (left as they were, because the published model was trained on their output)
+------------------------------------------------------------------------------------------------
+* The merged record of a composite keeps its file name but drops ``srcs``. The frozen training
+  list therefore cannot be checked for composite provenance on its own; the separate
+  ``synth_coco.json`` files are needed (``audit_coco_holdout_leak --synth-coco``).
+* Base pictures with no ``video_id`` (the CVAT frames) are not tested against the holdout, here
+  or anywhere else in the pipeline. See ``salmonid/holdout.py``.
+* The exact commands that merged the four targeted v2.6 composite batches were not recorded in
+  any repository, and the step that blacks out the 40-pixel header strip on real frames is not
+  part of this deposit. The composites are shuffled with a fixed seed (42) before the cap.
 """
 from __future__ import annotations
 
@@ -76,11 +90,17 @@ def _load_holdout(op_path, ls_path):
         ``(video_id, track_id)`` track keys. Either set is empty when its path is absent.
     """
     op_keys, ls_keys = set(), set()
+    for label, path in (("--op-testset", op_path), ("--ls-test-queue", ls_path)):
+        # The original skipped a missing file without a word. These two lists are secondary to
+        # the canonical guard (which is fatal when its own files are missing), so a missing one
+        # is still not an error here, but it is now said out loud.
+        if path and not Path(path).is_file():
+            print(f"  WARNING: {label} file not found, so it excludes nothing: {path}")
     if op_path and Path(op_path).is_file():
-        for v in json.loads(Path(op_path).read_text()).get("videos", []):
+        for v in json.loads(Path(op_path).read_text(encoding="utf-8")).get("videos", []):
             op_keys.add((v["site"], v["video_rel"].replace("\\", "/")))
     if ls_path and Path(ls_path).is_file():
-        for it in json.loads(Path(ls_path).read_text()).get("items", []):
+        for it in json.loads(Path(ls_path).read_text(encoding="utf-8")).get("items", []):
             ls_keys.add((it["video_id"], int(it["track_id"])))
     return op_keys, ls_keys
 
@@ -94,18 +114,16 @@ def _img_is_holdout(img, op_keys, ls_keys) -> bool:
     return False
 
 
-def _load_track_keys(paths) -> set:
-    """Load (video_id, track_id) holdout keys from files with a 'tracks' or 'items' list (e.g.
-    test_set_v6_holdout.json). These are dropped from BOTH the base (by its per-image video_id/track_id)
-    and the synth (by srcs) — the leak fix that was missing when v2.5 first built."""
-    keys = set()
-    for p in paths or []:
-        d = json.loads(Path(p).read_text())
-        for t in d.get("tracks", []):
-            keys.add((t[0], int(t[1])))
-        for it in d.get("items", []):
-            keys.add((it["video_id"], int(it["track_id"])))
-    return keys
+def _load_track_keys(extra_paths):
+    """The canonical eval holdout (salmonid.holdout), plus any --holdout-keys files ADDED to it.
+
+    Returns a video-aware HoldoutKeys: `(video_id, track_id) in keys` is True for a held-out pair OR any
+    track in a held-out video. Dropped from BOTH the base (by its per-image video_id/track_id) and the
+    synth (by srcs). Importing CANONICAL_HOLDOUT_FILES rather than re-listing it here is what makes the
+    project rule true: add a frozen eval set once and every builder honors it.
+    """
+    from salmonid.holdout import load_holdout_pairs
+    return load_holdout_pairs(extra_files=extra_paths)
 
 
 def main() -> None:
@@ -116,21 +134,24 @@ def main() -> None:
     per-synth-mode tally). Aborts if a synth category_id is not defined by the base categories.
     """
     a = _parse_args()
-    base = json.loads(Path(a.base).read_text())
+    base = json.loads(Path(a.base).read_text(encoding="utf-8"))
     base_imgs, base_anns = base["images"], base["annotations"]
     cats = {c["id"]: c["name"] for c in base["categories"]}
     print(f"base: {len(base_imgs)} images, {len(base_anns)} anns, categories {cats}")
 
-    # Track-level holdout (test_set_v6): drop matching BASE images (they carry video_id/track_id) + anns.
+    # Eval holdout (test_set_v6 + ls_test_v5): drop matching BASE images + anns. Video-aware, so an image
+    # from a held-out clip is dropped even when its track id is -1/unknown or from another detection run.
     hk = _load_track_keys(a.holdout_keys)
-    if hk:
+    if hk or hk.videos:
         def _held(im):
-            return im.get("track_id") is not None and (im.get("video_id"), int(im["track_id"])) in hk
+            # Keyed on video_id. A base picture WITHOUT a video_id (the CVAT frames) is kept
+            # unexamined: a known gap, documented in the module docstring, not closed here.
+            return im.get("video_id") is not None and hk.held(im["video_id"], im.get("track_id"))
         kept_imgs = [im for im in base_imgs if not _held(im)]
         kept_ids = {im["id"] for im in kept_imgs}
         kept_anns = [an for an in base_anns if an["image_id"] in kept_ids]
-        print(f"  holdout ({len(hk)} test_set_v6 tracks): dropped {len(base_imgs)-len(kept_imgs)} base "
-              f"images / {len(base_anns)-len(kept_anns)} anns")
+        print(f"  holdout ({len(hk)} eval tracks / {len(hk.videos)} eval videos): dropped "
+              f"{len(base_imgs)-len(kept_imgs)} base images / {len(base_anns)-len(kept_anns)} anns")
         base_imgs, base_anns = kept_imgs, kept_anns
 
     max_img_id = max((im["id"] for im in base_imgs), default=0)
@@ -141,13 +162,14 @@ def main() -> None:
     # Gather all synth images (with their anns) across the passed synth files.
     pool = []  # [(img, [anns], mode_tag)]
     for sp in a.synth:
-        sc = json.loads(Path(sp).read_text())
+        sc = json.loads(Path(sp).read_text(encoding="utf-8"))
         anns_by_img = {}
         for an in sc["annotations"]:
             anns_by_img.setdefault(an["image_id"], []).append(an)
         n_hold = 0
         for im in sc["images"]:
-            src_held = hk and any((s["video_id"], int(s["track_id"])) in hk for s in im.get("srcs", []))
+            # A composite is held out if ANY fish pasted into it was cut from a held-out clip.
+            src_held = any(hk.held(s["video_id"], s.get("track_id")) for s in im.get("srcs", []))
             if src_held or _img_is_holdout(im, op_keys, ls_keys):
                 n_hold += 1
                 continue
@@ -155,6 +177,7 @@ def main() -> None:
         print(f"synth {Path(sp).parent.name}: {len(sc['images'])} imgs "
               f"({n_hold} holdout-dropped here)")
 
+    # Seeded shuffle, then cap: which composites survive the cap is fixed by --seed.
     rng.shuffle(pool)
     if a.max_synth and len(pool) > a.max_synth:
         pool = pool[:a.max_synth]
@@ -169,6 +192,8 @@ def main() -> None:
     src_tally = Counter()
     for im, anns, tag in pool:
         iid += 1
+        # Only these five fields are carried over. `srcs` (which real fish the composite was cut
+        # from) is NOT, which is why a later audit needs the original synth_coco.json files.
         rec = {"id": iid, "file_name": im["file_name"], "width": im["width"],
                "height": im["height"], "synth_source": tag}
         new_imgs.append(rec)
@@ -181,7 +206,7 @@ def main() -> None:
 
     out = {"categories": base["categories"], "images": new_imgs, "annotations": new_anns}
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
-    Path(a.out).write_text(json.dumps(out))
+    Path(a.out).write_text(json.dumps(out), encoding="utf-8")
     added = len(new_imgs) - len(base_imgs)
     pct = 100.0 * added / max(1, len(new_imgs))
     print(f"\nmerged -> {a.out}")
@@ -189,7 +214,8 @@ def main() -> None:
           f"(synth = {pct:.1f}% of train)")
     print(f"  synth by mode: {dict(src_tally)}")
     print(f"  synth boxes added: {len(new_anns) - len(base_anns)}")
-    print("  NEXT: run the header-mask step over the merged COCO, then train v2.5 (one variable).")
+    print("  NEXT: composites made without --mask-header-px 40 still show the header strip; black it "
+          "out before training (that step is not part of this deposit).")
 
 
 def _parse_args():
@@ -197,16 +223,14 @@ def _parse_args():
     p = argparse.ArgumentParser(description="Fold SAM2 synth COCO into a DEIMv2 base train COCO")
     p.add_argument("--base", required=True, help="Base DEIMv2 train.json (val stays untouched).")
     p.add_argument("--synth", action="append", required=True, metavar="PATH",
-                   help="synth_coco.json from _sam2_composite.py (repeatable).")
+                   help="synth_coco.json from salmonid.data.sam2_composite (repeatable).")
     p.add_argument("--out", required=True)
     p.add_argument("--max-synth", type=int, default=None,
                    help="Cap total synth images (keep it a minority — e.g. ~10%% of the base).")
-    p.add_argument("--holdout-keys", nargs="*",
-                   default=[str(config.LABEL_BATCHES / "test_set_v6_holdout.json"),
-                            str(config.LABEL_BATCHES / "ls_test_set_v5.json")],
-                   help="Track-level holdout file(s) — dropped from BOTH the base (by per-image "
-                        "video_id/track_id) and the synth (by srcs). Defaults to the canonical frozen "
-                        "eval sets so leakage can't happen by forgetting the flag.")
+    p.add_argument("--holdout-keys", nargs="*", default=None, metavar="PATH",
+                   help="EXTRA holdout file(s) to add on top of salmonid.holdout's canonical frozen "
+                        "eval sets (which are always applied — they cannot be turned off from the CLI). "
+                        "Dropped from BOTH the base (by per-image video_id/track_id) and the synth (by srcs).")
     p.add_argument("--op-testset",
                    default=str(config.LABEL_BATCHES / "op_testset_v1.json"))
     p.add_argument("--ls-test-queue",

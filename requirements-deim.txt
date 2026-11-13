@@ -1,23 +1,28 @@
-# Single-stage DEIMv2-X training + detection (Pass A) environment (the `.venv_deim`).
-# This env hosts the external DEIMv2 repo's engine (see docs/DEIMV2_PIN.md). It uses
-# torch 2.7 / torchvision 0.22 (NOT the torch 2.5 DEIMv2's own requirements.txt pins) —
-# which is exactly why the pinned `docs/deimv2_worktree.patch` is required (it renames the
-# torchvision >=0.22 beta-transforms `_transform`->`transform` and registers ColorJitter).
+# Tier 2, DEIMv2 (GPU) environment: training and detection (Pass A). It hosts the external
+# DEIMv2 code at the pinned commit (docs/DEIMV2_PIN.md). The exact versions used are in
+# environment/deim.lock.txt.
 #
-# CUDA 12.8 wheels (RTX 5090, sm_120). Install torch/torchvision from the cu128 index:
-#   pip install torch==2.7.0+cu128 torchvision==0.22.0+cu128 \
-#       --index-url https://download.pytorch.org/whl/cu128
-#   pip install -r requirements-deim.txt      # the rest, below
-
-torch==2.7.0            # +cu128 (see note above)
+# torch 2.7 / torchvision 0.22 are newer than the versions DEIMv2's own requirements name,
+# which is why the patch in docs/deimv2_worktree.patch is required: it follows a renamed
+# torchvision method and registers the ColorJitter transform the fish configuration uses.
+#
+#   python -m venv .venv_deim
+#   pip install torch==2.7.0+cu128 torchvision==0.22.0+cu128 --index-url https://download.pytorch.org/whl/cu128
+#   pip install -r requirements-deim.txt
+#   pip install -e .            (so `python -m salmonid.detect.detect_store` works here too)
+#
+# Developed on an NVIDIA RTX 5090 (32 GB), CUDA 12.8. Then point SALMONID_DEIM_PYTHON at this
+# environment's interpreter (see .env.example).
+torch==2.7.0            # +cu128, from the index above
 torchvision==0.22.0     # +cu128
-numpy>=2.0              # DEIMv2 env uses numpy 2.x (boxmot/tracking lives in the base env)
+numpy>=2.0
+pandas>=2.0
 Pillow>=12
 opencv-python>=4.13
 scipy>=1.17
-pyyaml>=6.0
+PyYAML>=6.0
 faster-coco-eval>=1.7   # DEIMv2's COCO evaluator
-transformers>=5.10      # DINOv3 backbone weights loading
+transformers>=5.10      # loads the DINOv3 backbone
 tensorboard>=2.20
-calflops>=0.3           # DEIMv2 FLOPs accounting at model build
+calflops>=0.3           # DEIMv2 counts operations when it builds the model
 decord>=0.6

@@ -9,12 +9,13 @@ Figure S1 (manuscript) — corrected-detection sample grid, one clean example pe
 
 Pipeline position: **results -> figures** (presentation only). This script does NOT run the
 detector; it consumes detections that already exist in the SAM2 cutout manifest and renders a
-publication figure. It is the source of the manuscript's "the detector localises fish correctly"
-supporting claim (Figure S1) — it replaces the old figures/bbox_sample_grid.png, which was
-rendered from the pre-2026-05-26 run (run_v17_ganaraska) and carries the bbox-y decode bug (boxes
-drawn too high on the fish). Here we draw the boxes straight from the verified SAM2 cutout manifest,
-whose detector boxes already passed the strict y-centre sanity gate (0.30-0.85), so the boxes sit
-correctly. All FIVE species are shown, each labelled with the species and detector confidence.
+publication figure (Figure S1). The boxes are drawn straight from the verified SAM2 cutout
+manifest, whose detector boxes passed a y-centre sanity check (box centre between 0.30 and 0.85
+of the frame height). All FIVE species are shown, each labelled with the species and the
+detector's confidence.
+
+Tier: 2. This figure shows real video frames, so it cannot be regenerated from the committed
+tables; it needs the cutout manifest and the source footage (see docs/DATA_AVAILABILITY.md).
 
 Inputs
 ------
@@ -26,7 +27,7 @@ Inputs
 
 Output
 ------
-* ``docs/manuscript_figures/bbox_sample_grid.{png,pdf/tiff}`` — manuscript Figure S1.
+* ``figures/bbox_sample_grid.png`` + ``.tiff`` (flattened RGB, 600 dpi) — manuscript Figure S1.
 
 Environment: base Python env (cv2 + matplotlib + pandas). No detector / torch / .venv_deim needed.
 
@@ -141,9 +142,12 @@ def main():
     """Build and save the 3-over-2 species grid (manuscript Figure S1).
 
     Reads the cutout manifest, picks one panel per species, lays them out in a balanced
-    3-over-2 mosaic, and writes docs/manuscript_figures/bbox_sample_grid.* via
+    3-over-2 mosaic, and writes figures/bbox_sample_grid.* via
     :func:`salmonid.figures.manuscript_style.save_fig`.
     """
+    config.require(BASE / "manifest.csv", "the SAM2 cutout manifest (Figure S1 source detections)",
+                   "SALMONID_PROJECTS_ROOT")
+    config.require(FRAMES, "the raw fishway footage (Figure S1 source frames)", "SALMONID_FOOTAGE_ROOT")
     man = pd.read_csv(BASE / "manifest.csv")
     panels = pick_panels(man)
     order = [s for s in SPECIES if s in panels]

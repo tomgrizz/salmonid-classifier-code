@@ -1,53 +1,79 @@
-"""In plain terms: this file adds extra hand-picked fish examples (the tricky cases — rare species,
-look-alikes, and confusing debris) into the pile of labelled pictures the species-identification
-model learns from. It does not produce a number in the paper by itself, but it improves the model
-that stands behind the paper's headline 0.966 species-accuracy result. A built-in safety check makes
-sure none of the fixed "exam" fish used to score the model can ever sneak into this training pile.
-
-Base masked 6-class COCO builder (honours the leak guard).
-
-Merge the extra label sources (hardcase + triple-confirmed) into the 6-class COCO that
-``prepare_dataset.py`` produced. Resolves each track's bboxes from the v6 corpus detection store
-(where the hardcase + triple-confirmed tracks were mined) and reuses ``prepare_dataset``'s frame
-extraction + bbox y/x/area/conf sanity filters, so nothing bypasses the safety net.
-
-Pipeline position
------------------
-data (this module) -> detect -> track -> eval/count -> results -> figures. This is a *training-data*
-step: it augments the frozen training COCO that fits the single-stage DEIMv2-X detector. It does not
-itself produce a manuscript number; it feeds the model whose held-out species macro-F1 (0.966 on
-``test_set_v6``) and downstream count / abundance-index results are the manuscript claims.
+"""In plain terms: this script adds extra hand-picked fish examples (rare species, look-alike
+species, and confusing debris) to the pile of labelled pictures the model learns from. For each
+listed fish it finds the video clip, pulls out a few of the clearest frames, and records the box
+around the fish and its species. Before adding anything it asks the leak guard whether the clip
+belongs to the held-out test set, and skips it if so. This is the script through which most of
+the 62 test fish reached the previous model's training set, so the guard call below is the single
+most important line in it.
 
 Inputs
 ------
-* ``--data-dir``          a prepared dataset dir holding ``train.json`` (from ``prepare_dataset``).
-* ``--extra-pos CSV...``  ``video_id,track_id,species`` rows (hardcase + triple-confirmed positives).
-* ``--extra-neg CSV...``  ``video_id,track_id`` rows (hardcase negatives / hard debris).
-* corpus detection stores per-video parquets under ``config.MODEL_OUTPUTS`` (the v6 corpus run),
-                          plus the raw footage they were mined from (resolved via ``prepare_dataset``).
+* ``--data-dir``: a prepared dataset folder holding ``train.json`` (from ``prepare_dataset``).
+* ``--extra-pos CSV...``: rows of ``video_id,track_id,species`` (the hand-picked fish).
+* ``--extra-neg CSV...``: rows of ``video_id,track_id`` (debris that must not be called a fish).
+* Stored detections of the earlier runs, under ``<SALMONID_PROJECTS_ROOT>/model_outputs``, and
+  the raw footage the clips came from.
 
-``track_id == -1`` means "the dominant track in the clip" (used by the single-track triple-confirmed).
+``track_id == -1`` in a CSV row means "the main fish in this clip" (the track with the most
+detections). This shorthand is why a guard keyed on track numbers could not work: the row never
+names the fish's real track number, so it could never match a held-out (video, track) pair.
 
 Outputs
 -------
-* extracted JPEG frames under ``<data-dir>/extra_frames/``.
-* the same ``<data-dir>/train.json`` rewritten in place with the new images + boxes appended. All
-  extra data goes to TRAIN only (val stays clean LS/CVAT).
+* JPEG frames under ``<data-dir>/extra_frames/``.
+* ``<data-dir>/train.json`` rewritten in place with the new pictures and boxes appended. All of
+  it goes to the training split; the validation split is left alone.
 
-Leak guard
-----------
-``salmonid.holdout.load_holdout_pairs`` is consulted unconditionally so no held-out eval track
-(``test_set_v6`` / ``ls_test``) can ever be folded into the training COCO (hard rule #1).
+Feeds
+-----
+No manuscript number directly. It supplied 14,013 pictures of positives (``extra_pos``) and 397
+of negatives (``extra_neg``) of the 45,249 pictures the published v2.7 model was trained on
+(Methods, training-set composition), and so stands behind the held-out species score (macro-F1
+0.961) and every count the model produces.
 
-Environment: base Python (cv2 + pyarrow); no GPU. The DEIMv2 training that consumes this COCO runs
-in the isolated ``.venv_deim`` — this builder does not.
+Run
+---
+::
+
+    python -m salmonid.data.build_extra_coco --data-dir <dataset dir>
+        --extra-pos <hardcase_pos.csv> <triple_confirmed_pos.csv>
+        --extra-neg <hardcase_neg.csv>
+
+(one command; shown on three lines)
+
+Tier
+----
+2. It needs the raw footage, the stored detections and the label CSVs, none of which are in
+git. The published training list is a frozen file (see ``provenance/v2.7/``); this script is
+deposited so the way that file was assembled can be read, not so it can be re-run from a clone.
+
+How this differs from what built the published data
+---------------------------------------------------
+The published v2.7 training list was not rebuilt from scratch with a corrected guard. It is the
+v2.6 list, which an earlier pair-keyed version of this script helped build, with every picture
+from a held-out clip removed afterwards by ``salmonid.data.audit_coco_holdout_leak --out``. The
+guard below is the corrected one (research repository commit ``d40b869``): a fresh build with it
+would not let those pictures in to begin with.
+
+Known limitations (left as they were, because the published model was trained on their output)
+------------------------------------------------------------------------------------------------
+* The ``track_id`` written to each picture record is the raw CSV value, so it is ``-1`` for
+  11,103 of the 14,013 ``extra_pos`` pictures in the published list. Those pictures can be traced
+  to a clip but not to a track.
+* ``train.json`` is overwritten in place, so running the script twice appends the same pictures
+  twice. It was run once per build.
+* The default of 4 frames per fish differs from ``prepare_dataset``'s default of 3.
+* Negatives are frames of tracks labelled "not a fish". Nothing checks that no other fish is
+  visible in the same frame.
+* The scripts that produced the input CSVs are not part of this deposit.
+* A row whose clip, stored detections or frames cannot be found is skipped without a message
+  (the per-CSV "rows -> kept" tally printed at the end is the only trace).
 """
 from __future__ import annotations
 import argparse
 import csv
 import glob
 import json
-import os
 from pathlib import Path
 import cv2
 
@@ -166,7 +192,7 @@ def main():
     a = ap.parse_args()
     dd = Path(a.data_dir)
     frames_dir = dd / "extra_frames"; frames_dir.mkdir(parents=True, exist_ok=True)
-    train = json.loads((dd / "train.json").read_text())
+    train = json.loads((dd / "train.json").read_text(encoding="utf-8"))
     next_img = max((im["id"] for im in train["images"]), default=-1) + 1
     next_ann = max((an["id"] for an in train["annotations"]), default=-1) + 1
 
@@ -176,10 +202,15 @@ def main():
     n_hold = 0
 
     def _is_held(vid, tid):
-        try:
-            return (vid, int(tid)) in hold
-        except (TypeError, ValueError):
-            return False   # track_id == -1 (dominant) — resolved downstream; video rarely a test video
+        # VIDEO-level first: `track_id == -1` means "the dominant track in this clip" (_resolve above),
+        # which is normally the very fish the test set holds out, and mined rows carry the track id of
+        # whichever detection run produced them. Pair-matching alone missed both — it put 62 test_set_v6
+        # fish into the v2.6 COCO with their own label (audit 2026-07-24).
+        #
+        # The version this replaces read `(vid, int(tid)) in hold` against a plain set of pairs and
+        # returned False when the id could not be parsed. For a `-1` row that test could never be
+        # True, so the guard was silently inert for most of this script's input.
+        return hold.held(vid, tid)
 
     new_imgs, new_anns = [], []
     stats = {}
@@ -223,7 +254,7 @@ def main():
         an["id"] = next_ann; next_ann += 1
     train["images"] += new_imgs
     train["annotations"] += new_anns
-    (dd / "train.json").write_text(json.dumps(train))
+    (dd / "train.json").write_text(json.dumps(train), encoding="utf-8")
     import collections
     print("\nstats (csv rows -> tracks with >=1 frame):", stats)
     print(f"leak guard: skipped {n_hold} held-out (test_set_v6/ls_test) tracks")

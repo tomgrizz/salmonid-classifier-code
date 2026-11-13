@@ -1,0 +1,7 @@
+statistic,scope,days,median_abs_diff,mean_abs_diff,top_days,share_of_days,share_of_run,model_over_tech,min_tech_count
+median absolute difference in the daily total,all species rows,1702,3.0,17.7,,,,,
+median absolute difference in the daily total,3 abundant,1573,3.0,18.7,,,,,
+busiest days carrying two thirds of the technician Chinook count,pooled (days ranked across both rivers),857,,,127.0,0.1482,0.6679,0.9325,265.0
+busiest days carrying two thirds of the technician Chinook count,Credit ranked within river,411,,,74.0,0.18,0.6688,0.8877,135.0
+busiest days carrying two thirds of the technician Chinook count,Ganaraska ranked within river,446,,,66.0,0.148,0.6679,0.9306,374.0
+busiest days carrying two thirds of the technician Chinook count,pooled 2022-2025,663,,,109.0,0.1644,0.6676,0.9185,283.0

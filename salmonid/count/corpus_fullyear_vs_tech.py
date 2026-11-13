@@ -1,4 +1,13 @@
-"""
+"""STATUS: only ``load_tech()`` in this file is on the published path.
+``load_tech()`` reads the technician count records for the season(s) named below and is
+imported by salmonid/count/corpus_countr_from_store.py, which produced the published counts.
+Everything else in this file (the command-line entry point, the per-frame file reading, the
+species-confidence floors) is the counting engine of the earlier two-stage pipeline: it is
+kept for provenance, its inputs are not deposited, and none of its numbers are in the
+manuscript. Statements below about "the paper" describe an earlier draft. The method of
+record is docs/COUNTING_METHOD.md.
+Tier: 2 (technician records are external; see docs/DATA_AVAILABILITY.md).
+
 In plain terms: this file tallies how many fish of each species the automated system counted
 each day and checks those daily tallies against the official counts made by the field
 technicians. For every species it reports two numbers — total fish seen (activity) and net
@@ -51,7 +60,7 @@ Outputs
   * Printed ACTIVITY / NET totals tables (model / tech / %err) and per-species Ganaraska daily
     Pearson-r (activity | net).
   * Per-species Ganaraska activity + cumulative-net PNG figures in --out-dir.
-  * Optional daily CSVs (--dump-daily-prefix) feeding the shared _count_r_gate.
+  * Optional daily CSVs (--dump-daily-prefix) feeding salmonid.eval.count_r_gate.
 
 Manuscript claim
 ----------------
@@ -202,7 +211,7 @@ def main() -> None:
     ap.add_argument("--down-thresh", type=float, default=300.0)
     ap.add_argument("--dump-daily-prefix", default="",
                     help="Write <prefix>_activity.csv and <prefix>_net.csv (date,site,species,model,tech) so the "
-                         "two-stage counts flow through the SAME _count_r_gate as the single-stage adapter.")
+                         "two-stage counts flow through the same salmonid.eval.count_r_gate as the single-stage adapter.")
     args = ap.parse_args()
     out = Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
     froot = Path(args.footage_root)

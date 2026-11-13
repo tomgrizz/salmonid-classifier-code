@@ -1,0 +1,13 @@
+river,technician,model_outcome,videos,of_videos,percent
+Credit,fish,counted track,8743,9042,96.7
+Credit,fish,"detections, no track",80,9042,0.9
+Credit,fish,no detection,219,9042,2.4
+Credit,no fish (false trigger),counted track,6,195,3.1
+Credit,no fish (false trigger),"detections, no track",8,195,4.1
+Credit,no fish (false trigger),no detection,181,195,92.8
+Ganaraska,fish,counted track,16331,16910,96.6
+Ganaraska,fish,"detections, no track",281,16910,1.7
+Ganaraska,fish,no detection,298,16910,1.8
+Ganaraska,no fish (false trigger),counted track,22,250,8.8
+Ganaraska,no fish (false trigger),"detections, no track",13,250,5.2
+Ganaraska,no fish (false trigger),no detection,215,250,86.0

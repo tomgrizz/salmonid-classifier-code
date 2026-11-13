@@ -1,0 +1,5 @@
+river,day_size,size_measured_by,days,model_sum,tech_sum,model_over_tech,mean_diff_per_day
+Ganaraska,1 to 19 fish,mean of the two counts,155,1034,817,1.266,1.4
+Ganaraska,1 to 19 fish,technician count,160,1154,905,1.275,1.56
+Credit,1 to 49 fish,mean of the two counts,227,2678,2606,1.028,0.32
+Credit,1 to 49 fish,technician count,237,2764,2754,1.004,0.04

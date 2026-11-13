@@ -1,9 +1,9 @@
 """In plain terms: this script draws the paper's main results figures — the pictures that
 compare the automated fish counter (a computer program that counts fish in the tunnel-camera
 videos) against what human technicians counted by hand. It reads the already-finished count
-tables and produces the manuscript's Figure 4 (year-by-year automated-vs-technician counts),
-Figure 5 (run timing — when each species moves through), and Figure 6 (showing ~90% of the
-Chinook Salmon run falls inside the new Ganaraska sanctuary's closed season).
+tables and produces the manuscript's Figure 4 (year-by-year model-vs-technician counts),
+Figure 5 (run timing: when each species moves through), and Figure 7 (showing that about 90% of
+the Chinook Salmon run falls inside the Ganaraska River sanctuary's closed season).
 
 Manuscript hero / regulation figures — the *figures* stage of the pipeline.
 
@@ -18,22 +18,24 @@ Publication-quality figures from the canonical dataset, in CJFAS/CSP production 
 and no in-artwork title (the caption is the title). Emits a PNG preview + a vector PDF for each.
 
 Inputs (committed, repo-local — resolved via ``salmonid.config``):
-  * ``config.CANONICAL_DAILY``   — per-day model-vs-technician counts (net + activity), 2019-2025, both rivers.
+  * ``config.CANONICAL_DAILY``   — per-day model-vs-technician counts (net + activity), 2020-2025, both rivers.
   * ``config.CANONICAL_SUMMARY`` — per-(year, river, species) totals; used only to know which cells exist.
 
 Outputs (vector PDF + PNG preview, written by ``manuscript_style.save_fig``):
   * fig_hero_performance.png / .pdf  (manuscript Fig 4) — model output (red line) vs technician
     (blue bars) annual NET counts, river x species grid, per-panel % error + inter-annual r^2.
-  * fig_hero_activity.png / .pdf     — the same grid for the total ACTIVITY count.
+  * fig_hero_activity.png / .pdf     — the same grid for the total ACTIVITY count (supporting
+    material; not placed in the manuscript).
   * fig_species_phenology.png / .pdf (manuscript Fig 5) — average run timing by species, per river.
-  * fig_ganaraska_sanctuary.png / .pdf (manuscript Fig 6) — automated counter supports the new Lower
-    Ganaraska Chinook sanctuary.
+  * fig_ganaraska_sanctuary.png / .pdf (manuscript Fig 7) — share of the Ganaraska River Chinook
+    Salmon run that falls inside the 1 September to 14 October sanctuary window, by year.
 
-Manuscript claim supported: the automated counter reproduces the technician's inter-annual abundance
-index (mean main-species net r^2 printed to stdout on run) and independently validates the Ganaraska
-1 Sept - 14 Oct Chinook sanctuary (~90% of the run falls inside the closed window, both methods agreeing).
-
-  python -m salmonid.figures.render_hero_regulation
+Feeds  : manuscript Figures 4, 5 and 7. The per-panel annotations in Figure 4 (% error and
+         inter-annual r-squared) are computed here from the canonical table over all six seasons
+         2020-2025, INCLUDING the 2020 Ganaraska season that the agreement statistics set aside;
+         that is why a Figure 4 panel can show a different r-squared from Section 3.3.
+Tier   : 1 (runs from committed data; no model, no GPU; a few seconds).
+Run    : python -m salmonid.figures.render_hero_regulation
 """
 import csv, datetime, math
 from pathlib import Path
@@ -56,7 +58,7 @@ DAILY = config.CANONICAL_DAILY
 SUMM = config.CANONICAL_SUMMARY
 ROWS = list(csv.DictReader(open(DAILY)))
 SUM = {(int(r["year"]), r["river"], r["species"]): r for r in csv.DictReader(open(SUMM))}
-SPS = list(SPECIES_ORDER)   # class order, matching Tables 3 and 4 and Figure 2
+SPS = list(SPECIES_ORDER)   # class order, matching Tables 1 and 2 and Figure 2
 RIVERS = ["Ganaraska", "Credit"]
 YEARS = list(range(2020, 2026))
 MET = {"net": ("model_net", "tech_net", "net_r"), "activity": ("model_act", "tech_act", "act_r")}
@@ -222,7 +224,7 @@ def fig_phenology():
         for sp in species:
             dm = np.zeros(367); dt = np.zeros(367)
             for r in ROWS:
-                # 2020-2025 only, matching the caption (the canonical table also holds 2019 at the Credit).
+                # 2020-2025 only, matching the caption.
                 if r["river"] == river and r["species"] == sp and int(r["year"]) in YEARS:
                     doy = datetime.date.fromisoformat(r["date"]).timetuple().tm_yday
                     dm[doy] += max(0, int(r["model_net"])); dt[doy] += max(0, int(r["tech_net"]))
@@ -250,10 +252,15 @@ def fig_phenology():
     save_fig(fig, "fig_species_phenology", kind="vector")
 
 
+def main():
+    """Draw Figures 4, 5 and 7 (plus the supporting activity grid) into figures/."""
+    mr2 = mean_main_r2("net")
+    print(f"mean main-species (Chinook/Coho/Rainbow, both rivers) net abundance-index r^2 = {mr2:.3f}")
+    make_grid("net", "fig_hero_performance.png", "Net-total count")        # Figure 4
+    make_grid("activity", "fig_hero_activity.png", "Total activity count")  # supporting, not placed
+    fig_sanctuary()                                                         # Figure 7
+    fig_phenology()                                                         # Figure 5
+
+
 if __name__ == "__main__":
-    MR2 = mean_main_r2("net")
-    print(f"mean main-species (Chinook/Coho/Rainbow, both rivers) net abundance-index r^2 = {MR2:.3f}")
-    make_grid("net", "fig_hero_performance.png", "Net-total count")
-    make_grid("activity", "fig_hero_activity.png", "Total activity count")
-    fig_sanctuary()
-    fig_phenology()
+    main()

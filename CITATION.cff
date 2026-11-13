@@ -1,21 +1,1425 @@
+# How to cite this repository. GitHub and Zenodo read this file.
+#
+# BEFORE THE DEPOSIT IS TAGGED, the authors must complete the items marked TODO:
+#   - ORCID identifiers for each author
+#   - the licence (see LICENSE; pending sign-off)
+#   - the repository DOI (reserve it on Zenodo or Dryad, then add `doi:` and `identifiers:`)
+#   - `date-released` = the date of the tagged release
+#   - the article's volume, pages and DOI once it is accepted
+# Validate with:  pip install cffconvert && cffconvert --validate
 cff-version: 1.2.0
-message: "If you use this code, please cite the accompanying manuscript."
-title: "Single-stage deep-learning enumeration of migratory salmonids at Lake Ontario fishways — reproduction code"
-# NOTE: author list and manuscript DOI are PLACEHOLDERS — complete before publication.
+message: >-
+  If you use this code or these data, please cite the article given under
+  preferred-citation, and the repository itself using the metadata below.
+type: software
+title: >-
+  Code and data for: Deep learning identification and counting of migratory salmon and
+  trout from fishway video: validation against six years of counts at two Lake Ontario
+  tributaries
+abstract: >-
+  Analysis code, model configuration, training-run provenance and the derived count tables
+  needed to reproduce the classification score, the count-agreement statistics and the
+  figures of the accompanying article. A single DEIMv2-X detector with a DINOv3 backbone
+  identifies five salmon and trout species in RiverWatcher fishway video; BoT-SORT tracking
+  converts detections into daily upstream and downstream counts, which are validated against
+  technician counts at the Ganaraska River and the Credit River, 2020 to 2025.
 authors:
   - family-names: Gristey
     given-names: Thomas
-    affiliation: "Ontario Ministry of Natural Resources — Lake Ontario Management Unit"
-  # - additional authors per the manuscript CRediT list (Q.F., S.C., M.F., M.Y., D.K.)
-version: "2.6.0"
-license: Apache-2.0        # placeholder — must match LICENSE once finalized
-repository-code: "https://github.com/<org>/salmonid-classifier-code"   # PLACEHOLDER
+    email: thomas.gristey@ontario.ca
+    affiliation: "Lake Ontario Management Unit, Ontario Ministry of Natural Resources, Picton, Ontario, Canada"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: Fisher
+    given-names: Quinn
+    # affiliation: "TODO"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: Collier
+    given-names: Simone
+    # affiliation: "TODO"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: Ford
+    given-names: Mikayla
+    affiliation: "Lake Ontario Management Unit, Ontario Ministry of Natural Resources, Picton, Ontario, Canada"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: Yuille
+    given-names: Michael
+    affiliation: "Lake Ontario Management Unit, Ontario Ministry of Natural Resources, Picton, Ontario, Canada"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: Leos Barajas
+    given-names: Vianey
+    affiliation: "University of Toronto, Toronto, Ontario, Canada"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: deKerckhove
+    given-names: Dak
+    affiliation: "Science and Research, Ontario Ministry of Natural Resources, Peterborough, Ontario, Canada"
+    # orcid: "https://orcid.org/TODO"
+version: "2.7.0"
+# date-released: "TODO (YYYY-MM-DD of the tagged release)"
+# license: "TODO (SPDX identifier, e.g. Apache-2.0; must match the LICENSE file)"
+# doi: "TODO"
+repository-code: "https://github.com/tomgrizz/salmonid-classifier-code"
+keywords:
+  - deep learning
+  - fish passage
+  - salmonid
+  - fishway
+  - image classification
+  - automated monitoring
+  - Lake Ontario
+  - count validation
 preferred-citation:
   type: article
-  title: "Against the Current: deep learning enumeration of migratory salmonids at Lake Ontario fishways, validated on technician counts"
+  title: >-
+    Deep learning identification and counting of migratory salmon and trout from fishway
+    video: validation against six years of counts at two Lake Ontario tributaries
   authors:
     - family-names: Gristey
       given-names: Thomas
-  journal: "Fisheries Research"
+    - family-names: Fisher
+      given-names: Quinn
+    - family-names: Collier
+      given-names: Simone
+    - family-names: Ford
+      given-names: Mikayla
+    - family-names: Yuille
+      given-names: Michael
+    - family-names: Leos Barajas
+      given-names: Vianey
+    - family-names: deKerckhove
+      given-names: Dak
+  journal: "Canadian Journal of Fisheries and Aquatic Sciences"
+  status: submitted
   year: 2026
-  # doi: <add on acceptance>
+  # volume, start, end, doi: TODO on acceptance
+# ---------------------------------------------------------------------------------------
+# Software, models, datasets and statistical methods this work depends on.
+# The same entries, as BibTeX, are in docs/software.bib; docs/SOFTWARE_CITATIONS.md explains
+# what each one is used for, the version used, and its licence.
+# ---------------------------------------------------------------------------------------
+references:
+  # harris2020numpy
+  - type: article
+    title: Array programming with NumPy
+    authors:
+    - family-names: Harris
+      given-names: Charles R.
+    - family-names: Millman
+      given-names: K. Jarrod
+    - family-names: van der Walt
+      given-names: Stéfan J.
+    - family-names: Gommers
+      given-names: Ralf
+    - family-names: Virtanen
+      given-names: Pauli
+    - family-names: Cournapeau
+      given-names: David
+    - family-names: Wieser
+      given-names: Eric
+    - family-names: Taylor
+      given-names: Julian
+    - family-names: Berg
+      given-names: Sebastian
+    - family-names: Smith
+      given-names: Nathaniel J.
+    - family-names: Kern
+      given-names: Robert
+    - family-names: Picus
+      given-names: Matti
+    - family-names: Hoyer
+      given-names: Stephan
+    - family-names: van Kerkwijk
+      given-names: Marten H.
+    - family-names: Brett
+      given-names: Matthew
+    - family-names: Haldane
+      given-names: Allan
+    - family-names: Fernández del Río
+      given-names: Jaime
+    - family-names: Wiebe
+      given-names: Mark
+    - family-names: Peterson
+      given-names: Pearu
+    - family-names: Gérard-Marchant
+      given-names: Pierre
+    - family-names: Sheppard
+      given-names: Kevin
+    - family-names: Reddy
+      given-names: Tyler
+    - family-names: Weckesser
+      given-names: Warren
+    - family-names: Abbasi
+      given-names: Hameer
+    - family-names: Gohlke
+      given-names: Christoph
+    - family-names: Oliphant
+      given-names: Travis E.
+    year: 2020
+    journal: Nature
+    volume: 585
+    issue: 7825
+    start: 357
+    end: 362
+    doi: 10.1038/s41586-020-2649-2
+    notes: NumPy 2.4.4 (BSD-3-Clause). Used throughout the package.
+  # mckinney2010pandas
+  - type: conference-paper
+    title: Data Structures for Statistical Computing in Python
+    authors:
+    - family-names: McKinney
+      given-names: Wes
+    year: 2010
+    collection-title: Proceedings of the 9th Python in Science Conference
+    conference:
+      name: 9th Python in Science Conference (SciPy 2010)
+    start: 56
+    end: 61
+    doi: 10.25080/Majora-92bf1922-00a
+  # pandas2025software
+  - type: software
+    title: 'pandas-dev/pandas: Pandas'
+    authors:
+    - name: The pandas development team
+    year: 2025
+    version: 2.3.3
+    date-released: '2025-09-30'
+    doi: 10.5281/zenodo.17229934
+    repository-code: https://github.com/pandas-dev/pandas
+    license: BSD-3-Clause
+    notes: 'All-versions DOI: 10.5281/zenodo.3509134.'
+  # virtanen2020scipy
+  - type: article
+    title: 'SciPy 1.0: fundamental algorithms for scientific computing in Python'
+    authors:
+    - family-names: Virtanen
+      given-names: Pauli
+    - family-names: Gommers
+      given-names: Ralf
+    - family-names: Oliphant
+      given-names: Travis E.
+    - family-names: Haberland
+      given-names: Matt
+    - family-names: Reddy
+      given-names: Tyler
+    - family-names: Cournapeau
+      given-names: David
+    - family-names: Burovski
+      given-names: Evgeni
+    - family-names: Peterson
+      given-names: Pearu
+    - name: others
+    year: 2020
+    journal: Nature Methods
+    volume: 17
+    issue: 3
+    start: 261
+    end: 272
+    doi: 10.1038/s41592-019-0686-2
+    notes: SciPy 1.15.3 (base environment; version DOI 10.5281/zenodo.15366870) and 1.17.1 (DEIMv2 environment;
+      version DOI 10.5281/zenodo.18736568). BSD-3-Clause.
+  # hunter2007matplotlib
+  - type: article
+    title: 'Matplotlib: A 2D graphics environment'
+    authors:
+    - family-names: Hunter
+      given-names: John D.
+    year: 2007
+    journal: Computing in Science & Engineering
+    volume: 9
+    issue: 3
+    start: 90
+    end: 95
+    doi: 10.1109/MCSE.2007.55
+  # matplotlib2025software
+  - type: software
+    title: 'Matplotlib: Visualization with Python'
+    authors:
+    - name: The Matplotlib Development Team
+    year: 2025
+    version: 3.10.8
+    date-released: '2025-11-13'
+    doi: 10.5281/zenodo.17595503
+    repository-code: https://github.com/matplotlib/matplotlib
+    notes: 'Matplotlib licence (based on the Python Software Foundation licence). All-versions DOI:
+      10.5281/zenodo.592536.'
+  # apachearrow2025
+  - type: software
+    title: 'Apache Arrow: PyArrow'
+    authors:
+    - name: Apache Software Foundation
+    year: 2025
+    version: 22.0.0
+    date-released: '2025-10-24'
+    url: https://arrow.apache.org/
+    license: Apache-2.0
+  # bradski2000opencv
+  - type: article
+    title: The OpenCV Library
+    authors:
+    - family-names: Bradski
+      given-names: G.
+    year: 2000
+    journal: Dr. Dobb's Journal of Software Tools
+    notes: Citation requested by the OpenCV project. opencv-python 4.13.0 used (Apache-2.0).
+  # murray2026pillow
+  - type: software
+    title: 'python-pillow/Pillow: 12.1.1'
+    authors:
+    - family-names: Murray
+      given-names: Andrew
+    - family-names: van Kemenade
+      given-names: Hugo
+    - name: wiredfool
+    - family-names: Clark
+      given-names: Jeffrey A.
+    - family-names: Karpinsky
+      given-names: Alexander
+    - family-names: Baranovič
+      given-names: Ondrej
+    - name: others
+    year: 2026
+    version: 12.1.1
+    date-released: '2026-02-11'
+    doi: 10.5281/zenodo.18604291
+    repository-code: https://github.com/python-pillow/Pillow
+    notes: 'MIT-CMU (HPND) licence. All-versions DOI: 10.5281/zenodo.596518.'
+  # decord2021
+  - type: software
+    title: Decord
+    authors:
+    - name: Decord contributors
+    year: 2021
+    version: 0.6.0
+    date-released: '2021-06-14'
+    repository-code: https://github.com/dmlc/decord
+    license: Apache-2.0
+  # paszke2019pytorch
+  - type: conference-paper
+    title: 'PyTorch: An Imperative Style, High-Performance Deep Learning Library'
+    authors:
+    - family-names: Paszke
+      given-names: Adam
+    - family-names: Gross
+      given-names: Sam
+    - family-names: Massa
+      given-names: Francisco
+    - family-names: Lerer
+      given-names: Adam
+    - family-names: Bradbury
+      given-names: James
+    - family-names: Chanan
+      given-names: Gregory
+    - family-names: Killeen
+      given-names: Trevor
+    - family-names: Lin
+      given-names: Zeming
+    - family-names: Gimelshein
+      given-names: Natalia
+    - family-names: Antiga
+      given-names: Luca
+    - family-names: Desmaison
+      given-names: Alban
+    - family-names: Köpf
+      given-names: Andreas
+    - family-names: Yang
+      given-names: Edward
+    - family-names: DeVito
+      given-names: Zachary
+    - family-names: Raison
+      given-names: Martin
+    - family-names: Tejani
+      given-names: Alykhan
+    - family-names: Chilamkurthy
+      given-names: Sasank
+    - family-names: Steiner
+      given-names: Benoit
+    - family-names: Fang
+      given-names: Lu
+    - family-names: Bai
+      given-names: Junjie
+    - family-names: Chintala
+      given-names: Soumith
+    year: 2019
+    collection-title: Advances in Neural Information Processing Systems 32
+    conference:
+      name: 33rd Conference on Neural Information Processing Systems (NeurIPS 2019)
+    url: https://proceedings.neurips.cc/paper/2019/hash/bdbca288fee7f92f2bfa9f7012727740-Abstract.html
+    notes: torch 2.7.0+cu128 (DEIMv2 environment) and 2.11.0+cu128 (base environment). BSD-3-Clause.
+  # ansel2024pytorch2
+  - type: conference-paper
+    title: 'PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph
+      Compilation'
+    authors:
+    - family-names: Ansel
+      given-names: Jason
+    - family-names: Yang
+      given-names: Edward
+    - family-names: He
+      given-names: Horace
+    - family-names: Gimelshein
+      given-names: Natalia
+    - family-names: Jain
+      given-names: Animesh
+    - family-names: Voznesensky
+      given-names: Michael
+    - family-names: Bao
+      given-names: Bin
+    - family-names: Bell
+      given-names: Peter
+    - name: others
+    year: 2024
+    collection-title: Proceedings of the 29th ACM International Conference on Architectural Support
+      for Programming Languages and Operating Systems, Volume 2
+    conference:
+      name: ASPLOS '24
+    start: 929
+    end: 947
+    doi: 10.1145/3620665.3640366
+    notes: 'Optional: the citation the PyTorch repository currently lists as preferred.'
+  # torchvision2016
+  - type: software
+    title: 'TorchVision: PyTorch''s Computer Vision library'
+    authors:
+    - name: TorchVision maintainers and contributors
+    year: 2016
+    date-released: '2016-11-06'
+    repository-code: https://github.com/pytorch/vision
+    license: BSD-3-Clause
+    notes: torchvision 0.22.0+cu128 (DEIMv2 environment) and 0.26.0+cu128 (base environment).
+  # brostrom2024boxmot
+  - type: software
+    title: 'BoxMOT: pluggable SOTA tracking modules for object detection, segmentation and pose estimation
+      models'
+    authors:
+    - family-names: Broström
+      given-names: Mikel
+    year: 2024
+    version: 10.0.52
+    date-released: '2024-03-02'
+    doi: 10.5281/zenodo.7452873
+    repository-code: https://github.com/mikel-brostrom/boxmot
+    license: AGPL-3.0-only
+    notes: 'BoT-SORT and ByteTrack implementation. Installed in the base environment; version 21.0.0
+      is installed in the DEIMv2 environment, and which of the two produced the published counts is
+      being confirmed (keep this entry or the next, not both). The DOI is the all-versions record; Zenodo
+      holds no record for 10.0.52. Package metadata states AGPL-3.0 (PyPI classifier: AGPLv3 or later).'
+  # brostrom2026boxmot
+  - type: software
+    title: 'BoxMOT: pluggable state-of-the-art multi-object tracking modules'
+    authors:
+    - family-names: Broström
+      given-names: Mikel
+    - family-names: Kozak
+      given-names: Mikhail
+    year: 2026
+    version: 21.0.0
+    date-released: '2026-06-03'
+    doi: 10.5281/zenodo.7452873
+    repository-code: https://github.com/mikel-brostrom/boxmot
+    license: AGPL-3.0-only
+    notes: 'ALTERNATIVE to the previous entry: keep only if the published counts are confirmed to come
+      from BoxMOT 21.0.0 (DEIMv2 environment). The DOI is the all-versions record; Zenodo holds no record
+      for 21.0.0.'
+  # wolf2020transformers
+  - type: conference-paper
+    title: 'Transformers: State-of-the-Art Natural Language Processing'
+    authors:
+    - family-names: Wolf
+      given-names: Thomas
+    - family-names: Debut
+      given-names: Lysandre
+    - family-names: Sanh
+      given-names: Victor
+    - family-names: Chaumond
+      given-names: Julien
+    - family-names: Delangue
+      given-names: Clement
+    - family-names: Moi
+      given-names: Anthony
+    - family-names: Cistac
+      given-names: Pierric
+    - family-names: Rault
+      given-names: Tim
+    - name: others
+    year: 2020
+    collection-title: 'Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing:
+      System Demonstrations'
+    conference:
+      name: EMNLP 2020
+    start: 38
+    end: 45
+    doi: 10.18653/v1/2020.emnlp-demos.6
+    notes: transformers 5.5.4 (base environment) and 5.10.2 (DEIMv2 environment). Apache-2.0.
+  # roboflow2026supervision
+  - type: software
+    title: Supervision
+    authors:
+    - name: Roboflow
+    year: 2026
+    version: 0.27.0.post2
+    date-released: '2026-03-14'
+    repository-code: https://github.com/roboflow/supervision
+    license: MIT
+    notes: Supplies the ByteTrack used by the optional store-only tracker in salmonid/count/corpus_countr_from_store.py.
+  # mixaill2026fastercocoeval
+  - type: software
+    title: 'Faster-COCO-Eval: Faster and Enhanced COCO Evaluation Library'
+    authors:
+    - name: MiXaiLL76
+    year: 2026
+    version: 1.7.2
+    date-released: '2026-02-22'
+    repository-code: https://github.com/MiXaiLL76/faster_coco_eval
+    license: Apache-2.0
+  # simonov2025pyyaml
+  - type: software
+    title: PyYAML
+    authors:
+    - family-names: Simonov
+      given-names: Kirill
+    - name: PyYAML contributors
+    year: 2025
+    version: 6.0.3
+    date-released: '2025-09-25'
+    url: https://pyyaml.org/
+    license: MIT
+  # tensorboard2025
+  - type: software
+    title: TensorBoard
+    authors:
+    - name: The TensorFlow Authors
+    year: 2025
+    version: 2.20.0
+    date-released: '2025-07-17'
+    repository-code: https://github.com/tensorflow/tensorboard
+    license: Apache-2.0
+  # ye2023calflops
+  - type: software
+    title: 'calflops: a FLOPs and Params calculate tool for neural networks in pytorch framework'
+    authors:
+    - family-names: Ye
+      given-names: Xiaoju
+    year: 2023
+    version: 0.3.2
+    repository-code: https://github.com/MrYxJ/calculate-flops.pytorch
+    license: MIT
+  # fleischmann2026geopandas
+  - type: article
+    title: 'GeoPandas: Fundamental data structures for vector spatial data in Python'
+    authors:
+    - family-names: Fleischmann
+      given-names: Martin
+    - family-names: Van den Bossche
+      given-names: Joris
+    - family-names: Jordahl
+      given-names: Kelsey
+    - family-names: Richards
+      given-names: Matthew John
+    - family-names: McBride
+      given-names: James
+    - family-names: Wasserman
+      given-names: Jacob
+    - family-names: Ward
+      given-names: Brendan
+    - family-names: Wolf
+      given-names: Levi John
+    year: 2026
+    journal: Computers, Environment and Urban Systems
+    volume: 130
+    start: 102495
+    doi: 10.1016/j.compenvurbsys.2026.102495
+    notes: GeoPandas 1.1.3 (BSD-3-Clause; version DOI 10.5281/zenodo.18934477). Used only by the Fig.
+      1 map script in the manuscript repository.
+  # gillies2025shapely
+  - type: software
+    title: Shapely
+    authors:
+    - family-names: Gillies
+      given-names: Sean
+    - family-names: van der Wel
+      given-names: Casper
+    - family-names: Van den Bossche
+      given-names: Joris
+    - family-names: Taves
+      given-names: Mike W.
+    - family-names: Arnott
+      given-names: Joshua
+    - family-names: Ward
+      given-names: Brendan C.
+    - name: others
+    year: 2025
+    version: 2.1.2
+    date-released: '2025-09-24'
+    doi: 10.5281/zenodo.17193310
+    repository-code: https://github.com/shapely/shapely
+    license: BSD-3-Clause
+    notes: 'All-versions DOI: 10.5281/zenodo.5597138. Used only by the Fig. 1 map script.'
+  # dacostaluis2019tqdm
+  - type: article
+    title: 'tqdm: A Fast, Extensible Progress Meter for Python and CLI'
+    authors:
+    - family-names: da Costa-Luis
+      given-names: Casper O.
+    year: 2019
+    journal: Journal of Open Source Software
+    volume: 4
+    issue: 37
+    start: 1277
+    doi: 10.21105/joss.01277
+    notes: Installed but not imported by any module of this repository; listed for completeness only.
+  # huang2025deimv2
+  - type: article
+    title: Real-Time Object Detection Meets DINOv3
+    authors:
+    - family-names: Huang
+      given-names: Shihua
+    - family-names: Hou
+      given-names: Yongjie
+    - family-names: Liu
+      given-names: Longfei
+    - family-names: Yu
+      given-names: Xuanlong
+    - family-names: Shen
+      given-names: Xi
+    year: 2025
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.2509.20787
+    url: https://github.com/Intellindust-AI-Lab/DEIMv2
+    identifiers:
+    - type: other
+      value: arXiv:2509.20787
+      description: arXiv identifier
+    notes: 'DEIMv2: the detector. Code pinned at commit 0fff8d4dcdc272e6cf2d84be31399db471357941, which
+      carries an Apache-2.0 licence.'
+  # huang2025deim
+  - type: conference-paper
+    title: 'DEIM: DETR with Improved Matching for Fast Convergence'
+    authors:
+    - family-names: Huang
+      given-names: Shihua
+    - family-names: Lu
+      given-names: Zhichao
+    - family-names: Cun
+      given-names: Xiaodong
+    - family-names: Yu
+      given-names: Yongjun
+    - family-names: Zhou
+      given-names: Xiao
+    - family-names: Shen
+      given-names: Xi
+    year: 2025
+    collection-title: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition
+      (CVPR)
+    conference:
+      name: CVPR 2025
+    start: 15162
+    end: 15171
+    doi: 10.1109/CVPR52734.2025.01412
+  # peng2025dfine
+  - type: conference-paper
+    title: 'D-FINE: Redefine Regression Task in DETRs as Fine-grained Distribution Refinement'
+    authors:
+    - family-names: Peng
+      given-names: Yansong
+    - family-names: Li
+      given-names: Hebei
+    - family-names: Wu
+      given-names: Peixi
+    - family-names: Zhang
+      given-names: Yueyi
+    - family-names: Sun
+      given-names: Xiaoyan
+    - family-names: Wu
+      given-names: Feng
+    year: 2025
+    collection-title: International Conference on Learning Representations (ICLR)
+    conference:
+      name: ICLR 2025
+    url: https://arxiv.org/abs/2410.13842
+    identifiers:
+    - type: other
+      value: arXiv:2410.13842
+      description: arXiv identifier
+  # lv2023rtdetr
+  - type: conference-paper
+    title: DETRs Beat YOLOs on Real-time Object Detection
+    authors:
+    - family-names: Zhao
+      given-names: Yian
+    - family-names: Lv
+      given-names: Wenyu
+    - family-names: Xu
+      given-names: Shangliang
+    - family-names: Wei
+      given-names: Jinman
+    - family-names: Wang
+      given-names: Guanzhong
+    - family-names: Dang
+      given-names: Qingqing
+    - family-names: Liu
+      given-names: Yi
+    - family-names: Chen
+      given-names: Jie
+    year: 2024
+    collection-title: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition
+      (CVPR)
+    conference:
+      name: CVPR 2024
+    start: 16965
+    end: 16974
+    doi: 10.1109/CVPR52733.2024.01605
+  # lv2024rtdetrv2
+  - type: article
+    title: 'RT-DETRv2: Improved Baseline with Bag-of-Freebies for Real-Time Detection Transformer'
+    authors:
+    - family-names: Lv
+      given-names: Wenyu
+    - family-names: Zhao
+      given-names: Yian
+    - family-names: Chang
+      given-names: Qinyao
+    - family-names: Huang
+      given-names: Kui
+    - family-names: Wang
+      given-names: Guanzhong
+    - family-names: Liu
+      given-names: Yi
+    year: 2024
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.2407.17140
+    identifiers:
+    - type: other
+      value: arXiv:2407.17140
+      description: arXiv identifier
+    notes: Base architecture of the earlier two-stage detector scored by salmonid/eval/bbox_regression_gate.py.
+  # carion2020detr
+  - type: conference-paper
+    title: End-to-End Object Detection with Transformers
+    authors:
+    - family-names: Carion
+      given-names: Nicolas
+    - family-names: Massa
+      given-names: Francisco
+    - family-names: Synnaeve
+      given-names: Gabriel
+    - family-names: Usunier
+      given-names: Nicolas
+    - family-names: Kirillov
+      given-names: Alexander
+    - family-names: Zagoruyko
+      given-names: Sergey
+    year: 2020
+    collection-title: Computer Vision - ECCV 2020 (Lecture Notes in Computer Science)
+    conference:
+      name: European Conference on Computer Vision (ECCV 2020)
+    start: 213
+    end: 229
+    doi: 10.1007/978-3-030-58452-8_13
+  # simeoni2025dinov3
+  - type: article
+    title: DINOv3
+    authors:
+    - family-names: Siméoni
+      given-names: Oriane
+    - family-names: Vo
+      given-names: Huy V.
+    - family-names: Seitzer
+      given-names: Maximilian
+    - family-names: Baldassarre
+      given-names: Federico
+    - family-names: Oquab
+      given-names: Maxime
+    - family-names: Jose
+      given-names: Cijo
+    - family-names: Khalidov
+      given-names: Vasil
+    - family-names: Szafraniec
+      given-names: Marc
+    - name: others
+    year: 2025
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.2508.10104
+    url: https://github.com/facebookresearch/dinov3
+    identifiers:
+    - type: other
+      value: arXiv:2508.10104
+      description: arXiv identifier
+    notes: 'Backbone: ViT-S+/16 pretrained on LVD-1689M (dinov3_vits16plus_pretrain_lvd1689m-4057cbaa.pth).
+      Weights are released under the DINOv3 License, a custom licence that also governs derivative works.'
+  # oquab2024dinov2
+  - type: article
+    title: 'DINOv2: Learning Robust Visual Features without Supervision'
+    authors:
+    - family-names: Oquab
+      given-names: Maxime
+    - family-names: Darcet
+      given-names: Timothée
+    - family-names: Moutakanni
+      given-names: Théo
+    - family-names: Vo
+      given-names: Huy V.
+    - family-names: Szafraniec
+      given-names: Marc
+    - family-names: Khalidov
+      given-names: Vasil
+    - name: others
+    year: 2024
+    journal: Transactions on Machine Learning Research
+    url: https://openreview.net/forum?id=a68SUt6zFt
+    notes: Backbone comparison only (ViT-B/14, facebook/dinov2-base, Apache-2.0).
+  # dosovitskiy2021vit
+  - type: conference-paper
+    title: 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale'
+    authors:
+    - family-names: Dosovitskiy
+      given-names: Alexey
+    - family-names: Beyer
+      given-names: Lucas
+    - family-names: Kolesnikov
+      given-names: Alexander
+    - family-names: Weissenborn
+      given-names: Dirk
+    - family-names: Zhai
+      given-names: Xiaohua
+    - family-names: Unterthiner
+      given-names: Thomas
+    - family-names: Dehghani
+      given-names: Mostafa
+    - family-names: Minderer
+      given-names: Matthias
+    - family-names: Heigold
+      given-names: Georg
+    - family-names: Gelly
+      given-names: Sylvain
+    - family-names: Uszkoreit
+      given-names: Jakob
+    - family-names: Houlsby
+      given-names: Neil
+    year: 2021
+    collection-title: International Conference on Learning Representations (ICLR)
+    conference:
+      name: ICLR 2021
+    identifiers:
+    - type: other
+      value: arXiv:2010.11929
+      description: arXiv identifier
+  # he2016resnet
+  - type: conference-paper
+    title: Deep Residual Learning for Image Recognition
+    authors:
+    - family-names: He
+      given-names: Kaiming
+    - family-names: Zhang
+      given-names: Xiangyu
+    - family-names: Ren
+      given-names: Shaoqing
+    - family-names: Sun
+      given-names: Jian
+    year: 2016
+    collection-title: 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)
+    conference:
+      name: CVPR 2016
+    start: 770
+    end: 778
+    doi: 10.1109/CVPR.2016.90
+    notes: Backbone comparison only (ResNet-50, torchvision IMAGENET1K_V1 weights).
+  # deng2009imagenet
+  - type: conference-paper
+    title: 'ImageNet: A large-scale hierarchical image database'
+    authors:
+    - family-names: Deng
+      given-names: Jia
+    - family-names: Dong
+      given-names: Wei
+    - family-names: Socher
+      given-names: Richard
+    - family-names: Li
+      given-names: Li-Jia
+    - family-names: Li
+      given-names: Kai
+    - family-names: Fei-Fei
+      given-names: Li
+    year: 2009
+    collection-title: 2009 IEEE Conference on Computer Vision and Pattern Recognition
+    conference:
+      name: CVPR 2009
+    start: 248
+    end: 255
+    doi: 10.1109/CVPR.2009.5206848
+    notes: Dataset behind the ResNet-50 comparison classifier's pretrained weights.
+  # lin2014coco
+  - type: conference-paper
+    title: 'Microsoft COCO: Common Objects in Context'
+    authors:
+    - family-names: Lin
+      given-names: Tsung-Yi
+    - family-names: Maire
+      given-names: Michael
+    - family-names: Belongie
+      given-names: Serge
+    - family-names: Hays
+      given-names: James
+    - family-names: Perona
+      given-names: Pietro
+    - family-names: Ramanan
+      given-names: Deva
+    - family-names: Dollár
+      given-names: Piotr
+    - family-names: Zitnick
+      given-names: C. Lawrence
+    year: 2014
+    collection-title: Computer Vision - ECCV 2014 (Lecture Notes in Computer Science)
+    conference:
+      name: European Conference on Computer Vision (ECCV 2014)
+    start: 740
+    end: 755
+    doi: 10.1007/978-3-319-10602-1_48
+    notes: Dataset the starting DEIMv2-X checkpoint (deimv2_x_coco.pth) was trained on. Annotations
+      CC BY 4.0; images under the Flickr terms of use.
+  # aharon2022botsort
+  - type: article
+    title: 'BoT-SORT: Robust Associations Multi-Pedestrian Tracking'
+    authors:
+    - family-names: Aharon
+      given-names: Nir
+    - family-names: Orfaig
+      given-names: Roy
+    - family-names: Bobrovsky
+      given-names: Ben-Zion
+    year: 2022
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.2206.14651
+    identifiers:
+    - type: other
+      value: arXiv:2206.14651
+      description: arXiv identifier
+    notes: Tracking algorithm; the implementation used is BoxMOT.
+  # zhang2022bytetrack
+  - type: conference-paper
+    title: 'ByteTrack: Multi-object Tracking by Associating Every Detection Box'
+    authors:
+    - family-names: Zhang
+      given-names: Yifu
+    - family-names: Sun
+      given-names: Peize
+    - family-names: Jiang
+      given-names: Yi
+    - family-names: Yu
+      given-names: Dongdong
+    - family-names: Weng
+      given-names: Fucheng
+    - family-names: Yuan
+      given-names: Zehuan
+    - family-names: Luo
+      given-names: Ping
+    - family-names: Liu
+      given-names: Wenyu
+    - family-names: Wang
+      given-names: Xinggang
+    year: 2022
+    collection-title: Computer Vision - ECCV 2022 (Lecture Notes in Computer Science)
+    conference:
+      name: European Conference on Computer Vision (ECCV 2022)
+    start: 1
+    end: 21
+    doi: 10.1007/978-3-031-20047-2_1
+    notes: Tracker-comparison arm; the implementation used is BoxMOT's ByteTrack (salmonid/detect/track_from_store.py
+      --tracker bytetrack).
+  # zhou2019osnet
+  - type: conference-paper
+    title: Omni-Scale Feature Learning for Person Re-Identification
+    authors:
+    - family-names: Zhou
+      given-names: Kaiyang
+    - family-names: Yang
+      given-names: Yongxin
+    - family-names: Cavallaro
+      given-names: Andrea
+    - family-names: Xiang
+      given-names: Tao
+    year: 2019
+    collection-title: 2019 IEEE/CVF International Conference on Computer Vision (ICCV)
+    conference:
+      name: ICCV 2019
+    start: 3701
+    end: 3711
+    doi: 10.1109/ICCV.2019.00380
+    notes: Re-identification network (OSNet x0.25, weights osnet_x0_25_msmt17).
+  # zhou2022osnet
+  - type: article
+    title: Learning Generalisable Omni-Scale Representations for Person Re-Identification
+    authors:
+    - family-names: Zhou
+      given-names: Kaiyang
+    - family-names: Yang
+      given-names: Yongxin
+    - family-names: Cavallaro
+      given-names: Andrea
+    - family-names: Xiang
+      given-names: Tao
+    year: 2022
+    journal: IEEE Transactions on Pattern Analysis and Machine Intelligence
+    volume: 44
+    issue: 9
+    start: 5056
+    end: 5069
+    doi: 10.1109/TPAMI.2021.3069237
+    notes: 'Optional: requested by Torchreid alongside the ICCV paper.'
+  # zhou2019torchreid
+  - type: article
+    title: 'Torchreid: A Library for Deep Learning Person Re-Identification in Pytorch'
+    authors:
+    - family-names: Zhou
+      given-names: Kaiyang
+    - family-names: Xiang
+      given-names: Tao
+    year: 2019
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.1910.10093
+    url: https://github.com/KaiyangZhou/deep-person-reid
+    identifiers:
+    - type: other
+      value: arXiv:1910.10093
+      description: arXiv identifier
+    notes: Source of the pretrained OSNet weights (code MIT).
+  # wei2018msmt17
+  - type: conference-paper
+    title: Person Transfer GAN to Bridge Domain Gap for Person Re-identification
+    authors:
+    - family-names: Wei
+      given-names: Longhui
+    - family-names: Zhang
+      given-names: Shiliang
+    - family-names: Gao
+      given-names: Wen
+    - family-names: Tian
+      given-names: Qi
+    year: 2018
+    collection-title: 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition
+    conference:
+      name: CVPR 2018
+    start: 79
+    end: 88
+    doi: 10.1109/CVPR.2018.00016
+    notes: MSMT17, the dataset the OSNet re-identification weights were trained on.
+  # ravi2024sam2
+  - type: article
+    title: 'SAM 2: Segment Anything in Images and Videos'
+    authors:
+    - family-names: Ravi
+      given-names: Nikhila
+    - family-names: Gabeur
+      given-names: Valentin
+    - family-names: Hu
+      given-names: Yuan-Ting
+    - family-names: Hu
+      given-names: Ronghang
+    - family-names: Ryali
+      given-names: Chaitanya
+    - family-names: Ma
+      given-names: Tengyu
+    - family-names: Khedr
+      given-names: Haitham
+    - family-names: Rädle
+      given-names: Roman
+    - family-names: Rolland
+      given-names: Chloe
+    - family-names: Gustafson
+      given-names: Laura
+    - family-names: Mintun
+      given-names: Eric
+    - family-names: Pan
+      given-names: Junting
+    - family-names: Alwala
+      given-names: Kalyan Vasudev
+    - family-names: Carion
+      given-names: Nicolas
+    - family-names: Wu
+      given-names: Chao-Yuan
+    - family-names: Girshick
+      given-names: Ross
+    - family-names: Dollár
+      given-names: Piotr
+    - family-names: Feichtenhofer
+      given-names: Christoph
+    year: 2024
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.2408.00714
+    url: https://github.com/facebookresearch/sam2
+    identifiers:
+    - type: other
+      value: arXiv:2408.00714
+      description: arXiv identifier
+    notes: Checkpoint facebook/sam2.1-hiera-base-plus (code and checkpoints Apache-2.0). Also published
+      at ICLR 2025.
+  # ghiasi2021copypaste
+  - type: conference-paper
+    title: Simple Copy-Paste is a Strong Data Augmentation Method for Instance Segmentation
+    authors:
+    - family-names: Ghiasi
+      given-names: Golnaz
+    - family-names: Cui
+      given-names: Yin
+    - family-names: Srinivas
+      given-names: Aravind
+    - family-names: Qian
+      given-names: Rui
+    - family-names: Lin
+      given-names: Tsung-Yi
+    - family-names: Cubuk
+      given-names: Ekin D.
+    - family-names: Le
+      given-names: Quoc V.
+    - family-names: Zoph
+      given-names: Barret
+    year: 2021
+    collection-title: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition
+      (CVPR)
+    conference:
+      name: CVPR 2021
+    start: 2918
+    end: 2928
+    doi: 10.1109/CVPR46437.2021.00294
+    notes: Method implemented by salmonid/data/sam2_composite.py.
+  # lin1989concordance
+  - type: article
+    title: A Concordance Correlation Coefficient to Evaluate Reproducibility
+    authors:
+    - family-names: Lin
+      given-names: Lawrence I-Kuei
+    year: 1989
+    journal: Biometrics
+    volume: 45
+    issue: 1
+    start: 255
+    end: 268
+    doi: 10.2307/2532051
+  # mcbride2005proposal
+  - type: report
+    title: A proposal for strength-of-agreement criteria for Lin's concordance correlation coefficient
+    authors:
+    - family-names: McBride
+      given-names: Graham B.
+    year: 2005
+    institution:
+      name: National Institute of Water and Atmospheric Research (NIWA)
+    number: HAM2005-062
+    notes: NIWA Client Report.
+  # bland1986statistical
+  - type: article
+    title: Statistical methods for assessing agreement between two methods of clinical measurement
+    authors:
+    - family-names: Bland
+      given-names: J. Martin
+    - family-names: Altman
+      given-names: Douglas G.
+    year: 1986
+    journal: The Lancet
+    volume: 327
+    issue: 8476
+    start: 307
+    end: 310
+    doi: 10.1016/S0140-6736(86)90837-8
+  # bland1999measuring
+  - type: article
+    title: Measuring agreement in method comparison studies
+    authors:
+    - family-names: Bland
+      given-names: J. Martin
+    - family-names: Altman
+      given-names: Douglas G.
+    year: 1999
+    journal: Statistical Methods in Medical Research
+    volume: 8
+    issue: 2
+    start: 135
+    end: 160
+    doi: 10.1177/096228029900800204
+  # wilson1927probable
+  - type: article
+    title: Probable Inference, the Law of Succession, and Statistical Inference
+    authors:
+    - family-names: Wilson
+      given-names: Edwin B.
+    year: 1927
+    journal: Journal of the American Statistical Association
+    volume: 22
+    issue: 158
+    start: 209
+    end: 212
+    doi: 10.1080/01621459.1927.10502953
+  # brown2001interval
+  - type: article
+    title: Interval Estimation for a Binomial Proportion
+    authors:
+    - family-names: Brown
+      given-names: Lawrence D.
+    - family-names: Cai
+      given-names: T. Tony
+    - family-names: DasGupta
+      given-names: Anirban
+    year: 2001
+    journal: Statistical Science
+    volume: 16
+    issue: 2
+    start: 101
+    end: 133
+    doi: 10.1214/ss/1009213286
+  # efron1979bootstrap
+  - type: article
+    title: 'Bootstrap Methods: Another Look at the Jackknife'
+    authors:
+    - family-names: Efron
+      given-names: B.
+    year: 1979
+    journal: The Annals of Statistics
+    volume: 7
+    issue: 1
+    start: 1
+    end: 26
+    doi: 10.1214/aos/1176344552
+  # kunsch1989jackknife
+  - type: article
+    title: The Jackknife and the Bootstrap for General Stationary Observations
+    authors:
+    - family-names: Künsch
+      given-names: Hans R.
+    year: 1989
+    journal: The Annals of Statistics
+    volume: 17
+    issue: 3
+    start: 1217
+    end: 1241
+    doi: 10.1214/aos/1176347265
+  # cohen1960coefficient
+  - type: article
+    title: A Coefficient of Agreement for Nominal Scales
+    authors:
+    - family-names: Cohen
+      given-names: Jacob
+    year: 1960
+    journal: Educational and Psychological Measurement
+    volume: 20
+    issue: 1
+    start: 37
+    end: 46
+    doi: 10.1177/001316446002000104
+  # fleiss1969large
+  - type: article
+    title: Large sample standard errors of kappa and weighted kappa
+    authors:
+    - family-names: Fleiss
+      given-names: Joseph L.
+    - family-names: Cohen
+      given-names: Jacob
+    - family-names: Everitt
+      given-names: B. S.
+    year: 1969
+    journal: Psychological Bulletin
+    volume: 72
+    issue: 5
+    start: 323
+    end: 327
+    doi: 10.1037/h0028106
+    notes: 'Optional: only if the asymptotic kappa interval is reported.'
+  # landis1977measurement
+  - type: article
+    title: The Measurement of Observer Agreement for Categorical Data
+    authors:
+    - family-names: Landis
+      given-names: J. Richard
+    - family-names: Koch
+      given-names: Gary G.
+    year: 1977
+    journal: Biometrics
+    volume: 33
+    issue: 1
+    start: 159
+    end: 174
+    doi: 10.2307/2529310
+    notes: 'Optional: only if the verbal kappa bands are quoted.'
+  # fisher1915frequency
+  - type: article
+    title: Frequency Distribution of the Values of the Correlation Coefficient in Samples from an Indefinitely
+      Large Population
+    authors:
+    - family-names: Fisher
+      given-names: R. A.
+    year: 1915
+    journal: Biometrika
+    volume: 10
+    issue: 4
+    start: 507
+    end: 521
+    doi: 10.2307/2331838
+  # spearman1904proof
+  - type: article
+    title: The Proof and Measurement of Association between Two Things
+    authors:
+    - family-names: Spearman
+      given-names: C.
+    year: 1904
+    journal: The American Journal of Psychology
+    volume: 15
+    issue: 1
+    start: 72
+    end: 101
+    doi: 10.2307/1412159
+  # mcnemar1947note
+  - type: article
+    title: Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages
+    authors:
+    - family-names: McNemar
+      given-names: Quinn
+    year: 1947
+    journal: Psychometrika
+    volume: 12
+    issue: 2
+    start: 153
+    end: 157
+    doi: 10.1007/BF02295996
+  # okabe2008color
+  - type: website
+    title: 'Color Universal Design (CUD): How to make figures and presentations that are friendly to
+      Colorblind people'
+    authors:
+    - family-names: Okabe
+      given-names: Masataka
+    - family-names: Ito
+      given-names: Kei
+    year: 2008
+    url: https://jfly.uni-koeln.de/color/
+    notes: Source of the Okabe-Ito palette. First posted 2002; modified 2008.
+  # wong2011points
+  - type: article
+    title: 'Points of view: Color blindness'
+    authors:
+    - family-names: Wong
+      given-names: Bang
+    year: 2011
+    journal: Nature Methods
+    volume: 8
+    issue: 6
+    start: 441
+    end: 441
+    doi: 10.1038/nmeth.1618
+  # python3119
+  - type: software
+    title: Python
+    authors:
+    - name: Python Software Foundation
+    year: 2024
+    version: 3.11.9
+    date-released: '2024-04-02'
+    url: https://www.python.org/downloads/release/python-3119/
+    license: PSF-2.0
+  # nickolls2008cuda
+  - type: article
+    title: Scalable Parallel Programming with CUDA
+    authors:
+    - family-names: Nickolls
+      given-names: John
+    - family-names: Buck
+      given-names: Ian
+    - family-names: Garland
+      given-names: Michael
+    - family-names: Skadron
+      given-names: Kevin
+    year: 2008
+    journal: ACM Queue
+    volume: 6
+    issue: 2
+    start: 40
+    end: 53
+    doi: 10.1145/1365490.1365500
+    notes: Optional. PyTorch builds used CUDA 12.8 (NVIDIA proprietary licence).
+  # chetlur2014cudnn
+  - type: article
+    title: 'cuDNN: Efficient Primitives for Deep Learning'
+    authors:
+    - family-names: Chetlur
+      given-names: Sharan
+    - family-names: Woolley
+      given-names: Cliff
+    - family-names: Vandermersch
+      given-names: Philippe
+    - family-names: Cohen
+      given-names: Jonathan
+    - family-names: Tran
+      given-names: John
+    - family-names: Catanzaro
+      given-names: Bryan
+    - family-names: Shelhamer
+      given-names: Evan
+    year: 2014
+    journal: arXiv preprint
+    doi: 10.48550/arXiv.1410.0759
+    identifiers:
+    - type: other
+      value: arXiv:1410.0759
+      description: arXiv identifier
+    notes: Optional. cuDNN 9.19 (base environment) and 9.7 (DEIMv2 environment).
+  # macfarlane2026pandoc
+  - type: software
+    title: Pandoc
+    authors:
+    - family-names: MacFarlane
+      given-names: John
+    - family-names: Krewinkel
+      given-names: Albert
+    - family-names: Rosenthal
+      given-names: Jesse
+    year: 2026
+    repository-code: https://github.com/jgm/pandoc
+    license: GPL-2.0-or-later
+    notes: Manuscript build only. Version used not verified.
+  # allaire2022quarto
+  - type: software
+    title: Quarto
+    authors:
+    - family-names: Allaire
+      given-names: J. J.
+    - family-names: Teague
+      given-names: Charles
+    - family-names: Scheidegger
+      given-names: Carlos
+    - family-names: Xie
+      given-names: Yihui
+    - family-names: Dervieux
+      given-names: Christophe
+    - family-names: Woodhull
+      given-names: Gordon
+    year: 2022
+    doi: 10.5281/zenodo.5960048
+    repository-code: https://github.com/quarto-dev/quarto-cli
+    notes: Manuscript build only. Version used not verified.
+  # madje2026typst
+  - type: software
+    title: Typst
+    authors:
+    - family-names: Mädje
+      given-names: Laurenz
+    - family-names: Haug
+      given-names: Martin
+    - name: The Typst Project Developers
+    year: 2026
+    url: https://typst.app/
+    repository-code: https://github.com/typst/typst
+    license: Apache-2.0
+    notes: Manuscript PDF build only. Version used not verified.
+  # naturalearth
+  - type: data
+    title: 'Natural Earth: free vector and raster map data, 1:50m cultural and physical vectors'
+    authors:
+    - name: Natural Earth
+    year: 2026
+    url: https://www.naturalearthdata.com/
+    notes: Public domain. Inset basemap of Fig. 1.
+  # openstreetmap2026
+  - type: data
+    title: OpenStreetMap
+    authors:
+    - name: OpenStreetMap contributors
+    year: 2026
+    url: https://www.openstreetmap.org
+    license: ODbL-1.0
+    notes: Overpass API extract of 2026-06-10 (Ganaraska River centrelines in Fig. 1). Attribution required.

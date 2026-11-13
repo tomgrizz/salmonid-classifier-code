@@ -1,4 +1,12 @@
-"""
+"""STATUS: development record. NOT used for any number in the manuscript.
+This script belongs to the earlier two-stage pipeline (a separate detector and species
+classifier, with per-frame output files that are not part of this deposit). It is kept
+because it documents how the counting rules were arrived at; see
+docs/history/counting_and_movement_development_notes.md. The published counts come from
+salmonid/count/corpus_countr_from_store.py, and the method of record is
+docs/COUNTING_METHOD.md. Statements below about "the paper" describe an earlier draft.
+Tier: 2 (and its inputs are not deposited).
+
 In plain terms: this script checks how well the automated fish counter agrees with the human
 technicians who reviewed the same tunnel-camera video and counted the fish by hand. It lines the
 computer's daily counts up against the technicians' counts for each species, river (Ganaraska and

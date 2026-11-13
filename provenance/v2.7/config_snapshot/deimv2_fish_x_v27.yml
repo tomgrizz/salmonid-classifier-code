@@ -1,0 +1,86 @@
+__include__: ['./deimv2_dinov3_x_coco.yml']
+
+# DEIMv2-X v2.7 = the LEAK-CLEAN publish candidate (2026-07-24). Same architecture and schedule as v2.5;
+# the ONLY deliberate changes are the data file and the initialisation:
+#
+#   1) DATA — C:/ssl_cache/deimv2_fish_6class_masked_v26_clean/{train,val_clean}.json. This is the v2.6
+#      corpus (v2.3 masked base + reviewed SAM2 partial/proximity synth + the targeted v26 chrome synth)
+#      with the eval holdout re-applied at VIDEO level. The v2.5/v2.6 COCOs excluded test_set_v6 by
+#      (video_id, track_id) only, which does not identify a fish: track ids are per detection run and
+#      `track_id == -1` is _build_extra_coco's "dominant track in this clip" wildcard. 62 of the 366
+#      test_set_v6 fish were therefore trained on with their own species label (Brown 36/60, Coho 16/60,
+#      Atlantic 6/60) — v2.6's held-out macro-F1 is 0.966 on the full set but 0.955 leak-clean.
+#      Gate: scripts/_audit_coco_holdout_leak.py --deep --strict (0 leaks at TRACK/VIDEO/SYNTH/box level).
+#
+#   2) INIT — trained from `ckpts/deimv2_x_coco.pth`, NOT warm-started from a v2.x checkpoint. v2.6 warm-
+#      started from v2.5 checkpoint0019, and the v2.3 base under both carried 149 leaked test tracks, so a
+#      warm start would re-import the leak through the weights however clean the COCO is. Hence the full
+#      30-epoch v2.5 schedule rather than v2.6's 10-epoch continuation.
+#
+# Everything else is v2.5 verbatim (960px, batch 8, lr 0.00025, flat 15 / no-aug 5, matcher change 25,
+# checkpoint_freq 2 so the early op peak at ep14-24 is captured). Select on the tracked-op sweep +
+# test_set_v6, NEVER on lab val AP — the train/val split is still by image (~98% of val tracks are in
+# train), so val AP is a memorization metric. See single_stage/REPRODUCE.md.
+num_classes: 6
+remap_mscoco_category: False
+output_dir: ./outputs/deimv2_fish_x_v27
+checkpoint_freq: 2
+eval_spatial_size: [960, 960]
+print_freq: 100
+
+epoches: 30
+flat_epoch: 15
+no_aug_epoch: 5
+
+optimizer:
+  lr: 0.00025          # v2.5's per-sample rate at batch 8 (DEIMv2 does not auto-scale and has no grad-accum)
+
+DEIMCriterion:
+  matcher:
+    matcher_change_epoch: 25
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 8
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v26_clean/train.json
+    transforms:
+      ops:
+        - {type: Mosaic, output_size: 480, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 1.0, fill_value: 0, use_cache: True, max_cached_images: 50, random_pop: True}
+        - {type: ColorJitter, brightness: 0.2, contrast: 0.2, saturation: 0.1, hue: 0.0}
+        - {type: RandomZoomOut, fill: 0, side_range: [1.0, 2.0]}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [960, 960], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: [4, 15, 25]
+        ops: ['Mosaic', 'ColorJitter', 'RandomZoomOut', 'RandomIoUCrop']
+      mosaic_prob: 0.5
+  collate_fn:
+    base_size: 960
+    base_size_repeat: null
+    mixup_prob: 0.5
+    mixup_epochs: [4, 15]
+    stop_epoch: 25
+    copyblend_prob: 0.5
+    copyblend_epochs: [4, 25]
+    copyblend_type: paste
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 8
+  dataset:
+    img_folder: /
+    ann_file: C:/ssl_cache/deimv2_fish_6class_masked_v26_clean/val_clean.json
+    transforms:
+      ops:
+        - {type: Resize, size: [960, 960], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}

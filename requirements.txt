@@ -1,23 +1,22 @@
-# Base environment — everything EXCEPT single-stage training/inference of the DEIMv2 model.
-# Covers: BoT-SORT tracking (Pass B), evaluation, counting, results/concordance, figures.
-# Python 3.11. Tracking needs numpy < 2 (boxmot 10.0.52 constraint), so this env is kept
-# SEPARATE from the DEIMv2 training env (numpy 2.x) — see requirements-deim.txt.
+# Tier 1 environment: everything `python run_tier1.py` needs.
 #
-#   python -m venv .venv && .venv/Scripts/activate    # (Windows)
+# These four packages are enough to recompute the held-out species score, every agreement
+# statistic, and every figure that is drawn from the committed count tables. No model, no
+# video library, no graphics card.
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate            (Windows)      source .venv/bin/activate   (macOS / Linux)
 #   pip install -r requirements.txt
-#   pip install -e .                                   # makes `salmonid` importable anywhere
-
-numpy<2
-pandas>=2.0
-scipy>=1.11
-matplotlib>=3.8
-pyarrow>=14
-opencv-python>=4.9
-Pillow>=10
-tqdm>=4.66
-decord>=0.6            # fast seek-to-frame video decode (Pass B)
-
-# tracking / re-ID (Pass B — BoT-SORT + OSNet). torch here is CPU-or-CUDA; the re-ID net is small.
-boxmot==10.0.52
-torch>=2.2
-torchvision>=0.17
+#   python run_tier1.py
+#
+# Python 3.11 or newer. The versions are pinned to the ones that produced the published
+# tables and figures. Newer versions are expected to give the same numbers; the figure files
+# may then differ in the last pixel (run_tier1.py reports that as a NOTE, not a failure).
+#
+# Tier 2 (tracking, detection, training) uses two further environments:
+#   requirements-track.txt   tracking, counting from stored detections, photo figures
+#   requirements-deim.txt    DEIMv2 detection and training (GPU)
+numpy==2.4.4
+pandas==2.3.3
+scipy==1.15.3
+matplotlib==3.10.8

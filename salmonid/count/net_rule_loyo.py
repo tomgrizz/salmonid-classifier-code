@@ -1,10 +1,10 @@
-"""In plain terms: the rule that decides whether a fish counted as swimming upstream (it must
-move at least 50 px up, but 300 px to count as going down) was chosen by trying several
-options and keeping the one that best matched the technicians, using the same seasons that
-the paper then reports as validation. That is circular: of course the chosen rule fits those
-seasons. This file re-does the choice honestly. It hides one season, picks the best rule using
-only the others, and then scores that rule on the hidden season, so the reported error is one
-the rule was never allowed to see.
+"""In plain terms: a fish is counted as moving upstream if its track shifts at least 50 pixels
+in the upstream direction, and as moving downstream only if it shifts at least 300 pixels the
+other way. That 50/300 rule was chosen by trying eight options and keeping the one that best
+matched the technicians, using the same seasons the paper then reports as validation. That is
+circular: of course the chosen rule fits those seasons. This file re-does the choice honestly.
+It hides one season, picks the best rule using only the others, and then scores that rule on
+the hidden season, so the reported error is one the rule was never allowed to see.
 
 Leave-one-year-out validation of the directional (net upstream) displacement rule.
 
@@ -22,9 +22,9 @@ candidate rule and every season are already on disk.
 
 What it computes
 ----------------
-* **In-sample error** -- the published number: each candidate rule scored on all four seasons
-  at once, the best one being 50/300 px at 4.39% mean absolute error. Reproduced here exactly
-  so the out-of-sample figure is comparable to it.
+* **In-sample error** -- each candidate rule scored on all four seasons at once, the best
+  one being 50/300 px at 3.56% mean absolute error. Reproduced here exactly so the
+  out-of-sample figure is comparable to it.
 * **Leave-one-year-out error** -- for each season in turn, the best rule is chosen using only
   the *other* seasons, then scored on the held-out season. The mean of those held-out errors
   is an out-of-sample estimate. Also reported: which rule each fold selected, since a rule
@@ -38,10 +38,20 @@ absolute percentage difference is averaged across seasons. That pooling is gener
 Ganaraska over-read can cancel a Credit under-read), so a per-cell variant, which averages the
 absolute error of each species x river x season cell separately, is reported alongside it.
 
-Inputs : config.NET_RULE_SWEEP (48 CSVs: <year>_<rule>.csv with date, site, species, model, tech).
-Outputs: net_rule_loyo.csv (--out-dir, default config.REPO_DATA).
+Inputs : config.NET_RULE_SWEEP (48 CSVs committed in data/net_rule_sweep/:
+         <year>_<rule>.csv with date, site, species, model, tech).
+Outputs: net_rule_loyo.csv, written to --out-dir (default output/tier1/). The committed copy
+         the manuscript quotes is data/net_rule_loyo.csv; run_tier1.py compares the two.
+Feeds  : manuscript Section 3.4 (the 50/300 px rule is chosen in all four folds; mean absolute
+         error 3.6% out of sample, equal to in sample; alternatives 10% to 26%).
+Tier   : 1 (runs from committed data; no random component, so it reproduces exactly).
 
-Usage:
+How to read the result honestly: only eight candidate rules were compared and 50/300 sits at
+the corner of that grid, and because the same rule wins every fold the out-of-sample error
+equals the in-sample error by construction. The result shows the choice does not depend on
+any one season; it does not show that 50/300 is optimal among all possible rules.
+
+Run:
   python -m salmonid.count.net_rule_loyo
   python -m salmonid.count.net_rule_loyo --years 2020 2021 2022 2023 2024 2025
 """
@@ -146,7 +156,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--sweep-dir", default=str(config.NET_RULE_SWEEP))
     ap.add_argument("--years", nargs="+", type=int, default=DEFAULT_YEARS)
-    ap.add_argument("--out-dir", default=str(config.REPO_DATA))
+    ap.add_argument("--out-dir", default=str(config.OUTPUT_DIR / "tier1"),
+                    help="Where to write net_rule_loyo.csv (never data/ by default).")
     a = ap.parse_args()
     years = sorted(a.years)
     all_rows = []
@@ -197,7 +208,7 @@ def main():
     out = Path(a.out_dir); out.mkdir(parents=True, exist_ok=True)
     dest = out / "net_rule_loyo.csv"
     with open(dest, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")   # LF on every platform (see classification_ci)
         w.writerow(["view", "held_out_year", "chosen_rule", "train_err_pct",
                     "heldout_err_pct", "published_rule_heldout_err_pct"])
         for view, folds, oos, best, best_err in all_rows:

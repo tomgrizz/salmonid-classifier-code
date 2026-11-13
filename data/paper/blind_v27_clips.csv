@@ -1,0 +1,156 @@
+video_id,site,n_truth,n_pred,npair,match,truth,pred,dom
+Credit/2025/04072025-04162025/24  11  27  12  32/145.mp4,Credit,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Credit/2025/04072025-04162025/24  11  27  12  32/158.mp4,Credit,2,5,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Credit/2025/04072025-04162025/24  11  27  12  32/167.mp4,Credit,1,4,1,1,Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Credit/2025/04072025-04162025/24  11  27  12  32/253.mp4,Credit,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Credit/2025/04072025-04162025/24  11  27  12  32/267.mp4,Credit,2,4,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Credit/2025/04162025-04252025/25  04  16  10  38/110.mp4,Credit,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Credit/2025/04162025-04252025/25  04  16  10  38/25.mp4,Credit,1,3,1,1,Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Credit/2025/05122025-05202025/25  05  12  12  48/31.mp4,Credit,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Credit/2025/05122025-05202025/25  05  12  12  48/39.mp4,Credit,0,10,0,0,,Rainbow Trout;Rainbow Trout;Brown Trout;Rainbow Trout;Brown Trout;Brown Trout;Brown Trout;Rainbow Trout;Brown Trout;Brown Trout,Rainbow Trout
+Credit/2025/05122025-05202025/25  05  12  12  48/52.mp4,Credit,0,3,0,0,,Rainbow Trout;Brown Trout;Rainbow Trout,Brown Trout
+Credit/2025/08182025-08252025/25  08  18  13  32/60.mp4,Credit,1,1,1,1,Atlantic,Atlantic,Atlantic
+Credit/2025/08182025-08252025/25  08  18  13  32/88.mp4,Credit,1,2,1,1,Atlantic,Atlantic;Rainbow Trout,Atlantic
+Credit/2025/08252025-09022025/25  08  25  12  41/8.mp4,Credit,1,3,1,1,Atlantic,Atlantic;Atlantic;Atlantic,Atlantic
+Credit/2025/09022025-09082025/25  09  02  11  10/1349.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/1374.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/1532.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/1645.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/268.mp4,Credit,2,3,2,1,Chinook;Coho,Chinook;Chinook;Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/326.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/410.mp4,Credit,2,3,2,2,Chinook;Chinook,Chinook;Chinook;Chinook,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/744.mp4,Credit,1,3,1,1,Chinook,Atlantic;Chinook;Atlantic,Chinook
+Credit/2025/09022025-09082025/25  09  02  11  10/859.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09082025-09112025/25  09  08  12  40/22.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09082025-09112025/25  09  08  12  40/331.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09112025-09152025/25  09  11  11  04/155.mp4,Credit,2,3,2,2,Chinook;Chinook,Chinook;Chinook;Chinook,Chinook
+Credit/2025/09112025-09152025/25  09  11  11  04/270.mp4,Credit,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Credit/2025/09112025-09152025/25  09  11  11  04/414.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09112025-09152025/25  09  11  11  04/514.mp4,Credit,1,2,1,1,Chinook,Chinook;Chinook,Chinook
+Credit/2025/09112025-09152025/25  09  11  11  04/520.mp4,Credit,2,3,2,2,Chinook;Chinook,Chinook;Chinook;Chinook,Chinook
+Credit/2025/09152025-09192025/25  09  15  14  42/122.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09192025-09222025/25  09  19  12  01/3.mp4,Credit,1,1,1,0,Coho,Rainbow Trout,Rainbow Trout
+Credit/2025/09222025-09252025/25  09  22  11  56/126.mp4,Credit,1,2,1,1,Chinook,Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/1367.mp4,Credit,2,6,2,2,Chinook;Chinook,Chinook;Chinook;Chinook;Chinook;Rainbow Trout;Rainbow Trout,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/306.mp4,Credit,0,10,0,0,,Chinook;Chinook;Chinook;Chinook;Chinook;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/363.mp4,Credit,0,6,0,0,,Chinook;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/427.mp4,Credit,1,4,1,1,Chinook,Chinook;Chinook;Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/607.mp4,Credit,4,1,1,1,Chinook;Chinook;Chinook;Chinook,Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/73.mp4,Credit,1,5,1,1,Chinook,Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/886.mp4,Credit,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/923.mp4,Credit,1,3,1,1,Chinook,Chinook;Chinook;Chinook,Chinook
+Credit/2025/09222025-09252025/25  09  22  11  56/928.mp4,Credit,1,2,1,1,Chinook,Chinook;Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/1138.mp4,Credit,2,3,2,2,Chinook;Chinook,Chinook;Chinook;Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/1398.mp4,Credit,1,1,1,1,Atlantic,Atlantic,Atlantic
+Credit/2025/09252025-10012025/25  09  25  14  26/1505.mp4,Credit,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/161.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/1737.mp4,Credit,2,3,2,2,Chinook;Atlantic,Chinook;Atlantic;Atlantic,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/1973.mp4,Credit,3,6,3,3,Chinook;Chinook;Chinook,Chinook;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/1981.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/2136.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/2143.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/2202.mp4,Credit,1,1,1,1,Atlantic,Atlantic,Atlantic
+Credit/2025/09252025-10012025/25  09  25  14  26/2442.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/434.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/09252025-10012025/25  09  25  14  26/730.mp4,Credit,3,6,3,3,Chinook;Chinook;Chinook,Chinook;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Credit/2025/10012025-10102025/25  10  01  11  21/1332.mp4,Credit,1,1,1,0,Chinook,Rainbow Trout,Rainbow Trout
+Credit/2025/10012025-10102025/25  10  01  11  21/1719.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10012025-10102025/25  10  01  11  21/2294.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10102025-10142025/25  10  10  12  07/1033.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10102025-10142025/25  10  10  12  07/1446.mp4,Credit,2,3,2,2,Chinook;Chinook,Chinook;Chinook;Chinook,Chinook
+Credit/2025/10102025-10142025/25  10  10  12  07/848.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10142025-10202025/25  10  14  10  40/1115.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10142025-10202025/25  10  14  10  40/1213.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10142025-10202025/25  10  14  10  40/132.mp4,Credit,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Credit/2025/10142025-10202025/25  10  14  10  40/1343.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10142025-10202025/25  10  14  10  40/368.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10142025-10202025/25  10  14  10  40/598.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Credit/2025/10202025-10242025/25  10  20  10  44/196.mp4,Credit,1,2,1,0,unsure,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Credit/2025/10242025-11032025/25  10  24  10  33/109.mp4,Credit,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/04042025-04072025/25  04  01  11  23/1171.mp4,Ganaraska,3,4,3,3,Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04042025-04072025/25  04  01  11  23/1539.mp4,Ganaraska,1,2,1,1,Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04042025-04072025/25  04  01  11  23/1595.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04072025-04092025/25  04  07  08  05/137.mp4,Ganaraska,2,2,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04072025-04092025/25  04  07  08  05/450.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04072025-04092025/25  04  07  08  05/524.mp4,Ganaraska,2,1,1,1,Rainbow Trout;Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04072025-04092025/25  04  07  08  05/750.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04092025-04142025/25  04  09  08  32/1637.mp4,Ganaraska,2,2,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04092025-04142025/25  04  09  08  32/251.mp4,Ganaraska,2,2,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04092025-04142025/25  04  09  08  32/735.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04092025-04142025/25  04  09  08  32/797.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04092025-04142025/25  04  09  08  32/976.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/1142.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/1176.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/1245.mp4,Ganaraska,1,2,1,1,Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/219.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/272.mp4,Ganaraska,2,4,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/641.mp4,Ganaraska,2,5,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/779.mp4,Ganaraska,2,2,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04142025-04152025/25  04  14  09  34/960.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04152025-04162025/25  04  15  10  48/712.mp4,Ganaraska,3,3,3,3,Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04152025-04162025/25  04  15  10  48/82.mp4,Ganaraska,1,2,1,1,Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/102.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/1021.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/1086.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/1559.mp4,Ganaraska,2,2,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/1967.mp4,Ganaraska,2,2,2,2,Rainbow Trout;Rainbow Trout,Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/275.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04162025-04232025/25  04  16  13  53/3073.mp4,Ganaraska,1,3,1,1,Rainbow Trout,Rainbow Trout;Rainbow Trout;Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04232025-04282025/25  04  23  15  00/206.mp4,Ganaraska,0,1,0,0,,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/04282025-04302025/25  04  28  10  14/44.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/05092025-05152025/25  05  09  09  04/54.mp4,Ganaraska,1,1,1,1,Rainbow Trout,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/06062025-06162025/25  06  06  10  45/32.mp4,Ganaraska,1,1,1,0,Rainbow Trout,Brown Trout,Brown Trout
+Ganaraska/Ganaraska 2025/06062025-06162025/25  06  06  10  45/41.mp4,Ganaraska,1,1,1,1,Brown Trout,Brown Trout,Brown Trout
+Ganaraska/Ganaraska 2025/06162025-06242025/25  06  16  15  14/24.mp4,Ganaraska,1,1,1,1,Brown Trout,Brown Trout,Brown Trout
+Ganaraska/Ganaraska 2025/07042025-07282025/25  07  04  15  14/26.mp4,Ganaraska,1,2,1,1,Brown Trout,Brown Trout;Brown Trout,Brown Trout
+Ganaraska/Ganaraska 2025/08132025-08222025/25  08  13  15  21/641.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/08132025-08222025/25  08  13  15  21/966.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/162.mp4,Ganaraska,2,3,2,2,Brown Trout;Chinook,Brown Trout;Chinook;Chinook,Brown Trout
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/342.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/561.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/736.mp4,Ganaraska,1,1,1,1,Brown Trout,Brown Trout,Brown Trout
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/805.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/900.mp4,Ganaraska,1,1,1,1,Brown Trout,Brown Trout,Brown Trout
+Ganaraska/Ganaraska 2025/08222025-08252025/25  08  22  15  41/925.mp4,Ganaraska,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/08252025-09022025/25  08  25  15  13/508.mp4,Ganaraska,1,1,1,0,unsure,Rainbow Trout,Rainbow Trout
+Ganaraska/Ganaraska 2025/09022025-09052025/25  09  02  14  39/130.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09022025-09052025/25  09  02  14  39/1673.mp4,Ganaraska,2,4,2,0,Chinook;Chinook,Coho;Coho;Coho;Coho,Coho
+Ganaraska/Ganaraska 2025/09022025-09052025/25  09  02  14  39/1678.mp4,Ganaraska,2,3,2,2,Chinook;Chinook,Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09022025-09052025/25  09  02  14  39/1798.mp4,Ganaraska,4,4,4,4,Chinook;Chinook;Chinook;Chinook,Chinook;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09022025-09052025/25  09  02  14  39/259.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09022025-09052025/25  09  02  14  39/879.mp4,Ganaraska,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/1023.mp4,Ganaraska,2,5,2,2,Chinook;Coho,Chinook;Coho;Chinook;Coho;Coho,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/1058.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/1214.mp4,Ganaraska,1,1,1,1,Coho,Coho,Coho
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/157.mp4,Ganaraska,4,4,4,3,Chinook;Chinook;Chinook;Chinook,Coho;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/1939.mp4,Ganaraska,1,5,1,1,Brown Trout,Brown Trout;Chinook;Chinook;Coho;Coho,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/217.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/2385.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/2553.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/3637.mp4,Ganaraska,3,6,3,3,Coho;Chinook;Chinook,Coho;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/4013.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/4197.mp4,Ganaraska,3,6,3,3,Coho;Chinook;Chinook,Coho;Coho;Chinook;Chinook;Coho;Chinook,Coho
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/4224.mp4,Ganaraska,2,6,2,2,Chinook;Chinook,Chinook;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/462.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09052025-09082025/25  09  05  15  13/642.mp4,Ganaraska,3,4,3,3,Chinook;Coho;Coho,Chinook;Coho;Coho;Coho,Chinook
+Ganaraska/Ganaraska 2025/09082025-09112025/25  09  08  15  57/1351.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09082025-09112025/25  09  08  15  57/1361.mp4,Ganaraska,1,1,1,1,Coho,Coho,Coho
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/1245.mp4,Ganaraska,2,2,2,2,Brown Trout;Chinook,Brown Trout;Chinook,Brown Trout
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/151.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/1617.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/1848.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/218.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/34.mp4,Ganaraska,2,4,2,2,Chinook;Chinook,Chinook;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09112025-09162025/25  09  11  14  27/953.mp4,Ganaraska,1,1,1,0,Chinook,Coho,Coho
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/1225.mp4,Ganaraska,2,4,2,2,Chinook;Chinook,Chinook;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/1273.mp4,Ganaraska,1,1,1,1,Coho,Coho,Coho
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/1616.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/2103.mp4,Ganaraska,1,1,1,1,Coho,Coho,Coho
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/2144.mp4,Ganaraska,2,1,1,1,Chinook;Coho,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/2489.mp4,Ganaraska,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/3006.mp4,Ganaraska,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/3083.mp4,Ganaraska,3,7,3,2,Chinook;Chinook;Coho,Chinook;Chinook;Chinook;Chinook;Chinook;Chinook;Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/3292.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/594.mp4,Ganaraska,2,4,2,1,Coho;Chinook,Coho;Coho;Coho;Coho,Coho
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/623.mp4,Ganaraska,1,1,1,1,Chinook,Chinook,Chinook
+Ganaraska/Ganaraska 2025/09162025-09222025/25  09  16  10  34/677.mp4,Ganaraska,2,2,2,2,Chinook;Chinook,Chinook;Chinook,Chinook

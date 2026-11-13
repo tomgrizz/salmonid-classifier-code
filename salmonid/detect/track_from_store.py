@@ -1,72 +1,165 @@
+"""In plain terms: the detection step leaves a list of boxes for each video frame, but it does
+not know that the box in one frame and the box in the next are the same fish. This script
+joins the boxes over time into "tracks", one track per fish, so that a fish seen in forty
+frames is counted once and not forty times. It follows each fish by predicting where it will
+be in the next frame and by comparing what it looks like. It saves, for every video, the list
+of tracks with each track's positions and species scores. Counting comes afterwards.
+
+Pass B: link stored detections into one track per fish (BoT-SORT), and save the tracks.
+
+Pipeline stage: data -> detect ("Pass A", ``detect_store.py``) -> **track (this module,
+"Pass B")** -> count (``salmonid.count.corpus_countr_from_store``) -> results -> figures.
+
+Inputs : * a detect-store folder written by Pass A (one file per video);
+         * the same video list (manifest JSON) that Pass A used;
+         * the raw footage under ``--footage-root`` (needed to compare what fish look like;
+           not needed with ``--tracker bytetrack``);
+         * the appearance-model weights ``osnet_x0_25_msmt17.pt`` (``config.REID_WEIGHTS``).
+Outputs: one "aggregate" pickle (``--agg-out``):
+           {store_file_name: {"site", "fw", "fh", "tech_set",
+                              "tracks": {track_id: {"boxes": M x 4, "pvs": M x 5}}}}
+         "boxes" are the track's positions (x1, y1, x2, y2 in original-frame pixels), one row
+         per processed frame; "pvs" are the five species scores of the detection matched at
+         each of those frames.
+Feeds  : every count in the manuscript (Tables 2-5, Figures 4-7; Sections 3.2-3.6) and, with
+         ``--tracker bytetrack``, the tracker comparison in Section 3.4.
+Tier   : 2 (needs the detect-stores, the raw footage and a GPU).
+
+Environment: the BASE Python environment (requirements.txt), not the DEIMv2 environment. Every
+published track was made with Python 3.11, boxmot 10.0.52 and numpy 2.4.4. The boxmot version
+matters: this script uses the 10.x interface (``BoTSORT``, ``BYTETracker``), which later
+boxmot releases replaced, and a different release may also link detections differently.
+
+Run (from the repository root; this is the setting used for every published season):
+
+  python -m salmonid.detect.track_from_store \\
+      --store-dir <projects>/deimv2_x_v27_corpus2024/store \\
+      --op-json <label_batches>/corpus_2024_credit.json --key-mode video_id \\
+      --decode-backend decord --reid-fp16 --frame-skip 3 \\
+      --agg-out <projects>/deimv2_x_v27_corpus2024/agg_credit_shard0.pkl --shard 0 --num-shards 2
+
+  # tracker comparison of Section 3.4 (motion only, no video needed, no GPU, about 5 minutes).
+  # This exact command reproduces the stored comparison aggregate track for track:
+  python -m salmonid.detect.track_from_store --tracker bytetrack \\
+      --store-dir <projects>/deimv2_x_v27_corpus2025/store \\
+      --op-json <label_batches>/corpus_2025_ganaraska_full.json --key-mode video_id \\
+      --frame-skip 3 --agg-out output/ablation/agg_bytetrack_2025_ganaraska.pkl
+
+``python -m salmonid.count.run_corpus --steps track --dry-run`` prints the first command for
+every season with all paths filled in.
+
+How a track is formed (the settings behind the published counts)
+----------------------------------------------------------------
+The tracker is BoT-SORT as implemented in the boxmot library, version 10.0.52. Each detection
+gets one confidence value here: its highest score among the FIVE species (the "Small Salmonid"
+score is ignored from this point on).
+
+* A NEW track can only start from a detection scoring above 0.50, and it is kept only if
+  another detection above 0.50 matches it in the very next processed frame. One isolated
+  detection never becomes a track. This is what stops a flash of light or a leaf from being
+  counted as a fish.
+* Detections scoring between 0.30 and 0.50 cannot start a track. They can only extend a
+  track that is already being followed. A fish that turns sideways or passes behind another
+  for a moment is therefore not lost.
+* A track that finds no matching detection is kept "alive" for a short while in case the
+  fish reappears, then closed. The time is set from the video's frame rate, and the frame
+  rate differs between seasons: 2 processed frames for the 2023-2025 videos (about 10
+  frames per second), 6 for 2020-2022 Ganaraska (25) and 8 for 2020-2022 Credit (30). In
+  seconds this is roughly the same everywhere (0.6 to 0.8 s).
+* Matching uses two cues: predicted position (a fish keeps moving roughly as it was) and
+  appearance (a small network, OSNet, that summarises what the boxed image looks like; it
+  was trained on photographs of people and is used unchanged).
+* Only frames that contain at least one detection are given to the tracker, in order. Empty
+  stretches are skipped, so the tracker's clock counts frames with fish, not seconds.
+* A fresh tracker is started for every video. Tracks never continue from one video file to
+  the next. Where the recorder cut one passage into several short files (the recovered 2020
+  Ganaraska footage), one fish can therefore produce more than one track.
+
+Two details that matter for the counting step
+---------------------------------------------
+* The positions saved for a track are the tracker's smoothed estimates of where the fish
+  was, not the raw detection boxes.
+* The tracker does not report a track's first detection (it waits for the confirmation in
+  the next frame). A saved track therefore starts at the fish's second detection, and a track
+  with three saved positions means the fish was detected in at least four processed frames.
+  The one exception is a fish already in view in the first processed frame of a video: its
+  track is reported from that first frame.
+
+The tracker comparison (``--tracker bytetrack``)
+------------------------------------------------
+ByteTrack follows fish by predicted position only; it never looks at the picture. Running
+it on the same stored detections shows what the appearance comparison adds. It is given the
+same start threshold (0.50) and matching threshold as BoT-SORT. Two settings differ:
+
+* boxmot's ByteTrack lets detections scoring down to 0.10 extend a track, where BoT-SORT
+  stops at 0.30. The stored detections all scored above 0.30 on their best of six classes,
+  so this only affects boxes whose best *species* score is between 0.10 and 0.30 (boxes kept
+  because of their "Small Salmonid" score).
+* How the published comparison was computed: it was run without ``--decode-backend decord``.
+  In that case the script takes the tracker's frame rate to be the video's full rate
+  (10 per second in 2025) instead of one third of it, so a lost track was kept alive for
+  8 processed frames, against 2 in the BoT-SORT run. Adding ``--decode-backend decord`` gives ByteTrack
+  the same 2 frames. Checked for the deposit on the 2025 Ganaraska detections (35,238
+  videos; Chinook net count against the technician's 17,638):
+      BoT-SORT (published counts)            48,721 tracks   18,267   +3.6%
+      ByteTrack as published (8 frames)      48,850 tracks   18,247   +3.5%
+      ByteTrack with matched 2 frames        49,951 tracks   18,234   +3.4%
+  The net count is almost the same in all three. The near-equal number of tracks holds only
+  for the longer keep-alive time.
+
+Safety checks ported from the research repository
+-------------------------------------------------
+* A store file that cannot be read is skipped, counted and reported. Before this check one
+  damaged file stopped a whole run part-way and silently dropped 679 videos from the 2025
+  Credit River season.
+* The appearance-model weights are looked up as an absolute path and the run stops with a
+  clear message if they are missing. Before, a missing file made the library try to download
+  it, fail, and end the run in seconds while the log still said "done"; three finished
+  seasons lost their tracking pass that way and had to be re-tracked.
+
+Which research-repository version this is: the lineage that carries these checks and the
+ByteTrack option (the "v2.7 corpus pipeline" commit of 5 August 2026). The other development
+branch has the same BoT-SORT code without them; for a readable store the two give the same
+tracks.
 """
-In plain terms: this file takes the boxes drawn around fish in each video frame (from the
-earlier detection step) and links them over time into one "track" per fish -- the step that
-follows a single fish across the video frames -- so each real fish gets counted once instead of
-many times. The per-fish tracks it produces are what the paper's multi-year fish-count results
-are built on (the yearly abundance-index agreement of r-squared 0.96 and 0.98, and the Chinook
-count totals).
-
-Pass B: re-track a detect-store with BoT-SORT + OSNet re-ID -> per-track aggregates.
-
-Pipeline position
------------------
-    data -> detect (Pass A) -> **track (this module, Pass B)** -> eval/count -> results -> figures
-
-This is the *producer* half of the DEIMv2 tracked eval / corpus absolute-count path. Pass A
-(_deimv2_detect_store.py, run in the DEIMv2 .venv_deim) writes a per-video *detection store*
-(boxes + per-frame class prob-vecs, one pickle per video). This module runs in the BASE env
-(boxmot 10.0.52 + OSNet, the same tracker as the two-stage op-presence-F1 0.894 baseline). It
-reads that store, re-decodes the video frames so OSNet can compute re-ID appearance features,
-runs BoT-SORT to stitch detections into tracks, and DUMPS per-track aggregates (boxes +
-per-frame 5-class prob-vecs + the technician tech_set) to a single pickle. Scoring / counting
-happens OFFLINE downstream: _score_tracked.py (op presence-F1) or
-_corpus_countr_from_store.py --agg (absolute counts).
-
-Why a second decode pass at all
--------------------------------
-This is the GOLD-STANDARD absolute-count path: BoT-SORT gives ~1.02 tracks/fish vs the
-store-only IoU tracker's ~1.48 (fixes the dense-Ganaraska over-count). OSNet re-ID needs the
-actual pixels, so this re-decodes video -- a second decode pass beyond Pass A. It is optimized
-by (a) reading from the F: NVMe mirror, (b) decord-fetching ONLY the stored detection frames
-(skips the ~2/3 empty frames of a frame-skip-3 store), (c) optional fp16 re-ID.
-
-Inputs:  a detect-store dir (one pickle/video), a video manifest JSON (site / video_rel /
-         video_id / tech_species per video), and the raw footage under --footage-root.
-Outputs: one aggregate pickle keyed by store-key -> {site, fw, fh, tech_set, tracks:
-         {track_id: {boxes, pvs}}}. Feeds the manuscript multi-year absolute-count claim.
-Env:     base Python (boxmot / OSNet / torch) -- NOT the DEIMv2 .venv_deim.
-Re-ID weight: resolved from config.REID_WEIGHTS (boxmot auto-downloads if absent).
-
-  # op eval (legacy key, cv2):
-  python -m salmonid.detect.track_from_store --store-dir G:/Projects/deimv2_op_detstore \
-      --op-json G:/Projects/label_batches/op_testset_v1.json --key-mode rel \
-      --agg-out G:/Projects/deimv2_op_detstore/_agg.pkl --new-track-thresh 0.5
-  # corpus year (video_id key, decord, fp16 re-ID):
-  python -m salmonid.detect.track_from_store --store-dir G:/Projects/deimv2_x_v26_corpus2023/store \
-      --op-json G:/Projects/label_batches/corpus_2023_ganaraska.json --key-mode video_id \
-      --footage-root F:/RiverWatcher --decode-backend decord --reid-fp16 --frame-skip 3 \
-      --agg-out G:/Projects/deimv2_x_v26_corpus2023/agg_gan2023.pkl
-"""
-import argparse, json, glob, pickle, hashlib
+import argparse, hashlib, glob, json, pickle
 from pathlib import Path
 import numpy as np, cv2, torch
 
 from salmonid import config
 
-SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]  # mirrors salmonid.config.SPECIES
+SPECIES = ["Chinook", "Coho", "Atlantic", "Rainbow Trout", "Brown Trout"]  # same order as salmonid.config.SPECIES
 TECH_NORM = {"chinook": "Chinook", "coho": "Coho", "atlantic": "Atlantic",
              "atlantic salmon": "Atlantic", "rainbow": "Rainbow Trout",
              "rainbow trout": "Rainbow Trout", "brown": "Brown Trout", "brown trout": "Brown Trout"}
-# BoT-SORT OSNet re-ID weights (boxmot auto-downloads the pretrained model on first use if absent).
-REID = str(config.REID_WEIGHTS)
+
+
+def reid_weights():
+    """Absolute path of the OSNet appearance-model weights; stops clearly if the file is missing.
+
+    A relative ``config.REID_WEIGHTS`` is taken relative to the repository root, never the
+    working directory, so the result does not depend on where the command is launched from.
+    If the file's fingerprint differs from the one used for the published run, a warning is
+    printed (a different file would change which detections are joined into tracks).
+    """
+    p = Path(config.REID_WEIGHTS)
+    if not p.is_absolute():
+        p = config.REPO_ROOT / p
+    p = config.require(p, "the OSNet appearance-model weights used by BoT-SORT (osnet_x0_25_msmt17.pt)",
+                       "SALMONID_REID_WEIGHTS")
+    digest = hashlib.sha256(p.read_bytes()).hexdigest()
+    if digest != config.REID_WEIGHTS_SHA256:
+        print(f"WARNING: {p.name} is not the file used for the published run "
+              f"(sha256 {digest[:12]}..., expected {config.REID_WEIGHTS_SHA256[:12]}...). "
+              "Tracks may differ from the published ones.", flush=True)
+    return p
 
 
 def build_index(roots):
-    """Map (site, "<parent>/<name>.mp4") -> absolute path for every mp4 under each site root.
+    """List every video under each river folder, keyed by (river, "<last folder>/<file>").
 
-    Used only in legacy ``--key-mode rel``: the op-testset manifest keys videos by a relative
-    "<parent>/<name>" path, so we glob the footage once and build a lookup. Args: ``roots`` =
-    {site: footage_dir}. Returns the lookup dict.
+    Only used with ``--key-mode rel`` (old naming). If the same "<last folder>/<file>" occurs
+    twice within a river, the last one found is kept.
     """
     idx = {}
     for site, root in roots.items():
@@ -76,45 +169,44 @@ def build_index(roots):
 
 
 def store_key(site, rel):
-    """Legacy (``rel`` mode) store filename: ``<site>__<md5(rel)[:12]>.pkl`` (must match Pass A)."""
+    """Store file name in ``rel`` mode (must match Pass A): ``<river>__<hash of "folder/file">.pkl``."""
     return f"{site}__{hashlib.md5(rel.encode()).hexdigest()[:12]}.pkl"
 
 
 def store_key_vid(video_id):
-    """Multi-year (``video_id`` mode) store filename: ``<md5(video_id)[:16]>.pkl``.
-
-    Keying on the full video_id (not site+rel) avoids the cross-site rel-path collisions that
-    corrupted the earlier corpus run; must match the key Pass A wrote the store under.
-    """
+    """Store file name in ``video_id`` mode (must match Pass A): a hash of the video's full path."""
     return f"{hashlib.md5(video_id.encode()).hexdigest()[:16]}.pkl"
 
 
 def resolve_vid(footage_root, video_id):
-    """Return the absolute footage path for ``video_id`` under ``footage_root``, or None if missing."""
+    """Return the video file for ``video_id`` under ``footage_root``, or None if it is not there."""
     p = Path(footage_root) / video_id
     return str(p) if p.is_file() else None
 
 
 def _dets_from_df(df):
-    """Build the boxmot detection matrix + parallel real 5-class prob vectors for one frame.
+    """Turn one frame's stored detections into the table the tracker expects.
 
-    ``df`` is one frame's slice of the detection store (or None for an empty frame). Returns
-    ``(dets, probvecs)`` where ``dets`` is an ``[N, 6]`` float array of ``[x1,y1,x2,y2,score,cls]``
-    rows (boxmot's expected input) and ``probvecs`` is the parallel list of the true 5-class
-    probability vectors (kept separately because boxmot only carries a single winning ``cls``,
-    but downstream counting votes over the full per-frame distribution). Two store formats:
-    the full-distribution store (``probs`` present, argmax over the 5 species gives cls/score)
-    and the legacy one-hot store (``labels``/``scores``, rebuilt into a one-hot prob vector).
+    Returns ``(dets, probvecs)``. ``dets`` has one row per detection: x1, y1, x2, y2, a single
+    confidence, and a class number. The confidence is the detection's highest score among the
+    five species and the class is that species. ``probvecs`` keeps the full five species
+    scores of each detection, because the tracker itself carries only one class and the
+    counting step needs all five.
+
+    How the published numbers were computed: the sixth score ("Small Salmonid") is dropped
+    here (``[:5]``). A juvenile fish that the model scored mainly as "Small Salmonid" is not
+    removed; it is carried forward under whichever adult species had its next-highest score,
+    provided that score is high enough to form a track (see the module notes).
     """
     dets, probvecs = [], []
-    if df is not None and "probs" in df:                    # full-distribution store
+    if df is not None and "probs" in df:                    # store written with --full-dist (all published runs)
         probs = df["probs"]
         for k in range(len(df["boxes"])):
             b = df["boxes"][k]; full = probs[k]
             spi = int(np.argmax(full[:5])); sc = float(full[spi])
             dets.append([b[0], b[1], b[2], b[3], sc, spi])
             probvecs.append(np.asarray(full[:5], np.float32))
-    elif df is not None:                                    # legacy one-hot store
+    elif df is not None:                                    # older store holding only the winning class
         for k in range(len(df["boxes"])):
             b = df["boxes"][k]; spi = int(df["labels"][k]); sc = float(df["scores"][k])
             if not (0 <= spi < 5):
@@ -125,37 +217,49 @@ def _dets_from_df(df):
 
 
 def main():
-    """CLI entry point: track every video in the manifest and dump the aggregate pickle.
-
-    Resolves store keys per ``--key-mode``, resumes from a partial ``--agg-out`` (skipping
-    already-tracked videos, flushing every 300), runs BoT-SORT over the stored detections of
-    each video, and writes ``{store_key: aggregate}`` to ``--agg-out``. Side effects: reads the
-    store dir / footage / manifest; writes (and periodically re-writes) the output pickle.
-    """
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--store-dir", default=str(config.PROJECTS_ROOT / "deimv2_op_detstore"))
-    ap.add_argument("--op-json", default=str(config.LABEL_BATCHES / "op_testset_v1.json"))
-    ap.add_argument("--agg-out", required=True)
-    ap.add_argument("--footage-root", default=str(config.FOOTAGE_ROOT_FAST))
+    """Track every video in the list and write the aggregate file."""
+    ap = argparse.ArgumentParser(description="Pass B: link stored detections into one track per fish.")
+    ap.add_argument("--store-dir", required=True, help="Detect-store folder written by Pass A.")
+    ap.add_argument("--op-json", required=True, help="The video list (manifest JSON) Pass A used.")
+    ap.add_argument("--agg-out", required=True, help="Output aggregate pickle (one per shard).")
+    ap.add_argument("--footage-root", default=str(config.FOOTAGE_ROOT_FAST),
+                    help="Folder holding <river> subfolders of raw video (default: the fast copy).")
     ap.add_argument("--key-mode", choices=["video_id", "rel"], default="video_id",
-                    help="video_id (default, multi-year safe) or rel (legacy 2025 store + op eval).")
+                    help="How store files are named; must match Pass A (all seasons: video_id).")
     ap.add_argument("--decode-backend", choices=["cv2", "decord"], default="cv2",
-                    help="decord fetches ONLY the stored detection frames (skips empty frames of a "
-                         "frame-skip store) -- big decode win at corpus scale. cv2 = sequential (legacy).")
+                    help="decord reads only the frames that have detections (used for all published "
+                         "seasons). cv2 reads every frame in turn.")
     ap.add_argument("--reid-fp16", action="store_true",
-                    help="fp16 OSNet re-ID (matches the two-stage v6 --fp16 corpus). ~identical tracks.")
-    ap.add_argument("--new-track-thresh", type=float, default=0.5)
-    ap.add_argument("--track-high-thresh", type=float, default=0.5)
-    ap.add_argument("--max-videos", type=int, default=0)
+                    help="Run the appearance model in half precision (used for all published seasons).")
+    ap.add_argument("--new-track-thresh", type=float, default=0.5,
+                    help="Minimum confidence for a detection to start a new track (published: 0.5).")
+    ap.add_argument("--track-high-thresh", type=float, default=0.5,
+                    help="Detections above this are matched first; lower ones (down to 0.3) can only "
+                         "extend an existing track (published: 0.5).")
+    ap.add_argument("--max-videos", type=int, default=0, help="Stop after N videos (0 = all); for testing.")
     ap.add_argument("--det-frames-only", action="store_true",
-                    help="Only step BoTSORT on frames that HAVE detections (compressed timeline). REQUIRED "
-                         "for a frame-skip store (implied by --decode-backend decord).")
-    ap.add_argument("--frame-skip", type=int, default=3, help="the store's frame-skip (for the det-frames rate)")
-    ap.add_argument("--shard", type=int, default=0)
-    ap.add_argument("--num-shards", type=int, default=1, help="run N parallel workers, each --shard i")
+                    help="Give the tracker only frames that have detections. Always on with "
+                         "--decode-backend decord. Needed for a store made with --frame-skip > 1.")
+    ap.add_argument("--frame-skip", type=int, default=3,
+                    help="The --frame-skip that Pass A used for this store (published seasons: 3). "
+                         "It sets how long a lost track is kept alive.")
+    ap.add_argument("--shard", type=int, default=0, help="Which part of the list this copy handles (0-based).")
+    ap.add_argument("--num-shards", type=int, default=1, help="Split the list into N parts for N copies.")
+    ap.add_argument("--tracker", choices=["botsort", "bytetrack"], default="botsort",
+                    help="botsort (default; position + appearance; used for every count) or bytetrack "
+                         "(position only; the comparison in manuscript Section 3.4). ByteTrack never "
+                         "opens the video and needs no GPU.")
+    ap.add_argument("--frame-size", nargs=2, type=int, default=[1280, 960], metavar=("W", "H"),
+                    help="Frame width and height written into each aggregate record. Only used with "
+                         "--tracker bytetrack, which never opens the video. Not used for counting.")
     args = ap.parse_args()
 
-    from boxmot import BoTSORT
+    bytetrack = args.tracker == "bytetrack"
+    config.require(args.store_dir, "the detect-store folder (--store-dir) written by Pass A",
+                   "SALMONID_PROJECTS_ROOT")
+    config.require(args.op_json, "the video list (manifest JSON) given as --op-json", "SALMONID_PROJECTS_ROOT")
+    REID = None if bytetrack else reid_weights()
+    from boxmot import BoTSORT, BYTETracker
     store = Path(args.store_dir)
     op = json.load(open(args.op_json))["videos"]
     if args.max_videos:
@@ -165,23 +269,28 @@ def main():
         print(f"shard {args.shard}/{args.num_shards}: {len(op)} videos", flush=True)
 
     idx = None
-    if args.key_mode == "rel":
+    if args.key_mode == "rel" and not bytetrack:
         roots = {"Ganaraska": f"{args.footage_root}/Ganaraska", "Credit": f"{args.footage_root}/Credit"}
         print("indexing footage (rel mode)...", flush=True); idx = build_index(roots)
-    dev = torch.device("cuda")
-    use_decord = args.decode_backend == "decord"
-    det_only = args.det_frames_only or use_decord
+    dev = torch.device("cuda") if not bytetrack else None
+    use_decord = args.decode_backend == "decord" and not bytetrack
+    # "det_only" = the tracker is stepped only on frames that have detections.
+    det_only = args.det_frames_only or args.decode_backend == "decord"
     if use_decord:
         from decord import VideoReader, cpu as _dcpu
+    if bytetrack:
+        print("tracker=bytetrack: motion-only, no re-ID -> frames are never decoded", flush=True)
 
-    # resume: reuse a partial agg (per-shard file), skip videos already tracked, flush periodically
+    # Resume: if the output file already exists, keep the videos it holds and only track the rest.
     agg = {}
     if Path(args.agg_out).is_file():
         try:
             agg = pickle.load(open(args.agg_out, "rb")); print(f"resume: {len(agg)} videos in {args.agg_out}", flush=True)
         except Exception:
+            # An unreadable partial output is discarded and the shard starts again from nothing.
+            print(f"WARNING: could not read existing {args.agg_out}; starting this shard from scratch", flush=True)
             agg = {}
-    n_done = n_miss = 0
+    n_done = n_miss = n_bad = 0
     for vi, v in enumerate(op):
         site = v["site"]; rel = v["video_rel"].replace("\\", "/"); vid = v.get("video_id")
         if args.key_mode == "video_id" and vid:
@@ -191,47 +300,78 @@ def main():
         if k in agg:
             n_done += 1; continue
         kp = store / k
-        if not kp.is_file() or vp is None:
+        # A video with no store file, or whose footage cannot be found, is counted as
+        # "unresolved" and left out of the aggregate (and so out of every later count).
+        # ByteTrack never opens the video, so missing footage is not a problem for it.
+        if not kp.is_file() or (vp is None and not bytetrack):
             n_miss += 1; continue
-        with open(kp, "rb") as f:
-            sd = pickle.load(f)
+        # One unreadable store file used to stop the whole shard at that point, with no error
+        # visible downstream because the aggregate simply ended early (679 videos of the 2025
+        # Credit River season were lost that way in the original run). Skip it, count it, and
+        # report it at the end instead.
+        try:
+            with open(kp, "rb") as f:
+                sd = pickle.load(f)
+        except Exception as e:                                      # noqa: BLE001
+            n_bad += 1
+            print(f"  CORRUPT STORE {kp.name}: {type(e).__name__}: {e} -- skipped", flush=True)
+            continue
         det_frames = sd["frames"]; fps = sd.get("fps", 15)
-        # BoT-SORT's frame_rate scales its track_buffer (how long a lost track survives). When we
-        # only step on detection frames of a frame-skip-N store, the effective rate is fps/N.
+        # The tracker keeps a lost track alive for track_buffer * frame_rate / 30 frames. Because
+        # it only sees every 3rd frame, its frame rate is the video's rate divided by 3: at
+        # 10 frames per second that is round(10/3) = 3, giving int(3/30 * 25) = 2 processed frames
+        # (25 frames per second: 8 -> 6 frames; 30 frames per second: 10 -> 8 frames).
         fr_rate = max(1, round(fps / args.frame_skip)) if det_only else max(1, round(fps))
-        # Fresh tracker per video (no track leakage across clips); same thresholds as the two-stage
-        # v6 corpus tracker so the counts are directly comparable.
-        tracker = BoTSORT(model_weights=Path(REID), device=dev, fp16=args.reid_fp16,
-                          track_high_thresh=args.track_high_thresh, track_low_thresh=0.3,
-                          new_track_thresh=args.new_track_thresh,
-                          track_buffer=25, match_thresh=0.9, frame_rate=fr_rate)
+        if bytetrack:
+            # Same start threshold, matching threshold and keep-alive time as the BoT-SORT run,
+            # so the main difference between the two runs is the appearance comparison.
+            tracker = BYTETracker(track_thresh=args.track_high_thresh, match_thresh=0.9,
+                                  track_buffer=25, frame_rate=fr_rate)
+        else:
+            # A fresh tracker per video: tracks never carry over from one file to the next.
+            # track_low_thresh 0.3  -> detections of 0.30-0.50 may only extend a live track
+            # track_high/new 0.5    -> only detections above 0.50 are matched first / start a track
+            # match_thresh 0.9      -> a loose position match is accepted (boxes need overlap only slightly)
+            tracker = BoTSORT(model_weights=Path(REID), device=dev, fp16=args.reid_fp16,
+                              track_high_thresh=args.track_high_thresh, track_low_thresh=0.3,
+                              new_track_thresh=args.new_track_thresh,
+                              track_buffer=25, match_thresh=0.9, frame_rate=fr_rate)
         tracks = {}; fw = fh = 0
 
         def _step(rgb, fi):
-            """Feed one RGB frame + its stored detections to the tracker; append box+probvec per live track.
-
-            Records frame size into the enclosing fw/fh; ``det_ind`` maps each tracker output back
-            to its source detection so the true 5-class prob vector travels with the box.
-            """
+            """Give the tracker one frame and its stored detections; record each live track's box and scores."""
             nonlocal fw, fh
             fh, fw = rgb.shape[:2]
             dets, probvecs = _dets_from_df(det_frames.get(fi))
             for trk in tracker.update(dets, rgb):
                 x1, y1, x2, y2, tid, conf, cls, det_ind = trk
                 tid = int(tid); det_ind = int(det_ind)
+                # det_ind says which detection this track was matched to in this frame, so the
+                # five species scores of that detection travel with the track.
                 pv = probvecs[det_ind] if 0 <= det_ind < len(probvecs) else np.zeros(5, np.float32)
                 t = tracks.setdefault(tid, {"boxes": [], "pvs": []})
                 t["boxes"].append([float(x1), float(y1), float(x2), float(y2)])
                 t["pvs"].append(pv.tolist())
 
-        if use_decord:                                      # fetch ONLY detection frames, in order
+        if bytetrack:                       # position only: step through the stored detections, no pictures
+            fw, fh = args.frame_size
+            for fi in sorted(det_frames.keys()):
+                dets, probvecs = _dets_from_df(det_frames.get(fi))
+                for trk in tracker.update(dets, None):
+                    x1, y1, x2, y2, tid, conf, cls, det_ind = trk
+                    tid = int(tid); det_ind = int(det_ind)
+                    pv = probvecs[det_ind] if 0 <= det_ind < len(probvecs) else np.zeros(5, np.float32)
+                    t = tracks.setdefault(tid, {"boxes": [], "pvs": []})
+                    t["boxes"].append([float(x1), float(y1), float(x2), float(y2)])
+                    t["pvs"].append(pv.tolist())
+        elif use_decord:                                    # read ONLY the frames that have detections, in order
             det_fis = sorted(det_frames.keys())
             if det_fis:
                 vr = VideoReader(vp, ctx=_dcpu(0))
-                batch = vr.get_batch(det_fis).asnumpy()     # [K, H, W, 3] RGB
+                batch = vr.get_batch(det_fis).asnumpy()     # [K, height, width, 3] RGB
                 for j, fi in enumerate(det_fis):
                     _step(batch[j], fi)
-        else:                                               # cv2 sequential (legacy)
+        else:                                               # cv2: read every frame in turn
             cap = cv2.VideoCapture(vp); fi = 0
             while True:
                 ok, fr = cap.read()
@@ -243,6 +383,8 @@ def main():
                 fi += 1
             cap.release()
 
+        # Species the technician recorded for this video, if the manifest carries them
+        # (used by a separate per-video check, not by the counts).
         tech_set = {TECH_NORM.get(s.strip().lower(), s) for s in v.get("tech_species", [])}
         tech_set = {s for s in tech_set if s in SPECIES}
         agg[k] = {
@@ -253,7 +395,7 @@ def main():
         n_done += 1
         if (vi + 1) % 40 == 0:
             print(f"  {vi+1}/{len(op)} videos", flush=True)
-        if (vi + 1) % 300 == 0:
+        if (vi + 1) % 300 == 0:                             # save progress so an interrupted run can resume
             Path(args.agg_out).parent.mkdir(parents=True, exist_ok=True)
             with open(args.agg_out, "wb") as f:
                 pickle.dump(agg, f)
@@ -261,8 +403,14 @@ def main():
     Path(args.agg_out).parent.mkdir(parents=True, exist_ok=True)
     with open(args.agg_out, "wb") as f:
         pickle.dump(agg, f)
-    print(f"\ntracked {n_done} videos ({n_miss} unresolved) -> {args.agg_out}")
-    print("score with: python scripts/_score_tracked.py --agg", args.agg_out)
+    print(f"\ntracked {n_done} videos ({n_miss} unresolved, {n_bad} corrupt-store) -> {args.agg_out}")
+    if n_bad:
+        print(f"WARNING: {n_bad} store file(s) unreadable and skipped. Re-run detect-store for those "
+              f"videos, or this cell's counts are short by that many.")
+    if n_miss:
+        print(f"WARNING: {n_miss} video(s) had no store file or no footage and are NOT in the aggregate. "
+              f"Check them with: python -m salmonid.detect.audit_store_integrity")
+    print("count with: python -m salmonid.count.corpus_countr_from_store --agg", args.agg_out)
 
 
 if __name__ == "__main__":

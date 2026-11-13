@@ -1,32 +1,45 @@
 """In plain terms: this script measures how often the model names a fish's species correctly.
-It compares the model's guesses against the species a biologist assigned to each fish in a fixed,
-never-trained-on set of test examples, and reports the accuracy. This is where the paper's headline
-0.966 species score comes from, along with the table showing which species get mistaken for which
-(the confusion matrix).
+It compares the model's answer for each of 366 test fish against the species a reviewer assigned
+to that fish, and reports how often they agree. The 366 fish were set aside before training and
+kept out of it. This is where the paper's headline 0.961 species score comes from, along with
+the table showing which species get mistaken for which (the confusion matrix).
 
-Held-out evaluation — THE headline metric of the manuscript.
+Held-out evaluation: the headline classification metric of the manuscript.
 
-Pipeline stage: results / eval  (data -> detect -> track -> **eval/count** -> results -> figures).
-Environment: base Python (pure stdlib + salmonid.config). It consumes ALREADY-COMPUTED predictions,
-so it never loads torch / DEIMv2 and does NOT need the .venv_deim detection env.
+Pipeline stage: eval  (data -> train -> detect -> track -> **eval** -> count -> results -> figures).
+Environment: base Python (standard library + salmonid.config). It consumes ALREADY-COMPUTED
+predictions, so it never loads the model and needs no GPU.
 
-Inputs : the frozen ground truth (test_set_v6_gt.json / labels.sqlite) + one of the prediction
-         sources below (a per-track CSV, a per-video CSV, or a run's tracks.sqlite).
-Outputs: printed TRACK species F1 + confusion matrix + VIDEO presence F1 (FULL and PRISTINE-only).
-Manuscript claim: the published single-stage DEIMv2-X model (v2.6) scores held-out **macro
-         species-F1 0.966** on this test set — this script is what computes that number.
+Inputs : the frozen ground truth (data/test_set_v6_gt.json) + a per-track predictions CSV
+         (default: data/preds_v27_ckpt0017.csv, the published model).
+Outputs: printed per-species precision / recall / F1, the macro-F1, accuracy and the confusion
+         matrix. Nothing is written to disk.
+Feeds  : manuscript Table 1 point estimates (macro-F1 0.961, accuracy 352 of 366 = 0.962),
+         Figure 2 (confusion matrix) and the Section 3.1 error breakdown (14 errors).
+Tier   : 1 (runs from committed data).
+Run    : python -m salmonid.eval.score_testset_v6
+
+What the two printed tables mean
+  * "FULL set" (n = 366) is the reported result.
+  * "PRISTINE tier only" (n = 215) is a diagnostic, NOT a reported result. The test set has two
+    tiers: 215 tracks that had never been labelled before the test set was drawn ("pristine";
+    almost all Chinook Salmon and Rainbow Trout) and 151 rare-species tracks taken from the
+    previously labelled pool ("heldout"; most of the Atlantic Salmon, Brown Trout and Coho
+    Salmon). The pristine tier holds 7 Atlantic Salmon and 1 Brown Trout, so its macro-F1
+    (0.768 for the published model) is driven by a handful of fish and should not be quoted.
+    The per-species n is printed beside it for that reason.
 
 Score a model on the held-out test set (test_set_v6). Defines the GT + two metrics precisely so the number
 is honest and reproducible:
 
   TRACK species F1 (primary)  — for each labelled test track, does the model name the BOXED fish correctly?
-                                Uses Tom's per-track label as GT -> a real confusion matrix (Coho->Chinook,
+                                Uses the reviewer's per-track label as GT -> a real confusion matrix (Coho->Chinook,
                                 Atlantic<->Rainbow, ...), per-species P/R/F1, macro, accuracy.
   VIDEO presence F1 (op-style) — per video, does the model's species SET match GT presence? GT presence =
-                                (boxed species of the video's test tracks) UNION (Tom's background flags),
-                                so multi-species/overlap clips are scored honestly. Same TP/FP/FN-per-species
-                                formulation as scripts/_score_tracked.py (comparable to the 0.894 op number),
-                                but with HUMAN GT instead of tech.
+                                (boxed species of the video's test tracks) UNION (the reviewer's background
+                                flags), so multi-species/overlap clips are scored honestly. Same TP/FP/FN-per-
+                                species formulation as salmonid/eval/score_tracked.py. Needs the labelling
+                                database (Tier 2); not used for any manuscript number.
 
 GT (from labels.sqlite, batch_id=test_set_v6, written by label_app during review):
   * final_label in the 5 species          -> track species GT (the boxed fish).
@@ -41,7 +54,8 @@ Predictions are model-agnostic:
   --from-tracks-db DB   convenience: read predicted_class per track from a run's tracks.sqlite (species F1
                  needs matching track_ids; presence unions predicted species per video — track_ids don't matter)
 
-  python scripts/_score_testset_v6.py --preds v6_track_preds.csv --video-preds v6_video_species.csv
+  python -m salmonid.eval.score_testset_v6                                   # the published result
+  python -m salmonid.eval.score_testset_v6 --preds data/preds_checkpoint0007.csv   # superseded v2.6
 """
 from __future__ import annotations
 
@@ -248,7 +262,12 @@ def main() -> None:
     a = _parse_args()
     tiers = {}
     if a.gt_file:
-        track_gt, tiers, video_presence = load_gt_file(a.gt_file, a.labels_db, a.batch_id)
+        # The labelling database only adds "background species" flags for the per-video presence
+        # score. It is an external (Tier-2) file, so it is opened only when that score was asked
+        # for; the species score that the manuscript reports never touches it.
+        need_db = bool(a.video_preds or a.from_tracks_db)
+        track_gt, tiers, video_presence = load_gt_file(a.gt_file, a.labels_db if need_db else None,
+                                                       a.batch_id)
         print(f"GT (frozen {Path(a.gt_file).name}): {len(track_gt)} tracks across {len(video_presence)} videos")
         print("  by tier: " + ", ".join(f"{t} {c}" for t, c in Counter(tiers.values()).most_common()))
     else:
@@ -272,12 +291,21 @@ def main() -> None:
         macro, acc, rows, cm, n = species_f1(track_gt, track_preds)
         _print_prf("TRACK species F1 (boxed fish, FULL set)", rows, macro, f"n={n} scored, acc={acc:.3f}")
         _print_cm(cm)
-        # Pristine-only subset — honest on ANY model (incl. baselines that trained on the held-out tier).
+        # Pristine-only subset: a DIAGNOSTIC, not a reported result (see the module docstring).
+        # It exists so an older model that had trained on the "heldout" tier can still be compared
+        # on tracks no model has seen. Its macro-F1 averages over species with as few as one fish.
         if tiers:
             pri_gt = {k: v for k, v in track_gt.items() if tiers.get(k) == "pristine"}
             pmacro, pacc, prows, _, pn = species_f1(pri_gt, track_preds)
-            _print_prf("TRACK species F1 (PRISTINE tier only — cross-model honest)", prows, pmacro,
-                       f"n={pn} scored, acc={pacc:.3f}")
+            _print_prf("TRACK species F1 (PRISTINE tier only: diagnostic, not a reported result)",
+                       prows, pmacro, f"n={pn} scored, acc={pacc:.3f}")
+            n_by_sp = Counter(pri_gt.values())
+            print("  tracks per species in this tier: "
+                  + ", ".join(f"{s} {n_by_sp.get(s, 0)}" for s in SPECIES))
+            small = [s for s in SPECIES if n_by_sp.get(s, 0) < 10]
+            if small:
+                print(f"  CAUTION: fewer than 10 tracks for {', '.join(small)}; the macro-F1 above "
+                      "is dominated by those few fish. Quote the FULL-set result.")
     else:
         print("\n(no per-track preds given -> skipping species F1)")
     if video_preds:
@@ -294,7 +322,9 @@ def _parse_args():
                    help="Frozen test GT (test_set_v6_gt.json). If absent, falls back to labels.sqlite batch scan.")
     p.add_argument("--labels-db", default=str(config.LABELS_DB))
     p.add_argument("--batch-id", default="test_set_v6")
-    p.add_argument("--preds", default=None, help="CSV video_id,track_id,pred_species (track species F1).")
+    p.add_argument("--preds", default=str(config.PUBLISHED_PREDS),
+                   help="CSV video_id,track_id,pred_species (track species F1). "
+                        "Default: the published v2.7 predictions in data/.")
     p.add_argument("--video-preds", default=None, help="CSV video_id,species (presence F1).")
     p.add_argument("--from-tracks-db", default=None,
                    help="Score a run's tracks.sqlite predicted_class directly (species F1 needs matching "

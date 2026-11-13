@@ -1,78 +1,118 @@
-"""
-In plain terms: this file gathers up all the fish examples that biologists and technicians
-have already labelled — each with its species and a box drawn around the fish — and packages
-them into the standard format the fish detector studies from (the detector is the model that
-finds a fish in a video frame and names its species). It builds the model's study material, so
-it does not itself produce any number or figure in the paper. It also has a built-in safeguard
-that keeps the fixed set of "test" fish (the examples reserved for scoring the paper's results)
-out of the training material, so the model is never quizzed on examples it was allowed to study.
+"""In plain terms: this script gathers the fish that people have already labelled (each with
+its species and a box drawn around it) and packages them into the list of pictures the detector
+learns from. For every labelled fish it finds the video clip, pulls out a few of the clearest
+frames, and writes down where the fish is and what species it is. It also adds frames labelled
+"not a fish" so the model learns to stay quiet on debris. Before using any fish it asks the leak
+guard whether the clip belongs to the held-out test set and leaves it out if so. Finally it
+splits the pictures into a large training part and a small validation part.
 
-Detector dataset prep — build the training COCO from labelled parquets (leak-guarded).
+Inputs
+------
+* ``--labels-db``: the review database of species labels (``config.LABELS_DB``).
+* ``--tracks-db`` and ``--detections-dir``: the stored detections of an earlier run, which
+  supply each labelled fish's boxes frame by frame.
+* ``--cvat-json``: frames hand-annotated in the CVAT tool (the images already exist on disk).
+* ``--test-manifest``: an older, frame-level test set whose CVAT frames are kept out.
+* The held-out sets, loaded unconditionally from ``salmonid.holdout``; ``--ls-test-queue`` adds more.
+* Optional sources (pseudo-labels, CVAT clips, technician count CSVs). None of them
+  contributed a picture to the published training set; see "What the published set contains".
+* The raw footage, under ``config.FOOTAGE_ROOT``.
 
-Pipeline position
------------------
-Stage 1 of the reproduction pipeline (data -> detect -> track -> eval/count -> results ->
-figures). This module turns human/technician labels + prior inference detections into a COCO
-train/val split that the single-stage DEIMv2 detector is trained on. It does **not** itself
-produce a manuscript number or figure; it produces the training data the published detector
-(v2.6) learns from.
+Outputs
+-------
+``<--output-dir>/train.json`` and ``val.json`` (COCO format), plus the extracted frames under
+``ls_frames/``, ``hard_neg_frames/`` (and ``pseudo_frames/``, ``tech_frames/`` if those sources
+are used).
 
-What it does
-------------
-Combines up to six label sources into one COCO dataset:
-  1. Label Studio (LS) labels from labels.sqlite — track-level, top-N frames per track
-  2. CVAT annotations from annotations.json — frame-level, images already on disk
-  3. (Optional) Pseudo-labels from a newer inference run — high-confidence predictions
-     used as training signal without human labeling
-  4. (Optional) Hard negatives — "Not a fish" labeled tracks, extracted as empty-annotation
-     frames so the detector is penalised for predicting species on background-only clips
-  5. (Optional) Pre-extracted CVAT training-clip best-frames (cvat_clips_tracks.sqlite)
-  6. (Optional) Tech-reviewed per-video fish-count CSVs, matched to inference tracks
+Feeds
+-----
+No manuscript number directly. It produced the human-labelled core of the published v2.7
+training set (Methods, training-set composition): 17,121 pictures from review labels, 1,854
+from CVAT and 567 "not a fish" frames, of 45,249 in total.
 
-Frames for LS labels are extracted from source videos and cached under
-``<--output-dir>/ls_frames/`` (one JPEG per selected frame). This pre-extraction avoids
-repeated video seeks during training.
+Run
+---
+::
 
-Training-eligible LS labels:
-  - final_label in five species + "Small Salmonid" (not "Not a fish"/"Multiple fish"/"Unsure")
-  - disagreement_resolution is NULL or 'senior' (not 'pending' or 'senior_overruled')
+    python -m salmonid.data.prepare_dataset
+        --labels-db       <config.LABELS_DB>
+        --tracks-db       <config.MODEL_OUTPUTS>/run_20260428/tracks.sqlite
+        --detections-dir  <config.MODEL_OUTPUTS>/run_20260428/detections
+        --cvat-json       <config.PROJECTS_ROOT>/cvat_dataset/annotations.json
+        --test-manifest   <path to test_set_v1>/manifest.json
+        --output-dir      <config.PROJECTS_ROOT>/training_data
+        [--frames-per-track 3] [--hard-neg-max 500] [--val-fraction 0.1] [--seed 42]
 
-Leak guard
-----------
-``salmonid.holdout.load_holdout_pairs()`` is loaded UNCONDITIONALLY (flag or no flag) and its
-(video_id, track_id) pairs are unioned into the exclusion set, so the frozen eval sets
-(test_set_v6, ls_test_set_v5) can never enter training. Partial exclusion is what leaked the
-op test set into an earlier classifier — this guard makes that impossible here.
+(one command; shown on several lines). The exact arguments of the build behind the published
+set were not recorded in any repository.
 
-Inputs:  labels.sqlite, tracks.sqlite + detection parquets, CVAT annotations.json, the frozen
-         test-set manifest, optional pseudo/tech/hard-neg sources. Paths resolve via
-         ``salmonid.config`` (see the Usage block); footage roots come from config.video_roots().
-Outputs: ``<output-dir>/train.json`` and ``<output-dir>/val.json`` (COCO), plus extracted
-         frame JPEGs under ``ls_frames/``, ``pseudo_frames/``, ``hard_neg_frames/``,
-         ``tech_frames/``.
-Environment: base Python 3.11 env (cv2 / pandas / pyarrow / decord). The DEIMv2 detector
-         *training* step that consumes train.json/val.json runs in the isolated .venv_deim;
-         this prep step does not.
+Tier
+----
+2. It needs the raw footage, the label database and the stored detections. The published
+training list is a frozen file (checksums in ``provenance/v2.7/``); this script is deposited so
+the way that file was assembled can be read, not so it can be re-run from a clone.
 
-Usage (path placeholders resolve via salmonid.config; defaults are the original workstation
-locations, override with the SALMONID_* env vars):
-  python -m salmonid.data.prepare_dataset \\
-      --labels-db       <config.LABELS_DB> \\
-      --tracks-db       <config.MODEL_OUTPUTS>/run_20260428/tracks.sqlite \\
-      --detections-dir  <config.MODEL_OUTPUTS>/run_20260428/detections \\
-      --cvat-json       <config.PROJECTS_ROOT>/cvat_dataset/annotations.json \\
-      --test-manifest   test_set/test_set_v1/manifest.json \\
-      --output-dir      <config.PROJECTS_ROOT>/training_data \\
-      [--pseudo-tracks-db  <config.MODEL_OUTPUTS>/run_v7long/tracks.sqlite] \\
-      [--pseudo-detections <config.MODEL_OUTPUTS>/run_v7long/detections] \\
-      [--pseudo-min-conf   0.90] \\
-      [--pseudo-max-per-species 3000] \\
-      [--frames-per-track 3] \\
-      [--hard-neg-max 500] \\
-      [--ls-test-queue <config.LABEL_BATCHES>/ls_test_set_v1.json] \\
-      [--val-fraction 0.1] \\
-      [--seed 42] \\
-      [--limit N]
+The six label sources
+---------------------
+1. Review labels from the label database: one species per track, top-N frames per track.
+   Eligible: one of the five species or "Small Salmonid" (not "Not a fish", "Multiple fish",
+   "Unsure"), with no unresolved reviewer disagreement.
+2. CVAT annotations: frame-level, images already on disk.
+3. (Optional) Pseudo-labels: high-confidence model predictions from a newer run.
+4. (Optional) Hard negatives: tracks labelled "Not a fish", written as frames with no box.
+5. (Optional) Pre-extracted CVAT training-clip frames.
+6. (Optional) Technician per-video count CSVs matched to model tracks.
+
+What the published set contains
+-------------------------------
+Only sources 1, 2 and 4 are present in the published training list. No picture in it carries
+the ``pseudo_label``, ``tech_reviewed`` or CVAT-clip source tag. In particular the seasonal
+plausibility table in this file (``_SEASONAL_VALID``) is applied only to pseudo-labels, so it
+filtered nothing in the published data. It should not be read as validated phenology: applied
+to the verified held-out fish it would reject 58 of 60 Brown Trout and 51 of 60 Atlantic Salmon.
+
+The leak guard, and how this differs from what built the published data
+------------------------------------------------------------------------
+``salmonid.holdout.load_holdout_pairs()`` is loaded UNCONDITIONALLY and returns a video-aware
+key set, so every ``(video_id, track_id) in ls_test_pairs`` test in this file excludes the
+whole held-out CLIP, not only the numbered fish. This is the corrected guard (research
+repository commit ``d40b869``). The build behind the published set ran the earlier, pair-keyed
+version; the pictures it let through were removed afterwards by
+``salmonid.data.audit_coco_holdout_leak --out``.
+
+Known limitations of the published training data (documented, deliberately NOT fixed here,
+because the published model was trained on exactly this output)
+------------------------------------------------------------------------------------------
+* **CVAT frames are not tested against the held-out test set.** ``_process_cvat`` drops only
+  the frames of the older ``--test-manifest`` set. CVAT records have a ``video_path`` and no
+  ``video_id``, so the guard above never sees them, and neither did the cleaning audit. The
+  published training set therefore contains 25 CVAT frames (the validation set 2) from the
+  clip of one held-out Atlantic Salmon (test track 353168).
+* **Pseudo-labels are not tested against the holdout either** (``_process_pseudo_labels`` only
+  skips tracks that already have a review label). No pseudo-label is in the published set.
+* **Clips next to a held-out clip are not excluded.** See ``salmonid/holdout.py``.
+* **The train/validation split is by picture, not by fish or clip** (``_stratified_split``).
+  About 98% of the validation tracks also have frames in training, so validation accuracy
+  measures memory, not generalisation. No manuscript number uses it, and the published
+  checkpoint was not chosen on it (see ``provenance/v2.7/CHECKPOINT_SELECTION.md``).
+* **One box per real frame.** Each picture from sources 1 and 2 carries exactly one fish box,
+  because pictures are emitted per (track, frame). Any other fish visible in that frame is
+  taught to the model as background.
+* **Duplicated frames with conflicting labels.** The same video frame can enter through more
+  than one source. In the published training set, 184 frames have the same box (overlap 0.9 or
+  more) labelled as different species in different copies. Separately, 45 CVAT file names occur
+  twice within training and 11 occur in both training and validation, each copy carrying a
+  different single fish (the CVAT source lists one image record per fish and they are not merged).
+* **"Not a fish" frames are not checked for other fish** in the same frame.
+* **Latent bugs not exercised by the published build:** the image-id offsets of sources 4, 5 and
+  6 can collide if source 5 or 6 is switched on; the bounding-box sanity check runs after the
+  files are written, so its "ABORT" leaves them on disk; CVAT boxes are copied without clamping
+  to the frame (one published box starts at x = -3.73); an out-of-range frame number is clamped
+  to the last frame instead of being refused (``_read_frame``).
+* The header strip (top 40 pixels) is blacked out on the published pictures by a later step
+  that is not part of this deposit; this script writes unmasked frames.
+
+Environment: base Python 3.11 (cv2 / pandas / pyarrow / decord). No GPU.
 """
 from __future__ import annotations
 
@@ -118,10 +158,10 @@ EXCLUDED_RESOLUTIONS = frozenset(["pending", "senior_overruled"])
 # per-site paths on the source workstation, but env-overridable via SALMONID_FOOTAGE_ROOT.
 VIDEO_ROOTS: dict[str, str] = config.video_roots()
 
-# Audit CSV statuses to drop (see scripts/_audit_parquet_bboxes.py).
+# Audit CSV statuses to drop (from the stored-detection box audit; its CSV is an optional input).
 _AUDIT_DROP_STATUSES = frozenset({"wrong_y_too_high", "wrong_y_too_low", "ambiguous"})
 
-# CVAT annotation audit statuses to drop (scripts/_audit_cvat_annotations.py).
+# CVAT annotation audit statuses to drop (from the CVAT annotation audit; optional input CSV).
 _CVAT_DROP_STATUSES = frozenset({"frame_empty", "manual_blank"})
 
 
@@ -189,8 +229,8 @@ def _load_bad_parquet_stems(audit_csvs: list[str] | str | None) -> frozenset[str
 def main() -> None:
     """Build train.json/val.json (COCO) from all requested label sources.
 
-    Parses CLI args, applies the leak guard (frozen eval tracks are unioned into the
-    exclusion set), assembles LS + CVAT + optional pseudo/clip/hard-neg/tech sources into
+    Parses CLI args, loads the leak guard (frozen eval tracks AND their whole video clips
+    are excluded), assembles LS + CVAT + optional pseudo/clip/hard-neg/tech sources into
     one image+annotation list, stratifies into train/val, and writes both COCO files plus a
     bbox y-sanity report. Side effects: extracts frame JPEGs to <output-dir> subfolders and
     writes train.json / val.json.
@@ -206,7 +246,7 @@ def main() -> None:
     if not test_manifest_path.is_file():
         sys.exit(
             f"ERROR: Test manifest not found: {test_manifest_path}\n"
-            "Run test_set/build_test_set.py first."
+            "It is the older frame-level CVAT test set (an external input; see the module docstring)."
         )
 
     test_annotations_path = test_manifest_path.parent / "annotations.json"
@@ -230,9 +270,14 @@ def main() -> None:
                 ls_test_pairs.add((item["video_id"], int(item["track_id"])))
         print(f"Reserving {len(ls_test_pairs)} LS test queue (video_id, track_id) pairs")
     # Permanent leak guard — ALWAYS exclude the canonical frozen eval sets, flag or no flag.
+    # Assign (don't |=): the guard is a video-aware HoldoutKeys set, and `plain_set |= keys` would
+    # flatten it back to pair-only matching — the hole that leaked test_set_v6 into v2.6.
+    # From here on `(video_id, track_id) in ls_test_pairs` is True for ANY track in a held-out
+    # clip, which is what every source below that receives `ls_test_pairs` relies on.
     from salmonid.holdout import load_holdout_pairs
-    ls_test_pairs |= load_holdout_pairs()
-    print(f"Reserving {len(ls_test_pairs)} total held-out (video_id, track_id) pairs after guard")
+    ls_test_pairs = load_holdout_pairs(extra_pairs=ls_test_pairs)
+    print(f"Reserving {len(ls_test_pairs)} held-out (video_id, track_id) pairs "
+          f"+ {len(ls_test_pairs.videos)} held-out videos after guard")
 
     bad_parquet_stems = _load_bad_parquet_stems(args.bbox_audit_csv)
     if bad_parquet_stems:
@@ -441,7 +486,7 @@ def main() -> None:
     _write_coco(train_images, train_anns, output_dir / "train.json")
     _write_coco(val_images, val_anns, output_dir / "val.json")
     _bbox_sanity_check(ls_annotations, ls_images)
-    print("\nDone. Run training/train.py next.")
+    print("\nDone. Next: salmonid.data.build_extra_coco, then merge_synth_into_coco (see docs/REPRODUCE.md).")
 
 
 def _bbox_sanity_check(ls_annotations: list, ls_images: list) -> None:
@@ -470,11 +515,11 @@ def _bbox_sanity_check(ls_annotations: list, ls_images: list) -> None:
     elif median_ratio < 0.28:
         print("Bbox sanity [ABORT]: LS median y_center/H = %.3f -- severely too high." % median_ratio)
         print("  Pre-fix bbox signature. Training will corrupt the model.")
-        print("  Run inference/fix_bbox_y.py on detections dir and rerun prepare_dataset.py.")
+        print("  The stored detections predate the box-coordinate fix; regenerate them and rerun.")
         raise SystemExit(1)
     else:
         print("Bbox sanity [WARNING]: LS median y_center/H = %.3f (expected 0.35-0.65)." % median_ratio)
-        print("  Bboxes may be partially wrong. Check CLAUDE.md bbox history.")
+        print("  Bboxes may be partially wrong. Inspect a sample of frames before training.")
 
 
 # ---------------------------------------------------------------------------
@@ -706,6 +751,11 @@ def _process_cvat(
     annotations: list[dict] = []
 
     for img in coco["images"]:
+        # KNOWN LIMITATION (deliberately unchanged): this is the ONLY exclusion on the CVAT path,
+        # and it covers the older frame-level test set, not the held-out test set of the
+        # manuscript. CVAT records carry `video_path`, not `video_id`, so the video-level guard
+        # never applies to them. 25 frames from one held-out clip are in the published training
+        # set as a result (module docstring, "Known limitations").
         if img["file_name"] in test_image_files:
             continue
 
@@ -1500,7 +1550,12 @@ def _load_track_detections(parquet_file: Path, track_id: int) -> pd.DataFrame | 
     try:
         tbl = pq.read_table(str(parquet_file), filters=[("track_id", "=", track_id)])
         return tbl.to_pandas() if len(tbl) > 0 else None
-    except Exception:
+    except Exception as exc:  # noqa: BLE001
+        # The caller counts a None as an ordinary "no detections" skip. The original returned
+        # None here without a word, so a corrupt or re-formatted file dropped its fish silently.
+        # The outcome is unchanged (still skipped); the reason is now printed.
+        print(f"  WARNING: could not read {Path(parquet_file).name} for track {track_id}: "
+              f"{type(exc).__name__}: {exc}")
         return None
 
 
@@ -1679,14 +1734,14 @@ def _parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--bbox-audit-csv", action="append", default=None, metavar="PATH",
-        help="Path to parquet_audit.csv from scripts/_audit_parquet_bboxes.py. "
+        help="Path to parquet_audit.csv (the stored-detection box audit; optional). "
              "Tracks whose source parquet was flagged wrong_y_too_high/low or ambiguous "
              "are skipped across LS, pseudo, tech, and hard-negative collection. "
              "Repeatable — pass once per inference run."
     )
     p.add_argument(
         "--cvat-audit-csv", default=None, metavar="PATH",
-        help="Path to cvat_annotation_audit.csv from scripts/_audit_cvat_annotations.py. "
+        help="Path to cvat_annotation_audit.csv (the CVAT annotation audit; optional). "
              "CVAT annotations on blank frames (status frame_empty/manual_blank) are "
              "dropped — prevents the detector learning to fire on empty water."
     )

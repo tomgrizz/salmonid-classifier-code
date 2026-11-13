@@ -4,8 +4,7 @@ with the counts made by human technicians. It scores the agreement with a standa
 statistic (Lin's concordance coefficient — a 0-to-1 number where 1 means the two
 counts match perfectly), both day-by-day and for the whole-season totals, and it
 builds the paper's agreement table (concordance_ccc.csv) and its two agreement
-figures (fig_concordance and the Bland-Altman plot) that back the claim the
-automated counter agrees substantially-to-almost-perfectly with the technicians.
+figures (the concordance scatter and the Bland-Altman plot).
 
 Concordance (agreement) analysis of automated vs technician fish counts.
 
@@ -23,22 +22,27 @@ accuracy factor Cb (CCC = r * Cb) and bootstrap 95% CIs, at two aggregation leve
   - annual (seasonal-total) counts, the abundance index, per species x river
 plus Bland-Altman limits of agreement (Bland & Altman 1986) for daily Chinook.
 
-Strength-of-agreement bands follow McBride (2005): <0.90 weak, 0.90-0.95
-moderate, 0.95-0.99 substantial, >0.99 almost perfect.
+Strength-of-agreement bands follow McBride (2005): below 0.90 poor (labelled
+"weak" in the output column), 0.90-0.95 moderate, 0.95-0.99 substantial, above 0.99
+almost perfect.
 
-Inputs : config.CANONICAL_DAILY, config.CANONICAL_SUMMARY (single-stage v2.6,
-  2019-2025). Recovered footage-years (2019 Credit, 2020 Ganaraska) are excluded
-  from agreement stats (magnitude-caveated; see manuscript caveats).
-Outputs: concordance_ccc.csv (--out-dir, default config.REPO_DATA); fig_concordance.png
-  + fig_bland_altman.png (--fig-dir, default = out-dir).
+Inputs : config.CANONICAL_DAILY, config.CANONICAL_SUMMARY (committed in data/; the
+  published v2.7 model, 2020-2025). The recovered footage season (2020 Ganaraska,
+  flagged ``recovered`` in the summary table) is excluded from every agreement
+  statistic, leaving Ganaraska 2021-2025 and Credit 2020-2025.
+Outputs: concordance_ccc.csv to --out-dir (default output/tier1/); fig_concordance and
+  fig_bland_altman (PNG + PDF) to --fig-dir (default figures/). The committed copy of
+  the table that the manuscript quotes is data/concordance_ccc.csv.
+Feeds  : manuscript Table 5 (river-days, Pearson r, CCC with its independent-day
+  bootstrap 95% CI, Cb, band), Figure 6 (concordance), Figure S3 (Bland-Altman:
+  mean difference -1.5 fish/day, limits -122 to +119, 857 river-days).
+Tier   : 1 (runs from committed data; no model, no GPU).
 
-Manuscript claim supported: the automated counter *agrees* with the technician
-counts — substantial-to-almost-perfect Lin's CCC on the annual abundance index and
-daily net counts, with a small, quantified Bland-Altman bias.
+Reproducibility: the bootstrap is seeded (SEED) with BOOT = 2,000 resamples, so a
+re-run reproduces data/concordance_ccc.csv exactly.
 
-Usage:
-  python -m salmonid.results.compute_concordance --out-dir <dir> [--fig-dir <dir>]
-Outputs: concordance_ccc.csv, fig_concordance.png, fig_bland_altman.png
+Run:
+  python -m salmonid.results.compute_concordance [--out-dir <dir>] [--fig-dir <dir>]
 """
 import argparse
 from pathlib import Path
@@ -265,16 +269,18 @@ def make_figures(daily, fig_dir):
 def main():
     """CLI entry: load tables, write concordance_ccc.csv, render both figures."""
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out-dir", default=str(config.REPO_DATA))
-    ap.add_argument("--fig-dir", default=None)
+    ap.add_argument("--out-dir", default=str(config.OUTPUT_DIR / "tier1"),
+                    help="Where to write concordance_ccc.csv (never data/ by default).")
+    ap.add_argument("--fig-dir", default=str(config.FIGURES_DIR),
+                    help="Where to write the two figures (default figures/).")
     a = ap.parse_args()
     out_dir = Path(a.out_dir); out_dir.mkdir(parents=True, exist_ok=True)
-    fig_dir = Path(a.fig_dir) if a.fig_dir else out_dir
+    fig_dir = Path(a.fig_dir)
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     daily, summ = load()
     tbl = build_table(daily, summ)
-    tbl.to_csv(out_dir / "concordance_ccc.csv", index=False)
+    tbl.to_csv(out_dir / "concordance_ccc.csv", index=False, lineterminator="\n")
     print(tbl.to_string(index=False))
     p1, p2, ba = make_figures(daily, fig_dir)
     print(f"\nBland-Altman (daily Chinook): bias={ba['bias']:.1f}, "
